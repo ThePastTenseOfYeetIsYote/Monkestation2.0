@@ -12899,7 +12899,7 @@
 /turf/open/floor/iron/smooth,
 /area/station/maintenance/department/cargo)
 "cZo" = (
-/obj/structure/sign/collision_counter{
+/obj/machinery/incident_display/tram{
 	pixel_x = -4;
 	pixel_y = 2
 	},
@@ -31129,7 +31129,7 @@
 /turf/open/floor/iron,
 /area/station/commons/fitness/recreation)
 "iWm" = (
-/obj/structure/sign/collision_counter{
+/obj/machinery/incident_display/tram{
 	pixel_x = -32
 	},
 /obj/structure/table/reinforced,
@@ -35785,7 +35785,7 @@
 /turf/open/floor/iron,
 /area/station/maintenance/tram/mid)
 "kxF" = (
-/obj/item/kirbyplants/dead,
+/obj/item/kirbyplants/random/dead,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -37938,7 +37938,7 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 2
 	},
-/obj/structure/sign/collision_counter{
+/obj/machinery/incident_display/tram{
 	pixel_x = 32
 	},
 /turf/open/floor/iron/white,
@@ -55283,7 +55283,7 @@
 /obj/structure/table,
 /obj/item/storage/toolbox/emergency,
 /obj/item/crowbar,
-/obj/structure/sign/collision_counter{
+/obj/machinery/incident_display/tram{
 	desc = "A display that indicates how many dents that'll need fixed after the shift is over.";
 	name = "darwin award counter";
 	pixel_x = 32
@@ -78847,7 +78847,7 @@
 /turf/open/floor/iron/white,
 /area/station/medical/pathology)
 "ycK" = (
-/obj/structure/sign/delamination_counter/directional/west,
+/obj/machinery/incident_display/delam/directional/west,
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 8
 	},
