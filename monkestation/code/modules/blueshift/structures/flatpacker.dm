@@ -31,12 +31,6 @@
 	QDEL_NULL(soundloop)
 	return ..()
 
-/obj/machinery/rnd/production/colony_lathe/on_deconstruction()
-	. = ..()
-	var/datum/component/material_container/materials = GetComponent(/datum/component/material_container)
-	materials.retrieve_all()
-
-
 // previously NO_DECONSTRUCTION
 /obj/machinery/rnd/production/colony_lathe/default_deconstruction_screwdriver(mob/user, icon_state_open, icon_state_closed, obj/item/screwdriver)
 	return NONE
@@ -83,9 +77,6 @@
 
 	update_static_data_for_all_viewers()
 
-/obj/machinery/rnd/production/colony_lathe/calculate_efficiency()
-	return
-
 // Item for carrying the lathe around and building it
 
 /obj/item/flatpacked_machine
@@ -97,12 +88,14 @@
 	var/obj/type_to_deploy = /obj/machinery/rnd/production/colony_lathe
 	/// How long it takes to create the structure in question.
 	var/deploy_time = 4 SECONDS
+	var/skips_deployable_component = FALSE
 
 /obj/item/flatpacked_machine/Initialize(mapload)
 	. = ..()
-	desc = initial(type_to_deploy.desc)
-	give_deployable_component()
-	give_manufacturer_examine()
+	if(!skips_deployable_component)
+		desc = initial(type_to_deploy.desc)
+		give_deployable_component()
+		give_manufacturer_examine()
 
 /// Adds the deployable component, so that it can be overridden in case that's wanted
 /obj/item/flatpacked_machine/proc/give_deployable_component()
@@ -119,3 +112,13 @@
 /obj/item/borg/apparatus/circuit/Initialize(mapload)
 	. = ..()
 	storable += /obj/item/flatpacked_machine
+
+
+/obj/item/flatpacked_machine/generic
+	name = "generic flat-packed machine"
+	skips_deployable_component = TRUE
+
+/obj/item/flatpacked_machine/generic/proc/after_set()
+	name = "flat-packed [initial(type_to_deploy.name)]"
+	desc = initial(type_to_deploy.desc)
+	give_deployable_component()
