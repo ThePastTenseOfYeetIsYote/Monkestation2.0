@@ -1793,6 +1793,16 @@
 /obj/machinery/biogenerator/admin,
 /turf/closed/wall/r_wall,
 /area/station/cargo/storage)
+"iR" = (
+/obj/item/stack/spacecash/c10000,
+/obj/item/stack/spacecash/c10000,
+/obj/item/stack/spacecash/c10000,
+/obj/item/stack/spacecash/c10000,
+/obj/item/stack/spacecash/c10000,
+/obj/item/stack/spacecash/c10000,
+/obj/item/stack/spacecash/c10000,
+/turf/open/floor/iron,
+/area/station/cargo/storage)
 "jb" = (
 /obj/machinery/door/airlock,
 /obj/structure/cable,
@@ -2189,6 +2199,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
+"wE" = (
+/obj/item/card/id/departmental_budget/car,
+/turf/open/floor/iron,
+/area/station/cargo/storage)
 "wM" = (
 /obj/structure/cable,
 /turf/open/floor/iron,
@@ -8785,7 +8799,7 @@ Em
 eP
 fY
 eZ
-eu
+iR
 fq
 fr
 eu
@@ -8877,7 +8891,7 @@ eu
 eQ
 eu
 fa
-eu
+wE
 eu
 eu
 fo
