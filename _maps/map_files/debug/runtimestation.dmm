@@ -1993,12 +1993,9 @@
 /turf/open/floor/iron,
 /area/station/construction)
 "pI" = (
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
-	},
-/obj/machinery/door/airlock/external/glass/ruin,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+/obj/machinery/door/airlock,
 /turf/open/floor/plating,
 /area/station/service/hydroponics)
 "qb" = (
@@ -2464,11 +2461,8 @@
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
 "Fi" = (
-/obj/machinery/atmospherics/pipe/smart/simple/cyan/visible{
-	dir = 10
-	},
-/turf/open/floor/plating,
-/area/station/construction)
+/turf/closed/wall/r_wall,
+/area/space)
 "GB" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -2513,6 +2507,8 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/station/science/explab)
+"Iu" = (
+)
 "Iy" = (
 /obj/structure/closet/secure_closet/research_director{
 	locked = 0
@@ -2667,12 +2663,9 @@
 /turf/open/floor/plating,
 /area/station/bitrunning/den)
 "Qt" = (
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
-	},
-/obj/machinery/door/airlock/external/glass/ruin,
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+/obj/machinery/door/airlock,
 /turf/open/floor/plating,
 /area/station/medical/medbay)
 "Qu" = (
@@ -8500,8 +8493,8 @@ bW
 cm
 cm
 ZL
-BH
-BH
+Iu
+Iu
 cL
 Kv
 dk
@@ -8956,7 +8949,7 @@ fg
 fg
 fg
 fg
-FD
+Fi
 zu
 VP
 Cv
@@ -9048,7 +9041,7 @@ aa
 aa
 aa
 aa
-FD
+Fi
 uw
 uI
 uI
@@ -9140,14 +9133,14 @@ aa
 aa
 aa
 aa
-FD
+Fi
 xa
 AY
 AY
 AY
 AY
 yo
-FD
+Fi
 aa
 aa
 aa
@@ -9232,14 +9225,14 @@ aa
 aa
 aa
 aa
-FD
+Fi
 AY
 uI
 uI
 uI
 uI
 AY
-FD
+Fi
 aa
 aa
 aa
@@ -9324,14 +9317,14 @@ aa
 aa
 aa
 aa
-FD
+Fi
 AY
 AY
 AY
 AY
 AY
 AY
-FD
+Fi
 aa
 aa
 aa
@@ -9416,14 +9409,14 @@ aa
 aa
 aa
 aa
-FD
-FD
-FD
-FD
-FD
-FD
-FD
-FD
+Fi
+Fi
+Fi
+Fi
+Fi
+Fi
+Fi
+Fi
 aa
 aa
 aa
