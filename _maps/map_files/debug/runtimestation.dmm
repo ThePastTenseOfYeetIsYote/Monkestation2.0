@@ -254,6 +254,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/engineering/gravity_generator)
+"bj" = (
+/obj/machinery/plantgenes,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
 "bk" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /obj/machinery/door/airlock,
@@ -1788,6 +1792,7 @@
 	lifespan = 1000;
 	production = 1000
 	},
+/mob/living/basic/pet/potty,
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
 "iP" = (
@@ -2128,7 +2133,8 @@
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
 "uI" = (
-/obj/machinery/growing,
+/obj/item/plant_analyzer,
+/obj/item/storage/bag/plants,
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
 "uO" = (
@@ -2507,8 +2513,6 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/station/science/explab)
-"Iu" = (
-)
 "Iy" = (
 /obj/structure/closet/secure_closet/research_director{
 	locked = 0
@@ -2679,8 +2683,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
 "QT" = (
-/mob/living/basic/pet/potty,
-/obj/machinery/growing,
+/obj/machinery/growing/tray,
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
 "Rb" = (
@@ -8493,8 +8496,8 @@ bW
 cm
 cm
 ZL
-Iu
-Iu
+cm
+cm
 cL
 Kv
 dk
@@ -9043,9 +9046,9 @@ aa
 aa
 Fi
 uw
-uI
-uI
-uI
+AY
+QT
+QT
 QT
 AY
 Yg
@@ -9135,7 +9138,7 @@ aa
 aa
 Fi
 xa
-AY
+uI
 AY
 AY
 AY
@@ -9227,10 +9230,10 @@ aa
 aa
 Fi
 AY
-uI
-uI
-uI
-uI
+AY
+QT
+QT
+QT
 AY
 Fi
 aa
@@ -9318,7 +9321,7 @@ aa
 aa
 aa
 Fi
-AY
+bj
 AY
 AY
 AY
