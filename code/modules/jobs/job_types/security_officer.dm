@@ -38,7 +38,7 @@
 		/obj/item/melee/baton/security/boomerang/loaded = 1
 	)
 	rpg_title = "Guard"
-	job_flags = JOB_ANNOUNCE_ARRIVAL | JOB_CREW_MANIFEST | JOB_EQUIP_RANK | JOB_CREW_MEMBER | JOB_NEW_PLAYER_JOINABLE | JOB_REOPEN_ON_ROUNDSTART_LOSS | JOB_ASSIGN_QUIRKS | JOB_CAN_BE_INTERN
+	job_flags = STATION_JOB_FLAGS
 
 
 GLOBAL_LIST_INIT(available_depts, list(SEC_DEPT_ENGINEERING, SEC_DEPT_MEDICAL, SEC_DEPT_SCIENCE, SEC_DEPT_SUPPLY))
@@ -122,6 +122,10 @@ GLOBAL_LIST_EMPTY(security_officer_distribution)
 		spawning.equip_to_slot_or_del(new ears(spawning),ITEM_SLOT_EARS)
 
 	//monkestation edit start: add dept sec outfitsif(suit)
+	if(suit)
+		if(spawning.wear_suit)
+			qdel(spawning.wear_suit)
+		spawning.equip_to_slot_or_del(new suit(spawning),ITEM_SLOT_OCLOTHING)
 	if(head)
 		if(spawning.head && !isplasmaman(spawning))
 			qdel(spawning.head)
