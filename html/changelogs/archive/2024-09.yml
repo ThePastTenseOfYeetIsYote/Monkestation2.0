@@ -463,3 +463,84 @@
   Absolucy:
   - refactor: Biocubes are now proper stacks, and behave as such.
   - image: Made the biocube sprite slightly smaller.
+2024-09-20:
+  Absolucy:
+  - bugfix: Fix constant errors related to pathology symptom varients.
+  - qol: Health Analyzers now tell if someone is incapable of being healed.
+  - qol: Cryotubes will now automatically eject people who are incapable of being
+      healed.
+  - qol: Wound tending surgeries can no longer be started on patients who are incapable
+      of being healed.
+  - bugfix: Hopefully fix bloodsuckers getting stuck in their coffin after torpor.
+  - bugfix: Abandoned areas in maint (i.e gambling den, garden, etc) are now properly
+      protected from radstorms.
+  - rscadd: Radstorm-proofed some more areas.
+  - bugfix: MOD chameleon modules actually work properly - they disguise when the
+      suit is deactivated, undisguise when its activated, and properly handle modsuits
+      that can be equipped to different slots.
+  Ivniinvi:
+  - spellcheck: Fixed some typos in the cassette system
+  PotatoTomahto:
+  - rscadd: Cooking removes diseases from all reagents.
+  - bugfix: Mice properly transfer their disease to their dead carcass.
+  RafRoq:
+  - rscadd: 'New plant trait: Catalytic Inhibitor Serum.'
+  - rscadd: 'New restricted traitor uplink item: plant data disk with Catalytic Inhibitor
+      Serum gene for 20 TC.'
+  - bugfix: Fixed Dank Vesicles and Densified Chemicals interaction.
+  - rscdel: Removed the Potency Limiter gene.
+  ThePooba:
+  - rscadd: added maints between supply and top centcom
+  - bugfix: fixed retirement air
+  - rscadd: Warden requires 10 sec hours now
+  - rscadd: added security bot "Bigsky" (he big!)
+  - balance: Rust heretics mark doesnt delete 75% of your items now and instead does
+      50 damage to your items
+  - balance: cosmic mark makes you confused for 7 seconds
+  Wisemonster:
+  - balance: Heavily slowed the progression of heart worms
+  - qol: Geysers now have a description explaining how to extract chemicals from them.
+2024-09-21:
+  ThePooba:
+  - balance: changed florida men anmes to be character names and not set to florida
+      man
+2024-09-22:
+  Absolucy:
+  - bugfix: Fixed some major lag that'd occur related to alt-clicking.
+  - server: Added a failsafe to immediately restart the MC during certain conditions
+      where a subsystem would loop infinitely while queuing.
+  - balance: The storyteller now actually still continues to matter after the 85 minute
+      mark.
+  - rscadd: Added an automatic crew transfer vote - which will first start at the
+      90 minute mark, and repeat every 30 minutes if it doesn't pass. If it passes,
+      the shuttle will be called (and cannot be recalled). Players cannot manually
+      start transfer votes - only admins or the server itself can.
+  - qol: Made the vote start/end messages in chat look better and easier to see.
+  C0ld0n02:
+  - rscadd: Adds Power gloves as a new 8 tc engineering traitor item.
+  Tractor Mann:
+  - rscadd: Added a new quirk, Tunnel Vision! (-2) using it will add FOV, preventing
+      you from seeing behind you! You can pick a range of 90-180-270 Degrees to not
+      see people in.
+  - rscdel: Removed herobrine.
+2024-09-23:
+  Absolucy:
+  - admin: '"Get Server Logs" can now jump to a specific round ID.'
+  - admin: '"Get Current/Server Logs (Debug)" can now download profiler logs, as users
+      with the permission to use that can use the profiler anyways.'
+2024-09-24:
+  Absolucy:
+  - bugfix: Seedless now works for spliced plants.
+  - bugfix: Made the seed extractor UI a bit less laggy.
+  - bugfix: Fixed the Living Heart ritual deleting your old heart when replacing it
+      instead of having it dramatically burst out of your chest like it should.
+  - qol: The Living Heart ritual will now work if you don't have one at all for some
+      reason, in the same way that'd you use an organic heart in the ritual to replace
+      a cybernetic heart.
+  - qol: The Living Heart ritual, when putting a new heart into your chest, will now
+      heal the heart enough to be just under the "severe damage" threshold, if needed.
+  ancient-engineer:
+  - bugfix: fixed power gloves dusting you if the power was below 10 GWs instead of
+      greater then or equal to 10 GWs
+  flleeppyy:
+  - rscdel: qc some jukebox songs
