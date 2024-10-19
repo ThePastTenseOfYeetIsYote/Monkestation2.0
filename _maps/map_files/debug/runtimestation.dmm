@@ -70,7 +70,7 @@
 	},
 /obj/structure/cable,
 /turf/open/floor/iron,
-/area/station/engineering/gravity_generator)
+/area/ruin/space/ks13/command/bridge)
 "av" = (
 /turf/open/floor/iron/dark,
 /area/station/engineering/gravity_generator)
@@ -112,7 +112,7 @@
 /obj/structure/closet/radiation,
 /obj/structure/cable,
 /turf/open/floor/iron,
-/area/station/engineering/gravity_generator)
+/area/ruin/space/ks13/command/bridge)
 "aH" = (
 /obj/machinery/light/directional/east,
 /obj/machinery/recharge_station,
@@ -180,7 +180,7 @@
 	},
 /obj/structure/cable,
 /turf/open/floor/iron,
-/area/station/engineering/gravity_generator)
+/area/ruin/space/ks13/command/bridge)
 "aV" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -190,15 +190,12 @@
 	},
 /obj/structure/cable,
 /turf/open/floor/iron,
-/area/station/engineering/gravity_generator)
+/area/ruin/space/ks13/command/bridge)
 "aX" = (
-/obj/machinery/door/airlock/engineering/glass{
-	name = "Gravity Generator"
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
-/turf/open/floor/iron/dark,
+/turf/closed/wall/r_wall,
 /area/station/engineering/gravity_generator)
 "aY" = (
 /obj/machinery/light/directional/east,
@@ -247,13 +244,13 @@
 /obj/machinery/power/apc/auto_name/directional/west,
 /obj/structure/cable,
 /turf/open/floor/iron,
-/area/station/engineering/gravity_generator)
+/area/ruin/space/ks13/command/bridge)
 "bh" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
 /turf/open/floor/iron,
-/area/station/engineering/gravity_generator)
+/area/ruin/space/ks13/command/bridge)
 "bj" = (
 /obj/machinery/plantgenes,
 /turf/open/floor/iron,
@@ -297,14 +294,14 @@
 	network = "tcommsat"
 	},
 /turf/open/floor/iron,
-/area/station/engineering/gravity_generator)
+/area/ruin/space/ks13/command/bridge)
 "br" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
 	},
 /obj/machinery/announcement_system,
 /turf/open/floor/iron,
-/area/station/engineering/gravity_generator)
+/area/ruin/space/ks13/command/bridge)
 "bt" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /obj/structure/cable,
@@ -446,10 +443,10 @@
 	},
 /area/station/medical/medbay)
 "bX" = (
-/obj/machinery/sleeper/syndie/fullupgrade,
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
 	},
+/mob/living/carbon/human,
 /turf/open/floor/iron/white/corner{
 	dir = 1
 	},
@@ -642,7 +639,6 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/structure/table,
 /obj/item/gun/magic/wand/resurrection/debug,
 /obj/item/gun/magic/wand/death/debug{
 	pixel_y = 10
@@ -650,6 +646,7 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
+/obj/structure/table/reinforced,
 /turf/open/floor/iron/white/corner{
 	dir = 1
 	},
@@ -776,7 +773,9 @@
 /turf/open/floor/iron,
 /area/station/commons/storage/primary)
 "dl" = (
-/turf/open/floor/plating,
+/obj/item/pipe_dispenser,
+/obj/structure/table/reinforced/plastitaniumglass,
+/turf/open/floor/engine,
 /area/station/commons/storage/primary)
 "dm" = (
 /obj/machinery/light/directional/west,
@@ -786,7 +785,9 @@
 /turf/open/floor/iron,
 /area/station/construction)
 "dn" = (
-/turf/open/floor/plating,
+/obj/machinery/portable_atmospherics/pump,
+/obj/machinery/portable_atmospherics/pump,
+/turf/open/floor/engine,
 /area/station/construction)
 "do" = (
 /obj/machinery/light/directional/east,
@@ -797,7 +798,9 @@
 /area/station/construction)
 "dp" = (
 /obj/machinery/light/directional/west,
-/turf/open/floor/plating,
+/obj/item/construction/plumbing,
+/obj/structure/table/reinforced/plastitaniumglass,
+/turf/open/floor/engine,
 /area/station/commons/storage/primary)
 "dq" = (
 /obj/effect/turf_decal/plaque{
@@ -843,7 +846,7 @@
 /area/station/commons/storage/primary)
 "dx" = (
 /obj/machinery/light/directional/east,
-/turf/open/floor/plating,
+/turf/open/floor/engine,
 /area/station/commons/storage/primary)
 "dy" = (
 /obj/effect/turf_decal/stripes/line{
@@ -924,15 +927,8 @@
 	},
 /turf/open/floor/iron,
 /area/station/construction)
-"dN" = (
-/obj/structure/table,
-/turf/open/floor/iron,
-/area/station/commons/storage/primary)
 "dO" = (
-/obj/structure/table,
 /obj/machinery/light/directional/south,
-/obj/item/storage/medkit/regular,
-/obj/item/healthanalyzer/advanced,
 /turf/open/floor/iron,
 /area/station/commons/storage/primary)
 "dP" = (
@@ -941,11 +937,6 @@
 	},
 /turf/open/floor/plating,
 /area/station/hallway/secondary/entry)
-"dQ" = (
-/obj/structure/table,
-/obj/machinery/light/directional/south,
-/turf/open/floor/iron,
-/area/station/commons/storage/primary)
 "dR" = (
 /obj/machinery/light/directional/west,
 /turf/open/floor/iron,
@@ -956,9 +947,8 @@
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
 "dT" = (
-/obj/machinery/camera/directional/north,
-/turf/open/floor/iron/dark,
-/area/station/engineering/gravity_generator)
+/turf/open/floor/iron,
+/area/ruin/space/ks13/command/bridge)
 "dU" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
 	dir = 4
@@ -983,9 +973,7 @@
 /turf/open/floor/iron,
 /area/station/construction)
 "ea" = (
-/obj/structure/table,
 /obj/machinery/camera/autoname/directional/south,
-/obj/item/gun/magic/wand/resurrection/debug,
 /turf/open/floor/iron,
 /area/station/commons/storage/primary)
 "ec" = (
@@ -1603,7 +1591,7 @@
 	pixel_x = 32;
 	pixel_y = -7
 	},
-/turf/open/floor/plating,
+/turf/open/floor/engine,
 /area/station/commons/storage/primary)
 "gh" = (
 /obj/machinery/airalarm/directional/north,
@@ -1733,10 +1721,8 @@
 /turf/open/floor/iron,
 /area/station/security/brig)
 "gW" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/sign/warning/radiation/rad_area/directional/north,
-/turf/open/floor/plating,
-/area/station/engineering/gravity_generator)
+/turf/closed/wall/r_wall,
+/area/ruin/space/ks13/command/bridge)
 "gY" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 8
@@ -1750,10 +1736,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
-"hr" = (
-/obj/machinery/electroplater,
-/turf/open/floor/iron,
-/area/station/commons/storage/primary)
 "hD" = (
 /obj/structure/closet/secure_closet/chemical/heisenberg{
 	locked = 0
@@ -1761,11 +1743,36 @@
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
 "hJ" = (
-/obj/machinery/conveyor{
-	dir = 4;
-	id = "debug"
-	},
-/turf/open/floor/plating,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/obj/item/tank/internals/plasma/empty,
+/turf/open/floor/engine,
 /area/station/construction)
 "ii" = (
 /obj/effect/turf_decal/stripes/line{
@@ -1782,23 +1789,6 @@
 /obj/structure/sign/warning/vacuum/external/directional/east,
 /turf/open/floor/iron,
 /area/station/medical/medbay)
-"iC" = (
-/obj/item/seeds/pumpkin{
-	maturation = 1000;
-	harvest_age = 1000;
-	endurance = 1000;
-	potency = 1000;
-	yield = 1000;
-	lifespan = 1000;
-	production = 1000
-	},
-/mob/living/basic/pet/potty,
-/turf/open/floor/iron,
-/area/station/service/hydroponics)
-"iP" = (
-/obj/machinery/biogenerator/admin,
-/turf/closed/wall/r_wall,
-/area/station/cargo/storage)
 "iR" = (
 /obj/item/stack/spacecash/c10000,
 /obj/item/stack/spacecash/c10000,
@@ -1820,15 +1810,11 @@
 	},
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
-"jF" = (
-/obj/machinery/bouldertech/crusher,
-/turf/open/floor/plating,
-/area/station/construction)
 "jU" = (
-/obj/structure/table,
-/obj/item/melee/energy/axe,
+/obj/machinery/growing/tray,
+/obj/machinery/light/floor/has_bulb,
 /turf/open/floor/iron,
-/area/station/commons/storage/primary)
+/area/station/service/hydroponics)
 "kj" = (
 /obj/machinery/door/airlock,
 /obj/structure/cable,
@@ -1907,10 +1893,29 @@
 /turf/open/floor/iron,
 /area/station/cargo/miningoffice)
 "mE" = (
-/obj/structure/cable,
-/obj/machinery/chem_mass_spec,
-/turf/open/floor/iron,
-/area/station/medical/chemistry)
+/obj/machinery/portable_atmospherics/canister/air,
+/obj/machinery/portable_atmospherics/canister/anesthetic_mix,
+/obj/machinery/portable_atmospherics/canister/antinoblium,
+/obj/machinery/portable_atmospherics/canister/bz,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/obj/machinery/portable_atmospherics/canister/freon,
+/obj/machinery/portable_atmospherics/canister/halon,
+/obj/machinery/portable_atmospherics/canister/healium,
+/obj/machinery/portable_atmospherics/canister/helium,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
+/obj/machinery/portable_atmospherics/canister/miasma,
+/obj/machinery/portable_atmospherics/canister/nitrium,
+/obj/machinery/portable_atmospherics/canister/nitrogen,
+/obj/machinery/portable_atmospherics/canister/nitrous_oxide,
+/obj/machinery/portable_atmospherics/canister/nob,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/machinery/portable_atmospherics/canister/plasma,
+/obj/machinery/portable_atmospherics/canister/pluoxium,
+/obj/machinery/portable_atmospherics/canister/tritium,
+/obj/machinery/portable_atmospherics/canister/water_vapor,
+/obj/machinery/portable_atmospherics/canister/zauker,
+/turf/open/floor/engine,
+/area/station/construction)
 "mU" = (
 /obj/machinery/door/airlock,
 /obj/structure/cable,
@@ -1934,10 +1939,9 @@
 /turf/open/floor/iron,
 /area/station/commons/storage/primary)
 "ny" = (
-/obj/structure/table,
-/obj/item/storage/toolbox/syndicate,
+/obj/machinery/biogenerator/admin,
 /turf/open/floor/iron,
-/area/station/commons/storage/primary)
+/area/station/service/hydroponics)
 "od" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -1951,14 +1955,11 @@
 "ow" = (
 /obj/machinery/airalarm/directional/north,
 /obj/effect/mapping_helpers/airalarm/unlocked,
-/obj/structure/table,
 /obj/machinery/reagentgrinder,
+/obj/item/gun/syringe,
+/obj/structure/table/reinforced,
 /turf/open/floor/iron/dark,
 /area/station/medical/chemistry)
-"oE" = (
-/obj/structure/closet/syndicate/resources/everything,
-/turf/open/floor/iron,
-/area/station/commons/storage/primary)
 "oK" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -1976,10 +1977,6 @@
 "pl" = (
 /turf/closed/wall/r_wall,
 /area/station/bitrunning/den)
-"pt" = (
-/obj/item/construction/plumbing,
-/turf/open/floor/plating,
-/area/station/construction)
 "pv" = (
 /obj/machinery/light/directional/north,
 /turf/open/floor/iron,
@@ -1994,7 +1991,6 @@
 	},
 /obj/machinery/camera/autoname/directional/west,
 /obj/machinery/light/directional/west,
-/obj/structure/test_boulder_spawner,
 /turf/open/floor/iron,
 /area/station/construction)
 "pI" = (
@@ -2028,12 +2024,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
-"rr" = (
-/obj/machinery/conveyor_switch/oneway{
-	id = "debug"
-	},
-/turf/open/floor/plating,
-/area/station/construction)
 "rK" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -2046,9 +2036,11 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
 "rU" = (
-/obj/item/stack/ducts/fifty,
-/turf/open/floor/plating,
-/area/station/construction)
+/obj/machinery/door/airlock/engineering/glass{
+	name = "Gravity Generator"
+	},
+/turf/open/floor/iron,
+/area/station/security/brig)
 "rZ" = (
 /turf/open/floor/iron/kitchen_coldroom/freezerfloor,
 /area/station/commons/storage/primary)
@@ -2064,10 +2056,9 @@
 /turf/open/floor/iron,
 /area/station/bitrunning/den)
 "sH" = (
-/obj/structure/table,
-/obj/item/storage/box/shipping,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/open/floor/iron,
-/area/station/commons/storage/primary)
+/area/station/medical/medbay)
 "sU" = (
 /obj/machinery/power/smes{
 	charge = 5e+006
@@ -2079,7 +2070,7 @@
 	},
 /obj/structure/cable,
 /turf/open/floor/iron,
-/area/station/engineering/gravity_generator)
+/area/ruin/space/ks13/command/bridge)
 "tB" = (
 /obj/structure/table/reinforced,
 /obj/machinery/light/directional/south,
@@ -2101,12 +2092,10 @@
 /turf/open/floor/iron/dark,
 /area/station/science/explab)
 "tY" = (
-/obj/machinery/conveyor{
-	dir = 6;
-	id = "debug"
-	},
-/turf/open/floor/plating,
-/area/station/construction)
+/obj/machinery/camera/directional/north,
+/obj/machinery/airalarm/directional/north,
+/turf/open/floor/iron/dark,
+/area/station/engineering/gravity_generator)
 "uf" = (
 /obj/structure/fans/tiny/invisible,
 /obj/effect/turf_decal/stripes/line{
@@ -2158,13 +2147,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/science/explab)
-"vh" = (
-/obj/machinery/conveyor{
-	dir = 1;
-	id = "debug"
-	},
-/turf/open/floor/plating,
-/area/station/construction)
 "vm" = (
 /mob/living/circuit_drone,
 /turf/open/floor/iron/dark,
@@ -2221,7 +2203,7 @@
 /area/station/command/bridge)
 "xa" = (
 /obj/machinery/vending/hydroseeds,
-/obj/machinery/light/blacklight/directional/north,
+/obj/machinery/light/floor/has_bulb,
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
 "xm" = (
@@ -2236,21 +2218,23 @@
 /obj/machinery/quantum_server,
 /turf/open/floor/iron,
 /area/station/bitrunning/den)
-"yo" = (
-/obj/machinery/light/blacklight/directional/south,
-/turf/open/floor/iron,
-/area/station/service/hydroponics)
 "yx" = (
-/obj/machinery/conveyor{
-	dir = 8;
-	id = "debug"
-	},
-/turf/open/floor/plating,
+/obj/machinery/portable_atmospherics/scrubber,
+/obj/machinery/portable_atmospherics/scrubber,
+/turf/open/floor/engine,
 /area/station/construction)
 "yy" = (
-/obj/machinery/big_manipulator,
-/turf/open/floor/plating,
-/area/station/construction)
+/obj/item/seeds/pumpkin{
+	maturation = 1000;
+	harvest_age = 1000;
+	endurance = 1000;
+	potency = 1000;
+	yield = 1000;
+	lifespan = 1000;
+	production = 1000
+	},
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
 "yA" = (
 /obj/docking_port/stationary/laborcamp_home{
 	dir = 8
@@ -2276,11 +2260,28 @@
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
 "yT" = (
-/obj/machinery/conveyor{
-	dir = 2;
-	id = "debug"
-	},
-/turf/open/floor/plating,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/portable_atmospherics/canister,
+/turf/open/floor/engine,
 /area/station/construction)
 "yU" = (
 /obj/machinery/vending/assaultops_ammo,
@@ -2298,20 +2299,12 @@
 /obj/structure/closet/secure_closet/hydroponics,
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
-"Aa" = (
-/obj/machinery/big_manipulator,
-/turf/open/floor/iron,
-/area/station/commons/storage/primary)
 "AP" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
 	dir = 8
 	},
 /turf/open/floor/iron,
 /area/station/science)
-"AR" = (
-/obj/machinery/bouldertech/refinery/smelter,
-/turf/open/floor/plating,
-/area/station/construction)
 "AY" = (
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
@@ -2356,18 +2349,11 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/construction)
-"Cc" = (
-/obj/machinery/conveyor{
-	dir = 9;
-	id = "debug"
-	},
-/turf/open/floor/plating,
-/area/station/construction)
 "Ce" = (
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
 "Ct" = (
-/obj/structure/closet/syndicate/resources/everything,
+/obj/item/storage/box/material,
 /turf/open/floor/iron,
 /area/station/science)
 "Cv" = (
@@ -2398,16 +2384,18 @@
 /obj/item/integrated_circuit/loaded/hello_world,
 /obj/item/integrated_circuit/loaded/speech_relay,
 /obj/structure/rack,
+/obj/item/integrated_circuit/chemical,
+/obj/item/integrated_circuit/chemical,
+/obj/item/integrated_circuit/chemical,
+/obj/item/integrated_circuit/admin,
+/obj/item/integrated_circuit/admin,
+/obj/item/integrated_circuit/admin,
 /turf/open/floor/iron/dark,
 /area/station/science/explab)
 "Dy" = (
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/bitrunning/den)
-"DL" = (
-/obj/machinery/bouldertech/crystalizer,
-/turf/open/floor/plating,
-/area/station/construction)
 "DW" = (
 /obj/machinery/computer/scan_consolenew{
 	dir = 1
@@ -2446,11 +2434,42 @@
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "EN" = (
-/obj/machinery/conveyor{
-	dir = 5;
-	id = "debug"
-	},
-/turf/open/floor/plating,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/obj/item/tank/internals/oxygen/empty,
+/turf/open/floor/engine,
 /area/station/construction)
 "ES" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
@@ -2460,22 +2479,83 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
 "EX" = (
-/obj/structure/table,
-/obj/item/screwdriver{
-	pixel_y = 10
-	},
+/obj/structure/sign/warning/radiation/rad_area/directional/north,
 /turf/open/floor/iron,
-/area/station/medical/chemistry)
+/area/station/security/brig)
 "Fi" = (
 /turf/closed/wall/r_wall,
 /area/space)
 "GB" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/machinery/arc_forge,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
 /turf/open/floor/iron,
-/area/station/commons/storage/primary)
+/area/station/medical/chemistry)
 "GS" = (
 /obj/structure/sign/directions/supply{
 	dir = 4;
@@ -2490,16 +2570,10 @@
 	pixel_x = -32;
 	pixel_y = -7
 	},
-/obj/structure/machine/assembly_bench,
-/turf/open/floor/plating,
+/turf/open/floor/engine,
 /area/station/commons/storage/primary)
-"Hr" = (
-/obj/machinery/bouldertech/chemical_injector,
-/turf/open/floor/plating,
-/area/station/construction)
 "Id" = (
-/obj/structure/anvil,
-/turf/open/floor/plating,
+/turf/open/floor/engine,
 /area/station/commons/storage/primary)
 "If" = (
 /obj/machinery/rnd/production/techfab/department,
@@ -2531,8 +2605,7 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
 "Jn" = (
-/obj/machinery/bouldertech/purification_chamber,
-/turf/open/floor/plating,
+/turf/open/floor/engine,
 /area/station/construction)
 "Jp" = (
 /obj/machinery/gravity_generator/main,
@@ -2557,19 +2630,76 @@
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
 "Li" = (
-/obj/machinery/bouldertech/enricher,
-/turf/open/floor/plating,
-/area/station/construction)
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/syringe,
+/turf/open/floor/iron,
+/area/station/medical/chemistry)
 "Lq" = (
 /turf/open/floor/circuit/green,
 /area/station/bitrunning/den)
-"Lx" = (
-/obj/machinery/conveyor{
-	dir = 10;
-	id = "debug"
-	},
-/turf/open/floor/plating,
-/area/station/construction)
 "Ly" = (
 /obj/machinery/chem_dispenser/chem_synthesizer,
 /turf/open/floor/iron/dark,
@@ -2616,7 +2746,10 @@
 /turf/open/floor/iron/dark,
 /area/station/science/explab)
 "Nc" = (
-/obj/machinery/chem_recipe_debug,
+/obj/machinery/vending/syndichem{
+	onstation = 0;
+	req_access = null
+	},
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
 "Ns" = (
@@ -2629,16 +2762,96 @@
 /turf/open/floor/iron,
 /area/station/science)
 "Ob" = (
-/obj/machinery/bouldertech/chemical_washer,
-/turf/open/floor/plating,
-/area/station/construction)
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+/obj/structure/cable,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/obj/item/reagent_containers/syringe/piercing,
+/turf/open/floor/iron,
+/area/station/medical/chemistry)
 "Oc" = (
-/obj/machinery/conveyor/inverted{
-	dir = 5;
-	id = "debug"
-	},
-/turf/open/floor/plating,
-/area/station/construction)
+/obj/machinery/composters,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
 "Oe" = (
 /obj/machinery/vending/imported,
 /turf/open/floor/iron,
@@ -2701,10 +2914,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
-"Rx" = (
-/obj/item/wrench/abductor,
-/turf/open/floor/plating,
-/area/station/construction)
 "RM" = (
 /obj/structure/closet/secure_closet/hop{
 	locked = 0
@@ -2715,10 +2924,6 @@
 "RW" = (
 /turf/open/floor/iron,
 /area/station/bitrunning/den)
-"Sd" = (
-/obj/machinery/bouldertech/dissolution_chamber,
-/turf/open/floor/plating,
-/area/station/construction)
 "Sj" = (
 /obj/structure/table/optable,
 /obj/effect/turf_decal/tile/blue{
@@ -2821,7 +3026,7 @@
 	},
 /obj/structure/cable,
 /turf/open/floor/iron,
-/area/station/engineering/gravity_generator)
+/area/ruin/space/ks13/command/bridge)
 "WK" = (
 /obj/structure/money_bot,
 /turf/open/floor/iron/dark,
@@ -2836,10 +3041,6 @@
 /area/station/engineering/main)
 "Xg" = (
 /obj/machinery/light/directional/east,
-/obj/machinery/vending/syndichem{
-	onstation = 0;
-	req_access = null
-	},
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
 "Xi" = (
@@ -2859,7 +3060,7 @@
 /area/station/science)
 "XE" = (
 /obj/machinery/light/floor/has_bulb,
-/turf/open/floor/plating,
+/turf/open/floor/engine,
 /area/station/construction)
 "XN" = (
 /obj/structure/table,
@@ -2890,20 +3091,9 @@
 /turf/open/floor/iron,
 /area/station/commons/storage/primary)
 "Yg" = (
-/obj/machinery/composters,
-/obj/item/bio_cube,
-/obj/item/bio_cube,
-/obj/item/bio_cube,
-/obj/item/bio_cube,
-/obj/item/bio_cube,
-/obj/item/bio_cube,
-/obj/item/bio_cube,
-/obj/item/bio_cube,
-/obj/item/bio_cube,
-/obj/item/bio_cube,
-/obj/item/bio_cube,
-/turf/closed/wall/r_wall,
-/area/station/cargo/storage)
+/mob/living/basic/pet/potty,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
 "Ym" = (
 /obj/structure/table,
 /obj/item/storage/toolbox/electrical,
@@ -5809,12 +5999,12 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
+ak
+aI
+aI
+aX
+aI
+aI
 ag
 ag
 bw
@@ -5901,12 +6091,12 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
+ak
+av
+av
+av
+av
+av
 ag
 dR
 aD
@@ -5993,13 +6183,13 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-ag
+ak
+av
+MN
+MN
+MN
+av
+rU
 gn
 aD
 aD
@@ -6085,14 +6275,14 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
+ak
+tY
+MN
+av
+Jp
+av
 ag
-aD
+EX
 aD
 aD
 bT
@@ -6177,12 +6367,12 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
+ak
+av
+MN
+MN
+MN
+av
 ah
 ah
 qb
@@ -6269,12 +6459,12 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
+ak
+av
+av
+aY
+av
+av
 ah
 ut
 aw
@@ -6361,12 +6551,12 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
+ak
+ak
+ak
+ak
+ak
+ak
 ah
 am
 aw
@@ -6385,16 +6575,16 @@ ES
 rL
 cP
 cX
-dn
-Sd
-yy
-dn
-dn
-dn
-Oc
-yT
-yT
-yT
+mE
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
 dL
 sr
 nn
@@ -6477,16 +6667,16 @@ bE
 Mh
 TV
 EA
-dn
-Sd
-yy
-dn
-dn
-dn
-yx
+yT
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
 XE
-yy
-yy
+Jn
+Jn
 dL
 cN
 lQ
@@ -6570,13 +6760,13 @@ bE
 ef
 EA
 dn
-dn
-dn
-dn
-dn
-Rx
-yx
-dn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
 Jn
 Jn
 dL
@@ -6661,16 +6851,16 @@ bE
 xZ
 cN
 BW
-dn
-Ob
-dn
-rU
-pt
-rr
 yx
-dn
-dn
-dn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
 dL
 cN
 ZP
@@ -6754,15 +6944,15 @@ yU
 cN
 EA
 EN
-vh
-vh
-vh
-vh
-Cc
-yx
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
 XE
-yy
-yy
+Jn
+Jn
 dL
 cN
 fI
@@ -6846,15 +7036,15 @@ YG
 cN
 cY
 hJ
-DL
-DL
-DL
-DL
-yx
-yx
-dn
-jF
-jF
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
 dZ
 cN
 Tt
@@ -6937,16 +7127,16 @@ bE
 IT
 cN
 cY
-tY
-yT
-yT
-yT
-yT
-Lx
-yx
-dn
-dn
-dn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
 dL
 cN
 Tt
@@ -7029,16 +7219,16 @@ bE
 Oe
 cN
 cY
-dn
-yy
-yy
-yy
-yy
-yy
-yx
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
 XE
-yy
-yy
+Jn
+Jn
 dL
 cN
 Tt
@@ -7121,16 +7311,16 @@ bE
 bE
 ef
 cY
-dn
-Hr
-Hr
-Hr
-Hr
-Hr
-yx
-dn
-Li
-Li
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
 dL
 cN
 Tt
@@ -7213,16 +7403,16 @@ bE
 bE
 ef
 cY
-dn
-yT
-yT
-yT
-yT
-yT
-Lx
-dn
-AR
-AR
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
+Jn
 dL
 cN
 Tt
@@ -7582,7 +7772,7 @@ bE
 cS
 dc
 dC
-GB
+dC
 dC
 dC
 eW
@@ -7665,7 +7855,7 @@ be
 be
 bx
 CV
-CV
+Ob
 ch
 CV
 cT
@@ -7757,9 +7947,9 @@ bf
 bp
 aj
 ow
-Ce
+Li
 JF
-mE
+cj
 oV
 bE
 bE
@@ -7772,10 +7962,10 @@ dJ
 dI
 dJ
 dJ
-Aa
 dJ
 dJ
-ny
+dJ
+dJ
 cS
 fI
 ga
@@ -7841,15 +8031,15 @@ aa
 aa
 ad
 ad
-ak
-ak
-ak
+gW
+gW
+gW
 aU
-ak
-ak
-ak
+gW
+gW
+gW
 bQ
-Ce
+GB
 Ce
 cj
 vP
@@ -7859,13 +8049,13 @@ cS
 fy
 dr
 dJ
-hr
-oE
+dJ
+dJ
 dI
 dJ
-Aa
 dJ
-Aa
+dJ
+dJ
 dJ
 dO
 cS
@@ -7933,13 +8123,13 @@ aa
 aa
 ad
 af
-ak
+gW
 sU
 aG
 aV
 bg
 bq
-ak
+gW
 bR
 cj
 cj
@@ -7956,10 +8146,10 @@ dJ
 dI
 dJ
 dJ
-Aa
 dJ
 dJ
-jU
+dJ
+dJ
 cS
 fO
 fO
@@ -8025,13 +8215,13 @@ aa
 aa
 bY
 af
-ak
+gW
 at
 Wx
 bh
 bh
 br
-ak
+gW
 bS
 Ce
 Ce
@@ -8117,15 +8307,15 @@ aa
 aa
 ad
 af
-ak
 gW
-aI
-aX
-aI
-aI
-ak
+dT
+dT
+dT
+dT
+dT
+gW
 Ly
-EX
+Ce
 Xg
 cj
 oV
@@ -8143,7 +8333,7 @@ dJ
 dJ
 dJ
 dJ
-sH
+dJ
 cS
 fP
 fO
@@ -8209,12 +8399,12 @@ aa
 aa
 ad
 af
-ak
-av
-av
-av
-av
-av
+gW
+dT
+dT
+dT
+dT
+dT
 by
 by
 ck
@@ -8235,7 +8425,7 @@ dJ
 dJ
 dJ
 dJ
-dQ
+dO
 cS
 gz
 fO
@@ -8301,12 +8491,12 @@ aa
 aa
 ad
 af
-ak
-av
-MN
-MN
-MN
-av
+gW
+dT
+dT
+dT
+dT
+dT
 by
 fV
 cl
@@ -8327,7 +8517,7 @@ dJ
 dJ
 dJ
 dJ
-dN
+dJ
 cS
 fQ
 fO
@@ -8393,12 +8583,12 @@ aa
 aa
 ad
 af
-ak
+gW
 dT
-MN
-av
-Jp
-av
+dT
+dT
+dT
+dT
 by
 bV
 cm
@@ -8485,19 +8675,19 @@ aa
 aa
 ad
 af
-ak
-av
-MN
-MN
-MN
-av
+gW
+dT
+dT
+dT
+dT
+dT
 by
 bW
 cm
 cm
 ZL
-cm
-cm
+sH
+sH
 cL
 Kv
 dk
@@ -8577,12 +8767,12 @@ aa
 aa
 ad
 af
-ak
-av
-av
-aY
-av
-av
+gW
+dT
+dT
+dT
+dT
+dT
 by
 bX
 cm
@@ -8594,14 +8784,14 @@ cK
 by
 dB
 dx
-dl
-dl
+Id
+Id
 gg
 ez
 dB
-dl
-dl
-dl
+Id
+Id
+Id
 dx
 dE
 cS
@@ -8669,12 +8859,12 @@ aa
 aa
 ad
 af
-ak
-ak
-ak
-ak
-ak
-ak
+gW
+gW
+gW
+gW
+gW
+gW
 by
 by
 dH
@@ -8958,8 +9148,8 @@ VP
 Cv
 AY
 AY
-iC
-iP
+AY
+et
 ev
 eA
 eA
@@ -9048,10 +9238,10 @@ Fi
 uw
 AY
 QT
-QT
+jU
 QT
 AY
-Yg
+et
 fB
 fh
 fh
@@ -9142,7 +9332,7 @@ uI
 AY
 AY
 AY
-yo
+AY
 Fi
 aa
 aa
@@ -9232,7 +9422,7 @@ Fi
 AY
 AY
 QT
-QT
+jU
 QT
 AY
 Fi
@@ -9322,10 +9512,10 @@ aa
 aa
 Fi
 bj
-AY
-AY
-AY
-AY
+Oc
+ny
+yy
+Yg
 AY
 Fi
 aa
