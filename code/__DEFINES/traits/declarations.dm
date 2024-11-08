@@ -437,7 +437,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Blowing kisses actually does damage to the victim
 #define TRAIT_KISS_OF_DEATH "kiss_of_death"
 /// Syndie kisses can apply burn damage
-/* #define TRAIT_SYNDIE_KISS "syndie_kiss" */
+#define TRAIT_SYNDIE_KISS "syndie_kiss"
 /// Used to activate french kissing
 #define TRAIT_GARLIC_BREATH "kiss_of_garlic_death"
 /// Addictions don't tick down, basically they're permanently addicted
@@ -1271,7 +1271,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /* #define TRAIT_NO_THROWING "no_throwing" */
 
 ///Trait which allows mobs to parry mining mob projectiles
-/* #define TRAIT_MINING_PARRYING "mining_parrying" */
+#define TRAIT_MINING_PARRYING "mining_parrying"
 
 /// That which allows mobs to instantly break down boulders.
 #define TRAIT_INSTANTLY_PROCESSES_BOULDERS "instantly_processes_boulders"

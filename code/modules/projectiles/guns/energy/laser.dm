@@ -36,6 +36,33 @@
 	icon_state = "hellgun"
 	ammo_type = list(/obj/item/ammo_casing/energy/laser/hellfire)
 
+/obj/item/gun/energy/laser/carbine
+	name = "laser carbine"
+	desc = "A modified laser gun which can shoot far faster, but each shot is far less damaging."
+	icon_state = "laser_carbine"
+	ammo_type = list(/obj/item/ammo_casing/energy/lasergun/carbine)
+
+/obj/item/gun/energy/laser/carbine/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/automatic_fire, 0.15 SECONDS, allow_akimbo = FALSE)
+
+/obj/item/gun/energy/laser/carbine/cybersun
+	name = "\improper Cybersun S-120"
+	desc = "A laser gun primarily used by syndicate security guards. It fires a rapid spray of low-power plasma beams."
+	icon_state = "cybersun_s120"
+	inhand_icon_state = "s120"
+	ammo_type = list(/obj/item/ammo_casing/energy/lasergun/carbine/cybersun)
+	spread = 14
+	pin = /obj/item/firing_pin/implant/pindicate
+
+/obj/item/gun/energy/laser/carbine/practice
+	name = "practice laser carbine"
+	desc = "A modified version of the laser carbine, this one fires even less concentrated energy bolts designed for target practice."
+	ammo_type = list(/obj/item/ammo_casing/energy/lasergun/carbine/practice)
+	clumsy_check = FALSE
+	item_flags = NONE
+	gun_flags = NOT_A_REAL_GUN
+
 /obj/item/gun/energy/laser/captain
 	name = "antique laser gun"
 	icon_state = "caplaser"
