@@ -104,4 +104,4 @@
 	name = "Syndicate Rebar Crossbow"
 	desc = "A much more proffessional version of the engineer's bootleg rebar crossbow. 3 shot mag, quicker loading, and better ammo. Owners manual included."
 	item = /obj/item/storage/box/syndie_kit/rebarxbowsyndie
-	cost = 10
+	cost = 12
