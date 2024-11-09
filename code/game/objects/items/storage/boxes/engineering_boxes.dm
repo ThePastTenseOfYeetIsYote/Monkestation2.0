@@ -53,6 +53,7 @@
 /obj/item/storage/box/debugtools/PopulateContents()
 	var/static/items_inside = list(
 		/obj/item/card/emag=1,
+		/obj/item/construction/plumbing=1,
 		/obj/item/construction/rcd/arcd=1,
 		/obj/item/disk/tech_disk/debug=1,
 		/obj/item/flashlight/emp/debug=1,
