@@ -2618,6 +2618,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
+"Kd" = (
+/obj/item/holosign_creator/atmos,
+/turf/open/floor/engine,
+/area/station/construction)
 "Kv" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/closed/wall/r_wall,
@@ -6576,7 +6580,7 @@ rL
 cP
 cX
 mE
-Jn
+Kd
 Jn
 Jn
 Jn
