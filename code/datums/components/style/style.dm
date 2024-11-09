@@ -112,7 +112,19 @@
 	RegisterSignal(parent, COMSIG_LIVING_DEFUSED_GIBTONITE, PROC_REF(on_gibtonite_defuse))
 	RegisterSignal(parent, COMSIG_LIVING_CRUSHER_DETONATE, PROC_REF(on_crusher_detonate))
 	RegisterSignal(parent, COMSIG_LIVING_DISCOVERED_GEYSER, PROC_REF(on_geyser_discover))
-	ADD_TRAIT(parent, TRAIT_MINING_PARRYING, STYLE_TRAIT)
+
+	projectile_parry = WEAKREF(parent.AddComponent(\
+		/datum/component/projectile_parry,\
+		list(\
+			/obj/projectile/colossus,\
+			/obj/projectile/temp/watcher,\
+			/obj/projectile/kinetic,\
+			/obj/projectile/bileworm_acid,\
+			/obj/projectile/herald,\
+			)\
+		)
+	)
+
 
 /datum/component/style/UnregisterFromParent()
 	UnregisterSignal(parent, COMSIG_MOB_ITEM_AFTERATTACK)
@@ -126,7 +138,10 @@
 	UnregisterSignal(parent, COMSIG_LIVING_DEFUSED_GIBTONITE)
 	UnregisterSignal(parent, COMSIG_LIVING_CRUSHER_DETONATE)
 	UnregisterSignal(parent, COMSIG_LIVING_DISCOVERED_GEYSER)
-	REMOVE_TRAIT(parent, TRAIT_MINING_PARRYING, STYLE_TRAIT)
+
+	if(projectile_parry)
+		qdel(projectile_parry.resolve())
+
 
 /datum/component/style/Destroy(force)
 	STOP_PROCESSING(SSdcs, src)
@@ -136,10 +151,13 @@
 		mob_parent.hud_used.show_hud(mob_parent.hud_used.hud_version)
 	return ..()
 
+
 /datum/component/style/process(seconds_per_tick)
 	point_multiplier = round(max(point_multiplier - 0.2 * seconds_per_tick, 1), 0.1)
 	change_points(-5 * seconds_per_tick * ROUND_UP((style_points + 1) / 200), use_multiplier = FALSE)
 	update_screen()
+
+
 
 /datum/component/style/proc/add_action(action, amount)
 	if(length(actions) > 9)

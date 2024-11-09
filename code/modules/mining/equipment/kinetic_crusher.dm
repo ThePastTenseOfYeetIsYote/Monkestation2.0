@@ -92,9 +92,8 @@
 /obj/item/kinetic_crusher/afterattack(atom/target, mob/living/user, proximity_flag, clickparams)
 	if(proximity_flag && isliving(target) && !override_markeffect)
 		var/mob/living/L = target
-		var/datum/status_effect/crusher_mark/mark = target.has_status_effect(/datum/status_effect/crusher_mark)
-		var/boosted_mark = mark?.boosted
-		if(!target.remove_status_effect(mark))
+		var/datum/status_effect/crusher_mark/CM = L.has_status_effect(/datum/status_effect/crusher_mark)
+		if(!CM || CM.hammer_synced != src || !L.remove_status_effect(/datum/status_effect/crusher_mark))
 			return
 		var/datum/status_effect/crusher_damage/C = L.has_status_effect(/datum/status_effect/crusher_damage)
 		if(!C)
@@ -111,7 +110,7 @@
 			var/combined_damage = detonation_damage
 			var/backstab_dir = get_dir(user, L)
 			var/def_check = L.getarmor(type = BOMB)
-			if((user.dir & backstab_dir) && (target.dir & backstab_dir) || boosted_mark)
+			if((user.dir & backstab_dir) && (L.dir & backstab_dir))
 				backstabbed = TRUE
 				combined_damage += backstab_bonus
 				playsound(user, 'sound/weapons/kenetic_accel.ogg', 100, TRUE) //Seriously who spelled it wrong
@@ -193,25 +192,21 @@
 	armor_flag = BOMB
 	range = 6
 	log_override = TRUE
-	/// Has this projectile been boosted
-	var/boosted = FALSE
+	var/obj/item/kinetic_crusher/hammer_synced
 
-/obj/projectile/destabilizer/Initialize(mapload)
-	. = ..()
-	AddComponent(/datum/component/parriable_projectile, parry_callback = CALLBACK(src, PROC_REF(on_parry)))
-
-/obj/projectile/destabilizer/proc/on_parry(mob/user)
-	SIGNAL_HANDLER
-	boosted = TRUE
-	// Get a bit of a damage/range boost after being parried
-	damage = 10
-	range = 9
+/obj/projectile/destabilizer/Destroy()
+	hammer_synced = null
+	return ..()
 
 /obj/projectile/destabilizer/on_hit(atom/target, blocked = 0, pierce_hit)
 	if(isliving(target))
 		var/mob/living/L = target
 		var/had_effect = (L.has_status_effect(/datum/status_effect/crusher_mark)) //used as a boolean
-		living_target.apply_status_effect(/datum/status_effect/crusher_mark, boosted)
+		var/datum/status_effect/crusher_mark/CM = L.apply_status_effect(/datum/status_effect/crusher_mark, hammer_synced)
+		if(hammer_synced)
+			for(var/t in hammer_synced.trophies)
+				var/obj/item/crusher_trophy/T = t
+				T.on_mark_application(target, CM, had_effect)
 	var/target_turf = get_turf(target)
 	if(ismineralturf(target_turf))
 		var/turf/closed/mineral/M = target_turf

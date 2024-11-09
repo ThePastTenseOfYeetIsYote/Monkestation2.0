@@ -360,16 +360,6 @@
 	special_screen_obj = "birthday"
 	special_screen_replace = FALSE
 
-/datum/mood_event/basketball_score
-	description = "Swish! Nothing but net."
-	mood_change = 2
-	timeout = 5 MINUTES
-
-/datum/mood_event/basketball_dunk
-	description = "Slam dunk! Boom, shakalaka!"
-	mood_change = 2
-	timeout = 5 MINUTES
-
 /datum/mood_event/moon_smile
 	description = "THE MOON SHOWS ME THE TRUTH AND ITS SMILE IS FACED TOWARDS ME!!!"
 	mood_change = 10

@@ -60,10 +60,6 @@
 	if (!isnull(operating_computer))
 		SEND_SIGNAL(operating_computer, COMSIG_OPERATING_COMPUTER_DISSECTION_COMPLETE, target)
 
-	if(HAS_TRAIT(user, TRAIT_MORBID) && ishuman(user))
-		var/mob/living/carbon/human/morbid_weirdo = user
-		morbid_weirdo.add_mood_event("morbid_dissection_success", /datum/mood_event/morbid_dissection_success)
-
 	return TRUE
 
 /datum/surgery_step/dissection/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, fail_prob)

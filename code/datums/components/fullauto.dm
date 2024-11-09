@@ -8,12 +8,8 @@
 	var/turf/target_loc //For dealing with locking on targets due to BYOND engine limitations (the mouse input only happening when mouse moves).
 	var/autofire_stat = AUTOFIRE_STAT_IDLE
 	var/mouse_parameters
-		/// Time between individual shots.
-	var/autofire_shot_delay = 0.3 SECONDS
-	/// This seems hacky but there can be two MouseDown() without a MouseUp() in between if the user holds click and uses alt+tab, printscreen or similar.
-	var/mouse_status = AUTOFIRE_MOUSEUP
-	/// Should dual wielding be allowed?
-	var/allow_akimbo
+	var/autofire_shot_delay = 0.3 SECONDS //Time between individual shots.
+	var/mouse_status = AUTOFIRE_MOUSEUP //This seems hacky but there can be two MouseDown() without a MouseUp() in between if the user holds click and uses alt+tab, printscreen or similar.
 
 	///windup autofire vars
 	///Whether the delay between shots increases over time, simulating a spooling weapon
@@ -30,7 +26,7 @@
 	var/timerid
 	COOLDOWN_DECLARE(next_shot_cd)
 
-/datum/component/automatic_fire/Initialize(autofire_shot_delay, windup_autofire, windup_autofire_reduction_multiplier, windup_autofire_cap, windup_spindown, allow_akimbo = TRUE)
+/datum/component/automatic_fire/Initialize(autofire_shot_delay, windup_autofire, windup_autofire_reduction_multiplier, windup_autofire_cap, windup_spindown)
 	. = ..()
 	if(!isgun(parent))
 		return COMPONENT_INCOMPATIBLE
@@ -38,7 +34,6 @@
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(wake_up))
 	if(autofire_shot_delay)
 		src.autofire_shot_delay = autofire_shot_delay
-	src.allow_akimbo = allow_akimbo
 	if(windup_autofire)
 		src.windup_autofire = windup_autofire
 		src.windup_autofire_reduction_multiplier = windup_autofire_reduction_multiplier
@@ -263,7 +258,7 @@
 	if(HAS_TRAIT(shooter, TRAIT_DOUBLE_TAP))
 		next_delay = round(next_delay * 0.5)
 	COOLDOWN_START(src, next_shot_cd, next_delay)
-	if(SEND_SIGNAL(parent, COMSIG_AUTOFIRE_SHOT, target, shooter, allow_akimbo, mouse_parameters) & COMPONENT_AUTOFIRE_SHOT_SUCCESS)
+	if(SEND_SIGNAL(parent, COMSIG_AUTOFIRE_SHOT, target, shooter, mouse_parameters) & COMPONENT_AUTOFIRE_SHOT_SUCCESS)
 		return TRUE
 	stop_autofiring()
 	return FALSE
@@ -296,21 +291,21 @@
 		return COMPONENT_AUTOFIRE_ONMOUSEDOWN_BYPASS
 
 
-/obj/item/gun/proc/do_autofire(datum/source, atom/target, mob/living/shooter, allow_akimbo, params)
+/obj/item/gun/proc/do_autofire(datum/source, atom/target, mob/living/shooter, params)
 	SIGNAL_HANDLER
 	if(semicd || shooter.incapacitated())
 		return NONE
 	if(!can_shoot())
 		shoot_with_empty_chamber(shooter)
 		return NONE
-	INVOKE_ASYNC(src, PROC_REF(do_autofire_shot), source, target, shooter, allow_akimbo, params)
+	INVOKE_ASYNC(src, PROC_REF(do_autofire_shot), source, target, shooter, params)
 	return COMPONENT_AUTOFIRE_SHOT_SUCCESS //All is well, we can continue shooting.
 
 
-/obj/item/gun/proc/do_autofire_shot(datum/source, atom/target, mob/living/shooter, allow_akimbo, params)
+/obj/item/gun/proc/do_autofire_shot(datum/source, atom/target, mob/living/shooter, params)
 	var/obj/item/gun/akimbo_gun = shooter.get_inactive_held_item()
 	var/bonus_spread = 0
-	if(istype(akimbo_gun) && weapon_weight < WEAPON_MEDIUM && allow_akimbo)
+	if(istype(akimbo_gun) && weapon_weight < WEAPON_MEDIUM)
 		if(akimbo_gun.weapon_weight < WEAPON_MEDIUM && akimbo_gun.can_trigger_gun(shooter))
 			bonus_spread = dual_wield_spread
 			addtimer(CALLBACK(akimbo_gun, TYPE_PROC_REF(/obj/item/gun, process_fire), target, shooter, TRUE, params, null, bonus_spread), 1)

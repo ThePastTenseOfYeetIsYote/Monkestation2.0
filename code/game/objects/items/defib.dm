@@ -657,10 +657,7 @@
 					H.emote("gasp")
 					H.set_jitter_if_lower(200 SECONDS)
 					SEND_SIGNAL(H, COMSIG_LIVING_MINOR_SHOCK)
-					if(HAS_TRAIT(user, TRAIT_MORBID))
-						user.add_mood_event("morbid_saved_life", /datum/mood_event/morbid_saved_life)
-					else
-						user.add_mood_event("saved_life", /datum/mood_event/saved_life)
+					user.add_mood_event("saved_life", /datum/mood_event/saved_life)
 					log_combat(user, H, "revived", defib)
 					if (target_synthetic)
 						user.visible_message(span_boldwarning("[src] fire a powerful jolt of electricity into [H]'s vulnerable circuitry!"))
