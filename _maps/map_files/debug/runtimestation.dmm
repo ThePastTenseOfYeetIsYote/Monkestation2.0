@@ -2324,6 +2324,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/command/bridge)
+"Bz" = (
+/obj/machinery/splicer,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
 "BD" = (
 /obj/structure/closet/secure_closet/chief_medical{
 	locked = 0
@@ -2935,6 +2939,10 @@
 	},
 /turf/open/floor/iron/white/corner,
 /area/station/medical/medbay)
+"St" = (
+/obj/machinery/seed_extractor,
+/turf/open/floor/iron,
+/area/station/service/hydroponics)
 "SJ" = (
 /obj/structure/cable,
 /turf/open/floor/iron,
@@ -9150,8 +9158,8 @@ Fi
 zu
 VP
 Cv
-AY
-AY
+yy
+Yg
 AY
 et
 ev
@@ -9515,11 +9523,11 @@ aa
 aa
 aa
 Fi
-bj
-Oc
-ny
-yy
-Yg
+AY
+AY
+AY
+AY
+AY
 AY
 Fi
 aa
@@ -9607,12 +9615,12 @@ aa
 aa
 aa
 Fi
-Fi
-Fi
-Fi
-Fi
-Fi
-Fi
+bj
+Oc
+ny
+St
+Bz
+AY
 Fi
 aa
 aa
@@ -9698,14 +9706,14 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+Fi
+Fi
+Fi
+Fi
+Fi
+Fi
+Fi
+Fi
 aa
 aa
 aa
