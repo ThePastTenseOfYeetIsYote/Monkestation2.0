@@ -2922,6 +2922,16 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
+"Rx" = (
+/obj/item/wrench/abductor,
+/turf/open/floor/plating,
+/area/station/construction)
+"Rz" = (
+/obj/structure/table,
+/obj/item/clothing/suit/space/hardsuit/security,
+/obj/item/tank/jetpack/suit,
+/turf/open/floor/iron,
+/area/station/medical/medbay)
 "RM" = (
 /obj/structure/closet/secure_closet/hop{
 	locked = 0
@@ -8975,7 +8985,7 @@ af
 by
 cz
 by
-cm
+Rz
 es
 by
 eu
