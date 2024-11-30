@@ -32,7 +32,7 @@
 	name = "Syndie Lipstick"
 	desc = "Stylish way to kiss to death, isn't it syndiekisser?"
 	item = /obj/item/lipstick/syndie
-	cost = 15
+	cost = 12
 
 /datum/uplink_item/stealthy_weapons/traitor_chem_bottle
 	name = "Poison Kit"
