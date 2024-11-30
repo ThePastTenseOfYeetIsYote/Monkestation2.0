@@ -30,7 +30,6 @@
 	maxHealth = 80
 	melee_damage_lower = 20
 	melee_damage_upper = 35
-	ai_controller = /datum/ai_controller/basic_controller/simple_hostile
 	faction = list(FACTION_CAT, ROLE_SYNDICATE)
 	can_be_held = TRUE
 	attack_verb_continuous = "claws"
