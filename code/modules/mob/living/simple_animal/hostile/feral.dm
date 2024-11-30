@@ -10,7 +10,6 @@
 	icon_living = "cat2"
 	icon_dead = "cat2_dead"
 	held_state = "cat2"
-	ai_controller = /datum/ai_controller/basic_controller/simple_hostile
 	faction = list(FACTION_CAT, ROLE_SYNDICATE)
 
 /mob/living/simple_animal/hostile/feraltabby
@@ -25,5 +24,4 @@
 	icon_living = "cat"
 	icon_dead = "cat_dead"
 	held_state = "cat"
-	ai_controller = /datum/ai_controller/basic_controller/simple_hostile
 	faction = list(FACTION_CAT, ROLE_SYNDICATE)
