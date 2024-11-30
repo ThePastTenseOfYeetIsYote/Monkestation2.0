@@ -37,3 +37,4 @@
 	attack_sound = 'sound/weapons/slash.ogg'
 	attack_vis_effect = ATTACK_EFFECT_CLAW
 	footstep_type = FOOTSTEP_MOB_CLAW
+	// If only I knew how to make em be implanted with a microbomb...

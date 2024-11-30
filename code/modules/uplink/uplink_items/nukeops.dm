@@ -523,7 +523,7 @@
 
 /datum/uplink_item/dangerous/syndicat
 	name = "Syndie cat grenade"
-	desc = "This grenade is filled with 3 angry cats in special syndicate modsuits. Upon activation, the Syndicate cats are awoken and unleashed unto unlucky bystanders. WARNING: The cats are not trained to discern friend from foe!"
+	desc = "This grenade is filled with 3 trained angry cats in special syndicate modsuits. Upon activation, the Syndicate cats are awoken and unleashed unto unlucky bystanders."
 	item = /obj/item/grenade/spawnergrenade/cat/syndicate
 	cost = 20
 	surplus = 50
