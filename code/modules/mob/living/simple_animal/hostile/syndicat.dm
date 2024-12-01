@@ -37,3 +37,10 @@
 	attack_sound = 'sound/weapons/slash.ogg'
 	attack_vis_effect = ATTACK_EFFECT_CLAW
 	footstep_type = FOOTSTEP_MOB_CLAW
+
+/mob/living/simple_animal/hostile/syndicat/Initialize(mapload)
+	. = ..()
+	var/obj/item/implant/toinstall = list(/obj/item/implant/weapons_auth, /obj/item/implant/explosive)
+	for(var/obj/item/implant/original_implants as anything in toinstall)
+		var/obj/item/implant/copied_implant = new original_implants.type
+		copied_implant.implant(src, silent = TRUE, force = TRUE)
