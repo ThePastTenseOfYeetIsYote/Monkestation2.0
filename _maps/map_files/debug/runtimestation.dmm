@@ -782,11 +782,10 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/construction)
 "dn" = (
-/obj/structure/window/spawner/directional/south,
-/obj/structure/window/spawner/directional/east,
 /obj/machinery/atmospherics/components/binary/pump{
 	dir = 1;
 	name = "Mix Outlet Pump"
@@ -857,6 +856,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/construction)
 "dz" = (
@@ -930,6 +930,7 @@
 /obj/effect/turf_decal/stripes/corner{
 	dir = 4
 	},
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/construction)
 "dN" = (
@@ -1743,6 +1744,7 @@
 /area/station/engineering/atmos)
 "gO" = (
 /obj/machinery/light/floor/has_bulb,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/construction)
 "gR" = (
@@ -1863,6 +1865,7 @@
 	dir = 4
 	},
 /obj/machinery/light_switch/directional/west,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/construction)
 "ij" = (
@@ -1882,8 +1885,6 @@
 /area/station/medical/medbay)
 "iB" = (
 /obj/effect/turf_decal/tile/purple/fourcorners,
-/obj/structure/window/spawner/directional/south,
-/obj/structure/window/spawner/directional/west,
 /obj/machinery/atmospherics/components/trinary/filter/atmos/plasma{
 	dir = 4
 	},
@@ -1950,7 +1951,6 @@
 /turf/open/floor/engine,
 /area/station/engineering/atmos)
 "jv" = (
-/obj/structure/window/spawner/directional/south,
 /obj/machinery/computer/atmos_control/air_tank{
 	dir = 1
 	},
@@ -1983,7 +1983,6 @@
 /turf/open/space,
 /area/station/engineering/atmos)
 "kg" = (
-/obj/structure/window/spawner/directional/south,
 /obj/machinery/computer/atmos_control/mix_tank{
 	dir = 1
 	},
@@ -2010,8 +2009,12 @@
 /obj/machinery/light_switch/directional/west,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
+"kM" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/cable,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "kO" = (
-/obj/structure/window/spawner/directional/south,
 /obj/effect/turf_decal/tile/red/fourcorners,
 /obj/machinery/atmospherics/components/trinary/filter/atmos/n2{
 	dir = 4
@@ -2103,6 +2106,7 @@
 "mx" = (
 /obj/machinery/door/airlock,
 /obj/structure/cable,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "mz" = (
@@ -2130,12 +2134,6 @@
 /turf/open/floor/engine/n2,
 /area/station/engineering/atmos)
 "mI" = (
-/obj/structure/window/spawner/directional/west,
-/obj/structure/window/spawner/directional/east,
-/obj/machinery/door/window/left/directional/north{
-	name = "Inner Pipe Access";
-	req_access = list("atmospherics")
-	},
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
 	dir = 4
 	},
@@ -2146,7 +2144,6 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos)
 "mN" = (
-/obj/structure/window/spawner/directional/south,
 /obj/machinery/computer/atmos_control/nitrous_tank{
 	dir = 1
 	},
@@ -2229,6 +2226,7 @@
 	dir = 4
 	},
 /obj/machinery/light/directional/west,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/construction)
 "oM" = (
@@ -2272,7 +2270,6 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "px" = (
-/obj/structure/window/spawner/directional/south,
 /obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible,
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
 	dir = 4
@@ -2290,6 +2287,7 @@
 	},
 /obj/machinery/camera/autoname/directional/west,
 /obj/machinery/light/directional/west,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/construction)
 "pG" = (
@@ -2329,8 +2327,6 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos)
 "qu" = (
-/obj/structure/window/spawner/directional/south,
-/obj/structure/window/spawner/directional/east,
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
 	dir = 4
 	},
@@ -2404,6 +2400,7 @@
 /area/station/engineering/atmos)
 "sr" = (
 /obj/machinery/door/airlock/shell,
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/construction)
 "ss" = (
@@ -2419,8 +2416,6 @@
 /turf/open/floor/iron,
 /area/station/bitrunning/den)
 "sx" = (
-/obj/structure/window/spawner/directional/west,
-/obj/structure/window/spawner/directional/south,
 /obj/machinery/atmospherics/pipe/smart/manifold/green/visible{
 	dir = 4
 	},
@@ -2696,6 +2691,11 @@
 /obj/machinery/power/rtg/debug,
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
+"yQ" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/machinery/atmospherics/components/unary/bluespace_sender,
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "yT" = (
 /obj/machinery/light/floor/has_bulb,
 /turf/open/floor/engine,
@@ -2746,7 +2746,6 @@
 /turf/open/floor/engine/co2,
 /area/station/engineering/atmos)
 "AD" = (
-/obj/structure/window/spawner/directional/south,
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/computer/atmos_control/oxygen_tank{
 	dir = 1
@@ -2762,6 +2761,13 @@
 	},
 /turf/open/floor/iron,
 /area/station/science)
+"AU" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/structure/cable,
+/turf/open/floor/iron,
+/area/station/construction)
 "AY" = (
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
@@ -2786,6 +2792,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/stripes/line,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "Bu" = (
@@ -2854,8 +2861,6 @@
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
 "CD" = (
-/obj/structure/window/spawner/directional/east,
-/obj/structure/window/spawner/directional/north,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/visible{
 	dir = 8
 	},
@@ -2869,8 +2874,6 @@
 /turf/open/floor/iron,
 /area/station/cargo/miningoffice)
 "CR" = (
-/obj/structure/window/spawner/directional/south,
-/obj/structure/window/spawner/directional/west,
 /obj/machinery/atmospherics/components/trinary/filter/atmos/co2{
 	dir = 4
 	},
@@ -2932,7 +2935,6 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos)
 "DR" = (
-/obj/structure/window/spawner/directional/south,
 /obj/machinery/atmospherics/components/binary/pump{
 	dir = 1;
 	name = "Air to Pure"
@@ -2940,7 +2942,6 @@
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
 	dir = 4
 	},
-/obj/structure/window/spawner/directional/east,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
@@ -3052,7 +3053,6 @@
 /turf/open/floor/engine/co2,
 /area/station/engineering/atmos)
 "FO" = (
-/obj/structure/window/spawner/directional/south,
 /obj/effect/turf_decal/tile/red/fourcorners,
 /obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible,
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
@@ -3151,7 +3151,6 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos)
 "GJ" = (
-/obj/structure/window/spawner/directional/south,
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/atmospherics/components/trinary/filter/atmos/o2{
 	dir = 4
@@ -3203,6 +3202,11 @@
 	dir = 1
 	},
 /turf/open/floor/engine/plasma,
+/area/station/engineering/atmos)
+"HS" = (
+/obj/effect/turf_decal/stripes/line,
+/obj/machinery/bluespace_vendor/directional/north,
+/turf/open/floor/iron,
 /area/station/engineering/atmos)
 "HY" = (
 /obj/item/holosign_creator/atmos,
@@ -3273,10 +3277,6 @@
 "JC" = (
 /obj/machinery/atmospherics/pipe/smart/simple/green/visible{
 	dir = 4
-	},
-/obj/machinery/door/window/left/directional/north{
-	name = "Inner Pipe Access";
-	req_access = list("atmospherics")
 	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos)
@@ -3384,10 +3384,6 @@
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
 "Lk" = (
-/obj/machinery/door/window/left/directional/north{
-	name = "Inner Pipe Access";
-	req_access = list("atmospherics")
-	},
 /obj/machinery/atmospherics/pipe/smart/simple/green/visible{
 	dir = 4
 	},
@@ -3470,7 +3466,6 @@
 /area/station/medical/medbay)
 "Ny" = (
 /obj/effect/turf_decal/tile/purple/fourcorners,
-/obj/structure/window/spawner/directional/south,
 /obj/machinery/computer/atmos_control/plasma_tank{
 	dir = 1
 	},
@@ -3483,8 +3478,6 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 8
 	},
-/obj/structure/window/spawner/directional/south,
-/obj/structure/window/spawner/directional/west,
 /obj/machinery/atmospherics/components/trinary/filter/atmos/n2o{
 	dir = 4
 	},
@@ -3496,7 +3489,6 @@
 /turf/open/floor/iron,
 /area/station/science)
 "Oa" = (
-/obj/structure/window/spawner/directional/south,
 /obj/effect/turf_decal/tile/blue/fourcorners,
 /obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible,
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
@@ -3642,16 +3634,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
-"Qj" = (
-/obj/machinery/door/window/left/directional/north{
-	name = "Inner Pipe Access";
-	req_access = list("atmospherics")
-	},
-/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
-	dir = 4
-	},
-/turf/open/floor/iron/dark,
-/area/station/engineering/atmos)
 "Qr" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -3672,6 +3654,10 @@
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/engine/vacuum,
 /area/station/engineering/atmos)
+"QK" = (
+/obj/structure/cable,
+/turf/open/floor/iron,
+/area/station/construction)
 "QP" = (
 /obj/machinery/vending/drugs,
 /turf/open/floor/iron,
@@ -3688,7 +3674,10 @@
 /area/station/hallway/secondary/entry)
 "Rd" = (
 /obj/machinery/light/directional/west,
-/obj/structure/cable,
+/obj/structure/cable{
+	pixel_x = 0;
+	pixel_y = 0
+	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "Re" = (
@@ -3698,10 +3687,6 @@
 /turf/open/floor/plating,
 /area/station/hallway/secondary/entry)
 "Rk" = (
-/obj/machinery/door/window/left/directional/north{
-	name = "Inner Pipe Access";
-	req_access = list("atmospherics")
-	},
 /obj/machinery/atmospherics/pipe/layer_manifold/cyan/visible,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos)
@@ -3727,7 +3712,6 @@
 /turf/open/floor/iron,
 /area/station/medical/medbay)
 "RB" = (
-/obj/structure/window/spawner/directional/south,
 /obj/machinery/computer/atmos_control/carbon_tank{
 	dir = 1
 	},
@@ -3743,6 +3727,11 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/simple/cyan/visible,
 /turf/closed/wall/r_wall,
+/area/station/engineering/atmos)
+"RK" = (
+/obj/machinery/power/apc/auto_name/directional/west,
+/obj/structure/cable,
+/turf/open/floor/iron,
 /area/station/engineering/atmos)
 "RM" = (
 /obj/structure/closet/secure_closet/hop{
@@ -3769,8 +3758,6 @@
 /turf/open/floor/iron/white/corner,
 /area/station/medical/medbay)
 "Sq" = (
-/obj/structure/window/spawner/directional/south,
-/obj/structure/window/spawner/directional/east,
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
 	dir = 4
 	},
@@ -3790,7 +3777,6 @@
 /turf/open/floor/iron,
 /area/station/medical/medbay)
 "SO" = (
-/obj/structure/window/spawner/directional/south,
 /obj/effect/turf_decal/tile/red/fourcorners,
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
 	dir = 4
@@ -3844,8 +3830,6 @@
 /area/station/medical/medbay)
 "Uv" = (
 /obj/effect/turf_decal/tile/purple/fourcorners,
-/obj/structure/window/spawner/directional/south,
-/obj/structure/window/spawner/directional/east,
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
 	dir = 4
 	},
@@ -3868,13 +3852,6 @@
 	dir = 1;
 	name = "N2 to Airmix"
 	},
-/turf/open/floor/iron/dark,
-/area/station/engineering/atmos)
-"UQ" = (
-/obj/machinery/atmospherics/pipe/smart/simple/green/visible{
-	dir = 4
-	},
-/obj/structure/window/spawner/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos)
 "UZ" = (
@@ -3979,8 +3956,8 @@
 "Xo" = (
 /obj/machinery/airalarm/directional/north,
 /obj/effect/mapping_helpers/airalarm/unlocked,
-/obj/machinery/power/apc/auto_name/directional/west,
 /obj/effect/turf_decal/stripes/corner,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "Xp" = (
@@ -4078,12 +4055,6 @@
 /turf/open/floor/iron,
 /area/station/cargo/miningoffice)
 "YS" = (
-/obj/structure/window/spawner/directional/east,
-/obj/structure/window/spawner/directional/west,
-/obj/machinery/door/window/left/directional/north{
-	name = "Inner Pipe Access";
-	req_access = list("atmospherics")
-	},
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
 	dir = 4
 	},
@@ -7381,7 +7352,7 @@ LH
 LF
 LF
 ij
-Di
+RK
 Rd
 Di
 Di
@@ -7558,9 +7529,9 @@ Jn
 Jn
 Jn
 Jn
-dL
+AU
 sr
-fI
+QK
 fI
 fI
 fI
@@ -7652,12 +7623,12 @@ Jn
 Jn
 dL
 cN
-fI
+QK
 gO
-fI
-fI
+QK
+QK
 mx
-sn
+kM
 jt
 yx
 yT
@@ -8209,7 +8180,7 @@ aa
 aa
 aa
 ah
-sn
+HS
 yx
 yx
 yT
@@ -8301,7 +8272,7 @@ aa
 aa
 aa
 ah
-sn
+yQ
 yx
 yx
 yx
@@ -8497,7 +8468,7 @@ yT
 yx
 yx
 sJ
-UQ
+JC
 DZ
 ah
 Rx
@@ -8681,7 +8652,7 @@ yx
 yx
 yx
 sJ
-UQ
+JC
 Wk
 ah
 PB
@@ -9785,7 +9756,7 @@ yx
 yx
 yx
 sJ
-Qj
+JC
 vb
 Wh
 PB
