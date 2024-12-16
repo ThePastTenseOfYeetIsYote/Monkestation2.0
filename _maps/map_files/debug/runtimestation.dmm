@@ -77,6 +77,10 @@
 "aw" = (
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
+"ay" = (
+/obj/structure/cable,
+/turf/open/floor/iron,
+/area/ruin/space/ks13/command/bridge)
 "aA" = (
 /turf/open/floor/iron,
 /area/station/engineering/main)
@@ -300,6 +304,7 @@
 	dir = 6
 	},
 /obj/machinery/announcement_system,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/ruin/space/ks13/command/bridge)
 "bt" = (
@@ -1926,30 +1931,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
-"jt" = (
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/obj/machinery/portable_atmospherics/canister,
-/turf/open/floor/engine,
-/area/station/engineering/atmos)
 "jv" = (
 /obj/machinery/computer/atmos_control/air_tank{
 	dir = 1
@@ -2345,6 +2326,10 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/commons/storage/primary)
+"qG" = (
+/obj/item/hfr_box/body/fuel_input,
+/turf/open/floor/engine,
+/area/station/engineering/atmos)
 "qQ" = (
 /turf/open/floor/engine,
 /area/station/cargo/miningoffice)
@@ -2398,11 +2383,6 @@
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
-"sr" = (
-/obj/machinery/door/airlock/shell,
-/obj/structure/cable,
-/turf/open/floor/iron/dark,
-/area/station/construction)
 "ss" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/smart/simple/green/visible,
@@ -2433,15 +2413,13 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "sU" = (
-/obj/machinery/power/smes{
-	charge = 5e+006
-	},
 /obj/machinery/airalarm/directional/north,
 /obj/effect/mapping_helpers/airalarm/unlocked,
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
 /obj/structure/cable,
+/obj/machinery/power/smes/magical,
 /turf/open/floor/iron,
 /area/ruin/space/ks13/command/bridge)
 "tq" = (
@@ -2488,6 +2466,10 @@
 /obj/machinery/airalarm/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/engineering/gravity_generator)
+"ud" = (
+/obj/item/hfr_box/body/moderator_input,
+/turf/open/floor/engine,
+/area/station/engineering/atmos)
 "uf" = (
 /obj/structure/fans/tiny/invisible,
 /obj/effect/turf_decal/stripes/line{
@@ -2730,6 +2712,10 @@
 /obj/structure/closet/secure_closet/hydroponics,
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
+"zD" = (
+/obj/item/hfr_box/corner,
+/turf/open/floor/engine,
+/area/station/engineering/atmos)
 "zG" = (
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/engine/co2,
@@ -2744,6 +2730,10 @@
 "Aq" = (
 /obj/machinery/atmospherics/miner/carbon_dioxide,
 /turf/open/floor/engine/co2,
+/area/station/engineering/atmos)
+"Ax" = (
+/obj/item/hfr_box/body/interface,
+/turf/open/floor/engine,
 /area/station/engineering/atmos)
 "AD" = (
 /obj/effect/turf_decal/tile/blue/fourcorners,
@@ -2860,6 +2850,14 @@
 	},
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
+"CB" = (
+/obj/machinery/power/smes/magical{
+	input_level = 200000;
+	output_level = 190000
+	},
+/obj/structure/cable,
+/turf/open/floor/iron,
+/area/ruin/space/ks13/command/bridge)
 "CD" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/visible{
 	dir = 8
@@ -2879,6 +2877,10 @@
 	},
 /obj/effect/turf_decal/tile/dark/fourcorners,
 /turf/open/floor/iron,
+/area/station/engineering/atmos)
+"CS" = (
+/obj/item/hfr_box/body/waste_output,
+/turf/open/floor/engine,
 /area/station/engineering/atmos)
 "CT" = (
 /obj/machinery/component_printer,
@@ -3173,30 +3175,6 @@
 	},
 /turf/open/floor/engine,
 /area/station/commons/storage/primary)
-"Hi" = (
-/obj/machinery/portable_atmospherics/canister/air,
-/obj/machinery/portable_atmospherics/canister/anesthetic_mix,
-/obj/machinery/portable_atmospherics/canister/antinoblium,
-/obj/machinery/portable_atmospherics/canister/bz,
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
-/obj/machinery/portable_atmospherics/canister/freon,
-/obj/machinery/portable_atmospherics/canister/halon,
-/obj/machinery/portable_atmospherics/canister/healium,
-/obj/machinery/portable_atmospherics/canister/helium,
-/obj/machinery/portable_atmospherics/canister/hydrogen,
-/obj/machinery/portable_atmospherics/canister/miasma,
-/obj/machinery/portable_atmospherics/canister/nitrium,
-/obj/machinery/portable_atmospherics/canister/nitrogen,
-/obj/machinery/portable_atmospherics/canister/nitrous_oxide,
-/obj/machinery/portable_atmospherics/canister/nob,
-/obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/machinery/portable_atmospherics/canister/plasma,
-/obj/machinery/portable_atmospherics/canister/pluoxium,
-/obj/machinery/portable_atmospherics/canister/tritium,
-/obj/machinery/portable_atmospherics/canister/water_vapor,
-/obj/machinery/portable_atmospherics/canister/zauker,
-/turf/open/floor/engine,
-/area/station/engineering/atmos)
 "HR" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/siphon/monitored/plasma_output{
 	dir = 1
@@ -3776,6 +3754,10 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/medical/medbay)
+"SK" = (
+/obj/item/hfr_box/core,
+/turf/open/floor/engine,
+/area/station/engineering/atmos)
 "SO" = (
 /obj/effect/turf_decal/tile/red/fourcorners,
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
@@ -4027,6 +4009,13 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/science/explab)
+"Yt" = (
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/obj/structure/cable,
+/turf/open/floor/iron,
+/area/ruin/space/ks13/command/bridge)
 "Yw" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/smart/simple/yellow/visible,
@@ -7530,14 +7519,14 @@ Jn
 Jn
 Jn
 AU
-sr
+LH
 QK
 fI
 fI
 fI
 mg
 Bt
-Hi
+yx
 HY
 yx
 yx
@@ -7629,7 +7618,7 @@ QK
 QK
 mx
 kM
-jt
+yx
 yx
 yT
 yx
@@ -8644,9 +8633,9 @@ sn
 yx
 yx
 yx
-yx
-yx
-yx
+zD
+qG
+zD
 yx
 yx
 yx
@@ -8736,9 +8725,9 @@ sn
 yx
 yx
 yT
-yx
-yx
-yx
+CS
+SK
+Ax
 yx
 yT
 yx
@@ -8828,9 +8817,9 @@ sn
 yx
 yx
 yx
-yx
-yx
-yx
+zD
+ud
+zD
 yx
 yx
 yx
@@ -9163,7 +9152,7 @@ gW
 at
 Wx
 bh
-bh
+Wx
 br
 gW
 bS
@@ -9252,11 +9241,11 @@ aa
 ad
 af
 gW
-dT
-dT
-dT
-dT
-dT
+CB
+CB
+CB
+CB
+ay
 gW
 Ly
 Ce
@@ -9344,11 +9333,11 @@ aa
 ad
 af
 gW
-dT
-dT
-dT
-dT
-dT
+Yt
+Yt
+Yt
+Yt
+ay
 by
 by
 ck
