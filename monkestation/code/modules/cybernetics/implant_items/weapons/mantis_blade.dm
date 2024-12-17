@@ -81,14 +81,17 @@
 	button_icon = 'icons/obj/implants.dmi'
 	button_icon_state = "adrenal"
 
-/datum/action/shield_blade_stance/is_valid_target(atom/cast_on)
-	if(!isliving(cast_on))
-		return FALSE
-
-/datum/action/shield_blade_stance/cast(mob/living/cast_on)
-	. = ..()
-	cast_on.apply_status_effect(/datum/status_effect/shield_mantis_defense)
-	to_chat(cast_on, span_notice("You enter defensive stance with your mantis blades."))
+/datum/action/shield_blade_stance/Trigger(trigger_flags)
+	if (!isliving(owner))
+		return
+	var/mob/living/user = owner
+	var/obj/item/r_hand = user.get_held_items_for_side(RIGHT_HANDS, FALSE)
+	var/obj/item/l_hand = user.get_held_items_for_side(LEFT_HANDS, FALSE)
+	if(!istype(l_hand, r_hand))
+		to_chat(user, span_warning("You must dual wield blades to enter the stance."))
+		return
+	user.apply_status_effect(/datum/status_effect/shield_mantis_defense)
+	to_chat(user, span_notice("You enter defensive stance with your mantis blades."))
 
 /obj/item/mantis_blade/modified
 	name = "Modified C.H.R.O.M.A.T.A. mantis blade"
@@ -102,19 +105,9 @@
 	attack_speed = 12
 	var/datum/action/shield_blade_stance/stance = new
 
-/obj/item/mantis_blade/modified/give_item_action(stance, mob/user, ITEM_SLOT_HANDS)
+/obj/item/mantis_blade/modified/equipped(mob/user)
 	. = ..()
-
-/obj/item/mantis_blade/modified/process()
-	. = ..()
-	if(!isliving(loc))
-		return
-	var/mob/living/user = loc
-	var/obj/item/some_item = user.get_inactive_held_item()
-	if(!istype(some_item,type))
-		if()
-
-
+	give_item_action(stance, user, ITEM_SLOT_HANDS)
 
 /obj/item/mantis_blade/syndicate
 	name = "A.R.A.S.A.K.A. mantis blade"
