@@ -40,27 +40,81 @@
 
 	some_item.attack(M, user)
 
-
-/obj/item/mantis_blade/chromata
-	tool_behaviour = TOOL_CROWBAR
-
-/obj/item/mantis_blade/chromata/attack_self(mob/user)
-	switch(tool_behaviour)
-		if(TOOL_CROWBAR)
-			tool_behaviour = TOOL_KNIFE
-			balloon_alert(user, "cutting mode activated")
-
-		if(TOOL_KNIFE)
-			tool_behaviour = TOOL_CROWBAR
-			balloon_alert(user, "prying mode activated")
-
-
-/obj/item/mantis_blade/chromata/proc/check_can_crowbar(mob/user)
+/obj/item/mantis_blade/proc/check_can_crowbar(mob/user)
 	var/obj/item/some_item = user.get_inactive_held_item()
 
 	if(!istype(some_item,type))
 		return FALSE
 	return TRUE
+
+/////////SHIELD MANTIS BLADES/////////////////
+/datum/status_effect/shield_mantis_defense
+	id = "mantis_defensive"
+	status_type = STATUS_EFFECT_UNIQUE
+	alert_type = /atom/movable/screen/alert/status_effect/realignment
+	tick_interval = 0.2 SECONDS
+
+/datum/status_effect/shield_mantis_defense/on_apply()
+	ADD_TRAIT(owner, TRAIT_PACIFISM, id)
+	var/obj/item/inactive = owner.get_inactive_held_item()
+	var/obj/item/active = owner.get_active_held_item()
+	if (!isnull(active))
+		active.block_chance = 25
+	if (!isnull(inactive))
+		inactive.block_chance = 25
+
+/datum/status_effect/shield_mantis_defense/on_remove()
+	REMOVE_TRAIT(owner, TRAIT_PACIFISM, id)
+	var/obj/item/inactive = owner.get_inactive_held_item()
+	var/obj/item/active = owner.get_active_held_item()
+	if (!isnull(active))
+		active.block_chance = initial(active.block_chance)
+	if (!isnull(inactive))
+		inactive.block_chance = initial(inactive.block_chance)
+
+/////////SHIELD MANTIS BLADES/////////////////
+/datum/action/shield_blade_stance
+	name = "Enter defensive stance"
+	desc = "Enter defensive stance, allowing your mantis blade to block most of upcoming attacks and projectiles. During the stance, you can not attack and will be slowed down significantly."
+	background_icon_state = "bg_heretic"
+	overlay_icon_state = "bg_heretic_border"
+	button_icon = 'icons/obj/implants.dmi'
+	button_icon_state = "adrenal"
+
+/datum/action/shield_blade_stance/is_valid_target(atom/cast_on)
+	if(!isliving(cast_on))
+		return FALSE
+
+/datum/action/shield_blade_stance/cast(mob/living/cast_on)
+	. = ..()
+	cast_on.apply_status_effect(/datum/status_effect/shield_mantis_defense)
+	to_chat(cast_on, span_notice("You enter defensive stance with your mantis blades."))
+
+/obj/item/mantis_blade/modified
+	name = "Modified C.H.R.O.M.A.T.A. mantis blade"
+	desc = "Modified mantis blades with bigger and wider blades, allowing user to block incoming projectiles and attacks. Because of that, the edge of blades is rather dull and large which makes it worse at wounding and requires much more time between each slash."
+	icon_state = "bs_mantis"
+	inhand_icon_state = "mantis"
+	lefthand_file = 'monkestation/code/modules/cybernetics/icons/swords_lefthand.dmi'
+	righthand_file = 'monkestation/code/modules/cybernetics/icons/swords_righthand.dmi'
+	force = 10
+	wound_bonus = 10
+	attack_speed = 12
+	var/datum/action/shield_blade_stance/stance = new
+
+/obj/item/mantis_blade/modified/give_item_action(stance, mob/user, ITEM_SLOT_HANDS)
+	. = ..()
+
+/obj/item/mantis_blade/modified/process()
+	. = ..()
+	if(!isliving(loc))
+		return
+	var/mob/living/user = loc
+	var/obj/item/some_item = user.get_inactive_held_item()
+	if(!istype(some_item,type))
+		if()
+
+
 
 /obj/item/mantis_blade/syndicate
 	name = "A.R.A.S.A.K.A. mantis blade"
@@ -70,6 +124,7 @@
 	block_chance = 20
 	bare_wound_bonus = 30
 	armour_penetration = 35
+	tool_behaviour = TOOL_KNIFE
 	COOLDOWN_DECLARE(lunge)
 
 /obj/item/mantis_blade/syndicate/afterattack(atom/target, mob/user, proximity_flag, click_parameters)

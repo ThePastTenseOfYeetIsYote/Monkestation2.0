@@ -86,10 +86,32 @@
 /obj/item/organ/internal/cyberimp/arm/item_set/mantis
 	name = "C.H.R.O.M.A.T.A. mantis blade implants"
 	desc = "High tech mantis blade implants, easily portable weapon, that has a high wound potential."
-	items_to_create = list(/obj/item/mantis_blade/chromata)
+	items_to_create = list(/obj/item/mantis_blade)
 	encode_info = AUGMENT_TG_LEVEL
 
 /obj/item/organ/internal/cyberimp/arm/item_set/mantis/l
+	zone = BODY_ZONE_L_ARM
+
+
+/obj/item/organ/internal/cyberimp/arm/item_set/mantis/shield
+	name = "C.H.R.O.M.A.T.A. mantis blade implants"
+	desc = "High tech mantis blade implants, easily portable weapon, that has a high wound potential."
+	items_to_create = list(/obj/item/mantis_blade/modified)
+	encode_info = AUGMENT_TG_LEVEL
+
+/obj/item/organ/internal/cyberimp/arm/item_set/mantis/shield/proc/stamina_retract()
+	if(owner.stamina.loss > 150)
+		Retract()
+		to_chat(owner, span_userdanger("You feel too exhausted to continue using the blades!"))
+
+/obj/item/organ/internal/cyberimp/arm/item_set/mantis/shield/ui_action_click()
+	. = ..()
+	if(owner.stamina.loss > 150)
+		Retract()
+		to_chat(owner, span_userdanger("You feel too exhausted to use the blades!"))
+		return
+
+/obj/item/organ/internal/cyberimp/arm/item_set/mantis/shield/l
 	zone = BODY_ZONE_L_ARM
 
 /obj/item/organ/internal/cyberimp/arm/item_set/syndie_mantis
