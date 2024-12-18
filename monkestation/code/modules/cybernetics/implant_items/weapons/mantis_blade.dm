@@ -71,6 +71,10 @@
 	if (!isnull(l_hand))
 		l_hand.block_chance = initial(l_hand.block_chance)
 
+//blocking with blades slow you down
+/datum/movespeed_modifier/shield_blades
+	multiplicative_slowdown = 2
+
 /////////SHIELD MANTIS BLADES/////////////////
 /datum/action/shield_blade_stance
 	name = "Enter defensive stance"
@@ -92,12 +96,29 @@
 			to_chat(user, span_warning("You must dual wield blades to enter the stance."))
 			return
 		user.apply_status_effect(/datum/status_effect/shield_mantis_defense)
+		user.add_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
 		in_stance = TRUE
 		to_chat(user, span_notice("You enter defensive stance with your mantis blades."))
 		return
 	user.remove_status_effect(/datum/status_effect/shield_mantis_defense)
+	user.remove_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
 	in_stance = FALSE
 	to_chat(user, span_notice("You stop blocking with your blades."))
+
+/datum/action/shield_blade_stance/on_tick()
+	. = ..()
+	if (!isliving(owner))
+		return
+	var/mob/living/user = owner
+	to_chat(user, span_warning("You must dual wield blades to keep yourself in stance."))
+	var/obj/item/r_hand = user.get_held_items_for_side(RIGHT_HANDS, FALSE)
+	var/obj/item/l_hand = user.get_held_items_for_side(LEFT_HANDS, FALSE)
+	if (in_stance)
+		if(isnull(r_hand) | isnull(l_hand) | !istype(l_hand,/obj/item/mantis_blade/modified) && !istype(r_hand,/obj/item/mantis_blade/modified))
+			to_chat(user, span_warning("You must dual wield blades to keep yourself in stance."))
+			in_stance = FALSE
+			user.remove_status_effect(/datum/status_effect/shield_mantis_defense)
+			user.remove_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
 
 /obj/item/mantis_blade/modified
 	name = "Modified C.H.R.O.M.A.T.A. mantis blade"
