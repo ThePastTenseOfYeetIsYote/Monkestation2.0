@@ -3,10 +3,6 @@
 	"eslint.workingDirectories": [
 		"./tgui"
 	],
-	"dreammaker.byondPath": [
-        "d:\\BYOND"
-    ],
-
 	"prettier.prettierPath": "./tgui/.yarn/sdks/prettier/index.cjs",
 	"typescript.tsdk": "./tgui/.yarn/sdks/typescript/lib",
 	"typescript.enablePromptUseWorkspaceTsdk": true,
