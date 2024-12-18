@@ -47,95 +47,6 @@
 		return FALSE
 	return TRUE
 
-/////////SHIELD MANTIS BLADES/////////////////
-/datum/status_effect/shield_mantis_defense
-	id = "mantis_defensive"
-	alert_type = /atom/movable/screen/alert/status_effect/realignment
-	tick_interval = 0.2 SECONDS
-
-/datum/status_effect/shield_mantis_defense/on_apply()
-	. = ..()
-	var/obj/item/r_hand = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
-	var/obj/item/l_hand = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
-	if (!isnull(r_hand))
-		r_hand.block_chance += 25
-	if (!isnull(l_hand))
-		l_hand.block_chance += 25
-
-/datum/status_effect/shield_mantis_defense/on_remove()
-	. = ..()
-	var/obj/item/r_hand = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
-	var/obj/item/l_hand = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
-	if (!isnull(r_hand))
-		r_hand.block_chance = initial(r_hand.block_chance)
-	if (!isnull(l_hand))
-		l_hand.block_chance = initial(l_hand.block_chance)
-
-//blocking with blades slow you down
-/datum/movespeed_modifier/shield_blades
-	multiplicative_slowdown = 2
-
-/////////SHIELD MANTIS BLADES/////////////////
-/datum/action/shield_blade_stance
-	name = "Enter defensive stance"
-	desc = "Enter defensive stance, allowing your mantis blade to block most of upcoming attacks and projectiles. During the stance, you can not attack and will be slowed down significantly."
-	background_icon_state = "bg_heretic"
-	overlay_icon_state = "bg_heretic_border"
-	button_icon = 'icons/obj/implants.dmi'
-	button_icon_state = "adrenal"
-	var/in_stance = FALSE
-
-/datum/action/shield_blade_stance/Trigger(trigger_flags)
-	if (!isliving(owner))
-		return
-	var/mob/living/user = owner
-	if (!in_stance)
-		var/obj/item/r_hand = user.get_held_items_for_side(RIGHT_HANDS, FALSE)
-		var/obj/item/l_hand = user.get_held_items_for_side(LEFT_HANDS, FALSE)
-		if(!istype(l_hand, r_hand))
-			to_chat(user, span_warning("You must dual wield blades to enter the stance."))
-			return
-		user.apply_status_effect(/datum/status_effect/shield_mantis_defense)
-		user.add_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
-		in_stance = TRUE
-		to_chat(user, span_notice("You enter defensive stance with your mantis blades."))
-		return
-	user.remove_status_effect(/datum/status_effect/shield_mantis_defense)
-	user.remove_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
-	in_stance = FALSE
-	to_chat(user, span_notice("You stop blocking with your blades."))
-
-/datum/action/shield_blade_stance/on_tick()
-	. = ..()
-	if (!isliving(owner))
-		return
-	var/mob/living/user = owner
-	to_chat(user, span_warning("You must dual wield blades to keep yourself in stance."))
-	var/obj/item/r_hand = user.get_held_items_for_side(RIGHT_HANDS, FALSE)
-	var/obj/item/l_hand = user.get_held_items_for_side(LEFT_HANDS, FALSE)
-	if (in_stance)
-		if(isnull(r_hand) | isnull(l_hand) | !istype(l_hand,/obj/item/mantis_blade/modified) && !istype(r_hand,/obj/item/mantis_blade/modified))
-			to_chat(user, span_warning("You must dual wield blades to keep yourself in stance."))
-			in_stance = FALSE
-			user.remove_status_effect(/datum/status_effect/shield_mantis_defense)
-			user.remove_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
-
-/obj/item/mantis_blade/modified
-	name = "Modified C.H.R.O.M.A.T.A. mantis blade"
-	desc = "Modified mantis blades with bigger and wider blades, allowing user to block incoming projectiles and attacks. Because of that, the edge of blades is rather dull and large which makes it worse at wounding and requires much more time between each slash."
-	icon_state = "bs_mantis"
-	inhand_icon_state = "mantis"
-	lefthand_file = 'monkestation/code/modules/cybernetics/icons/swords_lefthand.dmi'
-	righthand_file = 'monkestation/code/modules/cybernetics/icons/swords_righthand.dmi'
-	force = 10
-	wound_bonus = 10
-	attack_speed = 12
-	var/datum/action/shield_blade_stance/stance = new
-
-/obj/item/mantis_blade/modified/equipped(mob/user)
-	. = ..()
-	give_item_action(stance, user, ITEM_SLOT_HANDS)
-
 /obj/item/mantis_blade/syndicate
 	name = "A.R.A.S.A.K.A. mantis blade"
 	icon_state = "syndie_mantis"
@@ -171,3 +82,71 @@
 		living.stamina?.adjust(-30) // cost of a lunge
 
 	attack(target, user)
+
+
+
+
+/////////SHIELD MANTIS BLADES/////////////////
+/datum/status_effect/shield_mantis_defense
+	id = "mantis_defensive"
+	alert_type = /atom/movable/screen/alert/status_effect/realignment
+	tick_interval = 0.2 SECONDS
+	//storing held items for when it was applied
+	var/obj/item/r_hand = null
+	var/obj/item/l_hand = null
+
+/datum/status_effect/shield_mantis_defense/on_apply()
+	. = ..()
+	r_hand = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
+	l_hand = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
+	r_hand.block_chance += 30
+	l_hand.block_chance += 30
+	owner.add_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
+
+/datum/status_effect/shield_mantis_defense/on_remove()
+	. = ..()
+	r_hand.block_chance = initial(r_hand.block_chance)
+	l_hand.block_chance = initial(l_hand.block_chance)
+	owner.remove_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
+
+/datum/status_effect/shield_mantis_defense/tick()
+	. = ..()
+	var/held_r = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
+	var/held_l = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
+	if(!istype(r_hand, held_r) || !istype(l_hand, held_l))
+		owner.remove_status_effect(src)
+		to_chat(owner, span_warning("You must dual wield blades to enter the stance."))
+
+//blocking with blades slow you down
+/datum/movespeed_modifier/shield_blades
+	multiplicative_slowdown = 2
+
+/obj/item/mantis_blade/modified
+	name = "Modified C.H.R.O.M.A.T.A. mantis blade"
+	desc = "Modified mantis blades with bigger and wider blades, allowing user to block incoming projectiles and attacks. Because of that, the edge of blades is rather dull and large which makes it worse at wounding and requires much more time between each slash."
+	icon_state = "bs_mantis"
+	inhand_icon_state = "mantis"
+	lefthand_file = 'monkestation/code/modules/cybernetics/icons/swords_lefthand.dmi'
+	righthand_file = 'monkestation/code/modules/cybernetics/icons/swords_righthand.dmi'
+	force = 10
+	wound_bonus = 10
+	attack_speed = 12
+	var/in_stance = FALSE
+
+/obj/item/mantis_blade/modified/attack_self(mob/user)
+	if (!isliving(user))
+		return
+	var/mob/living/owner = user
+	if (!in_stance)
+		var/obj/item/r_hand = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
+		var/obj/item/l_hand = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
+		if(!istype(l_hand, r_hand))
+			to_chat(owner, span_warning("You must dual wield blades to enter the stance."))
+			return
+		owner.apply_status_effect(/datum/status_effect/shield_mantis_defense)
+		in_stance = TRUE
+		to_chat(owner, span_notice("You enter defensive stance with your mantis blades."))
+		return
+	owner.remove_status_effect(/datum/status_effect/shield_mantis_defense)
+	in_stance = FALSE
+	to_chat(owner, span_notice("You stop blocking with your blades."))
