@@ -90,8 +90,8 @@
 /obj/item/mantis_blade/modified
 	name = "Modified C.H.R.O.M.A.T.A. mantis blade"
 	desc = "Modified mantis blades with bigger and wider blades, allowing user to block incoming projectiles and attacks. Because of that, the edge of blades is rather dull and large which makes it worse at wounding and requires much more time between each slash."
-	icon_state = "bs_mantis"
-	inhand_icon_state = "mantis"
+	icon_state = "shield_mantis"
+	inhand_icon_state = "shield_mantis"
 	lefthand_file = 'monkestation/code/modules/cybernetics/icons/swords_lefthand.dmi'
 	righthand_file = 'monkestation/code/modules/cybernetics/icons/swords_righthand.dmi'
 	force = 10
@@ -121,7 +121,6 @@
 /datum/status_effect/shield_mantis_defense
 	id = "mantis_defensive"
 	alert_type = /atom/movable/screen/alert/status_effect/realignment
-	tick_interval = 0.2 SECONDS
 	//storing held items for when it was applied
 	var/obj/item/mantis_blade/modified/r_hand = null
 	var/obj/item/mantis_blade/modified/l_hand = null
