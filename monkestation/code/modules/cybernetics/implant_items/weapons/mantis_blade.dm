@@ -50,27 +50,26 @@
 /////////SHIELD MANTIS BLADES/////////////////
 /datum/status_effect/shield_mantis_defense
 	id = "mantis_defensive"
-	status_type = STATUS_EFFECT_UNIQUE
 	alert_type = /atom/movable/screen/alert/status_effect/realignment
 	tick_interval = 0.2 SECONDS
 
 /datum/status_effect/shield_mantis_defense/on_apply()
-	ADD_TRAIT(owner, TRAIT_PACIFISM, id)
-	var/obj/item/inactive = owner.get_inactive_held_item()
-	var/obj/item/active = owner.get_active_held_item()
-	if (!isnull(active))
-		active.block_chance = 25
-	if (!isnull(inactive))
-		inactive.block_chance = 25
+	. = ..()
+	var/obj/item/r_hand = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
+	var/obj/item/l_hand = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
+	if (!isnull(r_hand))
+		r_hand.block_chance += 25
+	if (!isnull(l_hand))
+		l_hand.block_chance += 25
 
 /datum/status_effect/shield_mantis_defense/on_remove()
-	REMOVE_TRAIT(owner, TRAIT_PACIFISM, id)
-	var/obj/item/inactive = owner.get_inactive_held_item()
-	var/obj/item/active = owner.get_active_held_item()
-	if (!isnull(active))
-		active.block_chance = initial(active.block_chance)
-	if (!isnull(inactive))
-		inactive.block_chance = initial(inactive.block_chance)
+	. = ..()
+	var/obj/item/r_hand = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
+	var/obj/item/l_hand = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
+	if (!isnull(r_hand))
+		r_hand.block_chance = initial(r_hand.block_chance)
+	if (!isnull(l_hand))
+		l_hand.block_chance = initial(l_hand.block_chance)
 
 /////////SHIELD MANTIS BLADES/////////////////
 /datum/action/shield_blade_stance
@@ -80,18 +79,25 @@
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/obj/implants.dmi'
 	button_icon_state = "adrenal"
+	var/in_stance = FALSE
 
 /datum/action/shield_blade_stance/Trigger(trigger_flags)
 	if (!isliving(owner))
 		return
 	var/mob/living/user = owner
-	var/obj/item/r_hand = user.get_held_items_for_side(RIGHT_HANDS, FALSE)
-	var/obj/item/l_hand = user.get_held_items_for_side(LEFT_HANDS, FALSE)
-	if(!istype(l_hand, r_hand))
-		to_chat(user, span_warning("You must dual wield blades to enter the stance."))
+	if (!in_stance)
+		var/obj/item/r_hand = user.get_held_items_for_side(RIGHT_HANDS, FALSE)
+		var/obj/item/l_hand = user.get_held_items_for_side(LEFT_HANDS, FALSE)
+		if(!istype(l_hand, r_hand))
+			to_chat(user, span_warning("You must dual wield blades to enter the stance."))
+			return
+		user.apply_status_effect(/datum/status_effect/shield_mantis_defense)
+		in_stance = TRUE
+		to_chat(user, span_notice("You enter defensive stance with your mantis blades."))
 		return
-	user.apply_status_effect(/datum/status_effect/shield_mantis_defense)
-	to_chat(user, span_notice("You enter defensive stance with your mantis blades."))
+	user.remove_status_effect(/datum/status_effect/shield_mantis_defense)
+	in_stance = FALSE
+	to_chat(user, span_notice("You stop blocking with your blades."))
 
 /obj/item/mantis_blade/modified
 	name = "Modified C.H.R.O.M.A.T.A. mantis blade"
