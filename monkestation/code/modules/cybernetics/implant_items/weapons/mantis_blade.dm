@@ -87,40 +87,6 @@
 
 
 /////////SHIELD MANTIS BLADES/////////////////
-/datum/status_effect/shield_mantis_defense
-	id = "mantis_defensive"
-	alert_type = /atom/movable/screen/alert/status_effect/realignment
-	tick_interval = 0.2 SECONDS
-	//storing held items for when it was applied
-	var/obj/item/r_hand = null
-	var/obj/item/l_hand = null
-
-/datum/status_effect/shield_mantis_defense/on_apply()
-	. = ..()
-	r_hand = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
-	l_hand = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
-	r_hand.block_chance += 30
-	l_hand.block_chance += 30
-	owner.add_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
-
-/datum/status_effect/shield_mantis_defense/on_remove()
-	. = ..()
-	r_hand.block_chance = initial(r_hand.block_chance)
-	l_hand.block_chance = initial(l_hand.block_chance)
-	owner.remove_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
-
-/datum/status_effect/shield_mantis_defense/tick()
-	. = ..()
-	var/held_r = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
-	var/held_l = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
-	if(!istype(r_hand, held_r) || !istype(l_hand, held_l))
-		owner.remove_status_effect(src)
-		to_chat(owner, span_warning("You must dual wield blades to enter the stance."))
-
-//blocking with blades slow you down
-/datum/movespeed_modifier/shield_blades
-	multiplicative_slowdown = 2
-
 /obj/item/mantis_blade/modified
 	name = "Modified C.H.R.O.M.A.T.A. mantis blade"
 	desc = "Modified mantis blades with bigger and wider blades, allowing user to block incoming projectiles and attacks. Because of that, the edge of blades is rather dull and large which makes it worse at wounding and requires much more time between each slash."
@@ -150,3 +116,41 @@
 	owner.remove_status_effect(/datum/status_effect/shield_mantis_defense)
 	in_stance = FALSE
 	to_chat(owner, span_notice("You stop blocking with your blades."))
+
+
+/datum/status_effect/shield_mantis_defense
+	id = "mantis_defensive"
+	alert_type = /atom/movable/screen/alert/status_effect/realignment
+	tick_interval = 0.2 SECONDS
+	//storing held items for when it was applied
+	var/obj/item/mantis_blade/modified/r_hand = null
+	var/obj/item/mantis_blade/modified/l_hand = null
+
+/datum/status_effect/shield_mantis_defense/on_apply()
+	. = ..()
+	r_hand = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
+	l_hand = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
+	r_hand.block_chance += 30
+	l_hand.block_chance += 30
+	owner.add_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
+
+/datum/status_effect/shield_mantis_defense/on_remove()
+	. = ..()
+	r_hand.block_chance = initial(r_hand.block_chance)
+	l_hand.block_chance = initial(l_hand.block_chance)
+	owner.remove_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
+
+/datum/status_effect/shield_mantis_defense/tick()
+	. = ..()
+	var/held_r = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
+	var/held_l = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
+	if(!istype(r_hand, held_r) || !istype(l_hand, held_l))
+		owner.remove_status_effect(src)
+		r_hand.in_stance = FALSE
+		l_hand.in_stance = FALSE
+
+//blocking with blades slow you down
+/datum/movespeed_modifier/shield_blades
+	multiplicative_slowdown = 2
+
+
