@@ -132,12 +132,14 @@
 	l_hand = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
 	r_hand.block_chance += 30
 	l_hand.block_chance += 30
+	ADD_TRAIT(owner, TRAIT_CANT_ATTACK, id)
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
 
 /datum/status_effect/shield_mantis_defense/on_remove()
 	. = ..()
 	r_hand.block_chance = initial(r_hand.block_chance)
 	l_hand.block_chance = initial(l_hand.block_chance)
+	REMOVE_TRAIT(owner, TRAIT_CANT_ATTACK, id)
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
 
 /datum/status_effect/shield_mantis_defense/tick()
@@ -151,6 +153,6 @@
 
 //blocking with blades slow you down
 /datum/movespeed_modifier/shield_blades
-	multiplicative_slowdown = 2
+	multiplicative_slowdown = 2.5
 
 
