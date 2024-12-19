@@ -97,26 +97,29 @@
 	force = 10
 	wound_bonus = 10
 	attack_speed = 12
-	var/in_stance = FALSE
+	var/in_stance = FALSE  //Toggle for the defensive stance.
 
-/obj/item/mantis_blade/modified/attack_self(mob/user)
-	if (!isliving(user))
-		return
-	var/mob/living/owner = user
+/obj/item/mantis_blade/modified/attack_self(mob/living/user)
 	if (!in_stance)
-		var/obj/item/r_hand = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
-		var/obj/item/l_hand = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
-		if(!istype(l_hand, r_hand))
-			to_chat(owner, span_warning("You must dual wield blades to enter the stance."))
+		var/obj/item/r_hand = user.get_held_items_for_side(RIGHT_HANDS, FALSE)
+		var/obj/item/l_hand = user.get_held_items_for_side(LEFT_HANDS, FALSE)
+		if(!istype(l_hand, r_hand))//Checks for if your hands are the same type (which they would be if you were dual wielding the shields.)
+			to_chat(user, span_warning("You must dual wield blades to enter the stance."))
 			return
-		owner.apply_status_effect(/datum/status_effect/shield_mantis_defense)
+		user.apply_status_effect(/datum/status_effect/shield_mantis_defense)
 		in_stance = TRUE
-		to_chat(owner, span_notice("You enter defensive stance with your mantis blades."))
+		to_chat(user, span_notice("You enter defensive stance with your mantis blades."))
 		return
-	owner.remove_status_effect(/datum/status_effect/shield_mantis_defense)
+	user.remove_status_effect(/datum/status_effect/shield_mantis_defense)
 	in_stance = FALSE
-	to_chat(owner, span_notice("You stop blocking with your blades."))
+	to_chat(user, span_notice("You stop blocking with your blades."))
 
+/obj/item/mantis_blade/modified/dropped(mob/living/user)
+	. = ..()
+	if (!user.has_status_effect(/datum/status_effect/shield_mantis_defense))
+		return
+	user.remove_status_effect(/datum/status_effect/shield_mantis_defense)
+	in_stance = FALSE
 
 /datum/status_effect/shield_mantis_defense
 	id = "mantis_defensive"
@@ -136,19 +139,10 @@
 
 /datum/status_effect/shield_mantis_defense/on_remove()
 	. = ..()
-	r_hand.block_chance = initial(r_hand.block_chance)
+	r_hand.block_chance = initial(r_hand.block_chance) //Resets block chance for right and left hand
 	l_hand.block_chance = initial(l_hand.block_chance)
 	REMOVE_TRAIT(owner, TRAIT_CANT_ATTACK, id)
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
-
-/datum/status_effect/shield_mantis_defense/tick()
-	. = ..()
-	var/held_r = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
-	var/held_l = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
-	if(!istype(r_hand, held_r) || !istype(l_hand, held_l))
-		owner.remove_status_effect(src)
-		r_hand.in_stance = FALSE
-		l_hand.in_stance = FALSE
 
 //blocking with blades slow you down
 /datum/movespeed_modifier/shield_blades
