@@ -40,6 +40,16 @@
 
 	some_item.attack(M, user)
 
+/obj/item/mantis_blade/attack_self(mob/user)
+	switch(tool_behaviour)
+		if(TOOL_CROWBAR)
+			tool_behaviour = TOOL_KNIFE
+			balloon_alert(user, "cutting mode activated")
+
+		if(TOOL_KNIFE)
+			tool_behaviour = TOOL_CROWBAR
+			balloon_alert(user, "prying mode activated")
+
 /obj/item/mantis_blade/proc/check_can_crowbar(mob/user)
 	var/obj/item/some_item = user.get_inactive_held_item()
 
