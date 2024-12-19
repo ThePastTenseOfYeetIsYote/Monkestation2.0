@@ -96,9 +96,9 @@
 
 
 /////////SHIELD MANTIS BLADES/////////////////
-/obj/item/mantis_blade/modified
-	name = "Modified C.H.R.O.M.A.T.A. mantis blade"
-	desc = "Modified mantis blades with bigger and wider blades, allowing user to block incoming projectiles and attacks. Because of that, the edge of blades is rather dull and large which makes it worse at wounding and requires much more time between each slash."
+/obj/item/mantis_blade/shield
+	name = "A.E.G.I.S. shield blade"
+	desc = "Mantis blades with bigger and wider blades, allowing user to block incoming projectiles and attacks. Because of that, the edge of blades is rather dull and large which makes it worse at wounding and requires much more time between each slash."
 	icon_state = "shield_mantis"
 	inhand_icon_state = "shield_mantis"
 	lefthand_file = 'monkestation/code/modules/cybernetics/icons/swords_lefthand.dmi'
@@ -108,7 +108,7 @@
 	attack_speed = 12
 	var/in_stance = FALSE  //Toggle for the defensive stance.
 
-/obj/item/mantis_blade/modified/attack_self(mob/living/user)
+/obj/item/mantis_blade/shield/attack_self(mob/living/user)
 	if (!in_stance)
 		var/obj/item/r_hand = user.get_held_items_for_side(RIGHT_HANDS, FALSE)
 		var/obj/item/l_hand = user.get_held_items_for_side(LEFT_HANDS, FALSE)
@@ -123,26 +123,25 @@
 	in_stance = FALSE
 	to_chat(user, span_notice("You stop blocking with your blades."))
 
-/obj/item/mantis_blade/modified/dropped(mob/living/user)
+/obj/item/mantis_blade/shield/dropped(mob/living/user)
 	. = ..()
 	if (!user.has_status_effect(/datum/status_effect/shield_mantis_defense))
 		return
 	user.remove_status_effect(/datum/status_effect/shield_mantis_defense)
-	in_stance = FALSE //currently doesn't check for both needs fixes
 
 /datum/status_effect/shield_mantis_defense
 	id = "mantis_defensive"
 	alert_type = /atom/movable/screen/alert/status_effect/realignment
 	//storing held items for when it was applied
-	var/obj/item/mantis_blade/modified/r_hand = null
-	var/obj/item/mantis_blade/modified/l_hand = null
+	var/obj/item/mantis_blade/shield/r_hand = null
+	var/obj/item/mantis_blade/shield/l_hand = null
 
 /datum/status_effect/shield_mantis_defense/on_apply()
 	. = ..()
 	r_hand = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
 	l_hand = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
-	r_hand.block_chance += 30
-	l_hand.block_chance += 30
+	r_hand.block_chance += 40
+	l_hand.block_chance += 40
 	ADD_TRAIT(owner, TRAIT_CANT_ATTACK, id)
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
 
@@ -152,9 +151,12 @@
 	l_hand.block_chance = initial(l_hand.block_chance)
 	REMOVE_TRAIT(owner, TRAIT_CANT_ATTACK, id)
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
+	//Reset for stances here
+	r_hand.in_stance = FALSE
+	l_hand.in_stance = FALSE
 
 //blocking with blades slow you down
 /datum/movespeed_modifier/shield_blades
-	multiplicative_slowdown = 2.5
+	multiplicative_slowdown = 2
 
 
