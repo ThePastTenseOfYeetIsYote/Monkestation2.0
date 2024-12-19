@@ -65,7 +65,6 @@
 	block_chance = 20
 	bare_wound_bonus = 30
 	armour_penetration = 35
-	tool_behaviour = TOOL_KNIFE
 	COOLDOWN_DECLARE(lunge)
 
 /obj/item/mantis_blade/syndicate/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
@@ -129,7 +128,7 @@
 	if (!user.has_status_effect(/datum/status_effect/shield_mantis_defense))
 		return
 	user.remove_status_effect(/datum/status_effect/shield_mantis_defense)
-	in_stance = FALSE
+	in_stance = FALSE //currently doesn't check for both needs fixes
 
 /datum/status_effect/shield_mantis_defense
 	id = "mantis_defensive"

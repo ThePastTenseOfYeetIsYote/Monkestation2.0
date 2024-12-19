@@ -20,20 +20,15 @@
 /obj/item/autosurgeon/organ/syndicate/syndie_mantis
 	starting_organ = /obj/item/organ/internal/cyberimp/arm/item_set/syndie_mantis
 
+/obj/item/autosurgeon/organ/syndicate/syndie_mantis/l
+	starting_organ = /obj/item/organ/internal/cyberimp/arm/item_set/syndie_mantis/l
+
 /obj/item/autosurgeon/organ/mantis_shield
 	starting_organ = /obj/item/organ/internal/cyberimp/arm/item_set/mantis/shield
 	uses = 1
 
 /obj/item/autosurgeon/organ/mantis_shield/l
 	starting_organ = /obj/item/organ/internal/cyberimp/arm/item_set/mantis/shield/l
-
-
-
-/obj/item/autosurgeon/organ/mantis_blade/shield
-	starting_organ = /obj/item/mantis_blade/modified
-
-/obj/item/autosurgeon/organ/syndicate/syndie_mantis/l
-	starting_organ = /obj/item/organ/internal/cyberimp/arm/item_set/syndie_mantis/l
 
 /obj/item/autosurgeon/organ/syndicate/razorwire
 	starting_organ = /obj/item/organ/internal/cyberimp/arm/item_set/razorwire
