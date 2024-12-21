@@ -3440,10 +3440,10 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/smart/simple/yellow/visible{
+/obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible,
+/obj/machinery/atmospherics/pipe/bridge_pipe/yellow/visible{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "Yt" = (
