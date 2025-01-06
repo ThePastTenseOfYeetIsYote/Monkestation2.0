@@ -649,6 +649,7 @@
 	dir = 8
 	},
 /obj/structure/table/reinforced,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/open/floor/iron/white/corner{
 	dir = 1
 	},
@@ -1526,6 +1527,12 @@
 	},
 /turf/open/space,
 /area/station/engineering/atmos)
+"hx" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 1
+	},
+/turf/closed/wall/r_wall,
+/area/station/engineering/atmos)
 "hz" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/monitored/air_input{
 	dir = 1
@@ -1814,12 +1821,8 @@
 /turf/closed/wall/r_wall,
 /area/station/engineering/atmos)
 "oq" = (
-/obj/machinery/door/airlock/external/ruin{
-	name = "Departure Lounge Airlock"
-	},
 /obj/effect/turf_decal/delivery,
-/obj/structure/fans/tiny,
-/turf/open/floor/iron,
+/turf/closed/wall/r_wall,
 /area/station/engineering/atmos)
 "ou" = (
 /obj/machinery/airalarm/directional/west,
@@ -2788,7 +2791,8 @@
 /turf/open/floor/iron/dark,
 /area/station/hallway/secondary/entry)
 "Kv" = (
-/obj/structure/sign/departments/evac,
+/obj/effect/turf_decal/delivery,
+/obj/structure/fans/tiny,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/closed/wall/r_wall,
 /area/station/engineering/atmos)
@@ -8503,7 +8507,7 @@ cj
 oV
 bE
 Mh
-Wh
+ah
 sn
 yx
 yx
@@ -8687,7 +8691,7 @@ cj
 oV
 bE
 bE
-Wh
+ah
 sn
 yx
 yx
@@ -8871,7 +8875,7 @@ cl
 cH
 cu
 cJ
-Wh
+ah
 sn
 yx
 yx
@@ -8960,7 +8964,7 @@ bV
 cm
 cm
 SJ
-cm
+sH
 cm
 Sj
 ah
@@ -9055,7 +9059,7 @@ ZL
 sH
 sH
 cL
-Kv
+mg
 sn
 yx
 yx
@@ -9239,7 +9243,7 @@ Qt
 by
 EB
 DW
-eH
+mg
 sn
 yx
 yx
@@ -9331,7 +9335,7 @@ cz
 by
 Rz
 es
-gb
+Kv
 sn
 yx
 yx
@@ -9423,7 +9427,7 @@ pI
 by
 by
 by
-eH
+mg
 sn
 yx
 yx
@@ -9710,7 +9714,7 @@ BW
 fS
 fS
 fS
-fS
+hx
 fS
 ah
 ah
