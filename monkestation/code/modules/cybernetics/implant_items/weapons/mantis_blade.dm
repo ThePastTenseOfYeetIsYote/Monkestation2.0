@@ -93,30 +93,14 @@
 	attack(target, user)
 
 
-<<<<<<< HEAD
-
-
-/////////SHIELD MANTIS BLADES/////////////////
-/obj/item/mantis_blade/shield
-	name = "A.E.G.I.S. shield blade"
-	desc = "Mantis blades with bigger and wider blades, allowing user to block incoming projectiles and attacks. Because of that, the edge of blades is rather dull and large which makes it worse at wounding and requires much more time between each slash."
-=======
 /////////SHIELD MANTIS BLADES/////////////////
 /obj/item/mantis_blade/shield
 	name = "S.A.Y.A. arm defense system"
 	desc = "Durable retractable blade made from hard materials, featuring a wide shield design. Purposefully sacrificing offensive capabilities and user mobility in favor of enhanced protection. Primarily issued to personnel safeguarding valuable targets. One of the many combat augmentations created by Muramasa Munitions."
->>>>>>> e92b31234fe138d9c2a1653d79d708cf0ec1b1b5
 	icon_state = "shield_mantis"
 	inhand_icon_state = "shield_mantis"
 	lefthand_file = 'monkestation/code/modules/cybernetics/icons/swords_lefthand.dmi'
 	righthand_file = 'monkestation/code/modules/cybernetics/icons/swords_righthand.dmi'
-<<<<<<< HEAD
-	force = 10
-	wound_bonus = 10
-	attack_speed = 12
-	var/in_stance = FALSE  //Toggle for the defensive stance.
-
-=======
 	force = 11
 	wound_bonus = 5
 	attack_speed = 12
@@ -126,7 +110,6 @@
 	. = ..()
 	AddElement(/datum/element/manufacturer_examine, COMPANY_MURAMASA)
 
->>>>>>> e92b31234fe138d9c2a1653d79d708cf0ec1b1b5
 /obj/item/mantis_blade/shield/attack_self(mob/living/user)
 	if (!in_stance)
 		var/obj/item/r_hand = user.get_held_items_for_side(RIGHT_HANDS, FALSE)
@@ -134,14 +117,6 @@
 		if(!istype(l_hand, r_hand))//Checks for if your hands are the same type (which they would be if you were dual wielding the shields.)
 			to_chat(user, span_warning("You must dual wield blades to enter the stance."))
 			return
-<<<<<<< HEAD
-		user.apply_status_effect(/datum/status_effect/shield_mantis_defense)
-		in_stance = TRUE
-		to_chat(user, span_notice("You enter defensive stance with your mantis blades."))
-		return
-	user.remove_status_effect(/datum/status_effect/shield_mantis_defense)
-	in_stance = FALSE
-=======
 		if(!do_after(user, 15, user, IGNORE_USER_LOC_CHANGE, extra_checks = !CALLBACK(r_hand, PROC_REF(dropped)) || !CALLBACK(l_hand, PROC_REF(dropped))))
 			to_chat(user, span_warning("You were interrupted!"))
 			return
@@ -149,7 +124,6 @@
 		to_chat(user, span_notice("You enter defensive stance with your mantis blades."))
 		return
 	user.remove_status_effect(/datum/status_effect/shield_mantis_defense)
->>>>>>> e92b31234fe138d9c2a1653d79d708cf0ec1b1b5
 	to_chat(user, span_notice("You stop blocking with your blades."))
 
 /obj/item/mantis_blade/shield/dropped(mob/living/user)
@@ -160,11 +134,7 @@
 
 /datum/status_effect/shield_mantis_defense
 	id = "mantis_defensive"
-<<<<<<< HEAD
-	alert_type = /atom/movable/screen/alert/status_effect/realignment
-=======
 	alert_type =  /atom/movable/screen/alert/status_effect/shield_mantis_defense
->>>>>>> e92b31234fe138d9c2a1653d79d708cf0ec1b1b5
 	//storing held items for when it was applied
 	var/obj/item/mantis_blade/shield/r_hand = null
 	var/obj/item/mantis_blade/shield/l_hand = null
@@ -173,12 +143,6 @@
 	. = ..()
 	r_hand = owner.get_held_items_for_side(RIGHT_HANDS, FALSE)
 	l_hand = owner.get_held_items_for_side(LEFT_HANDS, FALSE)
-<<<<<<< HEAD
-	r_hand.block_chance += 40
-	l_hand.block_chance += 40
-	ADD_TRAIT(owner, TRAIT_CANT_ATTACK, id)
-	owner.add_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
-=======
 	r_hand.block_chance += 60
 	l_hand.block_chance += 60
 	ADD_TRAIT(owner, TRAIT_CANT_ATTACK, id)
@@ -186,7 +150,6 @@
 	owner.balloon_alert_to_viewers("starts blocking!")
 	r_hand.in_stance = TRUE
 	l_hand.in_stance = TRUE
->>>>>>> e92b31234fe138d9c2a1653d79d708cf0ec1b1b5
 
 /datum/status_effect/shield_mantis_defense/on_remove()
 	. = ..()
@@ -194,19 +157,11 @@
 	l_hand.block_chance = initial(l_hand.block_chance)
 	REMOVE_TRAIT(owner, TRAIT_CANT_ATTACK, id)
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/shield_blades)
-<<<<<<< HEAD
-=======
 	owner.balloon_alert_to_viewers("stops blocking!")
->>>>>>> e92b31234fe138d9c2a1653d79d708cf0ec1b1b5
 	//Reset for stances here
 	r_hand.in_stance = FALSE
 	l_hand.in_stance = FALSE
 
-<<<<<<< HEAD
-//blocking with blades slow you down
-/datum/movespeed_modifier/shield_blades
-	multiplicative_slowdown = 2
-=======
 /datum/status_effect/shield_mantis_defense/tick() //could be a better way to do it?
 	. = ..()
 	if (owner.stat >= HARD_CRIT || owner.stat == UNCONSCIOUS || HAS_TRAIT_FROM(owner, TRAIT_INCAPACITATED, STAMINA))
@@ -220,6 +175,5 @@
 //blocking with blades slow you down
 /datum/movespeed_modifier/shield_blades
 	multiplicative_slowdown = 1.25
->>>>>>> e92b31234fe138d9c2a1653d79d708cf0ec1b1b5
 
 
