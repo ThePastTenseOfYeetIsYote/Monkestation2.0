@@ -14,9 +14,9 @@
 	var/votable = FALSE
 
 	// Config actually from the JSON - should default to Meta
-	var/map_name = "MetaStation"
-	var/map_path = "map_files/MetaStation"
-	var/map_file = "MetaStation.dmm"
+	var/map_name = "Runtime Station"
+	var/map_path = "map_files/debug"
+	var/map_file = "runtimestation.dmm"
 
 	var/traits = null
 	var/space_ruin_levels = 5
