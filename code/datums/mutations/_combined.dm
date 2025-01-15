@@ -25,6 +25,10 @@
 	required = "/datum/mutation/human/insulated; /datum/mutation/human/radioactive"
 	result = /datum/mutation/human/shock
 
+/datum/generecipe/pyrokinesis
+	required = "/datum/mutation/human/cryokinesis; /datum/mutation/human/fire_breath"
+	result = /datum/mutation/human/cryokinesis/pyrokinesis
+
 /datum/generecipe/antiglow
 	required = "/datum/mutation/human/glow; /datum/mutation/human/void"
 	result = /datum/mutation/human/glow/anti
