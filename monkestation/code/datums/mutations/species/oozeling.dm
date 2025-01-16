@@ -23,8 +23,8 @@
 	to_modify.blood_cost *= GET_MUTATION_SYNCHRONIZER(src)
 
 /datum/action/cooldown/spell/touch/acid
-	name = "Shock Touch"
-	desc = "Channel electricity to your hand to shock people with."
+	name = "Acid Touch"
+	desc = "Concentrate to move acid into your hand, using some of your blood."
 	button_icon = 'icons/mob/actions/actions_slime.dmi'
 	button_icon_state = "consume"
 	sound = 'sound/chemistry/bufferadd.ogg'
