@@ -85,6 +85,7 @@
 
 /datum/mutation/human/stimmed
 	instability = 20
+	power_coeff = 1
 
 /datum/mutation/human/stimmed/on_life(seconds_per_tick, times_fired)
 	if(HAS_TRAIT(owner, TRAIT_STASIS) || owner.stat == DEAD)
