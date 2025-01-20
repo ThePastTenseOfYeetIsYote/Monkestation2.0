@@ -1076,6 +1076,7 @@
 "eH" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
 "eJ" = (
@@ -1362,7 +1363,6 @@
 /area/station/medical/medbay)
 "fY" = (
 /obj/machinery/light/directional/west,
-/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "fZ" = (
@@ -1378,6 +1378,7 @@
 /obj/effect/turf_decal/delivery,
 /obj/structure/fans/tiny,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "gd" = (
@@ -1679,6 +1680,10 @@
 /obj/machinery/atmospherics/miner/nitrogen,
 /turf/open/floor/engine/n2,
 /area/station/engineering/atmos)
+"lb" = (
+/obj/structure/cable,
+/turf/closed/wall/r_wall,
+/area/station/medical/medbay)
 "lc" = (
 /turf/open/floor/engine,
 /area/station/hallway/secondary/entry)
@@ -2515,6 +2520,7 @@
 "Em" = (
 /obj/machinery/airalarm/directional/west,
 /obj/effect/mapping_helpers/airalarm/unlocked,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "EB" = (
@@ -2792,7 +2798,6 @@
 /area/station/hallway/secondary/entry)
 "Kv" = (
 /obj/effect/turf_decal/delivery,
-/obj/structure/fans/tiny,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/closed/wall/r_wall,
 /area/station/engineering/atmos)
@@ -2879,6 +2884,12 @@
 "Lq" = (
 /turf/open/floor/circuit/green,
 /area/station/bitrunning/den)
+"Lv" = (
+/obj/machinery/door/airlock/external/ruin{
+	name = "Departure Lounge Airlock"
+	},
+/turf/open/space/basic,
+/area/station/engineering/atmos)
 "Ly" = (
 /obj/machinery/chem_dispenser/chem_synthesizer,
 /turf/open/floor/iron/dark,
@@ -8691,7 +8702,7 @@ cj
 oV
 bE
 bE
-ah
+Lv
 sn
 yx
 yx
@@ -9424,10 +9435,10 @@ ad
 ad
 by
 pI
-by
-by
-by
-mg
+lb
+lb
+lb
+TV
 sn
 yx
 yx
@@ -9703,10 +9714,10 @@ AY
 AY
 AY
 AY
-mg
-mg
-mg
-mg
+TV
+TV
+TV
+TV
 mg
 mg
 dw
