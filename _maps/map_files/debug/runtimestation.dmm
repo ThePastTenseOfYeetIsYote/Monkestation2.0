@@ -1082,7 +1082,7 @@
 "eJ" = (
 /obj/docking_port/stationary{
 	dir = 4;
-	dwidth = 4;
+	dwidth = 5;
 	height = 7;
 	name = "Cargo Bay";
 	shuttle_id = "cargo_home";
@@ -2888,7 +2888,7 @@
 /obj/machinery/door/airlock/external/ruin{
 	name = "Departure Lounge Airlock"
 	},
-/turf/open/space/basic,
+/turf/open/floor/iron,
 /area/station/engineering/atmos)
 "Ly" = (
 /obj/machinery/chem_dispenser/chem_synthesizer,
