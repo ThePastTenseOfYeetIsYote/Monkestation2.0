@@ -1,10 +1,10 @@
 /datum/mutation/human/wings
 	name = "Strengthened Wings"
-	desc = "Subject's wing muscle volume rapidly increases, effect only observed in moth subjects."
+	desc = "Subject's wing muscle volume rapidly increases, effect only observed in naturally winged subjects."
 	quality = POSITIVE
 	difficulty = 12
 	text_gain_indication = span_notice("You feel your wing muscles expand!")
-	species_allowed = list(SPECIES_MOTH)
+	species_allowed = list(SPECIES_MOTH, SPECIES_TUNDRA, SPECIES_APID, SPECIES_ORNITHID)
 	instability = 15
 
 /datum/mutation/human/wings/on_acquiring(mob/living/carbon/human/owner)

@@ -154,14 +154,18 @@
 	quality = NEGATIVE
 	text_gain_indication = "<span class='danger'>You twitch.</span>"
 	synchronizer_coeff = 1
+	power_coeff = 1 // MONKESTATION ADDITION
+	energy_coeff = 1 // MONKESTATION ADDITION
 
 /datum/mutation/human/tourettes/on_life(seconds_per_tick, times_fired)
-	if(SPT_PROB(5 * GET_MUTATION_SYNCHRONIZER(src), seconds_per_tick) && owner.stat == CONSCIOUS && !owner.IsStun())
+//	if(SPT_PROB(5 * GET_MUTATION_SYNCHRONIZER(src), seconds_per_tick) && owner.stat == CONSCIOUS && !owner.IsStun()) // MONKESTATION EDIT OLD
+	if(SPT_PROB(5 * GET_MUTATION_SYNCHRONIZER(src) / GET_MUTATION_ENERGY(src), seconds_per_tick) && owner.stat == CONSCIOUS && !owner.IsStun()) // MONKESTATION EDIT NEW
 		switch(rand(1, 3))
 			if(1)
 				owner.emote("twitch")
 			if(2 to 3)
-				owner.say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "MROW", "ANIMES", "LIZZZARD", "HELP")]", forced=name)
+//				owner.say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "MROW", "ANIMES", "LIZZZARD", "HELP")]", forced=name) // MONKESTATION EDIT OLD
+				owner.say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "MROW", "ANIMES", "LIZZZARD", "HELP")][GET_MUTATION_POWER(src) > 1 ? "!!" : ""]", forced=name) // MONKESTATION EDIT NEW
 		var/x_offset_old = owner.pixel_x
 		var/y_offset_old = owner.pixel_y
 		var/x_offset = owner.pixel_x + rand(-2,2)

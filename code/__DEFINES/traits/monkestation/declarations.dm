@@ -1,6 +1,12 @@
 // BEGIN TRAIT DEFINES
 
 // /mob/living
+// Genetics start
+/// Removes tackle and throwing debuffs from dwarfs
+#define TRAIT_STABLE_DWARF "stable_dwarf"
+/// Makes you heal from radiation received
+#define TRAIT_RADHEALING "radiation_healing"
+// Genetics end
 /// Monkeys are friendly/neutral to this mob by defaulot.
 #define TRAIT_MONKEYFRIEND 	"monkeyfriend"
 /// User's stamina is over the STAMINA_EXHAUSTION_THRESHOLD.

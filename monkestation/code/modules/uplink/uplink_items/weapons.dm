@@ -15,6 +15,14 @@
 	item = /obj/item/storage/box/syndie_kit/imp_hard_spear/max
 	cost = 40
 
+/datum/uplink_item/implants/acid_spit
+	name = "Acid Spit Mutator"
+	desc = "A mutator containing the recently extracted \"acid spit\" mutation from xenomorphs. \
+		This version is twice as powerfull as can be produced in standard-issue nanotrasen genetic labs. \
+		Be cautious as it causes 50 DNA instability alongside being detectable by geneticists and curable with mutadone."
+	item = /obj/item/dnainjector/acid_spit
+	cost = 8
+
 /datum/uplink_item/dangerous/laser_musket
 	name = "Syndicate Laser Musket"
 	desc = "An exprimental 'rifle' designed by Aetherofusion. This laser(probably) uses alien technology to fit 4 high energy capacitors \

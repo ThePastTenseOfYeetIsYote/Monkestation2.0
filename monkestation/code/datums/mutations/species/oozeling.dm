@@ -45,10 +45,48 @@
 /datum/action/cooldown/spell/touch/acid/is_valid_target(atom/cast_on)
 	return isatom(cast_on) // We are not really picky
 
+/datum/action/cooldown/spell/touch/acid/IsAvailable(feedback = FALSE)
+	if(!owner || owner.stat != CONSCIOUS || (next_use_time > world.time))
+		return ..()
+
+	var/mob/living/carbon/human = owner
+	if(istype(human) && !isnull(human.handcuffed))
+		return TRUE
+
+	return ..()
+
+/datum/action/cooldown/spell/touch/acid/can_cast_spell(feedback = TRUE)
+	if(!owner || owner.stat != CONSCIOUS || (next_use_time > world.time))
+		return ..()
+
+	var/mob/living/carbon/human = owner
+	if(istype(human) && !isnull(human.handcuffed))
+		return TRUE
+
+	return ..()
+
+/datum/action/cooldown/spell/touch/acid/cast(mob/living/carbon/cast_on)
+	if(isnull(cast_on.handcuffed))
+		return ..()
+
+	do_hand_hit(null, cast_on.handcuffed, cast_on)
+	return TRUE
+
 /datum/action/cooldown/spell/touch/acid/cast_on_hand_hit(obj/item/melee/touch_attack/hand, atom/victim, mob/living/carbon/caster)
 	if(caster.blood_volume < BLOOD_VOLUME_OKAY)
 		to_chat(caster, span_warning("Your acid is too weakly concentrated to use for dissolving!"))
 		return FALSE
+
+	if(caster.handcuffed)
+		var/obj/handcuffs = caster.get_item_by_slot(ITEM_SLOT_HANDCUFFED)
+		if(!istype(handcuffs))
+			return FALSE
+		caster.visible_message(span_warning("The acid in [caster]'s hands becomes much more concentrated, starting to burn away [handcuffs]!"), \
+			span_notice("You concentrate on burning away your restrains using the acid in your hands..."))
+
+		caster.blood_volume = max(caster.blood_volume - blood_cost, 0)
+		addtimer(CALLBACK(src, PROC_REF(dissolve_handcuffs), caster, handcuffs), 90 SECONDS / acid_volume) // default 6 seconds
+		return TRUE
 
 	if(victim.acid_act(50, acid_volume))
 		caster.visible_message(span_warning("[caster] rubs their hands on [victim], spreading acid all over them!"))
@@ -57,6 +95,11 @@
 
 	to_chat(caster, span_notice("You cannot dissolve this object."))
 	return TRUE
+
+/datum/action/cooldown/spell/touch/acid/proc/dissolve_handcuffs(mob/living/carbon/human/user, obj/O)
+	if(O && user.handcuffed == O)
+		user.visible_message(span_warning("[O] dissolve[O.gender == PLURAL?"":"s"] into a puddle of sizzling goop."))
+		qdel(O)
 
 /obj/item/melee/touch_attack/acid
 	name = "\improper acidic hand"

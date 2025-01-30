@@ -7,7 +7,7 @@
 	power_path = /datum/action/cooldown/spell/self_amputation
 
 	energy_coeff = 1
-//	synchronizer_coeff = 1 // MONKESTATION REMOVAL -- THIS LITERALLY DOES NOTHING
+	synchronizer_coeff = 1
 
 /datum/action/cooldown/spell/self_amputation
 	name = "Drop a limb"
