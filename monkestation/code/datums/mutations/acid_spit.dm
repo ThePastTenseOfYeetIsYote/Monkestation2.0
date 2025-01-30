@@ -21,7 +21,7 @@
 
 /datum/action/cooldown/spell/pointed/projectile/acid_spit
 	name = "Acid Spit"
-	desc = "You focus your corrosive saliva to spit at your target, if used on yourself you'll burn away any restrains holding you"
+	desc = "You focus your corrosive saliva to spit at your target, if used on yourself you'll burn away any restraints holding you."
 	button_icon = 'icons/mob/actions/actions_xeno.dmi'
 	button_icon_state = "alien_neurotoxin_0"
 	active_icon_state = "alien_neurotoxin_1"
