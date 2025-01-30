@@ -82,7 +82,7 @@
 		if(!istype(handcuffs))
 			return FALSE
 		caster.visible_message(span_warning("The acid in [caster]'s hands becomes much more concentrated, starting to burn away [handcuffs]!"), \
-			span_notice("You concentrate on burning away your restrains using the acid in your hands..."))
+			span_notice("You concentrate on burning away your restraints using the acid in your hands..."))
 
 		caster.blood_volume = max(caster.blood_volume - blood_cost, 0)
 		addtimer(CALLBACK(src, PROC_REF(dissolve_handcuffs), caster, handcuffs), 90 SECONDS / acid_volume) // default 6 seconds

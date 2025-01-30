@@ -250,25 +250,30 @@
 	if(.)
 		return
 
-	owner.physiology?.brute_mod *= 0.8
-	owner.physiology?.burn_mod *= 0.9
+	var/datum/armor/owner_armor = owner.get_armor()
+	var/list/armorlist = owner_armor.get_rating_list()
+	armorlist[MELEE] += 10
+	armorlist[BULLET] += 10
+	owner.set_armor(owner_armor.generate_new_with_specific(armorlist))
 
 /datum/mutation/human/thickskin/on_losing(mob/living/carbon/human/owner)
 	. = ..()
 	if(.)
 		return
 
-	owner.physiology?.brute_mod /= 0.8
-	owner.physiology?.burn_mod /= 0.9
+	var/datum/armor/owner_armor = owner.get_armor()
+	var/list/armorlist = owner_armor.get_rating_list()
+	armorlist[MELEE] -= 10
+	armorlist[BULLET] -= 10
+	owner.set_armor(owner_armor.generate_new_with_specific(armorlist))
+
 	if(GET_MUTATION_POWER(src) > 1)
-		owner.physiology?.brute_mod /= 0.9
-		owner.physiology?.burn_mod /= 0.95
+		REMOVE_TRAIT(owner, TRAIT_EMBED_RESISTANCE, GENETIC_MUTATION)
 
 /datum/mutation/human/thickskin/modify()
 	. = ..()
 	if(GET_MUTATION_POWER(src) > 1)
-		owner.physiology?.brute_mod *= 0.9
-		owner.physiology?.burn_mod *= 0.95
+		ADD_TRAIT(owner, TRAIT_EMBED_RESISTANCE, GENETIC_MUTATION)
 
 /datum/mutation/human/hypermarrow
 	name = "Hyperactive Bone Marrow"
@@ -312,7 +317,6 @@
 	var/list/armorlist = owner_armor.get_rating_list()
 	armorlist[MELEE] += 5
 	armorlist[WOUND] += 10
-
 	owner.set_armor(owner_armor.generate_new_with_specific(armorlist))
 
 /datum/mutation/human/densebones/on_losing(mob/living/carbon/human/owner)
@@ -324,8 +328,8 @@
 	var/list/armorlist = owner_armor.get_rating_list()
 	armorlist[MELEE] -= 5
 	armorlist[WOUND] -= 10
-
 	owner.set_armor(owner_armor.generate_new_with_specific(armorlist))
+
 	if(GET_MUTATION_POWER(src) > 1)
 		REMOVE_TRAIT(owner, TRAIT_HARDLY_WOUNDED, GENETIC_MUTATION)
 

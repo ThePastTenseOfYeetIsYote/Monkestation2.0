@@ -27,8 +27,8 @@
 /datum/uplink_item/implants/acid_spit
 	name = "Acid Spit Mutator"
 	desc = "A mutator containing the recently extracted \"acid spit\" mutation from xenomorphs. \
-		This version is twice as powerfull as can be produced in standard-issue nanotrasen genetic labs. \
-		Be cautious as it causes 50 DNA instability alongside being detectable by geneticists and curable with mutadone."
+		The strain was refined over many months until the point of only causing 20 genetic instability instead of 70. \
+		Be cautious as it can be detected using genetic scanners and is curable with mutadone."
 	item = /obj/item/dnainjector/acid_spit
 	cost = 8
 
