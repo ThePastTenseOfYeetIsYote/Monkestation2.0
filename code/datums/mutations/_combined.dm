@@ -26,7 +26,8 @@
 	result = /datum/mutation/human/shock
 
 /datum/generecipe/pyrokinesis
-	required = "/datum/mutation/human/cryokinesis; /datum/mutation/human/fire_breath"
+//	required = "/datum/mutation/human/cryokinesis; /datum/mutation/human/fire_breath" // MONKESTATION EDIT OLD
+	required = "/datum/mutation/human/cryokinesis; /datum/mutation/human/fire" // MONKESTATION EDIT NEW
 	result = /datum/mutation/human/cryokinesis/pyrokinesis
 
 /datum/generecipe/antiglow
