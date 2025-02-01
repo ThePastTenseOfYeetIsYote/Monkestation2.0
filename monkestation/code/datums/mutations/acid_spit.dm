@@ -36,6 +36,16 @@
 	projectile_type = /obj/projectile/bullet/acid_spit
 	var/acid_multiplier = 1
 
+/datum/action/cooldown/spell/pointed/projectile/acid_spit/IsAvailable(feedback = FALSE)
+	if(owner)
+		var/mob/living/carbon/human = owner
+		if(istype(owner) && human.is_mouth_covered())
+			if(feedback)
+				owner.balloon_alert(owner, "mouth blocked!")
+			return FALSE
+
+	return ..()
+
 /datum/action/cooldown/spell/pointed/projectile/acid_spit/cast(atom/cast_on)
 	. = ..()
 	if(.)

@@ -65,7 +65,7 @@
 /obj/item/chromosome/synchronizer
 	name = "synchronizer chromosome"
 //	desc = "A chromosome that reduces mutation knockback and downsides by 50%." // MONKESTATION EDIT OLD
-	desc = "A chromosome that reduces downsides of negative effects on mutaions by 50% or hides visual effects of certain mutations." // MONKESTATION EDIT NEW
+	desc = "A chromosome that reduces downsides of negative effects on mutations by 50% or hides visual effects of certain mutations." // MONKESTATION EDIT NEW
 	icon_state = "synchronizer"
 	synchronizer_coeff = 0.5
 

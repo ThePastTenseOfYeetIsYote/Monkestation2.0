@@ -9,16 +9,6 @@
 
 	return ..()
 
-/datum/action/cooldown/spell/touch/shock/can_cast_spell(feedback = TRUE)
-	if(!owner || owner.stat != CONSCIOUS || !owner.pulledby || (next_use_time > world.time))
-		return ..()
-
-	var/mob/living/carbon/human = owner
-	if(istype(human) && !isnull(human.handcuffed))
-		return TRUE
-
-	return ..()
-
 /datum/action/cooldown/spell/touch/shock/cast(mob/living/carbon/cast_on)
 	if(isnull(cast_on.handcuffed) || !cast_on.pulledby)
 		return ..()
