@@ -18,6 +18,10 @@
 	required = "/datum/mutation/human/tongue_spike/chem; /datum/mutation/human/radioactive"
 	result = /datum/mutation/human/acid_spit/unstable
 
+/datum/generecipe/acid_hands
+	required = "/datum/mutation/human/acidflesh; /datum/mutation/human/radioactive"
+	result = /datum/mutation/human/acid_touch/unstable
+
 /datum/generecipe/flash_protection1 // Fuck it, give em 3 recipes
 	required = "/datum/mutation/human/night_vision; /datum/mutation/human/void"
 	result = /datum/mutation/human/flash_protection

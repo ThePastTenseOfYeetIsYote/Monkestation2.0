@@ -106,3 +106,9 @@
 	desc = "This is kind of like when you drink acid to replenish your blood, only a lot less safe for others."
 	icon = 'icons/obj/weapons/hand.dmi'
 	icon_state = "mansus"
+
+/datum/mutation/human/acid_touch/unstable
+	name = "Unstable Acidic Hands"
+	desc = "Allows a host to metabolize some of their blood into acid, concentrated on their hands. This strain is more unstable than the one observed on oozelings."
+	species_allowed = null
+	instability = 50
