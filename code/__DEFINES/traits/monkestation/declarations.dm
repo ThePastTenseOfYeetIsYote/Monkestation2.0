@@ -8,6 +8,10 @@
 #define TRAIT_RADHEALING "radiation_healing"
 /// Makes embed-able projectiles have an additional 50% chance at not embedding when hitting the target
 #define TRAIT_EMBED_RESISTANCE "embed_resistance"
+/// Makes you not leave fingerprints (you still leave fibers though)
+#define TRAIT_NO_FINGERPRINTS "no_fingerprints"
+/// Gives you a coinflip chance when eating disliked food to actually like its taste
+#define TRAIT_STABILIZED_EATER "stabilized_eater"
 // Genetics end
 /// Monkeys are friendly/neutral to this mob by defaulot.
 #define TRAIT_MONKEYFRIEND 	"monkeyfriend"

@@ -372,3 +372,95 @@
 	if(GET_MUTATION_POWER(src) > 1)
 		owner.physiology?.stamina_mod *= 0.85
 		owner.physiology?.stun_mod *= 0.925
+
+/datum/mutation/human/fat
+	name = "Obesity"
+	desc = "A strange mutation that forces the body to rapidly produce lipid tissue."
+	quality = NEGATIVE
+	text_gain_indication = span_notice("You feel blubbery and lethargic!")
+	text_lose_indication = span_notice("You feel fit!")
+
+/datum/mutation/human/fat/on_life(seconds_per_tick, times_fired)
+	if(HAS_TRAIT(owner, TRAIT_STASIS) || owner.stat == DEAD)
+		return
+
+	if(owner.nutrition <= NUTRITION_LEVEL_FAT)
+		owner.nutrition += 25 * seconds_per_tick
+
+/datum/mutation/human/horned
+	name = "Horns"
+	desc = "Enables the growth of a compacted keratin formation on the subject's head."
+	quality = MINOR_NEGATIVE
+	text_gain_indication = span_notice("A pair of horns erupt from your head.")
+	text_lose_indication = span_notice("Your horns crumble away into nothing.")
+
+/datum/mutation/human/horned/on_acquiring(mob/living/carbon/human/owner)
+	if(!owner || !istype(owner)) // Parent checks this, but we want to be safe when doing get_organ_slot
+		return TRUE
+
+	// First time something does get_organ_slot(ORGAN_SLOT_EXTERNAL_HORNS) btw, for very understandable reasons
+	var/obj/item/organ/external/horns/owner_horns = owner.get_organ_slot(ORGAN_SLOT_EXTERNAL_HORNS)
+	if(owner_horns)
+		return TRUE // Lets not de-horn people with horns, that'd be very rude
+
+	. = ..()
+	if(.)
+		return
+
+	var/obj/item/organ/external/horns/horns = new()
+	horns.Insert(owner)
+
+/datum/mutation/human/horned/on_losing(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+
+	// Second time something does get_organ_slot(ORGAN_SLOT_EXTERNAL_HORNS)
+	var/obj/item/organ/external/horns/owner_horns = owner.get_organ_slot(ORGAN_SLOT_EXTERNAL_HORNS)
+	if(owner_horns)
+		qdel(owner_horns)
+
+/datum/mutation/human/no_fingerprints
+	name = "Invisible Fingerprints"
+	desc = "Subjects finger tips melt into a singular smooth structure, causing their fingerprints to be impossible to detect."
+	quality = POSITIVE
+	text_gain_indication = span_notice("Your fingers feel numb.")
+	text_lose_indication = span_notice("Your fingers no longer feel numb.")
+	instability = 10
+
+/datum/mutation/human/no_fingerprints/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+
+	ADD_TRAIT(owner, TRAIT_NO_FINGERPRINTS, GENETIC_MUTATION)
+
+/datum/mutation/human/no_fingerprints/on_losing(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+
+	REMOVE_TRAIT(owner, TRAIT_NO_FINGERPRINTS, GENETIC_MUTATION)
+
+/datum/mutation/human/no_breath
+	name = "Automatic Respiration"
+	desc = "Subjects lungs begin to recycle CO2 into oxygen aided with melting the subjects airpipe shut making them have no need for air."
+	quality = POSITIVE
+	text_gain_indication = span_notice("You feel no need to breathe.")
+	text_lose_indication = span_notice("You feel the need to breathe, once more.")
+	instability = 30
+	difficulty = 14
+
+/datum/mutation/human/no_breath/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+
+	ADD_TRAIT(owner, TRAIT_NOBREATH, GENETIC_MUTATION)
+
+/datum/mutation/human/no_breath/on_losing(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+
+	REMOVE_TRAIT(owner, TRAIT_NOBREATH, GENETIC_MUTATION)

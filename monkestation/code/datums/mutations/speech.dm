@@ -1,3 +1,32 @@
+/datum/mutation/human/loud
+	name = "Loud"
+	desc = "Forces the speaking centre of the subjects brain to yell every sentence."
+	quality = MINOR_NEGATIVE
+	text_gain_indication = span_notice("YOU FEEL LIKE YELLING!")
+	text_lose_indication = span_notice("You feel like being quiet.")
+
+/datum/mutation/human/loud/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
+
+/datum/mutation/human/loud/on_losing(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+	UnregisterSignal(owner, COMSIG_MOB_SAY)
+
+/datum/mutation/human/loud/proc/handle_speech(datum/source, list/speech_args)
+	SIGNAL_HANDLER
+
+	var/message = speech_args[SPEECH_MESSAGE]
+	if(message)
+		message = replacetext(message,".","!")
+		message = replacetext(message,"?","?!")
+		message = replacetext(message,"!","!!")
+		speech_args[SPEECH_MESSAGE] = message
+
 /datum/mutation/human/smile
 	name = "Smile"
 	desc = "Causes the user to be in constant mania."

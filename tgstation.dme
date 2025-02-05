@@ -6006,6 +6006,7 @@
 #include "monkestation\code\datums\mocking\client.dm"
 #include "monkestation\code\datums\mutations\_combined.dm"
 #include "monkestation\code\datums\mutations\acid_spit.dm"
+#include "monkestation\code\datums\mutations\active.dm"
 #include "monkestation\code\datums\mutations\adaptation.dm"
 #include "monkestation\code\datums\mutations\alcohol.dm"
 #include "monkestation\code\datums\mutations\antenna.dm"

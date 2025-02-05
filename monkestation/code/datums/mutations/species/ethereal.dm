@@ -6,7 +6,6 @@
 	species_allowed = list(SPECIES_ETHEREAL)
 	instability = 30
 	power_path = /datum/action/cooldown/overload
-
 	power_coeff = 1
 	energy_coeff = 1
 
