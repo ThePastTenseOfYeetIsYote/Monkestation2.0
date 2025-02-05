@@ -15,7 +15,7 @@
 	if(.)
 		return
 
-	if(GET_MUTATION_STABILIZER(src) < 1)
+	if(GET_MUTATION_SYNCHRONIZER(src) < 1)
 		REMOVE_TRAIT(owner, TRAIT_STABILIZED_EATER, GENETIC_MUTATION)
 
 /datum/mutation/human/consumption/modify()
@@ -25,7 +25,7 @@
 
 	var/datum/action/cooldown/spell/pointed/consumption/to_modify = .
 	to_modify.healing_multiplier *= GET_MUTATION_POWER(src)
-	if(GET_MUTATION_STABILIZER(src) < 1)
+	if(GET_MUTATION_SYNCHRONIZER(src) < 1)
 		ADD_TRAIT(owner, TRAIT_STABILIZED_EATER, GENETIC_MUTATION)
 
 /datum/action/cooldown/spell/pointed/consumption
