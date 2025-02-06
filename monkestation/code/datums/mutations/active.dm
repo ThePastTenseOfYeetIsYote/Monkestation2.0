@@ -58,11 +58,6 @@
 	if(. & SPELL_CANCEL_CAST)
 		return
 
-	if(ismegafauna(cast_on))
-		cast_on.balloon_alert(owner, "???")
-		to_chat(owner, span_userdanger("you are NOT eating a fucking [cast_on] no matter how hard you try"))
-		return . | SPELL_CANCEL_CAST
-
 	if(is_type_in_typecache(cast_on, GLOB.oilfry_blacklisted_items))
 		cast_on.balloon_alert(owner, "A nuclear bomb looks tastier than this.")
 		return . | SPELL_CANCEL_CAST
@@ -95,7 +90,12 @@
 /datum/action/cooldown/spell/pointed/consumption/cast(obj/cast_on)
 	. = ..()
 	var/mob/living/carbon/human/human_owner = owner
-	if(istype(human_owner))
+	if(istype(cast_on, /obj/structure/closet))
+		for(var/atom/object as anything in cast_on.contents)
+			if(isliving(object) || istype(object, /obj/item/organ/internal/brain) || istype(object, /obj/item/mmi))
+				INVOKE_ASYNC(src, PROC_REF(vomit_object), object)
+
+	if(istype(human_owner) && !HAS_TRAIT(human_owner, TRAIT_SHOCKIMMUNE))
 		if(istype(cast_on, /obj/machinery/power/apc) || istype(cast_on, /obj/structure/cable))
 			if(!locate(/datum/mutation/human/insulated) in human_owner.dna.mutations) // last chance
 				electrocute_mob(owner, cast_on, cast_on, always_shock = TRUE)
@@ -141,6 +141,33 @@
 		Heal()
 		return TRUE
 
+	if(isliving(cast_on))
+		var/mob/living/living_target = cast_on
+		var/do_after_time = living_target.health + 1
+		if(iscyborg(living_target))
+			do_after_time *= 2
+
+		var/mob/living/silicon/ai/ai_target = cast_on
+		if(istype(ai_target) && ai_target.is_anchored)
+			do_after_time *= 2
+
+		owner.visible_message(span_danger("[owner] begins stuffing [living_target] into [owner.p_their()] gaping maw!"))
+		if(!do_after(owner, do_after_time, living_target))
+			to_chat(owner, span_danger("You were interrupted before you could eat [cast_on]!"))
+			return FALSE
+
+		living_target.forceMove(owner)
+		living_target.adjustBruteLoss(living_target.health)
+		living_target.death()
+		owner.visible_message(span_danger("[owner] eats [cast_on]."))
+		playsound(owner.loc, 'sound/items/eatfood.ogg', 50, FALSE)
+		Heal()
+		var/obj/brain = locate(/obj/item/mmi) in cast_on
+		if(brain)
+			INVOKE_ASYNC(src, PROC_REF(vomit_object), brain)
+
+		return TRUE
+
 	owner.visible_message(span_danger("[owner] eats [cast_on]."))
 	playsound(owner.loc, 'sound/items/eatfood.ogg', 50, FALSE)
 	Heal()
@@ -149,14 +176,17 @@
 		return TRUE
 
 	cast_on.forceMove(owner)
+
 	var/obj/brain
 	if(istype(cast_on, /obj/item/organ/internal/brain))
 		brain = cast_on
 	else
 		brain = locate(/obj/item/organ/internal/brain) in cast_on
+		if(!brain) // check for MMI's
+			brain = locate(/obj/item/organ/internal/brain) in cast_on.contents
 
 	if(brain)
-		INVOKE_ASYNC(src, PROC_REF(vomit_brain), brain)
+		INVOKE_ASYNC(src, PROC_REF(vomit_object), brain)
 	return TRUE
 
 /datum/action/cooldown/spell/pointed/consumption/proc/Heal()
@@ -166,19 +196,22 @@
 
 	human_owner.adjustBruteLoss(-15 * healing_multiplier)
 
-/datum/action/cooldown/spell/pointed/consumption/proc/vomit_brain(obj/item/organ/internal/brain/brain)
-	if(QDELETED(brain))
+/datum/action/cooldown/spell/pointed/consumption/proc/vomit_object(obj/item/object)
+	if(QDELETED(object))
 		return
 
 	var/mob/living/carbon/human/human_owner = owner
-	sleep(2.5 SECONDS)
+	sleep(rand(5, 25))
 	to_chat(owner, span_userdanger("You feel something sloshing around in your stomach..."))
-	sleep(2.5 SECONDS)
-	brain.forceMove(get_turf(owner))
+	sleep(rand(5, 25))
+	object.forceMove(get_turf(owner))
+	if(prob(25))
+		human_owner.vomit(distance = 2)
+		step(object, owner.dir)
+		step(object, owner.dir)
+		return
 	human_owner.vomit()
-	step(brain, owner.dir)
-
-
+	step(object, owner.dir)
 
 /*
 Jumpy:
