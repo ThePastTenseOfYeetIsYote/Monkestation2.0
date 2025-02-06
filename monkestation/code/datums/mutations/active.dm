@@ -141,8 +141,11 @@
 		Heal()
 		return TRUE
 
-	if(isliving(cast_on))
+	if(isliving(cast_on) || ispickedupmob(cast_on))
 		var/mob/living/living_target = cast_on
+		var/obj/item/clothing/head/mob_holder/holder = cast_on
+		if(holder)
+			living_target = holder.held_mob
 		var/do_after_time = living_target.health + 1
 		if(iscyborg(living_target))
 			do_after_time *= 2
@@ -150,6 +153,9 @@
 		var/mob/living/silicon/ai/ai_target = cast_on
 		if(istype(ai_target) && ai_target.is_anchored)
 			do_after_time *= 2
+
+		if(ispickedupmob(cast_on))
+			do_after_time = 1
 
 		owner.visible_message(span_danger("[owner] begins stuffing [living_target] into [owner.p_their()] gaping maw!"))
 		if(!do_after(owner, do_after_time, living_target))
@@ -181,9 +187,7 @@
 	if(istype(cast_on, /obj/item/organ/internal/brain))
 		brain = cast_on
 	else
-		brain = locate(/obj/item/organ/internal/brain) in cast_on
-		if(!brain) // check for MMI's
-			brain = locate(/obj/item/organ/internal/brain) in cast_on.contents
+		brain = locate(/obj/item/organ/internal/brain) in cast_on.contents
 
 	if(brain)
 		INVOKE_ASYNC(src, PROC_REF(vomit_object), brain)
