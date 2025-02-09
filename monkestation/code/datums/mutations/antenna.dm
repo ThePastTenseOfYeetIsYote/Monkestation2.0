@@ -1,4 +1,5 @@
 /datum/mutation/human/antenna
+	synchronizer_coeff = 1
 	power_coeff = 1
 
 /datum/mutation/human/antenna/modify()
@@ -20,6 +21,12 @@
 	var/obj/item/encryptionkey/lucky_winner = pick(random_keys) // Let's go gambling!
 	linked_radio.radio.keyslot = new lucky_winner
 	linked_radio.radio.recalculateChannels()
+
+/datum/mutation/human/antenna/get_visual_indicator()
+	if(GET_MUTATION_SYNCHRONIZER(src) < 1) // Stealth
+		return FALSE
+
+	return visual_indicators[type][1]
 
 /datum/mutation/human/mindreader
 	energy_coeff = 1
