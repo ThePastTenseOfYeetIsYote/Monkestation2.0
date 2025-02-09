@@ -8,9 +8,11 @@
 	text_gain_indication = "<span class='danger'>You get a headache.</span>"
 	synchronizer_coeff = 1
 	power_coeff = 1
+	energy_coeff = 1 // MONKESTATION ADDITION
 
 /datum/mutation/human/epilepsy/on_life(seconds_per_tick, times_fired)
-	if(SPT_PROB(0.5 * GET_MUTATION_SYNCHRONIZER(src), seconds_per_tick))
+//	if(SPT_PROB(0.5 * GET_MUTATION_SYNCHRONIZER(src), seconds_per_tick)) // MONKESTATION EDIT OLD
+	if(SPT_PROB(0.5 * GET_MUTATION_SYNCHRONIZER(src) / GET_MUTATION_ENERGY(src), seconds_per_tick)) // MONKESTATION EDIT NEW
 		trigger_seizure()
 
 /datum/mutation/human/epilepsy/proc/trigger_seizure()
@@ -83,9 +85,11 @@
 	text_gain_indication = "<span class='danger'>You start coughing.</span>"
 	synchronizer_coeff = 1
 	power_coeff = 1
+	energy_coeff = 1 // MONKESTATION ADDITION
 
 /datum/mutation/human/cough/on_life(seconds_per_tick, times_fired)
-	if(SPT_PROB(2.5 * GET_MUTATION_SYNCHRONIZER(src), seconds_per_tick) && owner.stat == CONSCIOUS)
+//	if(SPT_PROB(2.5 * GET_MUTATION_SYNCHRONIZER(src), seconds_per_tick) && owner.stat == CONSCIOUS) // MONKESTATION EDIT OLD
+	if(SPT_PROB(2.5 * GET_MUTATION_SYNCHRONIZER(src) / GET_MUTATION_ENERGY(src), seconds_per_tick) && owner.stat == CONSCIOUS) // MONKESTATION EDIT NEW
 		owner.drop_all_held_items()
 		owner.emote("cough")
 		if(GET_MUTATION_POWER(src) > 1)
