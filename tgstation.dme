@@ -6017,6 +6017,7 @@
 #include "monkestation\code\datums\mutations\body.dm"
 #include "monkestation\code\datums\mutations\chameleon.dm"
 #include "monkestation\code\datums\mutations\cold.dm"
+#include "monkestation\code\datums\mutations\fire_breath.dm"
 #include "monkestation\code\datums\mutations\hulk.dm"
 #include "monkestation\code\datums\mutations\passive.dm"
 #include "monkestation\code\datums\mutations\radioactive.dm"

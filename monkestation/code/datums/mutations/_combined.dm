@@ -14,6 +14,10 @@
 	required = "/datum/mutation/human/shock; /datum/mutation/human/telekinesis"
 	result = /datum/mutation/human/shock/far
 
+/datum/generecipe/fire_breath
+	required = "/datum/mutation/human/cryokinesis/pyrokinesis; /datum/mutation/human/cough"
+	result = /datum/mutation/human/firebreath/unstable
+
 /datum/generecipe/acid_spit
 	required = "/datum/mutation/human/tongue_spike/chem; /datum/mutation/human/radioactive"
 	result = /datum/mutation/human/acid_spit/unstable
