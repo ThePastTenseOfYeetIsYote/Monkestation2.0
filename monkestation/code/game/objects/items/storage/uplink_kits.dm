@@ -236,7 +236,7 @@
 
 /obj/item/storage/box/syndie_kit/laser_eyes
 	name = "Laser Eyes Mutation Kit"
-	desc = "A box with a singular syndicate-grade X-Ray mutator and 3 oculine medipens."
+	desc = "A box with a singular syndicate-grade laser eyes mutator and 3 oculine medipens."
 
 /obj/item/storage/box/syndie_kit/laser_eyes/PopulateContents()
 	new /obj/item/dnainjector/laser_eyes(src)
