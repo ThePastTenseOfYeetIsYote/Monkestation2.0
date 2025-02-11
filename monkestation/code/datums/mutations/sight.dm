@@ -56,7 +56,7 @@
 		cooldown -= 5
 		var/obj/item/organ/internal/eyes/eyes = owner.get_organ_slot(ORGAN_SLOT_EYES)
 		if(eyes && !(eyes.organ_flags & ORGAN_FAILING))
-			pwmer.balloon_alert(owner, "eyes recharged!")
+			owner.balloon_alert(owner, "eyes recharged!")
 			return
 
 	if(shots_left == 4)
