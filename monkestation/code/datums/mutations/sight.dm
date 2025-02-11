@@ -186,9 +186,18 @@
 /datum/mutation/human/weaker_xray
 	name = "X-Ray Vision"
 	desc = "A strange genome that allows the user to see between the spaces of walls at the cost of their eye health."
+	locked = TRUE
 	power_path = /datum/action/cooldown/toggle_xray
 	instability = 60
-	locked = TRUE
+	synchronizer_coeff = 1
+
+/datum/mutation/human/weaker_xray/modify()
+	. = ..()
+	if(!.)
+		return
+
+	var/datum/action/cooldown/toggle_xray/modified_power = .
+	modified_power.synchronizer = GET_MUTATION_SYNCHRONIZER(src)
 
 /datum/action/cooldown/toggle_xray
 	name = "Toggle X-ray"
@@ -196,6 +205,7 @@
 	button_icon = 'icons/mob/actions/actions_changeling.dmi'
 	button_icon_state = "augmented_eyesight"
 	var/toggle = FALSE
+	var/synchronizer = 1
 
 /datum/action/cooldown/toggle_xray/Grant(mob/granted_to)
 	. = ..()
@@ -244,7 +254,7 @@
 	if(toggle)
 		to_chat(owner, span_notice("You feel your eyes sting as you force them to see through solid matter."))
 		eyes.flash_protect--
-		eyes.apply_organ_damage(5)
+		eyes.apply_organ_damage(5 * synchronizer)
 		ADD_TRAIT(owner, TRAIT_XRAY_VISION, GENETIC_MUTATION)
 		owner.update_sight()
 		START_PROCESSING(SSobj, src)
@@ -259,7 +269,7 @@
 		toggle_off()
 		return
 
-	eyes.apply_organ_damage(seconds_per_tick * 2)
+	eyes.apply_organ_damage(seconds_per_tick * 2 * synchronizer)
 	if(eyes.organ_flags & ORGAN_FAILING)
 		toggle = !toggle
 		toggle_off()
