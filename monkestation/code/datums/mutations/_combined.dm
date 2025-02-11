@@ -1,10 +1,10 @@
 /datum/generecipe/laser_eyes
-	required = "/datum/mutation/human/thermal; /datum/mutation/human/fire"
+	required = "/datum/mutation/human/thermal; /datum/mutation/human/cryokinesis/pyrokinesis"
 	result = /datum/mutation/human/laser_eyes/unstable
 
 /datum/generecipe/xray_eyes
 	required = "/datum/mutation/human/thermal; /datum/mutation/human/radioactive"
-	result = /datum/mutation/human/xray
+	result = /datum/mutation/human/weaker_xray
 
 /datum/generecipe/cerebral
 	required = "/datum/mutation/human/clever; /datum/mutation/human/adrenaline_rush"
