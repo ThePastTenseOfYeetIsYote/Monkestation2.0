@@ -28,6 +28,10 @@
 		to_chat(source, span_warning("You can't shoot lasers whilst your cornea is melted!"))
 		return
 
+	if(eyes.status == ORGAN_ROBOTIC)
+		owner.balloon_alert(owner, "eyes robotic!")
+		return FALSE
+
 	if(!shots_left)
 		source.balloon_alert(source, "can't fire!")
 		to_chat(source, span_warning("You can't fire your laser eyes this fast!"))
@@ -52,7 +56,7 @@
 		cooldown -= 5
 		var/obj/item/organ/internal/eyes/eyes = owner.get_organ_slot(ORGAN_SLOT_EYES)
 		if(eyes && !(eyes.organ_flags & ORGAN_FAILING))
-			source.balloon_alert(source, "eyes recharged!")
+			pwmer.balloon_alert(owner, "eyes recharged!")
 			return
 
 	if(shots_left == 4)
