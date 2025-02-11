@@ -5,7 +5,59 @@
 /// Laser eyes made by a geneticist
 /datum/mutation/human/laser_eyes/unstable
 	name = "Unstable Laser Eyes"
+	desc = "Reflects concentrated light back from the eyes, however this mutation is very unstable and causes damage to the user."
 	instability = 60
+	var/shots_left = 4
+	var/cooldown
+
+/datum/mutation/human/laser_eyes/unstable/Destroy(force)
+	if(shots_left != 4)
+		STOP_PROCESSING(SSobj, src)
+	return ..()
+
+/datum/mutation/human/laser_eyes/unstable/on_ranged_attack(mob/living/carbon/human/source, atom/target, modifiers)
+	if(!(source.istate & ISTATE_HARM))
+		return
+
+	var/obj/item/organ/internal/eyes/eyes = source.get_organ_slot(ORGAN_SLOT_EYES)
+	if(!eyes)
+		to_chat(source, span_warning("You don't have eyes to shoot lasers!"))
+		return
+
+	if(eyes.organ_flags & ORGAN_FAILING)
+		to_chat(source, span_warning("You can't shoot lasers whilst your cornea is melted!"))
+		return
+
+	if(!shots_left)
+		source.balloon_alert(source, "can't fire!")
+		to_chat(source, span_warning("You can't fire your laser eyes this fast!"))
+		return
+
+	. = ..()
+	if(shots_left == 4)
+		START_PROCESSING(SSobj, src)
+	shots_left--
+
+	eyes.apply_organ_damage(5)
+	var/obj/item/bodypart/head/head = source.get_bodypart(BODY_ZONE_HEAD)
+	if(head)
+		head.receive_damage(burn = 5, damage_source = src)
+	else
+		source.adjustFireLoss(5)
+
+/datum/mutation/human/laser_eyes/unstable/process(seconds_per_tick)
+	cooldown += seconds_per_tick
+	if(cooldown >= 5)
+		shots_left++
+		cooldown -= 5
+		var/obj/item/organ/internal/eyes/eyes = owner.get_organ_slot(ORGAN_SLOT_EYES)
+		if(eyes && !(eyes.organ_flags & ORGAN_FAILING))
+			source.balloon_alert(source, "eyes recharged!")
+			return
+
+	if(shots_left == 4)
+		STOP_PROCESSING(SSobj, src)
+		cooldown = 0
 
 /datum/mutation/human/meson_vision
 	name = "Meson Visual Enhancement"
