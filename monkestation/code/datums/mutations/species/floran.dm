@@ -1,6 +1,7 @@
 /datum/mutation/human/spores
 	name = "Agaricale Pores" // Pores, not spores. ITS NOT SPORES!!!!!
 	desc = "An ancient mutation that gives florans the ability to produce spores."
+	locked = TRUE
 	quality = POSITIVE
 	difficulty = 12
 	text_gain_indication = span_notice("You feel your pores more sensitively..?")
@@ -35,6 +36,7 @@
 /datum/mutation/human/sapblood
 	name = "Sap blood"
 	desc = "A mutation that causes a florans blood to thicken, almost like sap, bleeding less and coagulating faster."
+	locked = TRUE
 	quality = POSITIVE
 	difficulty = 16
 	text_gain_indication = span_notice("You feel your arteries cloying!") // Cloying is apparently an actual word

@@ -1,6 +1,7 @@
 /datum/mutation/human/wings
 	name = "Strengthened Wings"
 	desc = "Subject's wing muscle volume rapidly increases, effect only observed in naturally winged subjects."
+	locked = TRUE
 	quality = POSITIVE
 	difficulty = 12
 	text_gain_indication = span_notice("You feel your wing muscles expand!")

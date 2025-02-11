@@ -1,6 +1,7 @@
 /datum/mutation/human/overload
 	name = "Overload"
 	desc = "Allows an Ethereal to overload their skin to cause a bright flash."
+	locked = TRUE
 	quality = POSITIVE
 	text_gain_indication = span_notice("You feel your skin energetically tingle.")
 	species_allowed = list(SPECIES_ETHEREAL)

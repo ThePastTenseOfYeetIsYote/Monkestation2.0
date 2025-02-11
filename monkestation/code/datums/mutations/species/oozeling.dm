@@ -1,6 +1,7 @@
 /datum/mutation/human/acid_touch
 	name = "Acidic Hands"
 	desc = "Allows an Oozeling to metabolize some of their blood into acid, concentrated on their hands."
+	locked = TRUE
 	quality = POSITIVE
 	difficulty = 16
 	text_gain_indication = span_notice("You feel power flow through your hands.")
