@@ -24,14 +24,6 @@
 	lock_other_purchases = TRUE
 	purchasable_from = ~(UPLINK_CLOWN_OPS | UPLINK_NUKE_OPS)
 
-/datum/uplink_item/implants/acid_spit
-	name = "Acid Spit Mutator"
-	desc = "A mutator containing the recently extracted \"acid spit\" mutation from xenomorphs. \
-		The strain was refined over many months until the point of only causing 20 genetic instability instead of 70. \
-		Be cautious as it can be detected using genetic scanners and is curable with mutadone."
-	item = /obj/item/dnainjector/acid_spit
-	cost = 8
-
 /datum/uplink_item/dangerous/laser_musket
 	name = "Syndicate Laser Musket"
 	desc = "An exprimental 'rifle' designed by Aetherofusion. This laser(probably) uses alien technology to fit 4 high energy capacitors \

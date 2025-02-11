@@ -7,6 +7,7 @@
 	name = "Unstable Laser Eyes"
 	desc = "Reflects concentrated light back from the eyes, however this mutation is very unstable and causes damage to the user."
 	instability = 60
+	synchronizer_coeff = 1
 	var/shots_left = 4
 	var/cooldown
 
@@ -42,12 +43,13 @@
 		START_PROCESSING(SSobj, src)
 	shots_left--
 
-	eyes.apply_organ_damage(5)
+	var/backfire_damage = 5 * GET_MUTATION_SYNCHRONIZER(src)
+	eyes.apply_organ_damage(backfire_damage)
 	var/obj/item/bodypart/head/head = source.get_bodypart(BODY_ZONE_HEAD)
 	if(head)
-		head.receive_damage(burn = 5, damage_source = src)
+		head.receive_damage(burn = backfire_damage, damage_source = src)
 	else
-		source.adjustFireLoss(5)
+		source.adjustFireLoss(backfire_damage)
 
 /datum/mutation/human/laser_eyes/unstable/process(seconds_per_tick)
 	cooldown += seconds_per_tick
@@ -62,6 +64,11 @@
 	if(shots_left == 4)
 		STOP_PROCESSING(SSobj, src)
 		cooldown = 0
+
+/datum/mutation/human/laser_eyes/unstable/syndicate
+	name = "Stabilized Laser Eyes"
+	desc = "Reflects concentrated light back from the eyes, this strain of the mutation is high-quality, yet still causes the user to take damage on use."
+	instability = 40
 
 /datum/mutation/human/meson_vision
 	name = "Meson Visual Enhancement"
@@ -289,3 +296,8 @@
 	if(toggle)
 		toggle = !toggle
 		toggle_off()
+
+/datum/mutation/human/weaker_xray/syndicate
+	name = "Refined X-Ray Vision"
+	desc = "A strange genome that allows the user to see between the spaces of walls at the cost of their eye health. This one seems to be high-quality making it more stable."
+	instability = 40
