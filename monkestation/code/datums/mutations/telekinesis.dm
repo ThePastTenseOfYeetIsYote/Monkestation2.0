@@ -2,20 +2,10 @@
 	synchronizer_coeff = 1
 	power_coeff = 1
 
-/datum/mutation/human/telekinesis/on_losing(mob/living/carbon/human/owner)
-	. = ..()
-	if(.)
-		return
-
-	if(GET_MUTATION_POWER(src) > 1)
-		UnregisterSignal(owner, COMSIG_LIVING_TRY_PULL)
-
 /datum/mutation/human/telekinesis/modify()
 	. = ..()
 	if(GET_MUTATION_SYNCHRONIZER(src) < 1)
 		owner.update_mutations_overlay()
-	if(GET_MUTATION_POWER(src) > 1)
-		RegisterSignal(owner, COMSIG_LIVING_TRY_PULL, PROC_REF(on_try_pull))
 
 /datum/mutation/human/telekinesis/get_visual_indicator()
 	if(GET_MUTATION_SYNCHRONIZER(src) < 1) // Stealth
@@ -26,19 +16,26 @@
 /datum/mutation/human/telekinesis/get_visual_indicator()
 	return visual_indicators[type][1]
 
-/datum/mutation/human/telekinesis/proc/on_try_pull(mob/user, atom/movable/target, force)
-	SIGNAL_HANDLER
-	if(!istype(user))
-		return
+/obj/item/tk_grab
+	var/added_damage // The damage we have given our target, we store it in a var to avoid adding chromosomes breaking things
 
-	return !user.Adjacent(target) && COMSIG_LIVING_CANCEL_PULL
+/obj/item/tk_grab/Destroy()
+	if(!QDELETED(focus) && added_damage)
+		focus.throwforce -= added_damage
+	return ..()
 
-/mob/attack_tk(mob/user, power_chromosome = FALSE)
-	if(!power_chromosome)
-		return
-	if(istate & ISTATE_SECONDARY) // Blocks grabbing from a distance, its buggy to say the least
-		return
-
+/obj/item/tk_grab/focus_object(obj/target) // Okay this is a LITTLE BIT jank BUT hear me out-- okay maybe don't.
 	. = ..()
-	if(. & COMPONENT_CANCEL_ATTACK_CHAIN)
-		user.changeNext_move(CLICK_CD_MELEE)
+	if(!.)
+		return
+
+	var/datum/mutation/human/telekinesis/telekinesis = locate(/datum/mutation/human/telekinesis) in tk_user.dna.mutations
+	if(!telekinesis)
+		return
+
+	var/mutation_power = GET_MUTATION_POWER(telekinesis)
+	if(mutation_power <= 1)
+		return
+
+	added_damage = mutation_power * 4
+	focus.throwforce += added_damage
