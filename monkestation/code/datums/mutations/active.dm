@@ -62,6 +62,10 @@
 		cast_on.balloon_alert(owner, "A nuclear bomb looks tastier than this.")
 		return . | SPELL_CANCEL_CAST
 
+	if(istype(cast_on, /obj/machinery/nuclearbomb))
+		cast_on.balloon_alert(owner, "A literal nuclear bomb is not great for digestion.")
+		return . | SPELL_CANCEL_CAST
+
 	if(ishuman(cast_on))
 		var/mob/living/carbon/human/human_target = cast_on
 		if(owner.zone_selected == BODY_ZONE_PRECISE_GROIN)
@@ -90,6 +94,24 @@
 /datum/action/cooldown/spell/pointed/consumption/cast(obj/cast_on)
 	. = ..()
 	var/mob/living/carbon/human/human_owner = owner
+	if(ismecha(cast_on))
+		owner.visible_message(span_userdanger("[owner] begins stuffing the entire [cast_on] into [owner.p_their()] gaping maw!"))
+		if(!do_after(owner, cast_on.get_integrity(), cast_on))
+			to_chat(owner, span_danger("You were interrupted before you could eat [cast_on]!"))
+			return FALSE
+
+		owner.visible_message(span_danger("[owner] eats [cast_on]."))
+		playsound(owner.loc, 'sound/items/eatfood.ogg', 50, FALSE)
+		Heal()
+		cast_on.forceMove(owner)
+		var/obj/vehicle/sealed/mecha/mecha = cast_on
+		for(var/atom/occupant in mecha.occupants)
+			if(isAI(occupant))
+				continue
+
+			INVOKE_ASYNC(src, PROC_REF(vomit_object), occupant)
+		return TRUE
+
 	if(istype(cast_on, /obj/structure/closet))
 		for(var/atom/object as anything in cast_on.contents)
 			if(isliving(object) || istype(object, /obj/item/organ/internal/brain) || istype(object, /obj/item/mmi))
