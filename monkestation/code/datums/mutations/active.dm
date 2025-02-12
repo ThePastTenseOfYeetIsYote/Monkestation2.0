@@ -58,12 +58,22 @@
 	if(. & SPELL_CANCEL_CAST)
 		return
 
+	if(isitem(cast_on))
+		var/obj/item/item = cast_on
+		if(item.item_flags & ABSTRACT)
+			cast_on.balloon_alert(owner, "... no.")
+			return . | SPELL_CANCEL_CAST
+
+	if(iseffect(cast_on))
+		cast_on.balloon_alert(owner, "what even is this?")
+		return . | SPELL_CANCEL_CAST
+
 	if(is_type_in_typecache(cast_on, GLOB.oilfry_blacklisted_items))
-		cast_on.balloon_alert(owner, "A nuclear bomb looks tastier than this.")
+		cast_on.balloon_alert(owner, "a nuclear bomb looks tastier than this.")
 		return . | SPELL_CANCEL_CAST
 
 	if(istype(cast_on, /obj/machinery/nuclearbomb))
-		cast_on.balloon_alert(owner, "A literal nuclear bomb is not great for digestion.")
+		cast_on.balloon_alert(owner, "a literal nuclear bomb is not great for digestion.")
 		return . | SPELL_CANCEL_CAST
 
 	if(ishuman(cast_on))
