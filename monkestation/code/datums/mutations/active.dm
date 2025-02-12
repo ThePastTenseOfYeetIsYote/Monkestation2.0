@@ -221,6 +221,9 @@
 		return TRUE
 
 	cast_on.forceMove(owner)
+	if(istype(cast_on, /obj/item/disk/nuclear))
+		INVOKE_ASYNC(src, PROC_REF(vomit_object), cast_on)
+		return TRUE
 
 	var/obj/brain
 	if(istype(cast_on, /obj/item/organ/internal/brain))
