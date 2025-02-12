@@ -1,13 +1,12 @@
 /datum/mutation/human/acid_touch
 	name = "Acidic Hands"
-	desc = "Allows an Oozeling to metabolize some of their blood into acid, concentrated on their hands."
+	desc = "Allows a host to metabolize some of their blood into acid, concentrated on their hands."
 	locked = TRUE
 	quality = POSITIVE
 	difficulty = 16
 	text_gain_indication = span_notice("You feel power flow through your hands.")
 	text_lose_indication = span_notice("The energy in your hands subsides.")
 	power_path = /datum/action/cooldown/spell/touch/acid
-	species_allowed = list(SPECIES_OOZELING)
 	instability = 30
 
 	synchronizer_coeff = 1
@@ -111,5 +110,4 @@
 /datum/mutation/human/acid_touch/unstable
 	name = "Unstable Acidic Hands"
 	desc = "Allows a host to metabolize some of their blood into acid, concentrated on their hands. This strain is more unstable than the one observed on oozelings."
-	species_allowed = null
 	instability = 50

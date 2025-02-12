@@ -68,6 +68,10 @@
 		cast_on.balloon_alert(owner, "what even is this?")
 		return . | SPELL_CANCEL_CAST
 
+	if(!isturf(owner.loc))
+		cast_on.balloon_alert(owner, "can't eat here!")
+		return . | SPELL_CANCEL_CAST
+
 	if(is_type_in_typecache(cast_on, GLOB.oilfry_blacklisted_items))
 		cast_on.balloon_alert(owner, "a nuclear bomb looks tastier than this.")
 		return . | SPELL_CANCEL_CAST
@@ -79,7 +83,7 @@
 	if(ishuman(cast_on))
 		var/mob/living/carbon/human/human_target = cast_on
 		if(owner.zone_selected == BODY_ZONE_PRECISE_GROIN)
-			var/message = pick(list("... You wouldn't.", "Nope.", "Better not.", "Not a good idea."))
+			var/message = pick(list("... You wouldn't.", "nope.", "better not.", "not a good idea."))
 			cast_on.balloon_alert(owner, message)
 			return . | SPELL_CANCEL_CAST
 
