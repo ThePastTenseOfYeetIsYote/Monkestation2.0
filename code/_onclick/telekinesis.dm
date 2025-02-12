@@ -52,10 +52,8 @@
 	add_hiddenprint(user)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
-/* Moved logic to 'monkestation/code/datums/mutations/telekinesis.dm'
 /mob/attack_tk(mob/user)
 	return
-*/
 
 /**
  * Telekinesis item attack_self act.
