@@ -105,6 +105,9 @@
 				cast_on.balloon_alert(owner, "grasp too loose!")
 				return . | SPELL_CANCEL_CAST
 
+	StartCooldown()
+	return . | SPELL_NO_IMMEDIATE_COOLDOWN
+
 /datum/action/cooldown/spell/pointed/consumption/cast(obj/cast_on)
 	. = ..()
 	var/mob/living/carbon/human/human_owner = owner
