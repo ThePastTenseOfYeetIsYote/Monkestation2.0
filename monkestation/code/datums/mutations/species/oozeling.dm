@@ -109,5 +109,5 @@
 
 /datum/mutation/human/acid_touch/unstable
 	name = "Unstable Acidic Hands"
-	desc = "Allows a host to metabolize some of their blood into acid, concentrated on their hands. This strain is more unstable than the one observed on oozelings."
+	desc = "Allows a host to metabolize some of their blood into acid, concentrated on their hands. This strain is more unstable than the one found on oozelings."
 	instability = 50
