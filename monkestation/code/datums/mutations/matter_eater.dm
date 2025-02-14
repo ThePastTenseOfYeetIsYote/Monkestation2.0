@@ -174,6 +174,7 @@
 	step(object, owner.dir)
 
 /atom/proc/get_eaten(mob/living/carbon/human/hungry_boy)
+	balloon_alert(hungry_boy, "what even is this?")
 	return EAT_FAILED_NO_COOLDOWN
 
 /turf/get_eaten(mob/living/carbon/human/hungry_boy, eat_time = 45 SECONDS)
