@@ -1,7 +1,8 @@
 #define EAT_FAILED (1 << 0)
-#define EAT_SUCCESS (1 << 1)
-#define EAT_VOMIT (1 << 2)
-#define EAT_DELETE (1 << 3)
+	#define EAT_FAILED_NO_COOLDOWN (1 << 1)
+#define EAT_SUCCESS (1 << 2)
+#define EAT_VOMIT (1 << 3)
+#define EAT_DELETE (1 << 4)
 
 /datum/mutation/human/consumption
 	name = "Matter Eater"
@@ -122,6 +123,10 @@
 	if(result == EAT_FAILED)
 		return
 
+	if(result == EAT_FAILED_NO_COOLDOWN)
+		next_use_time = 0
+		return
+
 	playsound(owner.loc, 'sound/items/eatfood.ogg', 100, FALSE)
 	Heal()
 	if(!isnum(result)) // If we're passed an object, we should vomit it
@@ -169,7 +174,7 @@
 	step(object, owner.dir)
 
 /atom/proc/get_eaten(mob/living/carbon/human/hungry_boy)
-	return EAT_FAILED
+	return EAT_FAILED_NO_COOLDOWN
 
 /turf/get_eaten(mob/living/carbon/human/hungry_boy, eat_time = 45 SECONDS)
 	hungry_boy.visible_message(span_danger("[hungry_boy] unhinges their jaw and begins slowly stuffing [src] into [hungry_boy.p_their()] gaping maw!"))
@@ -244,6 +249,15 @@
 	. = ..()
 	if(. == EAT_SUCCESS)
 		return EAT_DELETE
+
+/obj/structure/get_eaten(mob/living/carbon/human/hungry_boy)
+	hungry_boy.visible_message(span_danger("[hungry_boy] begins stuffing [src] into [hungry_boy.p_their()] gaping maw!"))
+	if(!do_after(hungry_boy, 10 SECONDS, src))
+		to_chat(hungry_boy, span_danger("You were interrupted before you could eat [src]!"))
+		return EAT_FAILED
+
+	hungry_boy.visible_message(span_danger("[hungry_boy] consumes [src] whole!"))
+	return EAT_SUCCESS
 
 /obj/structure/window/get_eaten(mob/living/carbon/human/hungry_boy)
 	hungry_boy.visible_message(span_danger("[hungry_boy] begins slowly stuffing [src] into [hungry_boy.p_their()] gaping maw!"))
