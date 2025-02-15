@@ -75,7 +75,7 @@
 		if(!istype(cast_on, /obj/machinery/power/supermatter_crystal) && !istype(cast_on, /obj/singularity) && !istype(cast_on, /obj/narsie))
 			cast_on.balloon_alert(owner, "jaw too small!")
 			to_chat(owner, span_warning("You can't seem to unhinge your jaw enough to eat [cast_on]."))
-		return . | SPELL_CANCEL_CAST
+			return . | SPELL_CANCEL_CAST
 
 	if(iseffect(cast_on))
 		cast_on.balloon_alert(owner, "what even is this?")
@@ -348,7 +348,6 @@
 
 // Special cases forward
 
-/* Broke during code cleanup, rest in peace
 /obj/narsie/get_eaten(mob/living/carbon/human/hungry_boy) // Basically impossible since nar'sie has a HUGE gib range
 	hungry_boy.visible_message(span_narsiesmall("[hungry_boy] eats [src] in one bite, breaking the fabric of reality itself!"))
 	return EAT_DELETE
@@ -366,7 +365,6 @@
 
 	hungry_boy.visible_message(span_danger("[hungry_boy] consumes [src] whole, how is that even possible?"))
 	return EAT_SUCCESS
-*/
 
 #undef EAT_FAILED
 #undef EAT_SUCCESS
