@@ -49,6 +49,18 @@
 	aim_assist = FALSE
 
 	var/healing_multiplier = 1
+	var/list/consumed_objects = list()
+
+/datum/action/cooldown/spell/pointed/consumption/Destroy(force)
+	if(owner)
+		var/turf/owner_turf = get_turf(owner)
+		owner.visible_message(span_danger("[owner] vomits what seems to be [length(consumed_objects)] things!"))
+		for(var/obj/object as anything in consumed_objects)
+			clean_references(object)
+			object.forceMove(get_turf(owner_turf))
+
+	consumed_objects = null
+	return ..()
 
 /datum/action/cooldown/spell/pointed/consumption/IsAvailable(feedback = FALSE)
 	if(owner)
@@ -71,8 +83,8 @@
 			cast_on.balloon_alert(owner, "... no.")
 			return . | SPELL_CANCEL_CAST
 
-	if(cast_on.resistance_flags & INDESTRUCTIBLE)
-		if(!istype(cast_on, /obj/machinery/power/supermatter_crystal) && !istype(cast_on, /obj/singularity) && !istype(cast_on, /obj/narsie))
+	if(cast_on.resistance_flags & INDESTRUCTIBLE) // Gods longest if() check
+		if(!istype(cast_on, /obj/machinery/power/supermatter_crystal) && !istype(cast_on, /obj/singularity) && !istype(cast_on, /obj/narsie) && !istype(cast_on, /obj/ratvar))
 			cast_on.balloon_alert(owner, "jaw too small!")
 			to_chat(owner, span_warning("You can't seem to unhinge your jaw enough to eat [cast_on]."))
 			return . | SPELL_CANCEL_CAST
@@ -138,16 +150,31 @@
 			INVOKE_ASYNC(src, PROC_REF(vomit_object), result)
 		return
 
-	switch(result)
-		if(EAT_SUCCESS)
-			cast_on.forceMove(owner)
+	if(result == EAT_DELETE)
+		qdel(cast_on)
+		return
 
-		if(EAT_VOMIT)
-			cast_on.forceMove(owner)
-			INVOKE_ASYNC(src, PROC_REF(vomit_object), cast_on)
+	cast_on.forceMove(owner)
+	RegisterSignal(cast_on, COMSIG_QDELETING, PROC_REF(clean_references))
+	RegisterSignal(cast_on, COMSIG_MOVABLE_MOVED, PROC_REF(on_object_moved))
+	consumed_objects += cast_on
 
-		if(EAT_DELETE)
-			qdel(cast_on)
+	if(result == EAT_VOMIT)
+		INVOKE_ASYNC(src, PROC_REF(vomit_object), cast_on)
+
+/datum/action/cooldown/spell/pointed/consumption/proc/clean_references(datum/source)
+	SIGNAL_HANDLER
+	consumed_objects -= source
+	UnregisterSignal(source, COMSIG_QDELETING)
+	UnregisterSignal(source, COMSIG_MOVABLE_MOVED)
+
+/datum/action/cooldown/spell/pointed/consumption/proc/on_object_moved(atom/source)
+	SIGNAL_HANDLER
+	if(!owner || !source)
+		return
+
+	if(source.loc != owner)
+		clean_references(source)
 
 /datum/action/cooldown/spell/pointed/consumption/proc/Heal()
 	var/mob/living/carbon/human/human_owner = owner
@@ -165,6 +192,7 @@
 	to_chat(owner, span_userdanger("You feel something sloshing around in your stomach..."))
 	sleep(rand(5, 25))
 	object.forceMove(get_turf(owner))
+	clean_references(object)
 	if(prob(25))
 		human_owner.vomit(distance = 2)
 		step(object, owner.dir)
@@ -349,6 +377,10 @@
 // Special cases forward
 
 /obj/narsie/get_eaten(mob/living/carbon/human/hungry_boy) // Basically impossible since nar'sie has a HUGE gib range
+	hungry_boy.visible_message(span_narsiesmall("[hungry_boy] eats [src] in one bite, breaking the fabric of reality itself!"))
+	return EAT_DELETE
+
+/obj/ratvar/get_eaten(mob/living/carbon/human/hungry_boy)
 	hungry_boy.visible_message(span_narsiesmall("[hungry_boy] eats [src] in one bite, breaking the fabric of reality itself!"))
 	return EAT_DELETE
 
