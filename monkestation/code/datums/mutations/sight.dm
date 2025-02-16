@@ -73,6 +73,7 @@
 /datum/mutation/human/meson_vision
 	name = "Meson Visual Enhancement"
 	desc = "A mutation that manipulates the subject's eyes in a way that makes them able to see behind walls to a limited degree."
+	locked = TRUE
 	quality = POSITIVE
 	text_gain_indication = span_notice("More information seems to reach your eyes...")
 	text_lose_indication = span_notice("The amount of information reaching your eyes fades...")
@@ -97,6 +98,7 @@
 /datum/mutation/human/night_vision
 	name = "Scotopic Visual Enhancement"
 	desc = "A mutation that manipulates the subject's eyes in a way that makes them able to see in the dark."
+	locked = TRUE
 	quality = POSITIVE
 	text_gain_indication = span_notice("Were the lights always that bright?")
 	text_lose_indication = span_notice("The ambient light level returns to normal...")

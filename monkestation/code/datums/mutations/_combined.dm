@@ -26,14 +26,14 @@
 	required = "/datum/mutation/human/acidflesh; /datum/mutation/human/radioactive"
 	result = /datum/mutation/human/acid_touch/unstable
 
-/datum/generecipe/flash_protection1 // Fuck it, give em 3 recipes
-	required = "/datum/mutation/human/night_vision; /datum/mutation/human/void"
-	result = /datum/mutation/human/flash_protection
+/datum/generecipe/meson_vision
+	required = "/datum/mutation/human/thermal; /datum/mutation/human/clever"
+	result = /datum/mutation/human/meson_vision
 
-/datum/generecipe/flash_protection2
-	required = "/datum/mutation/human/meson_vision; /datum/mutation/human/void"
-	result = /datum/mutation/human/flash_protection
+/datum/generecipe/night_vision
+	required = "/datum/mutation/human/thermal; /datum/mutation/human/glow/anti"
+	result = /datum/mutation/human/night_vision
 
-/datum/generecipe/flash_protection3
+/datum/generecipe/flash_protection
 	required = "/datum/mutation/human/thermal; /datum/mutation/human/void"
 	result = /datum/mutation/human/flash_protection
