@@ -359,14 +359,14 @@
 	hungry_boy.visible_message(span_danger("[hungry_boy] begins stuffing [src]'s [limb.name] into [hungry_boy.p_their()] gaping maw!"))
 	if(!do_after(hungry_boy, 30 SECONDS, src))
 		to_chat(hungry_boy, span_danger("You were interrupted before you could eat [src]!"))
-		return FALSE
+		return EAT_FAILED
 
 	if(istype(hungry_boy) && HAS_TRAIT(hungry_boy, TRAIT_CLUMSY)) // Whoops, i bit off my head again
 		if(prob(25))
 			limb = hungry_boy.get_bodypart(hungry_boy.zone_selected)
 
 	if(!limb || QDELETED(src))
-		return FALSE
+		return EAT_FAILED
 
 	hungry_boy.visible_message(span_danger("[hungry_boy] [pick("chomps","bites")] off [src]'s [limb]!"))
 	playsound(hungry_boy.loc, 'sound/items/eatfood.ogg', 50, 0)
