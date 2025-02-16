@@ -225,12 +225,12 @@
 	new /obj/item/book/granter/martial/the_tunnel_arts(src)
 	new /obj/item/clothing/suit/jacket/det_suit/khan(src)
 
-/obj/item/storage/box/syndie_kit/x_ray
+/obj/item/storage/box/syndie_kit/xray
 	name = "X-Ray Mutation Kit"
 	desc = "A box with a singular syndicate-grade X-Ray mutator and 3 oculine medipens."
 
-/obj/item/storage/box/syndie_kit/x_ray/PopulateContents()
-	new /obj/item/dnainjector/x_ray(src)
+/obj/item/storage/box/syndie_kit/xray/PopulateContents()
+	new /obj/item/dnainjector/syndicate_xray(src)
 	for(var/i in 1 to 3)
 		new /obj/item/reagent_containers/hypospray/medipen/deforest/occuisate(src)
 
@@ -239,7 +239,7 @@
 	desc = "A box with a singular syndicate-grade laser eyes mutator and 3 oculine medipens."
 
 /obj/item/storage/box/syndie_kit/laser_eyes/PopulateContents()
-	new /obj/item/dnainjector/laser_eyes(src)
+	new /obj/item/dnainjector/syndicate_laser_eyes(src)
 	for(var/i in 1 to 3)
 		new /obj/item/reagent_containers/hypospray/medipen/deforest/occuisate(src)
 

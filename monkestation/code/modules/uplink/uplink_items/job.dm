@@ -95,14 +95,23 @@
 	item = /obj/item/dnainjector/acid_spit
 	restricted_roles = list(JOB_GENETICIST)
 
-/datum/uplink_item/role_restricted/x_ray
+/datum/uplink_item/role_restricted/acid_spit
+	name = "Refined Matter Eater Mutator"
+	desc = "A mutator containing the recently refined \"Matter Eater\" mutation from clowns. \
+		The strain was refined to only cause 20 genetic instability instead of 40 in an undisclosed amount of time. \
+		Be cautious as it can be detected using genetic scanners and is curable with mutadone."
+	cost = 6
+	item = /obj/item/dnainjector/syndicate_matter_eater
+	restricted_roles = list(JOB_GENETICIST)
+
+/datum/uplink_item/role_restricted/xray
 	name = "Refined X-Ray Vision Mutator Box"
 	desc = "A mutator containing a refined X-ray mutation allowing you to see through walls at the cost of eye health. \
 		The strain was refined over many weeks until the point of only causing 40 genetic instability instead of 60. \
 		Be cautious as it can be detected using genetic scanners and is curable with mutadone. \
 		This package also includes 3 oculine medipens to negate the negative effects of the mutation upon your body."
 	cost = 8
-	item = /obj/item/storage/box/syndie_kit/x_ray
+	item = /obj/item/storage/box/syndie_kit/xray
 	restricted_roles = list(JOB_GENETICIST)
 
 /datum/uplink_item/role_restricted/laser_eyes

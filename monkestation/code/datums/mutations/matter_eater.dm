@@ -398,6 +398,11 @@
 	hungry_boy.visible_message(span_danger("[hungry_boy] consumes [src] whole, how is that even possible?"))
 	return EAT_SUCCESS
 
+/datum/mutation/human/consumption/syndicate
+	name = "Refined Matter Eater"
+	desc = "Allows the subject to eat just about anything without harm. This seems to be a strain that was marked as too dangerous by Nanotrasen and thus is outlawed."
+	instability = 20
+
 #undef EAT_FAILED
 #undef EAT_SUCCESS
 #undef EAT_VOMIT
