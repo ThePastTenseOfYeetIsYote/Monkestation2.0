@@ -401,6 +401,7 @@
 /datum/mutation/human/consumption/syndicate
 	name = "Refined Matter Eater"
 	desc = "Allows the subject to eat just about anything without harm. This seems to be a strain that was marked as too dangerous by Nanotrasen and thus is outlawed."
+	locked = TRUE
 	instability = 20
 
 #undef EAT_FAILED
