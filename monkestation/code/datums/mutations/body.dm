@@ -464,3 +464,43 @@
 		return
 
 	REMOVE_TRAIT(owner, TRAIT_NOBREATH, GENETIC_MUTATION)
+
+/datum/mutation/human/dizzy
+	name = "Dizzy"
+	desc = "Causes the subjects cerebellum to shut down in certain places causing dizzyness."
+	quality = NEGATIVE
+	text_gain_indication = span_danger("You suddenly start feeling very dizzy...")
+	text_lose_indication = span_notice("You regain your balance.")
+	instability = 15
+	synchronizer_coeff = 1
+	power_coeff = 1
+	energy_coeff = 1
+
+/datum/mutation/human/dizzy/on_life(seconds_per_tick, times_fired)
+	if(SPT_PROB(2.5 / GET_MUTATION_ENERGY(src), seconds_per_tick))
+		to_chat(owner, span_warning("[pick("You feel dizzy.", "Your head spins.")]"))
+		owner.adjust_dizzy_up_to(1 MINUTE * GET_MUTATION_SYNCHRONIZER(src) * GET_MUTATION_POWER(src), 3 MINUTES)
+
+/datum/mutation/human/colorblindness
+	name = "Genetic achromatopy"
+	desc = "This genetic sequence makes the subject occipital lobe not interpret color, rendering the patient completely colorblind."
+	quality = MINOR_NEGATIVE
+	text_gain_indication = span_notice("You feel your brain becoming a bit more numb..?")
+	text_lose_indication = span_notice("You can start seeing colors in moderation again.")
+	instability = 5
+
+/datum/mutation/human/colorblindness/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+
+	owner.add_client_colour(/datum/client_colour/monochrome/colorblind/genetic)
+
+/datum/mutation/human/colorblindness/on_losing(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+
+	owner.remove_client_colour(/datum/client_colour/monochrome/colorblind/genetic)
+
+/datum/client_colour/monochrome/colorblind/genetic // We exist

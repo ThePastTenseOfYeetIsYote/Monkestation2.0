@@ -1,3 +1,30 @@
+/datum/mutation/human/lisp
+	name = "Lisp"
+	desc = "Maketh the thubject thpeak with a lithp regardlethth of willingnethth."
+	quality = MINOR_NEGATIVE
+	text_gain_indication = span_warning("Thomething doethn't feel right.")
+	text_lose_indication = span_notice("You now feel able to pronounce consonants.")
+
+/datum/mutation/human/lisp/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
+
+/datum/mutation/human/lisp/on_losing(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+	UnregisterSignal(owner, COMSIG_MOB_SAY)
+
+/datum/mutation/human/lisp/proc/handle_speech(datum/source, list/speech_args)
+	SIGNAL_HANDLER
+
+	var/message = speech_args[SPEECH_MESSAGE]
+	if(message)
+		message = replacetext(message,"s","th")
+		speech_args[SPEECH_MESSAGE] = message
+
 /datum/mutation/human/loud
 	name = "Loud"
 	desc = "Forces the speaking centre of the subjects brain to yell every sentence."
