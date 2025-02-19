@@ -330,6 +330,11 @@
 
 /mob/living/get_eaten(mob/living/carbon/human/hungry_boy, eat_time = health + 1)
 	hungry_boy.visible_message(span_danger("[hungry_boy] begins stuffing [src] into [hungry_boy.p_their()] gaping maw!"))
+	var/datum/status_effect/pinkdamagetracker/damage_tracker = has_status_effect(/datum/status_effect/pinkdamagetracker)
+	if(istype(damage_tracker)) // This is in fact harmfull
+		damage_tracker.damage++
+
+	adjustBruteLoss(1) // AI WAKE UP YOU ARE LITERALLY BEING EATEN ALIVE
 	if(!do_after(hungry_boy, eat_time, src))
 		to_chat(hungry_boy, span_danger("You were interrupted before you could eat [src]!"))
 		return EAT_FAILED
@@ -338,10 +343,6 @@
 	adjustBruteLoss(health)
 	death()
 	hungry_boy.visible_message(span_danger("[hungry_boy] eats [src]."))
-	var/obj/brain = locate(/obj/item/mmi) in contents
-	if(brain)
-		return brain
-
 	return EAT_SUCCESS
 
 /mob/living/silicon/ai/get_eaten(mob/living/carbon/human/hungry_boy, eat_time = health + 1)
@@ -351,7 +352,15 @@
 
 /mob/living/silicon/robot/get_eaten(mob/living/carbon/human/hungry_boy, eat_time = health + 1)
 	eat_time *= 2
-	return ..()
+	. = ..()
+	if(. != EAT_SUCCESS || isnull(mmi) || isnull(mind) || isnull(mmi.brainmob)) // No, we can't use dump_into_mmi()
+		return
+
+	if(mmi.brainmob.stat == DEAD)
+		mmi.brainmob.set_stat(CONSCIOUS)
+	mind.transfer_to(mmi.brainmob)
+	mmi.update_appearance()
+	return mmi
 
 /mob/living/carbon/human/get_eaten(mob/living/carbon/human/hungry_boy, eat_time = health + 1)
 	var/obj/item/bodypart/limb = get_bodypart(hungry_boy.zone_selected)
