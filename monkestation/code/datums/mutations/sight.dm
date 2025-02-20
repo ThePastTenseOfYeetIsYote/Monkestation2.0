@@ -370,7 +370,7 @@
 	color_typepath = /datum/client_colour/genetic/green
 
 /datum/mutation/human/colorblindness/blue
-	name = "Deuteranopia"
+	name = "Tritanopia"
 	desc = "Causes severe damage to the blue spectrum of the subjects eyes, causing blue-green colorblindness."
 	text_gain_indication = span_warning("You feel your eyes hurt as blue begins to blend together with green.")
 	text_lose_indication = span_notice("You can start seeing blue and green seperatelly again.")
