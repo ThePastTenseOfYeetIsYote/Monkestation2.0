@@ -314,54 +314,64 @@
 	desc = "A strange genome that allows the user to see between the spaces of walls at the cost of their eye health. This one seems to be high-quality making it more stable."
 	instability = 40
 
+// Colorblindness stuff begins
+
+/datum/client_colour/monochrome/colorblind/genetic // We exist
+
+/datum/client_colour/genetic
+	priority = 100 // PRIORITY_NORMAL
+	fade_in = 20
+	fade_out = 20
+
+/datum/client_colour/genetic/red
+	colour = list(rgb(143,126,30), rgb(248,220,0), rgb(0,75,154)) // Don't ask how any of these numbers got here, pain
+
+/datum/client_colour/genetic/green
+	colour = list(rgb(161,120,0), rgb(255,213,153), rgb(0,80,131))
+
+/datum/client_colour/genetic/blue
+	colour = list(rgb(253,23,0), rgb(117,236,255), rgb(0,86,89))
+
 /datum/mutation/human/colorblindness
 	name = "Genetic achromatopy"
 	desc = "This genetic sequence makes the subject occipital lobe not interpret color, rendering the patient completely colorblind."
 	quality = MINOR_NEGATIVE
 	text_gain_indication = span_notice("You feel your brain becoming a bit more numb..?")
-	text_lose_indication = span_notice("You can start seeing colors in moderation again.")
+	text_lose_indication = span_notice("You can start seeing colors properly again.")
 	instability = 5
+	var/color_typepath = /datum/client_colour/monochrome/colorblind/genetic
 
 /datum/mutation/human/colorblindness/on_acquiring(mob/living/carbon/human/owner)
 	. = ..()
 	if(.)
 		return
 
-	owner.add_client_colour(/datum/client_colour/monochrome/colorblind/genetic)
+	owner.add_client_colour(color_typepath)
 
 /datum/mutation/human/colorblindness/on_losing(mob/living/carbon/human/owner)
 	. = ..()
 	if(.)
 		return
 
-	owner.remove_client_colour(/datum/client_colour/monochrome/colorblind/genetic)
+	owner.remove_client_colour(color_typepath)
 
-/datum/client_colour/monochrome/colorblind/genetic // We exist
+/datum/mutation/human/colorblindness/red
+	name = "Protanopia"
+	desc = "Causes severe damage to the red spectrum of the subjects eyes, causing red-green colorblindness."
+	text_gain_indication = span_warning("You feel your eyes hurt as red begins to blend together with green.")
+	text_lose_indication = span_notice("You can start seeing red and green seperatelly again.")
+	color_typepath = /datum/client_colour/genetic/red
 
-/datum/mutation/human/deuteranopia
+/datum/mutation/human/colorblindness/green
 	name = "Deuteranopia"
 	desc = "Causes severe damage to the green spectrum of the subjects eyes, causing green-red colorblindness."
-	quality = MINOR_NEGATIVE
-	text_gain_indication = span_warning("You feel your eyes hurt.")
-	text_lose_indication = span_notice("You can start seeing green properly again.")
-	instability = 5
+	text_gain_indication = span_warning("You feel your eyes hurt as green begins to blend together with red.")
+	text_lose_indication = span_notice("You can start seeing green and red seperatelly again.")
+	color_typepath = /datum/client_colour/genetic/green
 
-/datum/mutation/human/deuteranopia/on_acquiring(mob/living/carbon/human/owner)
-	. = ..()
-	if(.)
-		return
-
-	owner.add_client_colour(/datum/client_colour/deuteranopia)
-
-/datum/mutation/human/deuteranopia/on_losing(mob/living/carbon/human/owner)
-	. = ..()
-	if(.)
-		return
-
-	owner.remove_client_colour(/datum/client_colour/deuteranopia)
-
-/datum/client_colour/deuteranopia
-	colour = list(rgb(161,120,0), rgb(255,213,153), rgb(0,80,131)) // Don't ask how any of these numbers got here, pain
-	priority = 100 // PRIORITY_NORMAL
-	fade_in = 20
-	fade_out = 20
+/datum/mutation/human/colorblindness/blue
+	name = "Deuteranopia"
+	desc = "Causes severe damage to the blue spectrum of the subjects eyes, causing blue-green colorblindness."
+	text_gain_indication = span_warning("You feel your eyes hurt as blue begins to blend together with green.")
+	text_lose_indication = span_notice("You can start seeing blue and green seperatelly again.")
+	color_typepath = /datum/client_colour/genetic/blue
