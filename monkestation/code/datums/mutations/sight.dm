@@ -313,3 +313,55 @@
 	name = "Refined X-Ray Vision"
 	desc = "A strange genome that allows the user to see between the spaces of walls at the cost of their eye health. This one seems to be high-quality making it more stable."
 	instability = 40
+
+/datum/mutation/human/colorblindness
+	name = "Genetic achromatopy"
+	desc = "This genetic sequence makes the subject occipital lobe not interpret color, rendering the patient completely colorblind."
+	quality = MINOR_NEGATIVE
+	text_gain_indication = span_notice("You feel your brain becoming a bit more numb..?")
+	text_lose_indication = span_notice("You can start seeing colors in moderation again.")
+	instability = 5
+
+/datum/mutation/human/colorblindness/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+
+	owner.add_client_colour(/datum/client_colour/monochrome/colorblind/genetic)
+
+/datum/mutation/human/colorblindness/on_losing(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+
+	owner.remove_client_colour(/datum/client_colour/monochrome/colorblind/genetic)
+
+/datum/client_colour/monochrome/colorblind/genetic // We exist
+
+/datum/mutation/human/deuteranopia
+	name = "Deuteranopia"
+	desc = "Causes severe damage to the green spectrum of the subjects eyes, causing green-red colorblindness."
+	quality = MINOR_NEGATIVE
+	text_gain_indication = span_warning("You feel your eyes hurt.")
+	text_lose_indication = span_notice("You can start seeing green properly again.")
+	instability = 5
+
+/datum/mutation/human/deuteranopia/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+
+	owner.add_client_colour(/datum/client_colour/deuteranopia)
+
+/datum/mutation/human/deuteranopia/on_losing(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+
+	owner.remove_client_colour(/datum/client_colour/deuteranopia)
+
+/datum/client_colour/deuteranopia
+	colour = list(rgb(161,120,0), rgb(255,213,153), rgb(0,80,131)) // Don't ask how any of these numbers got here, pain
+	priority = 100 // PRIORITY_NORMAL
+	fade_in = 20
+	fade_out = 20

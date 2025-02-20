@@ -287,16 +287,88 @@
 	power_coeff = 1
 
 /datum/mutation/human/hypermarrow/on_acquiring(mob/living/carbon/human/owner)
-	if(HAS_TRAIT(owner, TRAIT_NOBLOOD))
-		return TRUE // No bone marrow to regenerate blood in the first place
-	return ..()
+	. = ..()
+	if(!.)
+		RegisterSignal(owner, COMSIG_HUMAN_ON_HANDLE_BLOOD, PROC_REF(gain_blood))
 
-/datum/mutation/human/hypermarrow/on_life(seconds_per_tick, times_fired)
-	if(HAS_TRAIT(owner, TRAIT_NOBLOOD))
+/datum/mutation/human/hypermarrow/on_losing(mob/living/carbon/human/owner)
+	. = ..()
+	if(!.)
+		UnregisterSignal(owner, COMSIG_HUMAN_ON_HANDLE_BLOOD)
+
+/datum/mutation/human/hypermarrow/proc/gain_blood(mob/living/carbon/human/gene_owner, seconds_per_tick, times_fired)
+	SIGNAL_HANDLER // Btw the signal sender handles if our owner gets the no_blood trait after being injected
+	if(gene_owner.stat == DEAD)
 		return
-	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
-		owner.blood_volume += (GET_MUTATION_POWER(src) * seconds_per_tick - 1)
-		owner.adjust_nutrition((GET_MUTATION_POWER(src) * GET_MUTATION_SYNCHRONIZER(src) * seconds_per_tick - 0.8) * HUNGER_FACTOR)
+
+	if(gene_owner.blood_volume <= BLOOD_VOLUME_NORMAL)
+		gene_owner.blood_volume += (2 * GET_MUTATION_POWER(src) * seconds_per_tick - 1)
+		gene_owner.adjust_nutrition((GET_MUTATION_POWER(src) * GET_MUTATION_SYNCHRONIZER(src) * seconds_per_tick - 0.8) * HUNGER_FACTOR)
+
+/datum/mutation/human/bloodyhell // Technically could be easily made a child of bone marrow, but signals dont like that.
+	name = "Polycythemia"
+	desc = "A mutation that stimulates the subjects bone marrow's blood production capability and removes the subject's bone marrow's usual safeties against overproducing blood."
+	quality = NEGATIVE
+	text_gain_indication = span_warning("For a brief moment you feel a pain in your heart as you feel it beating faster.")
+	text_lose_indication = span_notice("You feel your heart slowing down to its usual speed.")
+	instability = 15
+	conflicts = list(/datum/mutation/human/anemia)
+	synchronizer_coeff = 1
+	power_coeff = 1
+
+/datum/mutation/human/bloodyhell/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(!.)
+		RegisterSignal(owner, COMSIG_HUMAN_ON_HANDLE_BLOOD, PROC_REF(gain_blood))
+
+/datum/mutation/human/bloodyhell/on_losing(mob/living/carbon/human/owner)
+	. = ..()
+	if(!.)
+		UnregisterSignal(owner, COMSIG_HUMAN_ON_HANDLE_BLOOD)
+
+/datum/mutation/human/bloodyhell/proc/gain_blood(mob/living/carbon/human/gene_owner, seconds_per_tick, times_fired)
+	SIGNAL_HANDLER
+	if(gene_owner.stat == DEAD)
+		return
+
+	if(gene_owner.blood_volume > (BLOOD_VOLUME_NORMAL * 1.4))
+		// We actually NEED to add effects here because normally you get NO downsides for excess blood
+		var/blood_difference = (gene_owner.blood_volume / BLOOD_VOLUME_MAXIMUM) * 100
+		if(SPT_PROB(blood_difference, seconds_per_tick))
+			if(prob(20))
+				to_chat(gene_owner, span_warning("You feel bloated."))
+			gene_owner.adjustOxyLoss(floor(blood_difference / 20))
+
+	if(gene_owner.blood_volume < BLOOD_VOLUME_MAXIMUM)
+		gene_owner.blood_volume += (2 * GET_MUTATION_POWER(src) * GET_MUTATION_SYNCHRONIZER(src) * seconds_per_tick)
+
+/datum/mutation/human/anemia
+	name = "Anemia"
+	desc = "This mutation causes damage to the oxygen carrying properties of blood cells to a high degree in the subject."
+	quality = NEGATIVE
+	text_gain_indication = span_warning("You feel slightly woozy for a moment.") // No lose indicator, its a slow recovery
+	instability = 10
+	conflicts = list(/datum/mutation/human/bloodyhell)
+	synchronizer_coeff = 1
+	power_coeff = 1
+
+/datum/mutation/human/anemia/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(!.)
+		RegisterSignal(owner, COMSIG_HUMAN_ON_HANDLE_BLOOD, PROC_REF(lose_blood))
+
+/datum/mutation/human/anemia/on_losing(mob/living/carbon/human/owner)
+	. = ..()
+	if(!.)
+		UnregisterSignal(owner, COMSIG_HUMAN_ON_HANDLE_BLOOD)
+
+/datum/mutation/human/anemia/proc/lose_blood(mob/living/carbon/human/gene_owner, seconds_per_tick, times_fired)
+	SIGNAL_HANDLER
+	if(gene_owner.stat == DEAD)
+		return
+
+	if(gene_owner.blood_volume > BLOOD_VOLUME_SAFE - (75 * GET_MUTATION_POWER(src) * GET_MUTATION_SYNCHRONIZER(src)))
+		gene_owner.blood_volume -= (seconds_per_tick)
 
 /datum/mutation/human/densebones
 	name = "Bone Densification"
@@ -481,26 +553,17 @@
 		to_chat(owner, span_warning("[pick("You feel dizzy.", "Your head spins.")]"))
 		owner.adjust_dizzy_up_to(1 MINUTE * GET_MUTATION_SYNCHRONIZER(src) * GET_MUTATION_POWER(src), 3 MINUTES)
 
-/datum/mutation/human/colorblindness
-	name = "Genetic achromatopy"
-	desc = "This genetic sequence makes the subject occipital lobe not interpret color, rendering the patient completely colorblind."
+/datum/mutation/human/ear_cancer
+	name = "Tinnitus"
+	desc = "Causes the subjects to constantly hear a ringing noise."
 	quality = MINOR_NEGATIVE
-	text_gain_indication = span_notice("You feel your brain becoming a bit more numb..?")
-	text_lose_indication = span_notice("You can start seeing colors in moderation again.")
+	text_gain_indication = span_warning("You start hearing ringing in your ears.")
+	text_lose_indication = span_notice("You no longer bleed from your ears.")
 	instability = 5
+	synchronizer_coeff = 1
 
-/datum/mutation/human/colorblindness/on_acquiring(mob/living/carbon/human/owner)
-	. = ..()
-	if(.)
-		return
-
-	owner.add_client_colour(/datum/client_colour/monochrome/colorblind/genetic)
-
-/datum/mutation/human/colorblindness/on_losing(mob/living/carbon/human/owner)
-	. = ..()
-	if(.)
-		return
-
-	owner.remove_client_colour(/datum/client_colour/monochrome/colorblind/genetic)
-
-/datum/client_colour/monochrome/colorblind/genetic // We exist
+/datum/mutation/human/ear_cancer/on_life(seconds_per_tick, times_fired)
+	var/obj/item/organ/internal/ears/ears = owner.get_organ_slot(ORGAN_SLOT_EARS) // RIP THEM OUT TO STOP THE NOISE
+	if(ears && SPT_PROB(5 * GET_MUTATION_SYNCHRONIZER(src), seconds_per_tick))
+		to_chat(owner, span_warning("Your ears start to ring!"))
+		SEND_SOUND(owner, sound('sound/weapons/flash_ring.ogg', 0, 1, 0, 250))
