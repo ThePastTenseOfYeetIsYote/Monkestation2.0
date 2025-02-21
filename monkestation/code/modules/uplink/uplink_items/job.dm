@@ -123,3 +123,35 @@
 	cost = 8
 	item = /obj/item/storage/box/syndie_kit/laser_eyes
 	restricted_roles = list(JOB_GENETICIST)
+
+/datum/uplink_item/role_restricted/stabilizer_chromosome
+	name = "Stabilizer Chromosome"
+	desc = "A chromosome that reduces mutation instability by 20%. Whilst able to be found in people it is rather rare at a 6% chance. \
+		For this reason we are offering you this rare opportunity of a lifetime for a low cost."
+	cost = 2
+	item = /obj/item/chromosome/stabilizer
+	restricted_roles = list(JOB_GENETICIST)
+
+/datum/uplink_item/role_restricted/synchronizer_chromosome
+	name = "Synchronizer Chromosome"
+	desc = "A chromosome that reduces downsides of negative effects on mutations by 50% or hides visual effects of certain mutations. \
+		Due to not being easily mass-producable we are offering this chromosome to you agent for increased damage to the station."
+	cost = 1
+	item = /obj/item/chromosome/synchronizer
+	restricted_roles = list(JOB_GENETICIST)
+
+/datum/uplink_item/role_restricted/power_chromosome
+	name = "Power Chromosome"
+	desc = "A chromosome that increases mutation power by 50% or unlocks more powerful effects for specific mutations. \
+		Due to not being easily mass-producable we are offering this chromosome to you agent for increased damage to the station."
+	cost = 1
+	item = /obj/item/chromosome/power
+	restricted_roles = list(JOB_GENETICIST)
+
+/datum/uplink_item/role_restricted/energy_chromosome
+	name = "Energetic Chromosome"
+	desc = "A chromosome that reduces action mutation cooldowns by 50% or increases chances of random mutation effects. \
+		Due to not being easily mass-producable we are offering this chromosome to you agent for increased damage to the station."
+	cost = 1
+	item = /obj/item/chromosome/energy
+	restricted_roles = list(JOB_GENETICIST)
