@@ -87,21 +87,21 @@
 	restricted_roles = list(JOB_ASSISTANT)
 
 /datum/uplink_item/role_restricted/acid_spit
-	name = "Acid Spit Mutator"
-	desc = "A mutator containing the recently extracted \"acid spit\" mutation from xenomorphs. \
-		The strain was refined over many months until the point of only causing 20 genetic instability instead of 70. \
-		Be cautious as it can be detected using genetic scanners and is curable with mutadone."
-	cost = 8
-	item = /obj/item/dnainjector/acid_spit
-	restricted_roles = list(JOB_GENETICIST)
-
-/datum/uplink_item/role_restricted/acid_spit
 	name = "Refined Matter Eater Mutator"
 	desc = "A mutator containing the recently refined \"Matter Eater\" mutation from clowns. \
 		The strain was refined to only cause 20 genetic instability instead of 40 in an undisclosed amount of time. \
 		Be cautious as it can be detected using genetic scanners and is curable with mutadone."
 	cost = 6
 	item = /obj/item/dnainjector/syndicate_matter_eater
+	restricted_roles = list(JOB_GENETICIST)
+
+/datum/uplink_item/role_restricted/acid_spit
+	name = "Acid Spit Mutator"
+	desc = "A mutator containing the recently extracted \"acid spit\" mutation from xenomorphs. \
+		The strain was refined over many months until the point of only causing 20 genetic instability instead of 70. \
+		Be cautious as it can be detected using genetic scanners and is curable with mutadone."
+	cost = 8
+	item = /obj/item/dnainjector/acid_spit
 	restricted_roles = list(JOB_GENETICIST)
 
 /datum/uplink_item/role_restricted/xray
@@ -122,6 +122,15 @@
 		This package also includes 3 oculine medipens to negate the negative effects of the mutation upon your body."
 	cost = 8
 	item = /obj/item/storage/box/syndie_kit/laser_eyes
+	restricted_roles = list(JOB_GENETICIST)
+
+/datum/uplink_item/role_restricted/corrupted_mender
+	name = "Corrupted Mending Touch Mutator"
+	desc = "A mutator containing a \"Mending Touch\" mutation, we have used special methods in order to make it able to smite anyone. \
+		However this mending touch mutation causes 50 instability instead of 35 due to high complexity. \
+		Be cautious as it can be detected using genetic scanners and is curable with mutadone."
+	cost = 12
+	item = /obj/item/dnainjector/syndicate_mending_touch
 	restricted_roles = list(JOB_GENETICIST)
 
 /datum/uplink_item/role_restricted/stabilizer_chromosome

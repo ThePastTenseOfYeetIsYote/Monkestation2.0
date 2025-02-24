@@ -139,6 +139,7 @@
 	var/power_coefficient = 1
 	/// The mutation's synchronizer coefficient.
 	var/synchronizer_coefficient = 1
+	var/always_evil_smite = FALSE // MONKESTATION ADDITION -- Traitor version of this uses this
 
 /datum/action/cooldown/spell/touch/lay_on_hands/create_hand(mob/living/carbon/cast_on)
 	. = ..()
@@ -398,6 +399,8 @@
 /datum/action/cooldown/spell/touch/lay_on_hands/proc/by_gods_light_i_smite_you(mob/living/carbon/smiter, mob/living/motherfucker_to_hurt, smite_multiplier)
 	var/our_smite_multiplier = smite_multiplier
 	var/evil_smite = HAS_TRAIT(smiter, TRAIT_EVIL) ? TRUE : FALSE
+	if(always_evil_smite) // MONKESTATION ADDITION
+		evil_smite = TRUE // MONKESTATION ADDITION
 	var/divine_champion = smiter.mind?.holy_role >= HOLY_ROLE_PRIEST ? TRUE : FALSE
 	var/smite_text_to_target = "lays hands on you"
 

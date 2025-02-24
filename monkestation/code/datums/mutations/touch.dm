@@ -39,3 +39,29 @@
 		user.visible_message(span_notice("[user]'s hand reaches out but nothing happens."))
 		return
 	return ..(target, user, TRUE, click_parameters) //call the parent, forcing proximity = TRUE so even distant things are considered nearby
+
+/datum/mutation/human/lay_on_hands/syndicate
+	name = "Corrupted Mending Touch"
+	desc = "A genetic sequence thats highly corrupted sharing some nucleotides with mending touch, use is not advised."
+	quality = POSITIVE
+	locked = TRUE
+	text_gain_indication = span_notice("Your hand feels strange.")
+	text_lose_indication = span_notice("Your hand feels secular once more.")
+	power_path = /datum/action/cooldown/spell/touch/lay_on_hands/syndicate
+	instability = 50
+
+/datum/action/cooldown/spell/touch/lay_on_hands/syndicate
+	name = "Corrupted Mending Touch"
+	desc = "You can now lay your hands on other people to transfer a small amount of their physical injuries to yourself. \
+		This version of the mutation allows you smite anyone as long as you mean to cause HARM to them."
+	button_icon = 'monkestation/icons/mob/actions/actions_genetic.dmi'
+	button_icon_state = "corrupted_mending_touch"
+	always_evil_smite = TRUE
+
+/datum/action/cooldown/spell/touch/lay_on_hands/syndicate/determine_if_this_hurts_instead(mob/living/carbon/mendicant, mob/living/hurtguy)
+	if(HAS_TRAIT(mendicant, TRAIT_PACIFISM))
+		return FALSE //always return false if we're pacifist
+
+	. = ..()
+	if(!. && mendicant.istate & ISTATE_HARM)
+		return TRUE
