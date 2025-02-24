@@ -309,6 +309,15 @@
 
 	return EAT_SUCCESS
 
+/obj/machinery/dna_vault/get_eaten(mob/living/carbon/human/hungry_boy)
+	hungry_boy.visible_message(span_danger("[hungry_boy] begins stuffing [src] into [hungry_boy.p_their()] gaping maw, you estimate it'll take them at least an hour!"))
+	if(!do_after(hungry_boy, 1 HOUR, src))
+		to_chat(hungry_boy, span_danger("You were interrupted before you could eat [src], not really a suprise there."))
+		return EAT_FAILED
+
+	hungry_boy.visible_message(span_danger("[hungry_boy] consumes [src] whole, how did you allow it to happen?"))
+	return EAT_SUCCESS
+
 /obj/vehicle/sealed/mecha/get_eaten(mob/living/carbon/human/hungry_boy)
 	hungry_boy.visible_message(span_userdanger("[hungry_boy] begins stuffing the entire [src] into [hungry_boy.p_their()] gaping maw!"))
 	if(!do_after(hungry_boy, get_integrity(), src))
