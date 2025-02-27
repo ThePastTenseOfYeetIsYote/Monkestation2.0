@@ -21,7 +21,7 @@
 	crate_name = "surplus chromosome crate"
 	crate_type = /obj/structure/closet/crate/secure/science
 
-/datum/supply_pack/service/chromosomes/fill(obj/structure/closet/crate/our_crate)
+/datum/supply_pack/science/chromosomes/fill(obj/structure/closet/crate/our_crate)
 	for(var/i in 1 to 5)
 		var/chromosome_path = generate_chromosome()
 		new chromosome_path(our_crate)
