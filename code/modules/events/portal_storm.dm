@@ -1,7 +1,7 @@
 /datum/round_event_control/portal_storm_syndicate
 	name = "Portal Storm: Syndicate Shocktroops"
 	typepath = /datum/round_event/portal_storm/syndicate_shocktroop
-	weight = 2
+	weight = 0
 	min_players = 15
 	max_occurrences = 1 //MONKESTATION ADDITION
 	earliest_start = 30 MINUTES
@@ -36,7 +36,7 @@
 /datum/round_event_control/portal_storm_monkey
 	name = "Portal Storm: Monkeys"
 	typepath = /datum/round_event/portal_storm/portal_storm_monkey
-	weight = 4
+	weight = 0
 	max_occurrences = 2
 	earliest_start = 20 MINUTES
 	category = EVENT_CATEGORY_ENTITIES
