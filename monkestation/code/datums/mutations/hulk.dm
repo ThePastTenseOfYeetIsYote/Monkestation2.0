@@ -4,6 +4,9 @@
 
 /datum/mutation/human/hulk/modify()
 	. = ..()
+	if(isnull(owner))
+		return
+
 	if(GET_MUTATION_SYNCHRONIZER(src) < 1)
 		owner.physiology?.cold_mod *= (GET_MUTATION_SYNCHRONIZER(src) * 1.5)
 		owner.bodytemp_cold_damage_limit -= (BODYTEMP_HULK_COLD_DAMAGE_LIMIT_MODIFIER * GET_MUTATION_SYNCHRONIZER(src))

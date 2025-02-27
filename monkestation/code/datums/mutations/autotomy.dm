@@ -3,9 +3,11 @@
 
 /datum/mutation/human/self_amputation/modify()
 	. = ..()
-	if(.)
-		var/datum/action/cooldown/spell/self_amputation/modified_power = .
-		modified_power.mood_multiplier = GET_MUTATION_SYNCHRONIZER(src)
+	if(!.)
+		return
+
+	var/datum/action/cooldown/spell/self_amputation/modified_power = .
+	modified_power.mood_multiplier = GET_MUTATION_SYNCHRONIZER(src)
 
 	if(GET_MUTATION_POWER(src) > 1)
 		ADD_TRAIT(owner, TRAIT_LIMBATTACHMENT, GENETIC_MUTATION)

@@ -15,10 +15,10 @@
 
 /datum/mutation/human/acid_touch/modify()
 	. = ..()
-	var/datum/action/cooldown/spell/touch/acid/to_modify =.
-	if(!istype(to_modify)) // null or invalid
+	if(!.)
 		return
 
+	var/datum/action/cooldown/spell/touch/acid/to_modify = .
 	to_modify.acid_volume *= GET_MUTATION_POWER(src)
 	to_modify.blood_cost *= GET_MUTATION_SYNCHRONIZER(src)
 

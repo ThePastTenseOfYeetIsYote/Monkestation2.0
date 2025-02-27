@@ -3,7 +3,7 @@
 
 /datum/mutation/human/biotechcompat/modify()
 	. = ..()
-	if(GET_MUTATION_POWER(src) > 1)
+	if(owner && GET_MUTATION_POWER(src) > 1)
 		owner.adjust_skillchip_complexity_modifier(floor(GET_MUTATION_POWER(src)))
 
 /datum/mutation/human/biotechcompat/on_losing(mob/living/carbon/human/owner)
@@ -19,7 +19,7 @@
 
 /datum/mutation/human/clever/modify()
 	. = ..()
-	if(GET_MUTATION_POWER(src) > 1)
+	if(owner && GET_MUTATION_POWER(src) > 1)
 		owner.add_actionspeed_modifier(/datum/actionspeed_modifier/clever)
 
 /datum/mutation/human/clever/on_losing(mob/living/carbon/human/owner)

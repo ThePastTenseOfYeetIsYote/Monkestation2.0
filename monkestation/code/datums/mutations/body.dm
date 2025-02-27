@@ -4,6 +4,9 @@
 
 /datum/mutation/human/dwarfism/modify()
 	. = ..()
+	if(isnull(owner))
+		return
+
 	if(GET_MUTATION_POWER(src) > 1)
 		ADD_TRAIT(owner, TRAIT_FAST_CLIMBER, GENETIC_MUTATION)
 	if(GET_MUTATION_SYNCHRONIZER(src) < 1)
@@ -65,7 +68,7 @@
 
 /datum/mutation/human/strong/modify()
 	. = ..()
-	if(GET_MUTATION_POWER(src) == 1)
+	if(isnull(owner) || GET_MUTATION_POWER(src) == 1)
 		return
 
 	for(var/body_part as anything in affected_limbs)
@@ -151,7 +154,7 @@
 
 /datum/mutation/human/gigantism/modify()
 	. = ..()
-	if(GET_MUTATION_POWER(src) > 1) // Psst, the tackling component's stats are just copied from the gorilla gloves, but doubled stamina cost
+	if(owner && GET_MUTATION_POWER(src) > 1) // Psst, the tackling component's stats are just copied from the gorilla gloves, but doubled stamina cost
 		tackling_component = owner.AddComponent(/datum/component/tackler, stamina_cost = 60, base_knockdown = 1.25 SECONDS, range = 5, speed = 1, skill_mod = 2, min_distance = 0)
 
 /datum/mutation/human/spastic
@@ -161,6 +164,9 @@
 
 /datum/mutation/human/spastic/modify()
 	. = ..()
+	if(isnull(owner))
+		return
+
 	var/datum/status_effect/spasms/status_effect = locate(/datum/status_effect/spasms) in owner.status_effects
 	if(status_effect)
 		status_effect.mutation_synchronizer = GET_MUTATION_SYNCHRONIZER(src)
@@ -189,6 +195,9 @@
 
 /datum/mutation/human/headless/modify()
 	. = ..()
+	if(isnull(owner))
+		return
+
 	var/obj/item/bodypart/chest = owner.get_bodypart(BODY_ZONE_CHEST)
 	if(!chest)
 		return
@@ -230,6 +239,9 @@
 
 /datum/mutation/human/radproof/modify()
 	. = ..()
+	if(isnull(owner))
+		return
+
 	if(GET_MUTATION_SYNCHRONIZER(src) < 1)
 		owner.physiology?.tox_mod *= 0.85
 	if(GET_MUTATION_POWER(src) > 1)
@@ -272,7 +284,7 @@
 
 /datum/mutation/human/thickskin/modify()
 	. = ..()
-	if(GET_MUTATION_POWER(src) > 1)
+	if(owner && GET_MUTATION_POWER(src) > 1)
 		ADD_TRAIT(owner, TRAIT_EMBED_RESISTANCE, GENETIC_MUTATION)
 
 /datum/mutation/human/hypermarrow
@@ -407,7 +419,7 @@
 
 /datum/mutation/human/densebones/modify()
 	. = ..()
-	if(GET_MUTATION_POWER(src) > 1)
+	if(owner && GET_MUTATION_POWER(src) > 1)
 		ADD_TRAIT(owner, TRAIT_HARDLY_WOUNDED, GENETIC_MUTATION)
 
 /datum/mutation/human/cerebral
@@ -441,7 +453,7 @@
 
 /datum/mutation/human/cerebral/modify()
 	. = ..()
-	if(GET_MUTATION_POWER(src) > 1)
+	if(owner && GET_MUTATION_POWER(src) > 1)
 		owner.physiology?.stamina_mod *= 0.85
 		owner.physiology?.stun_mod *= 0.925
 

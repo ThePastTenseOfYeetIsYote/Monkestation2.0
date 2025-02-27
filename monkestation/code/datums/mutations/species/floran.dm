@@ -67,7 +67,7 @@
 
 /datum/mutation/human/sapblood/modify()
 	. = ..()
-	if(GET_MUTATION_ENERGY(src) < 1) // And this is where this turns from a helpfull mutation into murder
+	if(owner && GET_MUTATION_ENERGY(src) < 1) // And this is where this turns from a helpfull mutation into murder
 		owner.physiology?.bleed_mod /= 0.9
 
 /datum/mutation/human/sapblood/on_life(seconds_per_tick, times_fired)

@@ -22,6 +22,9 @@
 		/obj/item/encryptionkey/headset_service,
 	)
 	var/obj/item/encryptionkey/lucky_winner = pick(random_keys) // Let's go gambling!
+	if(linked_radio.radio.keyslot)
+		qdel(linked_radio.radio.keyslot)
+
 	linked_radio.radio.keyslot = new lucky_winner
 	linked_radio.radio.recalculateChannels()
 

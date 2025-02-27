@@ -11,10 +11,10 @@
 
 /datum/mutation/human/overload/modify()
 	. = ..()
-	var/datum/action/cooldown/overload/to_modify = .
-	if(!istype(to_modify))
+	if(!.)
 		return
 
+	var/datum/action/cooldown/overload/to_modify = .
 	to_modify.distance *= GET_MUTATION_POWER(src)
 
 /datum/action/cooldown/overload

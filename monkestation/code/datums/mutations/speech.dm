@@ -78,7 +78,7 @@
 
 /datum/mutation/human/smile/modify()
 	. = ..()
-	if(GET_MUTATION_POWER(src) > 1)
+	if(owner && GET_MUTATION_POWER(src) > 1)
 		owner.add_mood_event(GENETIC_MUTATION, /datum/mood_event/smile, GET_MUTATION_POWER(src))
 
 /datum/mutation/human/smile/proc/handle_speech(datum/source, list/speech_args)
