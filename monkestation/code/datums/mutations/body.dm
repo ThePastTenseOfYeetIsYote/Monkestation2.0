@@ -193,6 +193,14 @@
 	synchronizer_coeff = 1
 	power_coeff = 1
 
+/datum/mutation/human/headless/on_acquiring(mob/living/carbon/human/owner)
+	if(!owner || !istype(owner))
+		return TRUE
+
+	if(locate(/obj/item/organ/internal/ears/cat/super) in owner.get_organ_slot(ORGAN_SLOT_EARS))
+		return TRUE
+	. = ..()
+
 /datum/mutation/human/headless/modify()
 	. = ..()
 	if(isnull(owner))
