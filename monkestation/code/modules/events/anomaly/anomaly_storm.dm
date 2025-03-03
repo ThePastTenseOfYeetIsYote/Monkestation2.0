@@ -4,7 +4,7 @@
 	typepath = /datum/round_event/anomaly/anomaly_storm
 
 	max_occurrences = 3
-	weight = 5
+	weight = 0
 	min_players = 40
 
 	min_wizard_trigger_potency = 1

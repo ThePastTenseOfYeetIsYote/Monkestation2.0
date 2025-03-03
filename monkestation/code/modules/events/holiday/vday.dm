@@ -14,7 +14,7 @@ GLOBAL_LIST(valentine_mobs)
 	name = "Valentines!"
 	holidayID = VALENTINES
 	typepath = /datum/round_event/valentines
-	weight = -1 //forces it to be called, regardless of weight
+	weight = 0 //forces it to be called, regardless of weight
 	max_occurrences = 1
 	earliest_start = 0 MINUTES
 	category = EVENT_CATEGORY_HOLIDAY

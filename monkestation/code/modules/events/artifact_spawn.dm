@@ -2,7 +2,7 @@
 	name = "Artifact Manifestation"
 	description = "Spawns a random artifact somewhere on the station"
 	typepath = /datum/round_event/random_artifact
-	weight = 10
+	weight = 0
 	max_occurrences = 3
 	min_players = 3
 	category = EVENT_CATEGORY_ANOMALIES

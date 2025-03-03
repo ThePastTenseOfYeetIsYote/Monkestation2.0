@@ -4,7 +4,7 @@
 	typepath = /datum/round_event/anomaly/anomaly_fluid
 
 	max_occurrences = 3
-	weight = 20
+	weight = 0
 	min_players = 30
 	min_wizard_trigger_potency = 1
 	max_wizard_trigger_potency = 4

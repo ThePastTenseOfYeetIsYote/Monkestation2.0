@@ -3,7 +3,7 @@
 
 /datum/round_event_control/wizard/shuffleloc //Somewhere an AI is crying
 	name = "Change Places!"
-	weight = 2
+	weight = 0
 	typepath = /datum/round_event/wizard/shuffleloc
 	max_occurrences = 5
 	earliest_start = 0 MINUTES
@@ -42,7 +42,7 @@
 
 /datum/round_event_control/wizard/shufflenames //Face/off joke
 	name = "Change Faces!"
-	weight = 4
+	weight = 0
 	typepath = /datum/round_event/wizard/shufflenames
 	max_occurrences = 5
 	earliest_start = 0 MINUTES
@@ -82,7 +82,7 @@
 
 /datum/round_event_control/wizard/shuffleminds //Basically Mass Ranged Mindswap
 	name = "Change Minds!"
-	weight = 1
+	weight = 0
 	typepath = /datum/round_event/wizard/shuffleminds
 	max_occurrences = 3
 	earliest_start = 0 MINUTES

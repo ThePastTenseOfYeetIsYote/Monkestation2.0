@@ -4,7 +4,7 @@
 	typepath = /datum/round_event/anomaly/anomaly_frost
 
 	max_occurrences = 5
-	weight = 10
+	weight = 0
 	min_players = 20
 
 	min_wizard_trigger_potency = 1

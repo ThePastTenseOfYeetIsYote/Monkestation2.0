@@ -4,7 +4,7 @@
 /datum/round_event_control/tram_malfunction
 	name = "Tram Malfunction"
 	typepath = /datum/round_event/tram_malfunction
-	weight = 40
+	weight = 0
 	max_occurrences = 4
 	earliest_start = 15 MINUTES
 	category = EVENT_CATEGORY_ENGINEERING

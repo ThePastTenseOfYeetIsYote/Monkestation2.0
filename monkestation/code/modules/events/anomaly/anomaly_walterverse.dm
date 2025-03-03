@@ -3,7 +3,7 @@
 	typepath = /datum/round_event/anomaly/anomaly_walterverse
 
 	max_occurrences = 1
-	weight = 5
+	weight = 0
 	track = EVENT_TRACK_MAJOR
 
 /datum/round_event/anomaly/anomaly_walterverse

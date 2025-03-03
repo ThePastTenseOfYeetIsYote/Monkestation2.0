@@ -1,7 +1,7 @@
 /datum/round_event_control/sentient_disease
 	name = "Spawn Sentient Disease"
 	typepath = /datum/round_event/ghost_role/sentient_disease
-	weight = 7
+	weight = 0
 	max_occurrences = 0 //monkestation edit: from 1 to 0
 	min_players = 25
 	earliest_start = 60 MINUTES //monke edit: 25 to 60

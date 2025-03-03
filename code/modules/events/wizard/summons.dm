@@ -1,6 +1,6 @@
 /datum/round_event_control/wizard/summonguns //The Classic
 	name = "Summon Guns"
-	weight = 1
+	weight = 0
 	typepath = /datum/round_event/wizard/summonguns
 	max_occurrences = 1
 	earliest_start = 0 MINUTES
@@ -16,7 +16,7 @@
 
 /datum/round_event_control/wizard/summonmagic //The Somewhat Less Classic
 	name = "Summon Magic"
-	weight = 1
+	weight = 0
 	typepath = /datum/round_event/wizard/summonmagic
 	max_occurrences = 1
 	earliest_start = 0 MINUTES

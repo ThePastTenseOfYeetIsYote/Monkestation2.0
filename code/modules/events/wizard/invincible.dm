@@ -1,6 +1,6 @@
 /datum/round_event_control/wizard/invincible //Boolet Proof
 	name = "Invincibility"
-	weight = 3
+	weight = 0
 	typepath = /datum/round_event/wizard/invincible
 	max_occurrences = 5
 	earliest_start = 0 MINUTES

@@ -1,6 +1,6 @@
 /datum/round_event_control/wizard/embedpocalypse
 	name = "Make Everything Embeddable"
-	weight = 2
+	weight = 0
 	typepath = /datum/round_event/wizard/embedpocalypse
 	max_occurrences = 1
 	earliest_start = 0 MINUTES
@@ -23,7 +23,7 @@
 
 /datum/round_event_control/wizard/embedpocalypse/sticky
 	name = "Make Everything Sticky"
-	weight = 6
+	weight = 0
 	typepath = /datum/round_event/wizard/embedpocalypse/sticky
 	max_occurrences = 1
 	earliest_start = 0 MINUTES

@@ -4,7 +4,7 @@
 	typepath = /datum/round_event/anomaly/anomaly_lifebringer
 
 	max_occurrences = 2
-	weight = 15
+	weight = 0
 	track = EVENT_TRACK_MUNDANE
 
 /datum/round_event/anomaly/anomaly_lifebringer

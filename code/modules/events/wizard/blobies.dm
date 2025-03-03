@@ -1,6 +1,6 @@
 /datum/round_event_control/wizard/blobies //avast!
 	name = "Zombie Outbreak"
-	weight = 3
+	weight = 0
 	typepath = /datum/round_event/wizard/blobies
 	max_occurrences = 3
 	description = "Spawns a blob spore on every corpse."

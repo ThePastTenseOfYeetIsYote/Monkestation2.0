@@ -1,7 +1,7 @@
 /datum/round_event_control/space_dust
 	name = "Space Dust: Minor"
 	typepath = /datum/round_event/space_dust
-	weight = 200 // why the hell was this so much
+	weight = 0 // why the hell was this so much
 	max_occurrences = 10 //MONKESTATION CHANGE: 1000 ==> 10
 	earliest_start = 0 MINUTES
 	alert_observers = FALSE
@@ -20,7 +20,7 @@
 /datum/round_event_control/space_dust/major_dust
 	name = "Space Dust: Major"
 	typepath = /datum/round_event/space_dust/major_dust
-	weight = 8
+	weight = 0
 	description = "The station is pelted by sand."
 	min_players = 15
 	max_occurrences = 3

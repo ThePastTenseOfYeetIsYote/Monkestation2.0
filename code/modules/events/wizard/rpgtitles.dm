@@ -1,6 +1,6 @@
 /datum/round_event_control/wizard/rpgtitles //its time to adventure on boys
 	name = "RPG Titles"
-	weight = 3
+	weight = 0
 	typepath = /datum/round_event/wizard/rpgtitles
 	max_occurrences = 1
 	earliest_start = 0 MINUTES

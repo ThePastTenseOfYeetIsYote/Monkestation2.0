@@ -33,7 +33,7 @@
 
 /datum/event_admin_setup/listed_options/departmental_revolt/get_list()
 	return subtypesof(/datum/job_department)
-	
+
 /datum/event_admin_setup/listed_options/departmental_revolt/apply_to_event(datum/round_event/wizard/deprevolt/event)
 	event.picked_department = chosen
 

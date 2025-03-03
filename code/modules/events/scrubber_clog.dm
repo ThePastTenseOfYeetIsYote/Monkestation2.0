@@ -1,7 +1,7 @@
 /datum/round_event_control/scrubber_clog
 	name = "Scrubber Clog: Minor"
 	typepath = /datum/round_event/scrubber_clog
-	weight = 25
+	weight = 0
 	max_occurrences = 3
 	earliest_start = 5 MINUTES
 	category = EVENT_CATEGORY_JANITORIAL
@@ -136,7 +136,7 @@
 /datum/round_event_control/scrubber_clog/major
 	name = "Scrubber Clog: Major"
 	typepath = /datum/round_event/scrubber_clog/major
-	weight = 12
+	weight = 0
 	max_occurrences = 3
 	earliest_start = 10 MINUTES
 	description = "Dangerous mobs climb out of a scrubber."
@@ -162,7 +162,7 @@
 /datum/round_event_control/scrubber_clog/critical
 	name = "Scrubber Clog: Critical"
 	typepath = /datum/round_event/scrubber_clog/critical
-	weight = 8
+	weight = 0
 	min_players = 15
 	max_occurrences = 1
 	earliest_start = 25 MINUTES
@@ -192,7 +192,7 @@
 /datum/round_event_control/scrubber_clog/strange
 	name = "Scrubber Clog: Strange"
 	typepath = /datum/round_event/scrubber_clog/strange
-	weight = 5
+	weight = 0
 	max_occurrences = 1
 	description = "Strange mobs climb out of a scrubber, harmfulness varies."
 	min_wizard_trigger_potency = 0

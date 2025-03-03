@@ -1,7 +1,7 @@
 /datum/round_event_control/contractor
 	name = "Drifting Contractor"
 	typepath = /datum/round_event/ghost_role/contractor
-	weight = 8
+	weight = 0
 	max_occurrences = 2
 	min_players = 20
 

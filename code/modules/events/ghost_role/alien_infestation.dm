@@ -1,7 +1,7 @@
 /datum/round_event_control/antagonist/solo/from_ghosts/alien_infestation
 	name = "Alien Infestation"
 	typepath = /datum/round_event/antagonist/solo/ghost/alien_infestation
-	weight = 3
+	weight = 0
 	max_occurrences = 1
 	min_players = 35 //monkie edit: 10 to 35 (tg what the fuck)
 

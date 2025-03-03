@@ -1,3 +1,3 @@
 /datum/round_event_control/gravity_generator_blackout
-	weight = 8
+	weight = 0
 	max_occurrences = 2
