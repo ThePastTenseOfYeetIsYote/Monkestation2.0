@@ -1888,9 +1888,20 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/closed/wall/r_wall,
 /area/station/science)
+<<<<<<< HEAD
 "pG" = (
 /turf/open/floor/engine/n2o,
 /area/station/engineering/atmos)
+=======
+"pD" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/machinery/camera/autoname/directional/west,
+/obj/machinery/light/directional/west,
+/turf/open/floor/iron,
+/area/station/construction)
+>>>>>>> c1f73a5b0b8343d973f944c962a5dec5848f5720
 "pI" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
@@ -2595,6 +2606,8 @@
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
 	dir = 8
 	},
+/obj/item/storage/box/beakers/variety,
+/obj/item/storage/box/beakers,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "Gl" = (
