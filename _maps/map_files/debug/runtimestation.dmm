@@ -1888,20 +1888,13 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/closed/wall/r_wall,
 /area/station/science)
-<<<<<<< HEAD
+"pD" = (
+/obj/structure/chemical_manufacturer,
+/turf/open/floor/iron/dark,
+/area/station/science/explab)
 "pG" = (
 /turf/open/floor/engine/n2o,
 /area/station/engineering/atmos)
-=======
-"pD" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/machinery/camera/autoname/directional/west,
-/obj/machinery/light/directional/west,
-/turf/open/floor/iron,
-/area/station/construction)
->>>>>>> c1f73a5b0b8343d973f944c962a5dec5848f5720
 "pI" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
@@ -3179,12 +3172,6 @@
 /obj/structure/lattice,
 /turf/open/space,
 /area/station/engineering/atmos)
-"Rz" = (
-/obj/structure/table,
-/obj/item/clothing/suit/space/hardsuit/security,
-/obj/item/tank/jetpack/suit,
-/turf/open/floor/iron,
-/area/station/medical/medbay)
 "RE" = (
 /obj/machinery/meter{
 	name = "Mixed Air Tank In"
@@ -6709,7 +6696,7 @@ wM
 eh
 fZ
 dY
-ZP
+pD
 Df
 Nb
 CT
@@ -9357,7 +9344,7 @@ af
 by
 cz
 by
-Rz
+cm
 es
 Kv
 sn
