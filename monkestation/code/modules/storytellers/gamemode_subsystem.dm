@@ -133,7 +133,7 @@ SUBSYSTEM_DEF(gamemode)
 	var/roundstart_event_view = TRUE
 
 	/// Whether the storyteller has been halted
-	var/halted_storyteller = FALSE
+	var/halted_storyteller = TRUE
 
 	/// Ready players for roundstart events.
 	var/ready_players = 0
