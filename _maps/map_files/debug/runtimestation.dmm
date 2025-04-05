@@ -550,6 +550,7 @@
 /area/station/command/bridge)
 "ct" = (
 /obj/machinery/light/directional/west,
+/obj/machinery/vending/mechcomp,
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
 "cu" = (
@@ -666,6 +667,7 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
+/obj/item/disk/surgery/debug,
 /turf/open/floor/iron/cafeteria,
 /area/station/medical/medbay)
 "cK" = (
@@ -685,13 +687,17 @@
 /turf/open/floor/iron/white/corner,
 /area/station/medical/medbay)
 "cL" = (
-/obj/item/storage/backpack/duffelbag/syndie/surgery,
-/obj/item/disk/surgery/debug,
 /obj/structure/table/glass,
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+/obj/item/circular_saw/alien,
+/obj/item/hemostat/alien,
+/obj/item/scalpel/alien,
+/obj/item/retractor/alien,
+/obj/item/cautery/alien,
+/obj/item/surgical_drapes,
 /turf/open/floor/iron/white/corner,
 /area/station/medical/medbay)
 "cN" = (
@@ -936,11 +942,6 @@
 "dV" = (
 /turf/open/floor/plating,
 /area/station/hallway/secondary/entry)
-"dW" = (
-/obj/effect/turf_decal/stripes/line,
-/obj/machinery/vending/mechcomp,
-/turf/open/floor/iron,
-/area/station/commons/storage/primary)
 "dY" = (
 /turf/closed/wall/r_wall,
 /area/station/hallway/secondary/entry)
@@ -1015,7 +1016,6 @@
 /turf/open/floor/iron,
 /area/station/bitrunning/den)
 "es" = (
-/obj/machinery/dna_scannernew,
 /obj/effect/turf_decal/tile/blue/opposingcorners{
 	dir = 1
 	},
@@ -1545,12 +1545,6 @@
 	},
 /turf/open/floor/engine/air,
 /area/station/engineering/atmos)
-"hD" = (
-/obj/structure/closet/secure_closet/chemical/heisenberg{
-	locked = 0
-	},
-/turf/open/floor/iron,
-/area/station/medical/chemistry)
 "hJ" = (
 /obj/machinery/atmospherics/miner/plasma,
 /turf/open/floor/engine/plasma,
@@ -2191,10 +2185,6 @@
 /obj/machinery/light/floor/has_bulb,
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
-"xm" = (
-/obj/machinery/vending/medical,
-/turf/open/floor/iron,
-/area/station/hallway/primary/central)
 "xP" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/siphon/monitored/carbon_output{
 	dir = 1
@@ -2207,10 +2197,6 @@
 	},
 /turf/open/floor/engine/vacuum,
 /area/station/engineering/atmos)
-"xZ" = (
-/obj/machinery/vending/autodrobe,
-/turf/open/floor/iron,
-/area/station/hallway/primary/central)
 "yb" = (
 /obj/structure/cable,
 /turf/closed/wall/r_wall,
@@ -2263,11 +2249,6 @@
 /obj/machinery/atmospherics/components/unary/bluespace_sender,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
-"yU" = (
-/obj/machinery/vending/assaultops_ammo,
-/obj/item/armament_points_card/assaultops,
-/turf/open/floor/iron,
-/area/station/hallway/primary/central)
 "ze" = (
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible,
 /turf/closed/wall/r_wall,
@@ -2503,9 +2484,6 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "DW" = (
-/obj/machinery/computer/scan_consolenew{
-	dir = 1
-	},
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
@@ -2757,10 +2735,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/miningoffice)
-"IT" = (
-/obj/machinery/vending/mechcomp,
-/turf/open/floor/iron,
-/area/station/hallway/primary/central)
 "IZ" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/smart/simple/yellow/visible,
@@ -3075,10 +3049,6 @@
 /obj/machinery/composters,
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
-"Oe" = (
-/obj/machinery/vending/imported,
-/turf/open/floor/iron,
-/area/station/hallway/primary/central)
 "Op" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/siphon/monitored/mix_output{
 	dir = 1
@@ -3142,10 +3112,6 @@
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/engine/vacuum,
 /area/station/engineering/atmos)
-"QP" = (
-/obj/machinery/vending/drugs,
-/turf/open/floor/iron,
-/area/station/hallway/primary/central)
 "QT" = (
 /obj/machinery/growing/tray,
 /turf/open/floor/iron,
@@ -3243,10 +3209,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/miningoffice)
-"Tg" = (
-/obj/machinery/vending/coffee,
-/turf/open/floor/iron,
-/area/station/hallway/primary/central)
 "Tj" = (
 /obj/machinery/door/poddoor,
 /turf/open/floor/engine,
@@ -3270,13 +3232,6 @@
 /obj/machinery/rnd/destructive_analyzer,
 /turf/open/floor/iron,
 /area/station/science)
-"Ut" = (
-/obj/structure/closet/secure_closet/medical3{
-	locked = 0
-	},
-/obj/item/healthanalyzer/advanced,
-/turf/open/floor/iron,
-/area/station/medical/medbay)
 "Uv" = (
 /obj/effect/turf_decal/tile/purple/fourcorners,
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
@@ -3485,10 +3440,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/science)
-"YG" = (
-/obj/machinery/vending/tool,
-/turf/open/floor/iron,
-/area/station/hallway/primary/central)
 "YL" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -7234,7 +7185,7 @@ co
 bA
 lF
 bE
-xZ
+bE
 iS
 sn
 yx
@@ -7326,7 +7277,7 @@ bu
 bu
 cB
 bE
-yU
+bE
 iO
 po
 yx
@@ -7418,7 +7369,7 @@ cp
 bu
 cC
 lX
-YG
+bE
 ah
 sn
 yx
@@ -7510,7 +7461,7 @@ EI
 bv
 dU
 bE
-IT
+bE
 ah
 sn
 yx
@@ -7602,7 +7553,7 @@ BD
 bu
 dU
 bE
-Oe
+bE
 ah
 sn
 yx
@@ -7878,7 +7829,7 @@ RM
 bv
 cD
 bE
-QP
+bE
 ah
 sn
 yx
@@ -7970,7 +7921,7 @@ cr
 bu
 wb
 bE
-xm
+bE
 ah
 Ab
 yx
@@ -8062,7 +8013,7 @@ bu
 bu
 cE
 bE
-Tg
+bE
 ah
 sn
 yx
@@ -8148,7 +8099,7 @@ aS
 bd
 bo
 aj
-hD
+Ce
 cj
 ct
 Nc
@@ -9164,7 +9115,7 @@ bX
 cm
 is
 cy
-Ut
+cm
 cm
 cK
 mg
