@@ -129,7 +129,7 @@
 /obj/item/reagent_containers/pill/water
 	name = "water pill"
 	icon_state = "pill1"
-	list_reagents = list(/datum/reagent/consumable/water = 2)
+	list_reagents = list(/datum/reagent/water = 2)
 	rename_with_volume = TRUE
 
 /obj/item/reagent_containers/pill/icefraction

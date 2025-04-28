@@ -473,9 +473,7 @@
 		/obj/item/reagent_containers/cup/bottle,
 		/obj/item/reagent_containers/cup/tube,
 		/obj/item/reagent_containers/medigel,
-		/obj/item/reagent_containers/pill/fluorosurfactant,
-		/obj/item/reagent_containers/pill/ice,
-		/obj/item/reagent_containers/pill/icefraction,
+		/obj/item/reagent_containers/pill
 	))
 
 	// Add 40 of each pill
