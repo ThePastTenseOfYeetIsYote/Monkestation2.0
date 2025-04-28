@@ -131,7 +131,6 @@
 	icon_state = "pill1"
 	list_reagents = list(/datum/reagent/consumable/ice = 2)
 	rename_with_volume = TRUE
-	chem_temp = 270
 
 /obj/item/reagent_containers/pill/icefraction
 	name = "ice pill"
