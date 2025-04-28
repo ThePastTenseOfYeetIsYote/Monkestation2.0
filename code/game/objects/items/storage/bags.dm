@@ -453,6 +453,31 @@
 		/obj/item/reagent_containers/syringe,
 		))
 
+/obj/item/storage/bag/chemistry/debug
+	name = "chemistry bag"
+	icon = 'icons/obj/medical/chemical.dmi'
+	icon_state = "bag"
+	worn_icon_state = "chembag"
+	desc = "A bag for storing pills, patches, and bottles."
+	resistance_flags = FLAMMABLE
+
+/obj/item/storage/bag/chemistry/debug/Initialize(mapload)
+	. = ..()
+	atom_storage.max_total_storage = 999999
+	atom_storage.max_slots = 999999
+	atom_storage.set_holdable(list(
+		/obj/item/reagent_containers/chem_pack,
+		/obj/item/reagent_containers/dropper,
+		/obj/item/reagent_containers/cup/glass/waterbottle,
+		/obj/item/reagent_containers/cup/beaker,
+		/obj/item/reagent_containers/cup/bottle,
+		/obj/item/reagent_containers/cup/tube,
+		/obj/item/reagent_containers/medigel,
+		/obj/item/reagent_containers/pill,
+		/obj/item/reagent_containers/syringe,
+		))
+
+
 /*
  *  Biowaste bag (mostly for virologists)
  */
