@@ -143,8 +143,7 @@
 	name = "fluorosurfactant pill"
 	icon_state = "pill2"
 	list_reagents = list(/datum/reagent/fluorosurfactant = 2)
-
-
+	rename_with_volume = TRUE
 
 /obj/item/reagent_containers/pill/multiver
 	name = "multiver pill"
