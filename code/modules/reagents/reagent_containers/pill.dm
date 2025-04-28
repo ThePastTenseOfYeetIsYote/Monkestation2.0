@@ -129,12 +129,12 @@
 /obj/item/reagent_containers/pill/ice
 	name = "ice pill"
 	icon_state = "pill1"
-	list_reagents = list(/datum/reagent/medicine/ice = 2.18)
+	list_reagents = list(/datum/reagent/consumable/ice = 2.18)
 
 /obj/item/reagent_containers/pill/fluorosurfactant
 	name = "fluorosurfactant pill"
 	icon_state = "pill2"
-	list_reagents = list(/datum/reagent/medicine/fluorosurfactant = 2)
+	list_reagents = list(/datum/reagent/fluorosurfactant = 2)
 
 
 
