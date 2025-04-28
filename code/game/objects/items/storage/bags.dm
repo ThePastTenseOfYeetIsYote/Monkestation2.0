@@ -479,8 +479,10 @@
 	// Add 40 of each pill
 	for (var/i = 1 to 40)
 		new /obj/item/reagent_containers/pill/fluorosurfactant(src)
-		new /obj/item/reagent_containers/pill/water(src)
+		new /obj/item/reagent_containers/pill/ice
 		new /obj/item/reagent_containers/pill/icefraction(src)
+		new /obj/item/reagent_containers/pill/water(src)
+
 
 /*
  *  Biowaste bag (mostly for virologists)

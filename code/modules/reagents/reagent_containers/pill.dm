@@ -134,13 +134,19 @@
 
 /obj/item/reagent_containers/pill/icefraction
 	name = "ice pill"
-	icon_state = "pill1"
+	icon_state = "pill2"
 	list_reagents = list(/datum/reagent/consumable/ice = 0.18)
+	rename_with_volume = TRUE
+
+/obj/item/reagent_containers/pill/ice
+	name = "ice pill"
+	icon_state = "pill3"
+	list_reagents = list(/datum/reagent/consumable/ice = 2.18)
 	rename_with_volume = TRUE
 
 /obj/item/reagent_containers/pill/fluorosurfactant
 	name = "fluorosurfactant pill"
-	icon_state = "pill2"
+	icon_state = "pill4"
 	list_reagents = list(/datum/reagent/fluorosurfactant = 2)
 	rename_with_volume = TRUE
 
