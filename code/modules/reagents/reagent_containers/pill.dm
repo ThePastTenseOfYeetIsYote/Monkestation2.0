@@ -132,11 +132,6 @@
 	list_reagents = list(/datum/reagent/consumable/ice = 2)
 	rename_with_volume = TRUE
 
-/obj/item/reagent_containers/pill/ice/Initialize(mapload)
-    . = ..()
-    if(reagents)
-        reagents.temperature = 270 // Set temperature below the melting point of ice
-
 /obj/item/reagent_containers/pill/icefraction
 	name = "ice pill"
 	icon_state = "pill1"
