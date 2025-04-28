@@ -481,9 +481,7 @@
 	// Add 40 of each pill
 	for (var/i = 1 to 40)
 		new /obj/item/reagent_containers/pill/fluorosurfactant(src)
-		var/obj/item/reagent_containers/pill/ice/ice_pill = new /obj/item/reagent_containers/pill/ice(src)
-		if (ice_pill.reagents)
-			ice_pill.reagents.set_temperature(270) // Set temperature below melting point
+		new /obj/item/reagent_containers/pill/water(src)
 		new /obj/item/reagent_containers/pill/icefraction(src)
 
 /*
