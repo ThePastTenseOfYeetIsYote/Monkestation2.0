@@ -126,6 +126,18 @@
 	list_reagents = list(/datum/reagent/medicine/salbutamol = 30)
 	rename_with_volume = TRUE
 
+/obj/item/reagent_containers/pill/ice
+	name = "ice pill"
+	icon_state = "pill1"
+	list_reagents = list(/datum/reagent/medicine/ice = 2.18)
+
+/obj/item/reagent_containers/pill/fluorosurfactant
+	name = "fluorosurfactant pill"
+	icon_state = "pill2"
+	list_reagents = list(/datum/reagent/medicine/fluorosurfactant = 2)
+
+
+
 /obj/item/reagent_containers/pill/multiver
 	name = "multiver pill"
 	desc = "Neutralizes many common toxins and scales with unique medicine in the system. Diluted with granibitaluri."

@@ -463,8 +463,8 @@
 
 /obj/item/storage/bag/chemistry/debug/Initialize(mapload)
 	. = ..()
-	atom_storage.max_total_storage = 999999
-	atom_storage.max_slots = 999999
+	atom_storage.max_total_storage = INFINITY
+	atom_storage.max_slots = INFINITY
 	atom_storage.set_holdable(list(
 		/obj/item/reagent_containers/chem_pack,
 		/obj/item/reagent_containers/dropper,
@@ -476,6 +476,13 @@
 		/obj/item/reagent_containers/pill,
 		/obj/item/reagent_containers/syringe,
 		))
+
+	/obj/item/storage/box/heretic_box/PopulateContents()
+	for(var/i in 1 to 40)
+		new /obj/item/reagent_containers/pill/ice(src)
+	for(var/i in 40 to 80)
+		new /obj/item/reagent_containers/pill/fluorosurfactant(src)
+
 
 
 /*
