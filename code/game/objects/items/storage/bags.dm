@@ -480,8 +480,11 @@
 /obj/item/storage/bag/chemistry/debug/PopulateContents()
 	for(var/i in 1 to 40)
 		new /obj/item/reagent_containers/pill/ice(src)
-	for(var/i in 40 to 80)
+	for(var/i in 1 to 40)
 		new /obj/item/reagent_containers/pill/fluorosurfactant(src)
+	for(var/i in 1 to 40)
+		new /obj/item/reagent_containers/pill/icefraction(src)
+
 
 
 

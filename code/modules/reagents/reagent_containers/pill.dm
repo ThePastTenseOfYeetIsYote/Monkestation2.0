@@ -129,7 +129,15 @@
 /obj/item/reagent_containers/pill/ice
 	name = "ice pill"
 	icon_state = "pill1"
-	list_reagents = list(/datum/reagent/consumable/ice = 2.18)
+	list_reagents = list(/datum/reagent/consumable/ice = 2)
+	rename_with_volume = TRUE
+	dispensed_temperature = 270
+
+/obj/item/reagent_containers/pill/icefraction
+	name = "ice pill"
+	icon_state = "pill1"
+	list_reagents = list(/datum/reagent/consumable/ice = 0.18)
+	rename_with_volume = TRUE
 
 /obj/item/reagent_containers/pill/fluorosurfactant
 	name = "fluorosurfactant pill"
