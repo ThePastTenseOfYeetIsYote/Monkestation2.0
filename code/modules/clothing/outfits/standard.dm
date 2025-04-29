@@ -460,7 +460,8 @@
 		/obj/item/debug/human_spawner = 1,
 		/obj/item/debug/omnitool = 1,
 		/obj/item/storage/box/stabilized = 1,
-		/obj/item/analyzer
+		/obj/item/analyzer,
+		/obj/item/storage/bag/chemistry/debug = 1
 )
 	belt = /obj/item/storage/belt/utility/chief/full
 	ears = /obj/item/radio/headset/headset_cent/commander
