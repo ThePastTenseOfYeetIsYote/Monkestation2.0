@@ -22,9 +22,9 @@ SUBSYSTEM_DEF(statpanels)
 /datum/controller/subsystem/statpanels/fire(resumed = FALSE)
 	if (!resumed)
 		num_fires++
-		var/datum/map_config/cached = SSmapping.next_map_config
+		var/datum/map_config/cached = SSmap_vote.next_map_config
 		global_data = list(
-			"Map: [SSmapping.config?.map_name || "Loading..."]",
+			"Map: [SSmapping.current_map?.map_name || "Loading..."]",
 			cached ? "Next Map: [cached.map_name]" : null,
 			"Storyteller: [!SSgamemode.secret_storyteller && SSgamemode.current_storyteller ? SSgamemode.current_storyteller.name : "Secret"]", //monkestation addition
 			"Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
@@ -55,7 +55,7 @@ SUBSYSTEM_DEF(statpanels)
 		var/client/target = currentrun[length(currentrun)]
 		currentrun.len--
 
-		if(!target.stat_panel.is_ready())
+		if(!target?.stat_panel?.is_ready())
 			continue
 
 		if(target.stat_tab == "Status" && num_fires % status_wait == 0)

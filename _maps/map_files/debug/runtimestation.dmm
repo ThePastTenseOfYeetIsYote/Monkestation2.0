@@ -69,6 +69,7 @@
 	dir = 8
 	},
 /obj/structure/cable,
+/obj/machinery/power/apc/auto_name/directional/north,
 /turf/open/floor/iron,
 /area/ruin/space/ks13/command/bridge)
 "av" = (
@@ -245,8 +246,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/machinery/power/apc/auto_name/directional/west,
-/obj/structure/cable,
 /turf/open/floor/iron,
 /area/ruin/space/ks13/command/bridge)
 "bh" = (
@@ -8554,7 +8553,7 @@ bY
 af
 gW
 at
-Wx
+bh
 bh
 Wx
 br

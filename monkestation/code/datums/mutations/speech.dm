@@ -25,6 +25,25 @@
 		message = replacetext(message,"s","th")
 		speech_args[SPEECH_MESSAGE] = message
 
+/datum/mutation/human/uwuspeak
+	name = "Neko Speak"
+	desc = "Makes the subject speak in horrific combinations of words."
+	quality = NEGATIVE
+	text_gain_indication = span_warning("Something feels very wrong.")
+	text_lose_indication = span_notice("You no longer feel like vomiting up your tongue.")
+
+/datum/mutation/human/uwuspeak/on_acquiring(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+	owner.AddComponentFrom(GENETIC_MUTATION, /datum/component/fluffy_tongue)
+
+/datum/mutation/human/uwuspeak/on_losing(mob/living/carbon/human/owner)
+	. = ..()
+	if(.)
+		return
+	owner.RemoveComponentSource(GENETIC_MUTATION, /datum/component/fluffy_tongue)
+
 /datum/mutation/human/loud
 	name = "Loud"
 	desc = "Forces the speaking centre of the subjects brain to yell every sentence."
