@@ -1983,7 +1983,6 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/item/storage/part_replacer/bluespace/tier4,
 /turf/open/floor/iron,
 /area/station/bitrunning/den)
 "sx" = (
@@ -2027,6 +2026,11 @@
 "tB" = (
 /obj/structure/table/reinforced,
 /obj/machinery/light/directional/south,
+/obj/item/card/emag,
+/obj/item/storage/part_replacer/bluespace/tier4{
+	pixel_x = 0;
+	pixel_y = 0
+	},
 /turf/open/floor/iron,
 /area/station/bitrunning/den)
 "tG" = (
