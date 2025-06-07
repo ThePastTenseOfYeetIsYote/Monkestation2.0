@@ -246,6 +246,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/ruin/space/ks13/command/bridge)
 "bh" = (
@@ -1739,6 +1740,7 @@
 /area/station/engineering/atmos)
 "mw" = (
 /obj/machinery/door/airlock/shell,
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/hallway/secondary/entry)
 "mx" = (
@@ -1806,6 +1808,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 8
 	},
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/science/explab)
 "ny" = (
@@ -3215,6 +3218,13 @@
 "Tj" = (
 /obj/machinery/door/poddoor,
 /turf/open/floor/engine,
+/area/station/hallway/secondary/entry)
+"Tl" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
+	dir = 9
+	},
+/obj/structure/cable,
+/turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
 "Tt" = (
 /obj/structure/grille,
@@ -6376,8 +6386,8 @@ fs
 en
 dY
 dY
-ek
-eh
+gu
+wM
 mw
 nn
 ZP
@@ -6468,7 +6478,7 @@ eh
 eh
 eV
 eh
-ek
+gu
 eh
 dY
 lQ
@@ -6560,7 +6570,7 @@ ei
 ei
 ei
 Qi
-fZ
+Tl
 fZ
 JT
 ZP
@@ -6651,7 +6661,7 @@ eh
 eh
 eh
 eh
-wM
+eh
 eh
 fZ
 dY
