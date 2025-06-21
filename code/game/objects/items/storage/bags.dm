@@ -476,7 +476,7 @@
 		/obj/item/reagent_containers/pill
 	))
 
-	new /obj/item/reagent_containers/cup/beaker/bluespace/water(src)
+	new /obj/item/reagent_containers/cup/beaker/large/water(src)
 	// Add 50 of each pill
 	for (var/i = 1 to 50)
 		new /obj/item/reagent_containers/pill/fluorosurfactant(src)
