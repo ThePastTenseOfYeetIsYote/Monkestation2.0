@@ -1916,6 +1916,7 @@
 /obj/machinery/door/airlock,
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
+<<<<<<< HEAD
 "qj" = (
 /obj/machinery/atmospherics/components/binary/valve/digital{
 	name = "Waste Release"
@@ -1935,6 +1936,17 @@
 	name = "N2O to Pure"
 	},
 /obj/effect/turf_decal/tile/yellow/fourcorners,
+=======
+"qn" = (
+/turf/open/space/basic,
+/area/space/shipbreak)
+"qF" = (
+/obj/machinery/airalarm/directional/north,
+/obj/effect/mapping_helpers/airalarm/unlocked,
+/obj/machinery/power/apc/auto_name/directional/west,
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/cable,
+>>>>>>> 7d79f8e882e038c6b32e80155c106ec89459755b
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "qG" = (
