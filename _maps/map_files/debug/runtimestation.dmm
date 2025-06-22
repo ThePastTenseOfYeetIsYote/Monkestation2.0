@@ -1937,7 +1937,7 @@
 	},
 /obj/effect/turf_decal/tile/yellow/fourcorners,
 /turf/open/floor/iron,
-/area/space)
+/area/station/engineering/atmos)
 "qF" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/portable_atmospherics/pipe_scrubber,
