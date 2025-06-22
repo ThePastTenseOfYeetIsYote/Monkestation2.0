@@ -1345,6 +1345,7 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/yellow/fourcorners,
+/obj/effect/turf_decal/tile/yellow/fourcorners,
 /turf/open/indestructible/light,
 /area/station/engineering/atmos)
 "fS" = (
@@ -1916,7 +1917,6 @@
 /obj/machinery/door/airlock,
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
-<<<<<<< HEAD
 "qj" = (
 /obj/machinery/atmospherics/components/binary/valve/digital{
 	name = "Waste Release"
@@ -1936,17 +1936,13 @@
 	name = "N2O to Pure"
 	},
 /obj/effect/turf_decal/tile/yellow/fourcorners,
-=======
-"qn" = (
-/turf/open/space/basic,
-/area/space/shipbreak)
+/turf/open/floor/iron,
+/area/space)
 "qF" = (
-/obj/machinery/airalarm/directional/north,
-/obj/effect/mapping_helpers/airalarm/unlocked,
-/obj/machinery/power/apc/auto_name/directional/west,
 /obj/effect/turf_decal/stripes/line,
-/obj/structure/cable,
->>>>>>> 7d79f8e882e038c6b32e80155c106ec89459755b
+/obj/machinery/portable_atmospherics/pipe_scrubber,
+/obj/machinery/portable_atmospherics/pipe_scrubber,
+/obj/machinery/portable_atmospherics/pipe_scrubber,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "qG" = (
@@ -7856,7 +7852,7 @@ cD
 bE
 bE
 ah
-sn
+qF
 yx
 yx
 dD
