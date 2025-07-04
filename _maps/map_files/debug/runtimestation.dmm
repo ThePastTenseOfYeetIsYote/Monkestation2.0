@@ -903,16 +903,7 @@
 	dir = 4
 	},
 /turf/open/floor/iron,
-<<<<<<< HEAD
 /area/station/engineering/atmos)
-=======
-/area/station/construction)
-"dN" = (
-/obj/structure/table,
-/obj/item/debug/human_spawner,
-/turf/open/floor/iron,
-/area/station/commons/storage/primary)
->>>>>>> d65a16c3d0c6af962abb289c705d16df7152f31c
 "dO" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -926,15 +917,6 @@
 	},
 /turf/open/floor/plating,
 /area/station/hallway/secondary/entry)
-<<<<<<< HEAD
-=======
-"dQ" = (
-/obj/structure/table,
-/obj/machinery/light/directional/south,
-/obj/item/clothing/glasses/debug,
-/turf/open/floor/iron,
-/area/station/commons/storage/primary)
->>>>>>> d65a16c3d0c6af962abb289c705d16df7152f31c
 "dR" = (
 /obj/machinery/light/directional/west,
 /turf/open/floor/iron,
@@ -1831,13 +1813,7 @@
 /turf/open/floor/iron/dark,
 /area/station/science/explab)
 "ny" = (
-<<<<<<< HEAD
 /obj/machinery/biogenerator/admin,
-=======
-/obj/structure/table,
-/obj/item/storage/toolbox/syndicate,
-/obj/item/debug/omnitool,
->>>>>>> d65a16c3d0c6af962abb289c705d16df7152f31c
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
 "od" = (
@@ -2020,20 +1996,9 @@
 	},
 /turf/open/floor/iron,
 /area/station/bitrunning/den)
-<<<<<<< HEAD
 "sx" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/green/visible{
 	dir = 4
-=======
-"sH" = (
-/obj/structure/table,
-/obj/item/storage/box/debugtools,
-/turf/open/floor/iron,
-/area/station/commons/storage/primary)
-"sU" = (
-/obj/machinery/power/smes{
-	charge = 5e+006
->>>>>>> d65a16c3d0c6af962abb289c705d16df7152f31c
 	},
 /obj/effect/turf_decal/tile/brown/fourcorners,
 /turf/open/floor/iron,
@@ -2718,7 +2683,6 @@
 /obj/item/reagent_containers/cup/beaker/large,
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
-<<<<<<< HEAD
 "GI" = (
 /obj/machinery/atmospherics/pipe/layer_manifold/yellow/visible,
 /obj/machinery/atmospherics/pipe/smart/simple/cyan/visible/layer5{
@@ -2733,12 +2697,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
-=======
-"FS" = (
-/obj/item/debug/human_spawner,
-/turf/open/floor/plating,
-/area/station/construction)
->>>>>>> d65a16c3d0c6af962abb289c705d16df7152f31c
 "GS" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -7617,7 +7575,6 @@ bu
 dU
 bE
 bE
-<<<<<<< HEAD
 ah
 sn
 yx
@@ -7635,22 +7592,6 @@ mI
 UZ
 VX
 Rx
-=======
-cN
-cY
-FS
-dn
-XE
-dn
-dn
-dn
-dn
-XE
-dn
-dn
-dL
-cN
->>>>>>> d65a16c3d0c6af962abb289c705d16df7152f31c
 Tt
 Tt
 Tt
