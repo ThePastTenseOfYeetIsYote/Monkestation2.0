@@ -4,4 +4,9 @@
 #Ranks will match to those with the same name in admin_ranks.txt, if a match isn't found the user won't be adminned.
 #If SQL-based admin loading is enabled, admins listed here will always be loaded first and will override any duplicate entries in the database.
 
+<<<<<<< HEAD
 Ellthorn = Host
+=======
+dwasint = Host
+#flleeppyy = Host
+>>>>>>> cf9d68edf52b28b912a4a3f0dfb20a79af3f36bc
