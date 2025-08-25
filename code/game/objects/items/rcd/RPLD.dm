@@ -11,8 +11,8 @@
 	slot_flags = ITEM_SLOT_BELT
 	///it does not make sense why any of these should be installed.
 	banned_upgrades = RCD_UPGRADE_FRAMES | RCD_UPGRADE_SIMPLE_CIRCUITS  | RCD_UPGRADE_FURNISHING | RCD_UPGRADE_ANTI_INTERRUPT | RCD_UPGRADE_NO_FREQUENT_USE_COOLDOWN
-	matter = 200
-	max_matter = 200
+	matter = 1000000
+	max_matter = 1000000
 
 	///type of the plumbing machine
 	var/obj/machinery/blueprint = null
