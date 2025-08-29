@@ -138,7 +138,7 @@
 	parent = null
 	real_location = null
 
-	for(var/mob/person in is_using)
+	for(var/mob/person as anything in is_using)
 		if(person.active_storage == src)
 			person.active_storage = null
 			person.client?.screen -= boxes
@@ -191,6 +191,7 @@
 	ASSERT(isnull(parent))
 
 	parent = new_parent
+	ADD_TRAIT(parent, TRAIT_COMBAT_MODE_SKIP_INTERACTION, REF(src))
 	// a few of theses should probably be on the real_location rather than the parent
 	RegisterSignals(parent, list(COMSIG_ATOM_ATTACK_PAW, COMSIG_ATOM_ATTACK_HAND), PROC_REF(on_attack))
 	RegisterSignal(parent, COMSIG_MOUSEDROP_ONTO, PROC_REF(on_mousedrop_onto))
@@ -660,7 +661,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 /datum/storage/proc/remove_and_refresh(atom/movable/gone)
 	SIGNAL_HANDLER
 
-	for(var/mob/user in is_using)
+	for(var/mob/user as anything in is_using)
 		if(user.client)
 			var/client/cuser = user.client
 			cuser.screen -= gone
@@ -817,6 +818,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return
 
 	attempt_insert(dropping, user)
+	return //COMPONENT_CANCEL_MOUSEDROPPED_ONTO
 
 /// Called directly from the attack chain if [insert_on_attack] is TRUE.
 /// Handles inserting an item into the storage when clicked.
@@ -1019,7 +1021,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 /// Close the storage UI for everyone viewing us.
 /datum/storage/proc/close_all()
-	for(var/mob/user in is_using)
+	for(var/mob/user as anything in is_using)
 		hide_contents(user)
 
 /// Refresh the views of everyone currently viewing the storage.
@@ -1145,3 +1147,19 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return
 
 	changed.visible_message(span_warning("[changed] falls out of [parent]!"), vision_distance = COMBAT_MESSAGE_RANGE)
+
+///Assign a new value to the locked variable. If it's higher than NOT_LOCKED, close the UIs and update the appearance of the parent.
+/datum/storage/proc/set_locked(new_locked)
+	if(locked == new_locked)
+		return
+	locked = new_locked
+	if(new_locked > STORAGE_NOT_LOCKED)
+		close_all_recursive()
+	parent.update_appearance()
+
+/// Closes the storage UIs of this and everything inside the parent for everyone viewing them.
+/datum/storage/proc/close_all_recursive()
+	close_all()
+	for(var/atom/movable/movable as anything in parent.get_all_contents())
+		movable.atom_storage?.close_all()
+
