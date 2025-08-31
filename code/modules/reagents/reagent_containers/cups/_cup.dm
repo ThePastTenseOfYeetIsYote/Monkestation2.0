@@ -346,8 +346,8 @@
 /obj/item/reagent_containers/cup/beaker/meta/omnizine
 	list_reagents = list(/datum/reagent/medicine/omnizine = 180)
 
-/obj/item/reagent_containers/cup/beaker/bluespace/water
-	list_reagents = list(/datum/reagent/water = 300)
+/obj/item/reagent_containers/cup/beaker/large/water
+	list_reagents = list(/datum/reagent/water = 100)
 
 
 /obj/item/reagent_containers/cup/beaker/meta/sal_acid

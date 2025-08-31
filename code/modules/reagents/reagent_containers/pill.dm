@@ -137,9 +137,15 @@
 	list_reagents = list(/datum/reagent/medicine/salbutamol = 30)
 	rename_with_volume = TRUE
 
-/obj/item/reagent_containers/pill/icefraction
+/obj/item/reagent_containers/pill/icefraction1
 	name = "ice pill"
 	icon_state = "pill2"
+	list_reagents = list(/datum/reagent/consumable/ice = 0.15)
+	rename_with_volume = TRUE
+
+/obj/item/reagent_containers/pill/icefraction2
+	name = "ice pill"
+	icon_state = "pill3"
 	list_reagents = list(/datum/reagent/consumable/ice = 0.18)
 	rename_with_volume = TRUE
 
