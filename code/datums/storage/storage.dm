@@ -37,7 +37,7 @@
 	/// whether or not we should have those cute little animations
 	var/animated = TRUE
 
-	var/max_slots = 7
+	var/max_slots = 10
 	/// max weight class for a single item being inserted
 	var/max_specific_storage = WEIGHT_CLASS_NORMAL
 	/// max combined weight classes the storage can hold
