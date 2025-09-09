@@ -98,14 +98,16 @@
 	SSwardrobe.provide_type(/obj/item/wirecutters/abductor, src)
 	SSwardrobe.provide_type(/obj/item/multitool/abductor, src)
 	SSwardrobe.provide_type(/obj/item/stack/cable_coil, src)
+	SSwardrobe.provide_type(/obj/item/extinguisher/mini, src)
+	SSwardrobe.provide_type(/obj/item/analyzer, src)
 
 /obj/item/storage/belt/utility/chief/full/get_types_to_preload()
 	var/list/to_preload = list() //Yes this is a pain. Yes this is the point
-	to_preload += /obj/item/screwdriver
-	to_preload += /obj/item/wrench
-	to_preload += /obj/item/weldingtool
-	to_preload += /obj/item/crowbar
-	to_preload += /obj/item/wirecutters
+	to_preload += /obj/item/screwdriver/power
+	to_preload += /obj/item/crowbar/power
+	to_preload += /obj/item/weldingtool/experimental
+	to_preload += /obj/item/extinguisher/mini
+	to_preload += /obj/item/analyzer
 	to_preload += /obj/item/multitool
 	to_preload += /obj/item/stack/cable_coil
 	return to_preload
