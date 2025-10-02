@@ -60,7 +60,6 @@
 		/obj/item/storage/box/beakers/bluespace=1,
 		/obj/item/storage/box/beakers/variety=1,
 		/obj/item/storage/box/material=1,
-		/obj/item/storage/box/debugbox/guns=1,
 		/obj/item/uplink/debug=1,
 		/obj/item/uplink/nuclear/debug=1,
 		/obj/item/clothing/ears/earmuffs/debug = 1,
