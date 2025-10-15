@@ -459,3 +459,86 @@
   - map: Extended the decal of caution across the chicken room
   - map: Icebox chicken room has chicken scanners
   - map: Icebox botany/chicken room distro been cleaned to use less piping.
+2025-10-11:
+  Absolucy:
+  - bugfix: Actually fixed ashwalkers speaking Draconic instead of Ashtongue.
+  CannibalHunter:
+  - rscadd: Donator item, Mr Bag Head's Paper Sack!
+  Lawlolawl:
+  - bugfix: Fixed medal box showing incorrect sprites.
+  - bugfix: Fixed toggling open/closed lid of medal box. You can now toggle the lid
+      of the medal box by using it in hand (after unlocking it with ID). Note that
+      you can only access its item storage when the lid is open.
+  SirNightKnight:
+  - bugfix: fixed modsuit control unequipment not working
+2025-10-12:
+  Absolucy:
+  - bugfix: Fixed the Monster Hunter weapon forge not working properly.
+  Absolucy, LettuceGuardian:
+  - image: Changed the Navigate HUD button sprite to actually say "Navigate" instead
+      of being a tiny icon. Sprites by LettuceGuardian.
+  - bugfix: The walk/run button no longer disappears when you sprint.
+  MilkForever:
+  - qol: The description for the stabilized light pink extracts will now mention the
+      pacifism effect.
+  Snack-Max:
+  - rscadd: Adds Quartermaster Turtleneck and Casualwear to Loadout
+  TheColorCyan:
+  - rscadd: Milthy's donator item - monkey varsity jacket
+  notghosti:
+  - map: Blueshift AI sat now runs through the SMES unit.
+  - map: Blueshift Cameras now have more accurate network tags for minisat, telecomms,
+      engine, and aicore.
+  - map: Blueshift has had cameras added in missing rooms, including medical patient
+      room, around the new bend in construction, solar, partly outside the ai sat,
+      and that one door between cargo office and cargo bay are now visible.
+  - map: Blueshift construction now has access tied to it, instead of only the Maintenace
+      entrance.
+  - map: Blueshift AI foyer has been split into foyer and AI interior.
+  - map: Blueshift AI sat uses the convenient giant body of space to rid of waste
+      gas rather than the stations distro
+  - qol: Once associated config is set up, antagonistic revival methods and cloning
+      will give a better corresponding death flavor text,
+2025-10-13:
+  ThePooba:
+  - bugfix: ship engines are now breakable in shipbreaking area with sledgehammer
+      and five rewards
+  - bugfix: sledgehammer bonus damage now applies properly in shipbreaking area
+2025-10-14:
+  Absolucy:
+  - rscadd: Added a preference to allow you to turn off the AI radio blip sounds.
+  - qol: The MOD ash accretion module now works when mining underwater on Oshan.
+  BobDABuilder9001:
+  - bugfix: Cyborgs can place rods and glass on window sills.
+  - qol: Placing glass on a window sill or on a grill no longer anchors it for one
+      but not the other
+  Cmpwarrior:
+  - rscadd: Adds some jester-themed clown clothing to the loadout selector (clown
+      only)
+  - rscadd: Adds greyscale capabilities to some jester clothing items
+  JohnFulpWillard:
+  - qol: Changed the escape menu to hopefully be more useful and not as laggy.
+  LassiH:
+  - balance: flares now can be extinquished by light eaters
+  notghosti:
+  - bugfix: Venus Human Traps will now heal on vines again, and be punished for daring
+      to leave them.
+  - map: Heliostation Emitters now have a proper smes connected to engines power.
+  - map: Heliostation PTL is now no longer hooked up to the stations power, rather
+      engines,
+  - map: Heliostations Starboard solars has a SMES unit and door access changed to
+      proper
+  - map: Heliostation CE now has a CE monitor in their room
+  - map: Heliostation EVA and pathology has been shifted in order to not block a external
+      airlock access
+  - map: Heliostation Bow solars now has a camera.
+  - map: Heliostation AI Core will now be hooked to the accurate grid and actually
+      recharge.
+  - map: Heliostation Gravity generator has proper camera coverage
+  - map: Heliostation Library no longer has a floating camera
+  - map: Heliostation Brig air control is now a actual checkpoint for air
+2025-10-15:
+  Lawlolawl:
+  - bugfix: Fixed relocking of privately bought cargo crates (including miner purchases).
+      Only the correct bank account can unlock/lock the crate now. Previously, mining
+      crates were stuck locked permanently after relocking.
