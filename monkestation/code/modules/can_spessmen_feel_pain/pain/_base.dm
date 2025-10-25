@@ -33,7 +33,7 @@
 
 #ifdef TESTING
 	/// For testing. Does this pain datum print testing messages when it happens?
-	var/print_debug_messages = TRUE
+	var/print_debug_messages = FALSE
 	/// For testing. Does this pain datum include ALL test messages, including very small and constant ones (like pain decay)?
 	var/print_debug_decay = FALSE
 #endif
