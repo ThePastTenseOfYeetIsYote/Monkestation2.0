@@ -100,6 +100,7 @@
 	SSwardrobe.provide_type(/obj/item/stack/cable_coil, src)
 	SSwardrobe.provide_type(/obj/item/analyzer, src)
 	SSwardrobe.provide_type(/obj/item/extinguisher/mini, src)
+	SSwardrobe.provide_type(/obj/item/holosign_creator/atmos, src)
 
 /obj/item/storage/belt/utility/chief/full/get_types_to_preload()
 	var/list/to_preload = list() //Yes this is a pain. Yes this is the point
@@ -112,6 +113,7 @@
 	to_preload += /obj/item/analyzer
 	to_preload += /obj/item/stack/cable_coil
 	to_preload += /obj/item/extinguisher/mini
+	to_pleload += /obj/item/holosign_creator/atmos
 	return to_preload
 
 /obj/item/storage/belt/utility/full/PopulateContents()
