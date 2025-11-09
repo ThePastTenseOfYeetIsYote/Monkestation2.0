@@ -113,7 +113,7 @@
 	to_preload += /obj/item/analyzer
 	to_preload += /obj/item/stack/cable_coil
 	to_preload += /obj/item/extinguisher/mini
-	to_pleload += /obj/item/holosign_creator/atmos
+	to_preload += /obj/item/holosign_creator/atmos
 	return to_preload
 
 /obj/item/storage/belt/utility/full/PopulateContents()
