@@ -39,7 +39,7 @@
 	cached_data |= "[/datum/disease/acute/premade/disease_debug]"
 	src.data = cached_data
 
-/obj/item/storage/box/debugbox/tools
+/obj/item/storage/box/debugbox/disease
 	name = "box of a debug disease"
 	icon_state = "syndiebox"
 

@@ -49,7 +49,6 @@
 /obj/item/storage/box/debugbox/tools/PopulateContents()
 	var/static/items_inside = list(
 		/obj/item/card/emag=1,
-		/obj/item/construction/rcd/combat/admin=1,
 		/obj/item/disk/tech_disk/debug=1,
 		/obj/item/flashlight/emp/debug=1,
 		/obj/item/geiger_counter=1,
@@ -63,6 +62,7 @@
 		/obj/item/uplink/debug=1,
 		/obj/item/uplink/nuclear/debug=1,
 		/obj/item/clothing/ears/earmuffs/debug = 1,
+		/obj/item/modular_computer/pda/heads/rd
 		)
 	generate_items_inside(items_inside,src)
 
