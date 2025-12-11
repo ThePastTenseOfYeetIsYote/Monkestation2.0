@@ -108,6 +108,8 @@ docs/_build/
 .ipynb_checkpoints
 .geminiignore
 GEMINI.md
+QWEN.md
+.qwenignore
 # pyenv
 .python-version
 
