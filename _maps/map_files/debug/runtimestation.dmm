@@ -1102,9 +1102,6 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
-"eI" = (
-/turf/open/floor/iron/dark,
-/area/station/science/ordnance)
 "eJ" = (
 /obj/docking_port/stationary{
 	dir = 4;
@@ -1626,10 +1623,6 @@
 /obj/structure/cable,
 /turf/closed/wall/r_wall,
 /area/station/engineering/atmos)
-"in" = (
-/obj/machinery/door/airlock,
-/turf/open/floor/iron,
-/area/station/science/circuits)
 "ip" = (
 /obj/machinery/byteforge,
 /turf/open/floor/circuit/green,
@@ -2117,6 +2110,9 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
+"rT" = (
+/turf/open/floor/iron/dark,
+/area/station/science/ordnance)
 "rU" = (
 /obj/machinery/door/airlock/engineering/glass{
 	name = "Gravity Generator"
@@ -2129,10 +2125,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
-"rZ" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/turf/open/floor/iron/dark,
-/area/station/science/ordnance)
 "sn" = (
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron,
@@ -2159,6 +2151,9 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/open/floor/iron,
 /area/station/medical/medbay)
+"sI" = (
+/turf/closed/wall/r_wall,
+/area/station/science/ordnance/freezerchamber)
 "sJ" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -2229,6 +2224,9 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/space)
+"tX" = (
+/turf/closed/wall/r_wall,
+/area/station/science/ordnance)
 "tY" = (
 /obj/machinery/camera/directional/north,
 /obj/machinery/airalarm/directional/north,
@@ -2252,6 +2250,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/miningoffice)
+"uo" = (
+/obj/structure/cable,
+/turf/closed/wall/r_wall,
+/area/station/hallway/secondary/entry)
 "ut" = (
 /obj/structure/closet/secure_closet/atmospherics{
 	locked = 0
@@ -2324,6 +2326,9 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/white,
 /area/station/science/ordnance/storage)
+"vx" = (
+/turf/closed/wall/r_wall,
+/area/station/science/ordnance/burnchamber)
 "vy" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 4
@@ -2406,10 +2411,6 @@
 /obj/machinery/light/floor/has_bulb,
 /turf/open/floor/iron,
 /area/station/service/hydroponics)
-"xy" = (
-/obj/machinery/door/airlock,
-/turf/open/floor/iron,
-/area/station/hallway/secondary/entry)
 "xP" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/siphon/monitored/carbon_output{
 	dir = 1
@@ -2520,9 +2521,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos)
-"zm" = (
-/turf/closed/wall/r_wall,
-/area/station/science/ordnance/burnchamber)
 "zo" = (
 /obj/structure/cable,
 /turf/open/floor/iron,
@@ -2541,9 +2539,6 @@
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/engine/co2,
 /area/station/engineering/atmos)
-"zL" = (
-/turf/closed/wall/r_wall,
-/area/station/science/ordnance/storage)
 "Ab" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
@@ -2646,10 +2641,6 @@
 "Ce" = (
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
-"Cn" = (
-/obj/structure/cable,
-/turf/closed/wall/r_wall,
-/area/station/hallway/secondary/entry)
 "Ct" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/purple/visible{
 	dir = 4
@@ -2943,9 +2934,6 @@
 /obj/machinery/atmospherics/pipe/smart/simple/cyan/visible,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
-"Hr" = (
-/turf/closed/wall/r_wall,
-/area/station/science/ordnance/freezerchamber)
 "HC" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/purple/visible{
 	dir = 1
@@ -3057,11 +3045,8 @@
 /turf/open/floor/engine/plasma,
 /area/station/engineering/atmos)
 "Jw" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
-	dir = 9
-	},
 /turf/closed/wall/r_wall,
-/area/station/engineering/atmos)
+/area/station/science/ordnance/storage)
 "JC" = (
 /obj/machinery/atmospherics/pipe/smart/simple/green/visible{
 	dir = 4
@@ -3130,6 +3115,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
+"Lw" = (
+/obj/machinery/door/airlock,
+/turf/open/floor/iron,
+/area/station/science/circuits)
 "Ly" = (
 /obj/machinery/chem_dispenser/chem_synthesizer,
 /turf/open/floor/iron/dark,
@@ -3238,8 +3227,9 @@
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
 "Ns" = (
-/turf/closed/wall/r_wall,
-/area/station/science/ordnance)
+/obj/machinery/door/airlock,
+/turf/open/floor/iron,
+/area/station/hallway/secondary/entry)
 "NI" = (
 /obj/effect/turf_decal/tile/red{
 	dir = 8
@@ -3424,6 +3414,10 @@
 /obj/machinery/atmospherics/pipe/smart/simple/cyan/visible,
 /turf/closed/wall/r_wall,
 /area/station/engineering/atmos)
+"RH" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/dark,
+/area/station/science/ordnance)
 "RJ" = (
 /obj/machinery/atmospherics/components/binary/pump{
 	dir = 1
@@ -6156,20 +6150,20 @@ aa
 aa
 aa
 aa
-zL
-zL
-zL
-zL
-zL
-zL
-zL
-Hr
-Hr
-Hr
-Hr
-Ns
-Ns
-Ns
+Jw
+Jw
+Jw
+Jw
+Jw
+Jw
+Jw
+sI
+sI
+sI
+sI
+tX
+tX
+tX
 aa
 aa
 aa
@@ -6254,14 +6248,14 @@ bM
 Qs
 GB
 aK
-zL
+Jw
 bJ
 YQ
 XI
-Hr
+sI
 gI
 Yi
-Ns
+tX
 aa
 aa
 aa
@@ -6346,14 +6340,14 @@ hl
 Ec
 aR
 ey
-zL
+Jw
 ll
 YW
 Nb
 qH
 KA
 Yh
-Ns
+tX
 aa
 aa
 aa
@@ -6438,14 +6432,14 @@ hl
 Ec
 cY
 Mu
-zL
+Jw
 Iy
-Hr
+sI
 Iy
-Hr
+sI
 bI
 vi
-Ns
+tX
 aa
 aa
 aa
@@ -6530,14 +6524,14 @@ ww
 Ec
 pc
 uM
-zL
+Jw
 HC
 eq
 Ct
 EQ
 vN
 mD
-Ns
+tX
 aa
 aa
 aa
@@ -6622,14 +6616,14 @@ ww
 Ec
 yb
 Ir
-zL
+Jw
 or
 EI
 Mh
 Mh
 vF
-rZ
-Ns
+RH
+tX
 aa
 aa
 aa
@@ -6708,20 +6702,20 @@ aa
 eE
 aa
 aa
-zL
+Jw
 Tr
 Rw
 Rb
 Vr
 vm
-zL
+Jw
 Ov
 EI
 Mh
 EI
-eI
+rT
 wW
-Ns
+tX
 aa
 aa
 aa
@@ -6800,7 +6794,7 @@ fn
 fs
 en
 dY
-zL
+Jw
 iA
 lQ
 mw
@@ -6813,12 +6807,12 @@ Mh
 EI
 mH
 Ob
-zm
-zm
-zm
-zm
-zm
-zm
+vx
+vx
+vx
+vx
+vx
+vx
 aa
 aa
 aa
@@ -6892,13 +6886,13 @@ eh
 eh
 eh
 eV
-zL
+Jw
 vo
 XL
 MK
 lQ
 kp
-zL
+Jw
 Ym
 EI
 Mh
@@ -7076,13 +7070,13 @@ eh
 eh
 eh
 eh
-zL
+Jw
 UA
 co
 yz
 pD
 Df
-zL
+Jw
 CT
 qv
 RM
@@ -7154,9 +7148,9 @@ cA
 bZ
 ft
 bZ
-Cn
-Cn
-Cn
+uo
+uo
+uo
 dY
 dY
 dY
@@ -7165,28 +7159,28 @@ dY
 dY
 dY
 dY
-xy
+Ns
 dY
 dY
-zL
-zL
-zL
-zL
-zL
-zL
-zL
+Jw
+Jw
+Jw
+Jw
+Jw
+Jw
+Jw
 wU
 wU
 wU
 wU
 wU
 wU
-zm
-zm
-zm
-zm
-zm
-zm
+vx
+vx
+vx
+vx
+vx
+vx
 aa
 aa
 aa
@@ -7338,7 +7332,7 @@ jb
 kQ
 ES
 rL
-Jw
+ij
 Xo
 ji
 ji
@@ -7702,7 +7696,7 @@ bu
 OU
 OU
 OU
-in
+Lw
 cB
 bE
 bE
