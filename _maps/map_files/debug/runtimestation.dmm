@@ -411,7 +411,6 @@
 /obj/machinery/camera/autoname/directional/north,
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/machinery/chem_heater/debug,
-/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/medical/chemistry)
 "bS" = (
@@ -509,7 +508,6 @@
 /area/station/medical/chemistry)
 "ck" = (
 /obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/medical/medbay)
 "cl" = (
@@ -680,14 +678,6 @@
 /area/station/medical/medbay)
 "cK" = (
 /obj/machinery/light/directional/south,
-/obj/item/storage/box/monkeycubes{
-	pixel_x = 6;
-	pixel_y = 1
-	},
-/obj/item/storage/box/monkeycubes{
-	pixel_x = -6;
-	pixel_y = 2
-	},
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
@@ -704,7 +694,7 @@
 /obj/item/retractor/alien,
 /obj/item/cautery/alien,
 /obj/item/surgical_drapes,
-/obj/item/wallframe/closet,
+/obj/structure/closet/generic/wall/directional,
 /turf/open/floor/iron/white/corner,
 /area/station/medical/medbay)
 "cN" = (
@@ -1030,7 +1020,7 @@
 	dir = 1
 	},
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "er" = (
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/structure/cable,
@@ -1533,7 +1523,7 @@
 	},
 /obj/machinery/firealarm/directional/east,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "gI" = (
 /obj/machinery/atmospherics/components/unary/thermomachine/freezer{
 	dir = 4;
@@ -1712,6 +1702,9 @@
 	},
 /turf/open/floor/plating,
 /area/station/engineering/atmos)
+"jO" = (
+/turf/closed/wall/r_wall,
+/area/station/science/ordnance/freezerchamber)
 "jU" = (
 /obj/machinery/growing/tray,
 /obj/machinery/light/floor/has_bulb,
@@ -1889,7 +1882,7 @@
 /obj/effect/turf_decal/box/red,
 /obj/machinery/portable_atmospherics/canister,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "mI" = (
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
 	dir = 4
@@ -1935,6 +1928,10 @@
 	},
 /turf/open/floor/plating,
 /area/station/hallway/secondary/entry)
+"og" = (
+/obj/machinery/door/airlock,
+/turf/open/floor/iron,
+/area/station/hallway/secondary/entry)
 "on" = (
 /obj/machinery/atmospherics/pipe/smart/simple/purple/visible,
 /obj/machinery/meter,
@@ -1953,7 +1950,7 @@
 	},
 /obj/machinery/portable_atmospherics/pipe_scrubber,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "ou" = (
 /obj/machinery/airalarm/directional/west,
 /turf/open/floor/plating,
@@ -1962,6 +1959,9 @@
 /obj/machinery/reagentgrinder,
 /turf/open/floor/iron/dark,
 /area/station/medical/chemistry)
+"oy" = (
+/turf/open/floor/iron/dark,
+/area/station/science/ordnance)
 "oK" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -1976,9 +1976,6 @@
 /obj/effect/turf_decal/tile/brown/fourcorners,
 /turf/open/indestructible/light,
 /area/station/engineering/atmos)
-"oS" = (
-/turf/closed/wall/r_wall,
-/area/station/science/ordnance/freezerchamber)
 "oV" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
 	dir = 4
@@ -2015,7 +2012,7 @@
 "pA" = (
 /obj/effect/turf_decal/siding/purple,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "pD" = (
 /obj/machinery/portable_atmospherics/scrubber,
 /obj/effect/turf_decal/siding/purple{
@@ -2082,7 +2079,7 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "qG" = (
 /obj/item/hfr_box/body/fuel_input,
 /turf/open/floor/engine,
@@ -2128,7 +2125,7 @@
 	name = "Gravity Generator"
 	},
 /turf/open/floor/iron,
-/area/station/security/brig)
+/area/station/engineering/gravity_generator)
 "rV" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
@@ -2230,7 +2227,7 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/cable,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "tY" = (
 /obj/machinery/camera/directional/north,
 /obj/machinery/airalarm/directional/north,
@@ -2391,7 +2388,7 @@
 /area/station/hallway/secondary/entry)
 "wU" = (
 /turf/closed/wall/r_wall,
-/area/station/science/ordnance/storage)
+/area/space)
 "wW" = (
 /obj/effect/turf_decal/siding/purple,
 /obj/machinery/camera/directional/south{
@@ -2437,7 +2434,6 @@
 /turf/open/floor/iron/dark,
 /area/station/science/circuits)
 "yw" = (
-/obj/item/wallframe/closet,
 /obj/item/storage/box/beakers/variety,
 /obj/item/storage/box/beakers/variety,
 /obj/item/storage/box/beakers/variety,
@@ -2448,6 +2444,7 @@
 /obj/item/storage/box/beakers/variety,
 /obj/item/storage/box/beakers/variety,
 /obj/item/storage/box/beakers/variety,
+/obj/structure/closet/generic/wall/directional,
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
 "yx" = (
@@ -2504,6 +2501,9 @@
 /obj/machinery/atmospherics/components/unary/bluespace_sender,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
+"za" = (
+/turf/closed/wall/r_wall,
+/area/station/science/ordnance)
 "ze" = (
 /obj/machinery/atmospherics/pipe/smart/simple/scrubbers/visible,
 /turf/closed/wall/r_wall,
@@ -2636,8 +2636,8 @@
 /turf/open/floor/iron,
 /area/station/science)
 "Ce" = (
-/turf/closed/wall/r_wall,
-/area/station/science/ordnance)
+/turf/open/floor/iron,
+/area/station/medical/chemistry)
 "Ct" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/purple/visible{
 	dir = 4
@@ -2646,7 +2646,7 @@
 	dir = 8
 	},
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "Cv" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
@@ -2702,7 +2702,7 @@
 	},
 /obj/structure/sign/poster/official/wtf_is_co2/directional/north,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "CV" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /obj/structure/cable,
@@ -2814,7 +2814,7 @@
 /area/station/engineering/atmos)
 "EI" = (
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "EN" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -2831,7 +2831,7 @@
 /obj/effect/turf_decal/box/red,
 /obj/machinery/portable_atmospherics/canister,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "ES" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
 	dir = 4
@@ -2889,8 +2889,6 @@
 /obj/machinery/atmospherics/pipe/bridge_pipe/green/visible{
 	dir = 8
 	},
-/obj/item/storage/box/beakers/variety,
-/obj/item/storage/box/beakers,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "Gl" = (
@@ -2943,7 +2941,7 @@
 /obj/machinery/light/directional/north,
 /obj/machinery/light_switch/directional/north,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "HR" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/siphon/monitored/plasma_output{
 	dir = 1
@@ -3044,8 +3042,11 @@
 /turf/open/floor/engine/plasma,
 /area/station/engineering/atmos)
 "Jw" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
+	dir = 9
+	},
 /turf/closed/wall/r_wall,
-/area/station/science/ordnance/burnchamber)
+/area/station/engineering/atmos)
 "JC" = (
 /obj/machinery/atmospherics/pipe/smart/simple/green/visible{
 	dir = 4
@@ -3134,7 +3135,7 @@
 "Mh" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "Mi" = (
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/engine/air,
@@ -3155,7 +3156,7 @@
 /obj/machinery/light/directional/south,
 /obj/effect/mapping_helpers/airalarm/unlocked,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "Mu" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen,
 /obj/effect/turf_decal/siding/purple,
@@ -3193,7 +3194,6 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "MZ" = (
-/obj/item/wallframe/closet,
 /obj/item/gun/syringe,
 /obj/item/storage/box/syringes/variety,
 /obj/item/storage/box/syringes/variety,
@@ -3205,6 +3205,7 @@
 /obj/item/storage/box/syringes/variety,
 /obj/item/storage/box/syringes/variety,
 /obj/item/storage/box/syringes/variety,
+/obj/structure/closet/generic/wall/directional,
 /turf/open/floor/iron,
 /area/station/medical/chemistry)
 "Nb" = (
@@ -3253,7 +3254,7 @@
 	},
 /obj/effect/turf_decal/siding/purple,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "Oc" = (
 /obj/machinery/composters,
 /turf/open/floor/iron,
@@ -3279,7 +3280,7 @@
 	},
 /obj/structure/tank_dispenser,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "OU" = (
 /turf/open/floor/iron/dark,
 /area/station/science/circuits)
@@ -3289,15 +3290,22 @@
 	dir = 4
 	},
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "PB" = (
 /obj/structure/lattice,
 /turf/open/space/basic,
 /area/station/engineering/atmos)
+"PF" = (
+/obj/structure/cable,
+/turf/closed/wall/r_wall,
+/area/station/hallway/secondary/entry)
 "PZ" = (
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/engine/o2,
 /area/station/engineering/atmos)
+"Qa" = (
+/turf/closed/wall/r_wall,
+/area/station/science/ordnance/burnchamber)
 "Qe" = (
 /obj/machinery/air_sensor/air_tank,
 /turf/open/floor/engine/air,
@@ -3308,6 +3316,9 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
+/area/station/science/ordnance/storage)
+"Ql" = (
+/turf/closed/wall/r_wall,
 /area/station/science/ordnance/storage)
 "Qn" = (
 /obj/machinery/door/poddoor/incinerator_ordmix,
@@ -3363,7 +3374,7 @@
 	dir = 10
 	},
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "Rb" = (
 /obj/machinery/door/firedoor/heavy,
 /obj/effect/turf_decal/stripes/corner{
@@ -3434,7 +3445,7 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "RW" = (
 /turf/open/floor/iron,
 /area/station/bitrunning/den)
@@ -3665,6 +3676,10 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
+"Ws" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/dark,
+/area/station/science/ordnance)
 "Wv" = (
 /turf/open/floor/engine/vacuum,
 /area/station/science/ordnance/burnchamber)
@@ -3692,7 +3707,7 @@
 	dir = 4
 	},
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "WT" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
@@ -3745,7 +3760,7 @@
 	},
 /obj/effect/turf_decal/siding/purple,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "XP" = (
 /obj/machinery/portable_atmospherics/canister/air,
 /turf/open/floor/engine/air,
@@ -3792,7 +3807,7 @@
 /obj/machinery/airalarm/directional/north,
 /obj/effect/mapping_helpers/airalarm/unlocked,
 /turf/open/floor/iron/dark,
-/area/station/science/ordnance)
+/area/space)
 "Yr" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -6141,20 +6156,20 @@ aa
 aa
 aa
 aa
-wU
-wU
-wU
-wU
-wU
-wU
-wU
-oS
-oS
-oS
-oS
-Ce
-Ce
-Ce
+Ql
+Ql
+Ql
+Ql
+Ql
+Ql
+Ql
+jO
+jO
+jO
+jO
+za
+za
+za
 aa
 aa
 aa
@@ -6239,14 +6254,14 @@ bM
 Qs
 GB
 aK
-wU
+Ql
 bJ
 YQ
 XI
-oS
+jO
 gI
 Yi
-Ce
+za
 aa
 aa
 aa
@@ -6331,14 +6346,14 @@ hl
 Ec
 aR
 ey
-wU
+Ql
 ll
 YW
 Nb
 qH
 KA
 Yh
-Ce
+za
 aa
 aa
 aa
@@ -6423,14 +6438,14 @@ hl
 Ec
 cY
 Mu
-wU
+Ql
 Iy
-oS
+jO
 Iy
-oS
+jO
 bI
 vi
-Ce
+za
 aa
 aa
 aa
@@ -6515,14 +6530,14 @@ ww
 Ec
 pc
 uM
-wU
+Ql
 HC
 eq
 Ct
 EQ
 vN
 mD
-Ce
+za
 aa
 aa
 aa
@@ -6607,14 +6622,14 @@ ww
 Ec
 yb
 Ir
-wU
+Ql
 or
 EI
 Mh
 Mh
 vF
-Mh
-Ce
+Ws
+za
 aa
 aa
 aa
@@ -6693,20 +6708,20 @@ aa
 eE
 aa
 aa
-wU
+Ql
 Tr
 Rw
 Rb
 Vr
 vm
-wU
+Ql
 Ov
 EI
 Mh
 EI
-EI
+oy
 wW
-Ce
+za
 aa
 aa
 aa
@@ -6785,7 +6800,7 @@ fn
 fs
 en
 dY
-wU
+Ql
 iA
 lQ
 mw
@@ -6798,12 +6813,12 @@ Mh
 EI
 mH
 Ob
-Jw
-Jw
-Jw
-Jw
-Jw
-Jw
+Qa
+Qa
+Qa
+Qa
+Qa
+Qa
 aa
 aa
 aa
@@ -6877,13 +6892,13 @@ eh
 eh
 eh
 eV
-wU
+Ql
 vo
 XL
 MK
 lQ
 kp
-wU
+Ql
 Ym
 EI
 Mh
@@ -7061,13 +7076,13 @@ eh
 eh
 eh
 eh
-wU
+Ql
 UA
 co
 yz
 pD
 Df
-wU
+Ql
 CT
 qv
 RM
@@ -7128,7 +7143,7 @@ ah
 qb
 ah
 ah
-ah
+ag
 ah
 ah
 Mq
@@ -7139,39 +7154,39 @@ cA
 bZ
 ft
 bZ
-iO
-iO
-iO
-ah
-ah
-ah
-ah
-ah
-ah
-ah
-ah
-iS
-ah
-ah
+PF
+PF
+PF
+dY
+dY
+dY
+dY
+dY
+dY
+dY
+dY
+og
+dY
+dY
+Ql
+Ql
+Ql
+Ql
+Ql
+Ql
+Ql
 wU
 wU
 wU
 wU
 wU
 wU
-wU
-Ce
-Ce
-Ce
-Ce
-Ce
-Ce
-Jw
-Jw
-Jw
-Jw
-Jw
-Jw
+Qa
+Qa
+Qa
+Qa
+Qa
+Qa
 aa
 aa
 aa
@@ -7323,7 +7338,7 @@ jb
 kQ
 ES
 rL
-ij
+Jw
 Xo
 ji
 ji
@@ -8697,7 +8712,7 @@ bf
 bp
 aj
 ow
-cj
+Ce
 JF
 oV
 bE
@@ -8789,7 +8804,7 @@ gW
 gW
 gW
 bQ
-cj
+Ce
 MO
 vP
 bE
@@ -8881,7 +8896,7 @@ bg
 bq
 gW
 bR
-cj
+Ce
 yw
 YU
 bE
@@ -8973,7 +8988,7 @@ Wx
 br
 gW
 bS
-cj
+Ce
 MZ
 oV
 bE
@@ -9065,7 +9080,7 @@ ay
 dT
 gW
 Ly
-cj
+Ce
 Xg
 oV
 bE
