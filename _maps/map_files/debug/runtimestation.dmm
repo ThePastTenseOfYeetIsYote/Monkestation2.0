@@ -3705,6 +3705,13 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/engineering/main)
+"WY" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/machinery/cassette_postbox,
+/turf/open/floor/iron,
+/area/station/commons/storage/primary)
 "Xg" = (
 /obj/machinery/light/directional/east,
 /turf/open/floor/iron,

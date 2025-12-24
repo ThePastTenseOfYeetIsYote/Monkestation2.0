@@ -251,4 +251,7 @@ config/dbconfig.txt
 # Running OpenDream locally
 tgstation.json
 rust_g64.dll
+
+#ableton sound analysis files
+*.asd
 *.md
