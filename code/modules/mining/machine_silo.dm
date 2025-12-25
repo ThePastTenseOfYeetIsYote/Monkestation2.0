@@ -319,3 +319,20 @@
 		separator = ", "
 		msg += "[amount < 0 ? "-" : "+"][val] [M.name]"
 	return msg.Join()
+
+// Full ore silo that starts with all materials
+/obj/machinery/ore_silo/full
+	name = "full ore silo"
+	desc = "An all-in-one bluespace storage and transmission system for the station's mineral distribution needs. This one comes pre-loaded with all materials."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "silo"
+
+/obj/machinery/ore_silo/full/Initialize(mapload)
+	. = ..() // Call the parent Initialize first
+
+	// Initialize with all silo materials
+	var/list/silo_materials = SSmaterials.materials_by_category[MAT_CATEGORY_SILO]
+	for(var/datum/material/mat in silo_materials)
+		// Add a large amount of each material (e.g., 1000 units worth of sheets)
+		// This is equivalent to 1000 sheets of material, which is 1000 * SHEET_MATERIAL_AMOUNT raw units
+		materials.insert_amount_mat(1000 * SHEET_MATERIAL_AMOUNT, mat)
