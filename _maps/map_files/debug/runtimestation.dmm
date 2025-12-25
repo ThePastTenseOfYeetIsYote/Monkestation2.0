@@ -550,8 +550,8 @@
 /area/station/science)
 "cr" = (
 /obj/machinery/light/directional/east,
-/obj/machinery/ore_silo,
 /obj/item/storage/box/material,
+/obj/machinery/ore_silo/full,
 /turf/open/floor/iron,
 /area/station/science)
 "ct" = (
