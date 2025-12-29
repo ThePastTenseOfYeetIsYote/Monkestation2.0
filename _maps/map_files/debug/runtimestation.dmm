@@ -2171,15 +2171,6 @@
 /obj/structure/cable,
 /turf/closed/wall/r_wall,
 /area/station/hallway/secondary/entry)
-"ut" = (
-/obj/machinery/power/smes/magical{
-	input_level = 200000;
-	output_level = 190000
-	},
-/obj/structure/cable,
-/obj/machinery/gravity_generator/main,
-/turf/open/floor/iron,
-/area/ruin/space/ks13/command/bridge)
 "uv" = (
 /turf/open/floor/engine/n2,
 /area/station/engineering/atmos)
@@ -8955,7 +8946,7 @@ aa
 ad
 af
 gW
-ut
+CB
 CB
 CB
 ay
