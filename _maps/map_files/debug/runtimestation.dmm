@@ -2454,7 +2454,6 @@
 /turf/open/floor/engine/co2,
 /area/station/engineering/atmos)
 "Aw" = (
-/obj/machinery/door/airlock/research/glass/incinerator/ordmix_interior,
 /obj/machinery/airlock_controller/incinerator_ordmix{
 	pixel_x = -24
 	},
@@ -2482,9 +2481,6 @@
 /turf/open/floor/iron/dark,
 /area/station/science/circuits)
 "Bj" = (
-/obj/machinery/door/airlock/research/glass/incinerator/ordmix_exterior{
-	name = "Burn Chamber Exterior Airlock"
-	},
 /obj/structure/holosign/barrier/atmos/sturdy,
 /turf/open/floor/engine/vacuum,
 /area/station/science/ordnance/burnchamber)
