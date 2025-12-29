@@ -131,10 +131,6 @@
 /obj/machinery/gravity_generator/main,
 /turf/open/floor/iron/dark,
 /area/station/engineering/gravity_generator)
-"aP" = (
-/obj/machinery/door/airlock,
-/turf/open/floor/iron/dark,
-/area/station/science/circuits)
 "aR" = (
 /obj/machinery/portable_atmospherics/canister/plasma,
 /turf/open/floor/iron/dark,
@@ -7384,7 +7380,7 @@ aa
 aa
 cA
 bF
-aP
+OU
 OU
 OU
 jb
