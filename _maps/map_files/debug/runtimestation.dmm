@@ -1043,7 +1043,7 @@
 "eJ" = (
 /obj/docking_port/stationary{
 	dir = 4;
-	dwidth = 5;
+	dwidth = 4;
 	height = 7;
 	name = "Cargo Bay";
 	shuttle_id = "cargo_home";
