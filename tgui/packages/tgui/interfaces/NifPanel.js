@@ -1,7 +1,5 @@
 import { useBackend, useLocalState } from '../backend';
-import { BlockQuote, Box, Button, Collapsible, Dropdown, Flex, Icon, Input, LabeledList, ProgressBar, Section, Table } from '../components';
-import { TableCell, TableRow } from '../components/Table';
-import { Window } from '../layouts';
+import { BlockQuote, Box, Button, Collapsible, Dropdown, Flex, Icon, Input, LabeledList, ProgressBar, Section, Table, Window } from '../components';
 
 export const NifPanel = (props, context) => {
   const { act, data } = useBackend(context);
@@ -67,8 +65,8 @@ export const NifPanel = (props, context) => {
                           />
                         }>
                         <Table>
-                          <TableRow>
-                            <TableCell>
+                          <Table.Row>
+                            <Table.Cell>
                               <Button
                                 icon="bolt"
                                 color="yellow"
@@ -79,8 +77,8 @@ export const NifPanel = (props, context) => {
                                 : ' ' +
                                 (nifsoft.activation_cost / max_power) * 100 +
                                 '% per activation'}
-                            </TableCell>
-                            <TableCell>
+                            </Table.Cell>
+                            <Table.Cell>
                               <Button
                                 icon="battery-half"
                                 color="orange"
@@ -92,8 +90,8 @@ export const NifPanel = (props, context) => {
                                 : ' ' +
                                 (nifsoft.active_cost / max_power) * 100 +
                                 '% consumed while active'}
-                            </TableCell>
-                            <TableCell>
+                            </Table.Cell>
+                            <Table.Cell>
                               <Button
                                 icon="exclamation"
                                 color={nifsoft.active ? 'green' : 'red'}
@@ -103,8 +101,8 @@ export const NifPanel = (props, context) => {
                               {nifsoft.active
                                 ? ' The NIFSoft is active!'
                                 : ' The NIFSoft is inactive!'}
-                            </TableCell>
-                          </TableRow>
+                            </Table.Cell>
+                          </Table.Row>
                         </Table>
                         <br />
                         <BlockQuote preserveWhitespace>
