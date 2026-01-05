@@ -64,6 +64,21 @@
 /obj/machinery/chem_dispenser/chem_synthesizer/ui_data(mob/user)
 	. = ..()
 	.["purity"] = purity
+
+	.["beakerCurrentVolume"] = 0
+	.["beakerMaxVolume"] = 0
+	.["isBeakerLoaded"] = FALSE
+	.["beakerContents"] = list()
+
+	if(beaker && !QDELETED(beaker))
+		.["isBeakerLoaded"] = TRUE
+		.["beakerMaxVolume"] = beaker.volume
+		.["beakerCurrentVolume"] = beaker.reagents ? beaker.reagents.total_volume : 0
+
+		if(beaker.reagents && length(beaker.reagents.reagent_list))
+			for(var/datum/reagent/R in beaker.reagents.reagent_list)
+				.["beakerContents"] += list(list("name" = R.name, "volume" = R.volume))
+
 	return .
 
 /obj/machinery/chem_dispenser/chem_synthesizer/proc/find_reagent(input)
