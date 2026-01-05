@@ -696,14 +696,32 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
-/obj/item/circular_saw/alien,
-/obj/item/hemostat/alien,
-/obj/item/scalpel/alien,
-/obj/item/retractor/alien,
-/obj/item/cautery/alien,
-/obj/item/surgical_drapes,
-/obj/structure/closet/generic/wall/directional,
+/obj/item/circular_saw/alien{
+	pixel_y = 1;
+	pixel_x = -7
+	},
+/obj/item/hemostat/alien{
+	pixel_y = 5;
+	pixel_x = 9
+	},
+/obj/item/scalpel/alien{
+	pixel_x = -4;
+	pixel_y = 13
+	},
+/obj/item/retractor/alien{
+	pixel_x = 9;
+	pixel_y = 15
+	},
+/obj/item/cautery/alien{
+	pixel_x = 11;
+	pixel_y = -5
+	},
+/obj/item/surgical_drapes{
+	pixel_x = -7;
+	pixel_y = -7
+	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/table/reinforced,
 /turf/open/floor/iron/white/corner,
 /area/station/medical/medbay)
 "cN" = (
