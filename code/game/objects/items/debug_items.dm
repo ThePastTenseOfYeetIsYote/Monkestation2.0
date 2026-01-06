@@ -25,8 +25,9 @@
 
 /obj/item/debug/human_spawner/attack_self(mob/user)
 	..()
-	var/choice = input("Select a species", "Human Spawner", null) in GLOB.species_list
-	selected_species = GLOB.species_list[choice]
+	var/choice = tgui_input_list(user, "Select a species", "Human Spawner", GLOB.species_list)
+	if(choice)
+		selected_species = choice
 
 /obj/item/debug/omnitool
 	name = "omnitool"
