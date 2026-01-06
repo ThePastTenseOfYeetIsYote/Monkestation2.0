@@ -433,5 +433,32 @@
 /obj/structure/chrono_field/blob_act(obj/structure/blob/B)
 	return
 
+///Fast Actions - Makes all actions performed by the wearer extremely fast.
+/obj/item/mod/module/fast_actions
+	name = "MOD fast actions module"
+	desc = "A specialized module that enhances the suit's processing power to allow the wearer to perform actions at incredible speeds."
+	icon = 'icons/mob/actions/actions_minor_antag.dmi'
+	icon_state = "chrono_phase"
+	module_type = MODULE_TOGGLE
+	active_power_cost = DEFAULT_CHARGE_DRAIN * 0
+	incompatible_modules = list(/obj/item/mod/module/fast_actions)
+	cooldown_time = 0.5 SECONDS
+	overlay_state_inactive = "module_fast_actions"
+	overlay_state_active = "module_fast_actions_on"
+
+/obj/item/mod/module/fast_actions/on_activation()
+	. = ..()
+	if(!.)
+		return
+	if(mod.wearer)
+		mod.wearer.add_actionspeed_modifier(/datum/actionspeed_modifier/admin_fast_actions)
+
+/obj/item/mod/module/fast_actions/on_deactivation(display_message = TRUE, deleting = FALSE)
+	. = ..()
+	if(!.)
+		return
+	if(mod.wearer)
+		mod.wearer.remove_actionspeed_modifier(/datum/actionspeed_modifier/admin_fast_actions)
+
 #undef CHRONO_BEAM_RANGE
 #undef CHRONO_FRAME_COUNT

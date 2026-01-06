@@ -620,12 +620,14 @@
 		/obj/item/mod/module/shove_blocker,
 		/obj/item/mod/module/quick_cuff,
 		/obj/item/mod/module/rad_protection, // monkestation edit
+		/obj/item/mod/module/fast_actions,
 	)
 	default_pins = list(
 		/obj/item/mod/module/stealth/ninja,
 		/obj/item/mod/module/magboot/advanced,
 		/obj/item/mod/module/jetpack/advanced,
 		/obj/item/mod/module/anomaly_locked/kinesis/plus,
+		/obj/item/mod/module/fast_actions,
 	)
 
 //these exist for the prefs menu

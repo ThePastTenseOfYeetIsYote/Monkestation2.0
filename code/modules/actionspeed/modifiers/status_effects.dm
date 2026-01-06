@@ -12,3 +12,8 @@
 
 /datum/actionspeed_modifier/status_effect/hazard_area
 	multiplicative_slowdown = 4
+
+/datum/actionspeed_modifier/admin_fast_actions
+	variable = TRUE
+	multiplicative_slowdown = -0.9
+	id = "admin_fast_actions"
