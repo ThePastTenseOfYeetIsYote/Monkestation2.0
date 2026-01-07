@@ -80,9 +80,12 @@
 		)
 
 	var/dir_to_use = ISDIAGONALDIR(wearer.dir) ? (wearer.dir & (EAST|WEST)) : wearer.dir
-	var/icon/icon_to_use = masks_and_shading["[dir_to_use]"]["mask"]
-	var/icon/shading_to_use = masks_and_shading["[dir_to_use]"]["shading"]
-	var/size = masks_and_shading["[dir_to_use]"]["size"]
+	var/list/direction_data = masks_and_shading["[dir_to_use]"]
+	if(!direction_data)
+		return
+	var/icon/icon_to_use = direction_data["mask"]
+	var/icon/shading_to_use = direction_data["shading"]
+	var/size = direction_data["size"]
 
 	appearance.add_filter("Digitigrade", 1, displacement_map_filter(icon = icon_to_use, size = size))
 	appearance.add_filter("Digitigrade_shading", 1, layering_filter(icon = shading_to_use, blend_mode = BLEND_MULTIPLY))
