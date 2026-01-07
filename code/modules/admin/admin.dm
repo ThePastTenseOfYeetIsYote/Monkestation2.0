@@ -63,63 +63,114 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////ADMIN HELPER PROCS
 
 ADMIN_VERB(spawn_atom, R_SPAWN, FALSE, "Spawn", "Spawn an atom.", ADMIN_CATEGORY_DEBUG, object as text)
-	if(!object)
+	var/static/list/atom_types
+	if (isnull(atom_types))
+		atom_types = subtypesof(/atom)
+
+	var/chosen_path = null
+	var/list/preparsed = null
+	if (object)
+		preparsed = splittext(object, ":")
+		var/list/matches = filter_fancy_list(atom_types, preparsed[1])
+		if (length(matches) == 1)
+			chosen_path = matches[1]
+
+	if(!chosen_path)
+		var/datum/spawn_menu/menu = user.holder.spawn_menu
+		if (!menu)
+			menu = new()
+			user.holder.spawn_menu = menu
+		menu.init_value = object
+		menu.ui_interact(user.mob)
+		BLACKBOX_LOG_ADMIN_VERB("Spawn Atom")
 		return
 
-	var/list/preparsed = splittext(object,":")
-	var/path = preparsed[1]
 	var/amount = 1
-	if(length(preparsed) > 1) //MONKE EDIT
-		amount = clamp(text2num(preparsed[2]),1,ADMIN_SPAWN_CAP)
+	if (length(preparsed) > 1)
+		amount = clamp(text2num(preparsed[2]), 1, ADMIN_SPAWN_CAP)
 
-	var/chosen = pick_closest_path(path)
-	if(!chosen)
-		return
-	var/turf/T = get_turf(user.mob)
-
-	if(ispath(chosen, /turf))
-		T.ChangeTurf(chosen)
+	var/turf/target_turf = get_turf(user.mob)
+	if (ispath(chosen_path, /turf))
+		target_turf.ChangeTurf(chosen_path)
 	else
-		for(var/i in 1 to amount)
-			var/atom/A = new chosen(T)
-			A.flags_1 |= ADMIN_SPAWNED_1
+		for (var/i in 1 to amount)
+			var/atom/spawned = new chosen_path(target_turf)
+			spawned.flags_1 |= ADMIN_SPAWNED_1
 
-	log_admin("[key_name(user)] spawned [amount] x [chosen] at [AREACOORD(user.mob)]")
+	log_admin("[key_name(user)] spawned [amount] x [chosen_path] at [AREACOORD(user.mob)]")
 	BLACKBOX_LOG_ADMIN_VERB("Spawn Atom")
 
 ADMIN_VERB(spawn_atom_pod, R_SPAWN, FALSE, "PodSpawn", "Spawn an atom via supply drop.", ADMIN_CATEGORY_DEBUG, object as text)
 
+	var/static/list/atom_types
+	if (isnull(atom_types))
+		atom_types = subtypesof(/atom)
+
+	var/chosen_path = null
+	var/list/preparsed = null
+	if (object)
+		preparsed = splittext(object, ":")
+		var/list/matches = filter_fancy_list(atom_types, preparsed[1])
+		if (length(matches) == 1)
+			chosen_path = matches[1]
+
+	if(!chosen_path)
+		var/datum/spawn_menu/menu = user.holder.spawn_menu
+		if (!menu)
+			menu = new()
+			user.holder.spawn_menu = menu
+		menu.init_value = object
+		menu.ui_interact(user.mob)
+		BLACKBOX_LOG_ADMIN_VERB("Podspawn Atom")
+		return
+
 	if(!check_rights(R_SPAWN))
 		return
 
-	var/chosen = pick_closest_path(object)
-	if(!chosen)
-		return
 	var/turf/target_turf = get_turf(user.mob)
 
-	if(ispath(chosen, /turf))
-		target_turf.ChangeTurf(chosen)
+	if(ispath(chosen_path, /turf))
+		target_turf.ChangeTurf(chosen_path)
 	else
 		var/obj/structure/closet/supplypod/pod = podspawn(list(
 			"target" = target_turf,
 			"path" = /obj/structure/closet/supplypod/centcompod,
 		))
 		//we need to set the admin spawn flag for the spawned items so we do it outside of the podspawn proc
-		var/atom/A = new chosen(pod)
+		var/atom/A = new chosen_path(pod)
 		A.flags_1 |= ADMIN_SPAWNED_1
 
-	log_admin("[key_name(user)] pod-spawned [chosen] at [AREACOORD(user.mob)]")
+	log_admin("[key_name(user)] pod-spawned [chosen_path] at [AREACOORD(user.mob)]")
 	BLACKBOX_LOG_ADMIN_VERB("Podspawn Atom")
 
 ADMIN_VERB(spawn_cargo, R_SPAWN, FALSE, "Spawn Cargo", "Spawn a cargo crate.", ADMIN_CATEGORY_DEBUG, object as text)
-	var/chosen = pick_closest_path(object, make_types_fancy(subtypesof(/datum/supply_pack)))
-	if(!chosen)
+	var/static/list/supply_pack_types
+	if (isnull(supply_pack_types))
+		supply_pack_types = make_types_fancy(subtypesof(/datum/supply_pack))
+
+	var/chosen_path = null
+	var/list/preparsed = null
+	if (object)
+		preparsed = splittext(object, ":")
+		var/list/matches = filter_fancy_list(supply_pack_types, preparsed[1])
+		if (length(matches) == 1)
+			chosen_path = matches[1]
+
+	if(!chosen_path)
+		var/datum/spawn_menu/menu = user.holder.spawn_menu
+		if (!menu)
+			menu = new()
+			user.holder.spawn_menu = menu
+		menu.init_value = object
+		menu.ui_interact(user.mob)
+		BLACKBOX_LOG_ADMIN_VERB("Spawn Cargo")
 		return
-	var/datum/supply_pack/S = new chosen
+
+	var/datum/supply_pack/S = new chosen_path
 	S.admin_spawned = TRUE
 	S.generate(get_turf(user.mob))
 
-	log_admin("[key_name(user.mob)] spawned cargo pack [chosen] at [AREACOORD(user.mob)]")
+	log_admin("[key_name(user.mob)] spawned cargo pack [chosen_path] at [AREACOORD(user.mob)]")
 	BLACKBOX_LOG_ADMIN_VERB("Spawn Cargo")
 
 /datum/admins/proc/dynamic_mode_options(mob/user)

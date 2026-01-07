@@ -6747,6 +6747,7 @@
 #include "monkestation\code\modules\abberant_organs\triggers\generic\process.dm"
 #include "monkestation\code\modules\abberant_organs\triggers\liver\chemical_consumption.dm"
 #include "monkestation\code\modules\admin\admin.dm"
+#include "monkestation\code\modules\admin\spawn_menu.dm"
 #include "monkestation\code\modules\admin\antag_tokens.dm"
 #include "monkestation\code\modules\admin\camera_view.dm"
 #include "monkestation\code\modules\admin\event_tokens.dm"
