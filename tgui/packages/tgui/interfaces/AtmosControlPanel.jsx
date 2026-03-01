@@ -1,16 +1,16 @@
 import { map, sortBy } from 'common/collections';
 import { flow } from 'common/fp';
-import { useBackend } from '../backend';
+import { useMemo, useState } from 'react';
 import {
   Box,
   Button,
+  Dropdown,
   Flex,
   Section,
   Table,
-  Dropdown,
 } from 'tgui-core/components';
+import { useBackend } from '../backend';
 import { Window } from '../layouts';
-import { useMemo, useState } from 'react';
 
 const sortOptions = [
   { displayText: 'Area Name', value: 'area' },
@@ -49,6 +49,18 @@ export const AtmosControlPanel = (props) => {
             >
               {data.frozen === 1 ? 'Freeze Subsystem' : 'Unfreeze Subsystem'}
             </Button>
+          </Flex.Item>
+          <Flex.Item>
+            <Button.Checkbox
+              checked={data.background}
+              onClick={() =>
+                act('set_background', {
+                  status: !data.background,
+                })
+              }
+            >
+              Background
+            </Button.Checkbox>
           </Flex.Item>
           <Flex.Item>Fire Cnt: {data.fire_count}</Flex.Item>
           <Flex.Item>Active Turfs: {data.active_size}</Flex.Item>

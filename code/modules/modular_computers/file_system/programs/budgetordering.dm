@@ -51,10 +51,9 @@
 
 	//Aquire access from the inserted ID card.
 	if(!length(access))
-		var/obj/item/card/id/D = computer?.computer_id_slot?.GetID()
-		if(!D)
+		access = computer?.GetAccess()
+		if(!length(access))
 			return FALSE
-		access = D.GetAccess()
 
 	if(paccess_to_check in access)
 		return TRUE
@@ -68,7 +67,7 @@
 
 	var/datum/bank_account/buyer = SSeconomy.get_dep_account(cargo_account)
 	var/obj/item/card/id/id_card = computer.computer_id_slot?.GetID()
-	if(id_card?.registered_account)
+	if(id_card?.registered_account?.account_job)
 		buyer = SSeconomy.get_dep_account(id_card?.registered_account.account_job.paycheck_department)
 		if((ACCESS_COMMAND in id_card.access) || (ACCESS_QM in id_card.access))
 			requestonly = FALSE

@@ -352,7 +352,7 @@
 	for(var/mob/M in hearers)
 		if(push_appearance)
 			M << output(push_appearance, "push_appearance_placeholder_id")
-		if(audible_message_flags & EMOTE_MESSAGE && runechat_prefs_check(M, audible_message_flags) && M.can_hear())
+		if(audible_message_flags & EMOTE_MESSAGE && runechat_prefs_check(M, audible_message_flags))
 			M.create_chat_message(src, raw_message = raw_msg, runechat_flags = audible_message_flags)
 		M.show_message(message, MSG_AUDIBLE, deaf_message, MSG_VISUAL)
 
@@ -1131,7 +1131,8 @@
  * * ALLOW_VENTCRAWL - Mobs with ventcrawl traits can alt-click this to vent
  * * BYPASS_ADJACENCY - The target does not have to be adjacent
  * * SILENT_ADJACENCY - Adjacency is required but errors are not printed
-* * NOT_INSIDE_TARGET - The target maybe adjacent but the mob should not be inside the target
+ * * NOT_INSIDE_TARGET - The target maybe adjacent but the mob should not be inside the target
+ * * ALLOW_PAI - Allows pAIs to perform an action
  *
  * silence_adjacency: Sometimes we want to use this proc to check interaction without allowing it to throw errors for base case adjacency
  * Alt click uses this, as otherwise you can detect what is interactable from a distance via the error message
@@ -1688,4 +1689,10 @@
 	if(QDELETED(container))
 		CRASH("Failed to send appearance to client")
 	return "<img class='icon [extra_classes]' src='\ref[container]' style='image-rendering: pixelated; -ms-interpolation-mode: nearest-neighbor'>"
+
+/**
+ * Returns the access list for this mob, most mobs don't have any access.
+ */
+/mob/proc/get_access() as /list
+	return list()
 

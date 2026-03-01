@@ -78,6 +78,7 @@
 		/obj/item/melee/sickly_blade/knock, //monkestation edit(maybe)
 		/obj/item/clockwork/replica_fabricator, //monkestation edit
 		/obj/item/clockwork/clockwork_slab, //monkestation edit
+		/obj/item/holotool, //monkestation edit
 	))
 
 /obj/item/storage/belt/utility/chief
@@ -775,12 +776,16 @@
 
 /obj/item/storage/belt/bandolier/Initialize(mapload)
 	. = ..()
-	atom_storage.max_slots = 18
-	atom_storage.max_total_storage = 18
+	atom_storage.max_slots = 28
+	atom_storage.max_total_storage = 28
 	atom_storage.numerical_stacking = TRUE
+	atom_storage.allow_quick_gather = TRUE
+	atom_storage.allow_quick_empty = TRUE
+
 	atom_storage.set_holdable(list(
 		/obj/item/ammo_casing/a762,
 		/obj/item/ammo_casing/shotgun,
+		/obj/item/ammo_casing/a357,
 	))
 
 /obj/item/storage/belt/fannypack
