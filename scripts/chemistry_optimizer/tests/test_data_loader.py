@@ -4,7 +4,7 @@ import unittest
 import os
 import json
 import tempfile
-from typing import Any, Optional
+from typing import Any
 
 from scripts.chemistry_optimizer.data_loader import ChemistryDataLoader
 
@@ -464,6 +464,13 @@ class TestRoundToDispense(unittest.TestCase):
         loader.load()
 
         self.assertEqual(loader.round_to_dispense(0), 0)
+
+    def test_round_to_dispense_negative(self) -> None:
+        """Test rounding negative numbers."""
+        loader = ChemistryDataLoader(self.temp_file.name)
+        loader.load()
+
+        self.assertEqual(loader.round_to_dispense(-5), 0)
 
     def test_round_to_dispense_decimal(self) -> None:
         """Test rounding decimal values."""

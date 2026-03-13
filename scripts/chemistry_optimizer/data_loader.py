@@ -1,6 +1,7 @@
 """Chemistry data loader for loading and indexing chemistry data."""
 
 import json
+import math
 from typing import Any, Optional
 
 
@@ -181,7 +182,6 @@ class ChemistryDataLoader:
         if amount <= 0:
             return 0
 
-        import math
         return int(math.ceil(amount / MIN_DISPENSE) * MIN_DISPENSE)
 
     def get_all_reagents(self) -> dict[str, dict[str, Any]]:
