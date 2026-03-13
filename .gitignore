@@ -1,5 +1,6 @@
 # monkestation addition: icon_exists cache
 icon_exists_cache.json
+.worktrees/
 
 ###Files and folders specified here will never be tracked.
 
