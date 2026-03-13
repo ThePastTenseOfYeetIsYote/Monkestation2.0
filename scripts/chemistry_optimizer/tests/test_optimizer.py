@@ -349,9 +349,28 @@ class TestAvoidUnwantedReagents(unittest.TestCase):
         )
         result = self.optimizer.optimize(request)
 
-        # Should still succeed but may need to find alternative path
-        # or warn about limited options
-        self.assertIsInstance(result, OptimizationResult)
+        # Should fail or warn because space drug requires ethanol
+        # Verify that avoidance actually affects recipe selection
+        self.assertFalse(result.success, 
+            "Should fail when required reagent is avoided")
+        self.assertGreater(len(result.warnings), 0,
+            "Should have warnings when no valid recipes available")
+
+    def test_optimize_returns_success_false_when_no_valid_recipes(self) -> None:
+        """Test that optimizer returns success=False when no valid recipes exist."""
+        # Request a reagent that has no recipes
+        request = OptimizationRequest(
+            targets=[{"reagent": "Water", "amount": 50}]
+        )
+        result = self.optimizer.optimize(request)
+
+        # Water has no recipes that produce it
+        self.assertFalse(result.success,
+            "Should return success=False when no recipes found")
+        self.assertEqual(len(result.recipes_used), 0,
+            "Should have no recipes used when optimization fails")
+        self.assertGreater(len(result.warnings), 0,
+            "Should have warnings explaining why optimization failed")
 
     def test_avoid_by_type(self) -> None:
         """Test avoiding reagents by typepath."""

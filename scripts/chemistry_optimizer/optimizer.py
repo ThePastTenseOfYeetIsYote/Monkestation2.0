@@ -5,6 +5,12 @@ from typing import Any
 
 from scripts.chemistry_optimizer.data_loader import ChemistryDataLoader, MIN_DISPENSE
 
+# Scoring weights and penalties for recipe optimization
+EFFICIENCY_WEIGHT = 10.0
+BASICNESS_WEIGHT = 2.0
+SAFETY_PENALTY = 3.0
+BYPRODUCT_PENALTY = 5.0
+
 
 @dataclass
 class OptimizationRequest:
@@ -12,6 +18,7 @@ class OptimizationRequest:
 
     Attributes:
         targets: List of target reagents to produce with amounts.
+            Amounts should be positive values (> 0).
         avoid: List of reagent names or typepaths to avoid.
         max_byproducts: Maximum allowed byproducts in the recipe.
         prefer_cold: Whether to prefer cold recipes.
@@ -218,15 +225,20 @@ class RecipeOptimizer:
 
         Args:
             recipe: The recipe dict to use.
-            target_amount: The desired output amount.
+            target_amount: The desired output amount. Must be positive.
 
         Returns:
             Dict mapping reagent typepaths to required amounts (rounded to 5u).
+            Returns empty dict if target_amount is zero or negative.
         """
         required_reagents = recipe.get("required_reagents", {})
         results = recipe.get("results", [])
 
         if not required_reagents or not results:
+            return {}
+
+        # Handle zero or negative target amounts
+        if target_amount <= 0:
             return {}
 
         # Calculate how many batches we need
@@ -291,13 +303,13 @@ class RecipeOptimizer:
 
         # Base efficiency score (weighted heavily)
         efficiency = self.calculate_efficiency(recipe)
-        score += efficiency * 10.0
+        score += efficiency * EFFICIENCY_WEIGHT
 
         # Basicness score (lower is better, so we invert)
         if request.prefer_basic:
             basicness = self.calculate_basicness_score(recipe)
             # Invert so lower basicness = higher score
-            score += (10.0 - basicness) * 2.0
+            score += (10.0 - basicness) * BASICNESS_WEIGHT
 
         # Safety score
         if request.prefer_safe:
@@ -307,7 +319,7 @@ class RecipeOptimizer:
                 if self._loader.is_reagent_harmful(reagent_type):
                     harmful_count += 1
             # Penalize harmful reagents
-            score -= harmful_count * 3.0
+            score -= harmful_count * SAFETY_PENALTY
 
         # Temperature preference
         is_cold = recipe.get("is_cold_recipe", False)
@@ -321,7 +333,7 @@ class RecipeOptimizer:
         if results:
             # Assume first result is the target, rest are byproducts
             byproduct_count = len(results) - 1
-            score -= byproduct_count * 2.0
+            score -= byproduct_count * BYPRODUCT_PENALTY
 
         return score
 
@@ -405,7 +417,6 @@ class RecipeOptimizer:
             target_reagent = self._loader.get_reagent_by_name(reagent_name)
             target_type = target_reagent.get("type", "") if target_reagent else ""
 
-            output_count = results.count(target_type) if target_type else len(results)
             total_output += target_amount
 
             # Track byproducts
