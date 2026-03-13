@@ -64,6 +64,10 @@ def format_result(result: OptimizationResult, loader: ChemistryDataLoader) -> st
     if result.input_reagents:
         for input_item in result.input_reagents:
             reagent_type = input_item.get("type", "")
+            # Validate type is present
+            if not reagent_type:
+                lines.append("  (Warning: Input reagent missing type)")
+                continue
             amount = input_item.get("amount", 0)
             reagent_data = loader.get_reagent_by_type(reagent_type)
             reagent_name = reagent_data.get("name", reagent_type) if reagent_data else reagent_type
@@ -261,14 +265,30 @@ Examples:
         "--prefer-safe",
         action="store_true",
         default=True,
+        dest="prefer_safe",
         help="Avoid dangerous reactions (default: True)",
+    )
+
+    parser.add_argument(
+        "--no-prefer-safe",
+        action="store_false",
+        dest="prefer_safe",
+        help="Allow dangerous reactions",
     )
 
     parser.add_argument(
         "--prefer-basic",
         action="store_true",
         default=True,
+        dest="prefer_basic",
         help="Prefer basic reagents (default: True)",
+    )
+
+    parser.add_argument(
+        "--no-prefer-basic",
+        action="store_false",
+        dest="prefer_basic",
+        help="Don't prefer basic reagents",
     )
 
     # File I/O
@@ -324,7 +344,7 @@ def main() -> int:
 
     # Merge with file input if provided
     if request_data:
-        # File targets take precedence, merge with CLI targets
+        # Both file and CLI targets are combined (file targets first, then CLI targets)
         file_targets = request_data.get("targets", [])
         cli_targets = targets
 
