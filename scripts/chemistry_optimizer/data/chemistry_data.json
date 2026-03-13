@@ -1,4 +1,196 @@
 {
-  "reagents": {},
-  "reactions": {}
+  "reagents": {
+    "/datum/reagent/water": {
+      "type": "/datum/reagent/water",
+      "name": "Water",
+      "description": "A clear liquid essential for life.",
+      "color": "#0000FF",
+      "ph": 7.0,
+      "mass": 18.015,
+      "specific_heat": 4.184,
+      "chemical_flags": 0,
+      "reaction_tags": [],
+      "harmful": false,
+      "basicness": 1
+    },
+    "/datum/reagent/sugar": {
+      "type": "/datum/reagent/sugar",
+      "name": "Sugar",
+      "description": "Sweet crystalline substance.",
+      "color": "#FFFFFF",
+      "ph": 7.0,
+      "mass": 342.3,
+      "specific_heat": 1.2,
+      "chemical_flags": 0,
+      "reaction_tags": [],
+      "harmful": false,
+      "basicness": 1
+    },
+    "/datum/reagent/ethanol": {
+      "type": "/datum/reagent/ethanol",
+      "name": "Ethanol",
+      "description": "Alcohol used in drinks and fuel.",
+      "color": "#8080FF",
+      "ph": 7.3,
+      "mass": 46.07,
+      "specific_heat": 2.44,
+      "chemical_flags": 0,
+      "reaction_tags": [],
+      "harmful": true,
+      "basicness": 1
+    },
+    "/datum/reagent/carbon": {
+      "type": "/datum/reagent/carbon",
+      "name": "Carbon",
+      "description": "Elemental carbon.",
+      "color": "#000000",
+      "ph": 7.0,
+      "mass": 12.01,
+      "specific_heat": 0.7,
+      "chemical_flags": 0,
+      "reaction_tags": [],
+      "harmful": false,
+      "basicness": 1
+    },
+    "/datum/reagent/space_drug": {
+      "type": "/datum/reagent/space_drug",
+      "name": "Space Drug",
+      "description": "A hallucinogenic substance.",
+      "color": "#FF00FF",
+      "ph": 6.5,
+      "mass": 50.0,
+      "specific_heat": 3.0,
+      "chemical_flags": 0,
+      "reaction_tags": [],
+      "harmful": true,
+      "basicness": 5
+    },
+    "/datum/reagent/synaptizine": {
+      "type": "/datum/reagent/synaptizine",
+      "name": "Synaptizine",
+      "description": "A smart drug that enhances cognitive function.",
+      "color": "#00FF00",
+      "ph": 7.2,
+      "mass": 85.0,
+      "specific_heat": 2.8,
+      "chemical_flags": 0,
+      "reaction_tags": [],
+      "harmful": false,
+      "basicness": 8
+    },
+    "/datum/reagent/morphine": {
+      "type": "/datum/reagent/morphine",
+      "name": "Morphine",
+      "description": "Powerful painkiller.",
+      "color": "#FFFF00",
+      "ph": 6.8,
+      "mass": 75.0,
+      "specific_heat": 2.5,
+      "chemical_flags": 0,
+      "reaction_tags": [],
+      "harmful": true,
+      "basicness": 6
+    },
+    "/datum/reagent/charcoal": {
+      "type": "/datum/reagent/charcoal",
+      "name": "Charcoal",
+      "description": "Activated charcoal for filtering.",
+      "color": "#333333",
+      "ph": 7.0,
+      "mass": 20.0,
+      "specific_heat": 0.8,
+      "chemical_flags": 0,
+      "reaction_tags": [],
+      "harmful": false,
+      "basicness": 2
+    }
+  },
+  "reactions": {
+    "/datum/chemical_reaction/ethanol": {
+      "type": "/datum/chemical_reaction/ethanol",
+      "name": "Ethanol Fermentation",
+      "results": ["/datum/reagent/ethanol"],
+      "required_reagents": {
+        "/datum/reagent/sugar": 5,
+        "/datum/reagent/water": 5
+      },
+      "required_catalysts": [],
+      "required_temp": 0,
+      "optimal_temp": 300,
+      "overheat_temp": 400,
+      "reaction_flags": 0,
+      "reaction_tags": [],
+      "is_cold_recipe": false,
+      "rate_up_lim": 100
+    },
+    "/datum/chemical_reaction/space_drug": {
+      "type": "/datum/chemical_reaction/space_drug",
+      "name": "Space Drug Synthesis",
+      "results": ["/datum/reagent/space_drug"],
+      "required_reagents": {
+        "/datum/reagent/ethanol": 5,
+        "/datum/reagent/carbon": 5
+      },
+      "required_catalysts": [],
+      "required_temp": 0,
+      "optimal_temp": 350,
+      "overheat_temp": 450,
+      "reaction_flags": 0,
+      "reaction_tags": [],
+      "is_cold_recipe": false,
+      "rate_up_lim": 50
+    },
+    "/datum/chemical_reaction/synaptizine": {
+      "type": "/datum/chemical_reaction/synaptizine",
+      "name": "Synaptizine Synthesis",
+      "results": ["/datum/reagent/synaptizine"],
+      "required_reagents": {
+        "/datum/reagent/space_drug": 5,
+        "/datum/reagent/carbon": 5,
+        "/datum/reagent/water": 5
+      },
+      "required_catalysts": [],
+      "required_temp": 0,
+      "optimal_temp": 370,
+      "overheat_temp": 470,
+      "reaction_flags": 0,
+      "reaction_tags": [],
+      "is_cold_recipe": false,
+      "rate_up_lim": 40
+    },
+    "/datum/chemical_reaction/morphine": {
+      "type": "/datum/chemical_reaction/morphine",
+      "name": "Morphine Extraction",
+      "results": ["/datum/reagent/morphine"],
+      "required_reagents": {
+        "/datum/reagent/charcoal": 10,
+        "/datum/reagent/water": 10
+      },
+      "required_catalysts": [],
+      "required_temp": 0,
+      "optimal_temp": 280,
+      "overheat_temp": 380,
+      "reaction_flags": 0,
+      "reaction_tags": [],
+      "is_cold_recipe": false,
+      "rate_up_lim": 60
+    },
+    "/datum/chemical_reaction/ethanol_cold": {
+      "type": "/datum/chemical_reaction/ethanol_cold",
+      "name": "Cold Ethanol Fermentation",
+      "results": ["/datum/reagent/ethanol"],
+      "required_reagents": {
+        "/datum/reagent/sugar": 10,
+        "/datum/reagent/water": 10
+      },
+      "required_catalysts": [],
+      "required_temp": 0,
+      "optimal_temp": 200,
+      "overheat_temp": 250,
+      "reaction_flags": 0,
+      "reaction_tags": [],
+      "is_cold_recipe": true,
+      "rate_up_lim": 50
+    }
+  }
 }
