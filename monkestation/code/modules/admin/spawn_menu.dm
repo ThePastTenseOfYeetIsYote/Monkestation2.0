@@ -17,7 +17,7 @@
 
 /datum/spawn_menu
 	/// Does the menu default to a regex prefix?
-	var/regex_search = FALSE
+	var/regex_search = TRUE
 	/// Does the search include atom names?
 	var/name_search = TRUE
 	/// Should we display full typepaths or the condensed versions?

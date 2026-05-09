@@ -106,10 +106,7 @@ docs/_build/
 
 # IPython Notebook
 .ipynb_checkpoints
-.geminiignore
-GEMINI.md
-QWEN.md
-.qwenignore
+.pi
 # pyenv
 .python-version
 
@@ -255,3 +252,4 @@ rust_g64.dll
 #ableton sound analysis files
 *.asd
 *.md
+
