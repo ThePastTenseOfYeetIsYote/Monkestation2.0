@@ -19,7 +19,7 @@
 	/// Does the menu default to a regex prefix?
 	var/regex_search = TRUE
 	/// Does the search include atom names?
-	var/name_search = TRUE
+	var/name_search = FALSE
 	/// Should we display full typepaths or the condensed versions?
 	var/fancy_types = TRUE
 	/// Should abstract types be included in the search?
