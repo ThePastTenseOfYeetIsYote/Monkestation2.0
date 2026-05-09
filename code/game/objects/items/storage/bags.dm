@@ -497,13 +497,25 @@
 		/obj/item/reagent_containers/pill
 	))
 
-	new /obj/item/reagent_containers/cup/beaker/large/water(src)
-	// Add 50 of each pill
-	for (var/i = 1 to 50)
-		new /obj/item/reagent_containers/pill/fluorosurfactant(src)
-		new /obj/item/reagent_containers/pill/ice
-		new /obj/item/reagent_containers/pill/icefraction1(src)
-		new /obj/item/reagent_containers/pill/icefraction2(src)
+	// 50 of each empty beaker type
+	for(var/i in 1 to 50)
+		new /obj/item/reagent_containers/cup/beaker/large(src)
+		new /obj/item/reagent_containers/cup/beaker/plastic(src)
+		new /obj/item/reagent_containers/cup/beaker/meta(src)
+		new /obj/item/reagent_containers/cup/beaker/noreact(src)
+		new /obj/item/reagent_containers/cup/beaker/bluespace(src)
+
+	// 50 fluorosurfactant tubes
+	for(var/i = 1 to 50)
+		var/obj/item/reagent_containers/cup/tube/fluoro = new(src)
+		fluoro.name = "fluorosurfactant"
+		fluoro.reagents.add_reagent(/datum/reagent/fluorosurfactant, 2.68, reagtemp = 300)
+
+	// 50 ice tubes
+	for(var/i = 1 to 50)
+		var/obj/item/reagent_containers/cup/tube/ice_tube = new(src)
+		ice_tube.name = "Ice"
+		ice_tube.reagents.add_reagent(/datum/reagent/consumable/ice, 2.91, reagtemp = 270)
 
 /*
  *  Biowaste bag (mostly for virologists)
