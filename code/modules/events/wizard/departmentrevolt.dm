@@ -13,6 +13,8 @@
 		/datum/event_admin_setup/question/departmental_revolt_annouce,
 		/datum/event_admin_setup/question/departmental_revolt_dangerous
 	)
+	min_wizard_trigger_potency = 6
+	max_wizard_trigger_potency = 100
 
 /datum/round_event/wizard/deprevolt
 	///which department is revolting?
