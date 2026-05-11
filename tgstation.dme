@@ -6562,6 +6562,7 @@
 #include "monkestation\code\datums\components\basic_inhands.dm"
 #include "monkestation\code\datums\components\carbon_sprint.dm"
 #include "monkestation\code\datums\components\charge_adjuster.dm"
+#include "monkestation\code\datums\components\damage_notifier.dm"
 #include "monkestation\code\datums\components\crafting.dm"
 #include "monkestation\code\datums\components\fluffy_tongue.dm"
 #include "monkestation\code\datums\components\gift_item.dm"

@@ -112,6 +112,8 @@
 	current = round(clamp(current + modify, 0, maximum), DAMAGE_PRECISION)
 	if(current != old_current)
 		should_notify_parent = TRUE
+		// Send signal when stamina changes (for damage notification system)
+		SEND_SIGNAL(parent, COMSIG_LIVING_ADJUST_STAMINA_DAMAGE, STAMINA, modify, forced)
 	if(modify < 0)
 		pause(STAMINA_REGEN_TIME)
 	update()
@@ -134,6 +136,8 @@
 		current = round(clamp(current + modify, 0, maximum), DAMAGE_PRECISION)
 	if(current != old_current)
 		should_notify_parent = TRUE
+		// Send signal when stamina changes (for damage notification system)
+		SEND_SIGNAL(parent, COMSIG_LIVING_ADJUST_STAMINA_DAMAGE, STAMINA, modify, forced)
 	if(modify < 0)
 		pause(STAMINA_REGEN_TIME)
 	update()
