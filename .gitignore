@@ -182,7 +182,7 @@ Temporary Items
 /tools/MapAtmosFixer/MapAtmosFixer/bin/*
 /tools/CreditsTool/bin/*
 /tools/CreditsTool/obj/*
-
+/.planning/*
 #GitHub Atom
 .atom-build.json
 
