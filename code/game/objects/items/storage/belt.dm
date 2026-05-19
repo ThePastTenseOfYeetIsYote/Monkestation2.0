@@ -92,7 +92,6 @@
 	preload = TRUE
 
 /obj/item/storage/belt/utility/chief/full/PopulateContents()
-<<<<<<< HEAD
 	SSwardrobe.provide_type(/obj/item/screwdriver/abductor, src)
 	SSwardrobe.provide_type(/obj/item/wrench/abductor, src)
 	SSwardrobe.provide_type(/obj/item/weldingtool/abductor, src)
@@ -101,18 +100,10 @@
 	SSwardrobe.provide_type(/obj/item/multitool/abductor, src)
 	SSwardrobe.provide_type(/obj/item/stack/cable_coil, src)
 	SSwardrobe.provide_type(/obj/item/analyzer, src)
-=======
-	SSwardrobe.provide_type(/obj/item/screwdriver/power, src)
-	SSwardrobe.provide_type(/obj/item/crowbar/power, src)
-	SSwardrobe.provide_type(/obj/item/weldingtool/experimental, src)
-	SSwardrobe.provide_type(/obj/item/multitool/tricorder, src)
-	SSwardrobe.provide_type(/obj/item/stack/cable_coil, src)
->>>>>>> 0c1a980e177be94d6e5776a8b6bcf81af7292c90
 	SSwardrobe.provide_type(/obj/item/extinguisher/mini, src)
 
 /obj/item/storage/belt/utility/chief/full/get_types_to_preload()
 	var/list/to_preload = list() //Yes this is a pain. Yes this is the point
-<<<<<<< HEAD
 	to_preload += /obj/item/screwdriver/abductor
 	to_preload += /obj/item/wrench/abductor
 	to_preload += /obj/item/weldingtool/abductor
@@ -120,13 +111,6 @@
 	to_preload += /obj/item/wirecutters/abductor
 	to_preload += /obj/item/multitool/abductor
 	to_preload += /obj/item/analyzer
-=======
-	to_preload += /obj/item/screwdriver/power
-	to_preload += /obj/item/crowbar/power
-	to_preload += /obj/item/weldingtool/experimental
-	to_preload += /obj/item/extinguisher/mini
-	to_preload += /obj/item/multitool/tricorder
->>>>>>> 0c1a980e177be94d6e5776a8b6bcf81af7292c90
 	to_preload += /obj/item/stack/cable_coil
 	to_preload += /obj/item/extinguisher/mini
 	return to_preload
