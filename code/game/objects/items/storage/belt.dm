@@ -672,6 +672,7 @@
 	worn_icon_state = "security"
 	content_overlays = TRUE
 	uses_advanced_reskins = FALSE
+	unique_reskin = null
 
 /obj/item/storage/belt/military/abductor/full/PopulateContents()
 	new /obj/item/screwdriver/abductor(src)
@@ -689,6 +690,7 @@
 	inhand_icon_state = "security"
 	worn_icon_state = "military"
 	uses_advanced_reskins = FALSE
+	unique_reskin = null
 
 /obj/item/storage/belt/military/assault
 	name = "assault belt"
@@ -697,6 +699,7 @@
 	inhand_icon_state = "security"
 	worn_icon_state = "assault"
 	uses_advanced_reskins = FALSE
+	unique_reskin = null
 
 /obj/item/storage/belt/military/assault/Initialize(mapload)
 	. = ..()
