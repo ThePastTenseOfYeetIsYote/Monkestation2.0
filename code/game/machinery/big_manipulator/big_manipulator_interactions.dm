@@ -170,8 +170,14 @@
 		monkey_resolve.istate |= ISTATE_HARM
 	else
 		monkey_resolve.istate &= ~ISTATE_HARM
+
+	if(destination_task.worker_use_rmb)
+		monkey_resolve.istate |= ISTATE_SECONDARY
+	else
+		monkey_resolve.istate &= ~ISTATE_SECONDARY
+
 	held_item.melee_attack_chain(monkey_resolve, type_to_use, list(RIGHT_CLICK = destination_task.worker_use_rmb ? TRUE : FALSE))
-	monkey_resolve.istate &= ~ISTATE_HARM
+	monkey_resolve.istate &= ~(ISTATE_HARM | ISTATE_SECONDARY)
 	do_attack_animation(destination_turf)
 	manipulator_arm.do_attack_animation(destination_turf)
 
@@ -198,9 +204,8 @@
 		obj_resolve.forceMove(src)
 
 	if(destination_task.worker_interaction == WORKER_SINGLE_USE && item_used_this_iteration)
-		obj_resolve.forceMove(drop_turf)
-		obj_resolve.dir = get_dir(get_turf(obj_resolve), get_turf(src))
-		finish_manipulation()
+		current_task = null
+		schedule_next_cycle()
 		return
 
 	if(!on)
