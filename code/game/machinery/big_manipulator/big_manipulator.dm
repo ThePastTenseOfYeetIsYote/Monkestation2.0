@@ -3,7 +3,6 @@
 	desc = "Operates different objects. Truly, a groundbreaking innovation..."
 	icon = 'icons/obj/machines/big_manipulator_parts/big_manipulator_core.dmi'
 	icon_state = "core"
-	post_init_icon_state = "core"
 	density = TRUE
 	circuit = /obj/item/circuitboard/machine/big_manipulator
 	greyscale_colors = "#d8ce13"
@@ -66,7 +65,7 @@
 		balloon_alert(user, "task limit reached!")
 		return FALSE
 
-	var/datum/stock_part/servo/locate_servo = locate() in component_parts
+	var/datum/stock_part/manipulator/locate_servo = locate() in component_parts
 	var/manipulator_tier = locate_servo ? locate_servo.tier : 1
 
 	var/datum/manipulator_task/new_task
@@ -121,7 +120,7 @@
 
 /// Checks the component tiers, adjusting the properties of the manipulator.
 /obj/machinery/big_manipulator/proc/process_upgrades()
-	var/datum/stock_part/servo/locate_servo = locate() in component_parts
+	var/datum/stock_part/manipulator/locate_servo = locate() in component_parts
 	if(!locate_servo)
 		return
 
@@ -195,16 +194,6 @@
 		context[SCREENTIP_CONTEXT_LMB] = "Interact with wires"
 		return CONTEXTUAL_SCREENTIP_SET
 
-/obj/machinery/big_manipulator/atom_deconstruct(disassembled)
-	if(task_disk)
-		task_disk.forceMove(drop_location())
-		task_disk = null
-	unregister_task_turf_signals()
-	QDEL_NULL(manipulator_arm)
-	QDEL_LIST(tasks)
-	id_lock = null
-	return ..()
-
 /obj/machinery/big_manipulator/Destroy(force)
 	unregister_task_turf_signals()
 	QDEL_NULL(task_disk)
@@ -222,8 +211,8 @@
 	if(gone != poor_monkey)
 		return
 
-	manipulator_arm.vis_contents -= poor_monkey
-	poor_monkey.remove_offsets(type)
+	vis_contents -= poor_monkey
+	poor_monkey.transform = matrix()
 	monkey_worker = null
 
 
@@ -265,13 +254,13 @@
 			validate_all_tasks()
 
 /obj/machinery/big_manipulator/screwdriver_act(mob/living/user, obj/item/tool)
-	return default_deconstruction_screwdriver(user, tool)
+	return default_deconstruction_screwdriver(user, "core", "core", tool)
 
 /obj/machinery/big_manipulator/crowbar_act(mob/living/user, obj/item/tool)
-	return default_deconstruction_crowbar(user, tool)
+	return default_deconstruction_crowbar(tool)
 
 /obj/machinery/big_manipulator/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(user.combat_mode)
+	if(user.istate & ISTATE_HARM)
 		return NONE
 
 	if(istype(tool, /obj/item/disk/manipulator))
@@ -313,7 +302,7 @@
 
 	balloon_alert(user, "unbuckled")
 	poor_monkey.drop_all_held_items()
-	poor_monkey.forceMove(drop_point)
+	poor_monkey.forceMove(drop_location())
 
 /obj/machinery/big_manipulator/mouse_drop_receive(atom/monkey, mob/user, params)
 	if(on || stopping)
@@ -340,13 +329,9 @@
 	monkey_worker = WEAKREF(poor_monkey)
 	poor_monkey.drop_all_held_items()
 	poor_monkey.forceMove(src)
-	manipulator_arm.vis_contents += poor_monkey
+	vis_contents += poor_monkey
 	poor_monkey.dir = manipulator_arm.dir
-	poor_monkey.add_offsets(
-		type,
-		x_add = 32 + manipulator_arm.calculate_item_offset(TRUE, pixels_to_offset = 16),
-		y_add = 32 + manipulator_arm.calculate_item_offset(FALSE, pixels_to_offset = 16)
-	)
+	poor_monkey.transform = manipulator_arm.transform
 
 /obj/machinery/big_manipulator/attackby(obj/item/some_item, mob/user, params)
 	. = ..()
@@ -370,7 +355,12 @@
 /obj/machinery/big_manipulator/proc/create_manipulator_arm()
 	manipulator_arm = new /obj/effect/big_manipulator_arm(src)
 	manipulator_arm.dir = NORTH
+	manipulator_arm.target_dir = NORTH
 	vis_contents += manipulator_arm
+
+/obj/machinery/big_manipulator/Initialize(mapload)
+	. = ..()
+	update_strategies()
 
 /obj/machinery/big_manipulator/proc/toggle_power_state(mob/user)
 	var/newly_on = !on
@@ -587,8 +577,12 @@
 			return TRUE
 
 		if("unbuckle")
-			unbuckle_all_mobs()
-			monkey_worker = null
+			if(monkey_worker)
+				var/mob/living/carbon/human/species/monkey/poor_monkey = monkey_worker.resolve()
+				if(poor_monkey && poor_monkey.loc == src)
+					poor_monkey.forceMove(drop_location())
+					manipulator_arm.vis_contents -= poor_monkey
+					monkey_worker = null
 			return TRUE
 
 		if("adjust_task_param")
@@ -673,7 +667,7 @@
 	current_task = null
 
 	var/turf/base = get_turf(src)
-	var/datum/stock_part/servo/locate_servo = locate() in component_parts
+	var/datum/stock_part/manipulator/locate_servo = locate() in component_parts
 	var/manipulator_tier = locate_servo ? locate_servo.tier : 1
 
 	for(var/list/task_data as anything in task_disk.tasks_data)
@@ -919,3 +913,94 @@
 		if(TASKING_STRICT)
 			return new /datum/tasking_strategy/strict()
 	return new /datum/tasking_strategy/sequential()
+
+/obj/machinery/big_manipulator/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "BigManipulator")
+		ui.open()
+
+/obj/machinery/big_manipulator/ui_data(mob/user)
+	. = list(
+		"active" = on,
+		"stopping" = stopping,
+		"current_task" = current_task?.type || null,
+		"speed_multiplier" = speed_multiplier,
+		"min_speed_multiplier" = min_speed_multiplier,
+		"max_speed_multiplier" = max_speed_multiplier,
+		"manipulator_position" = "[x],[y]",
+		"tasking_strategy" = tasking_strategy,
+		"has_monkey" = !isnull(monkey_worker),
+		"disk_inserted" = !isnull(task_disk),
+		"disk_read_only" = task_disk?.read_only || FALSE,
+		"disk_task_count" = length(task_disk?.tasks_data || list()),
+	)
+
+	.["tasks_data"] = list()
+	for(var/datum/manipulator_task/task as anything in tasks)
+		var/task_type = ""
+		if(istype(task, /datum/manipulator_task/cargo/pickup))
+			task_type = "pickup"
+		else if(istype(task, /datum/manipulator_task/cargo/dropoff_base/drop))
+			task_type = "drop"
+		else if(istype(task, /datum/manipulator_task/cargo/dropoff_base/throw))
+			task_type = "throw"
+		else if(istype(task, /datum/manipulator_task/cargo/dropoff_base/use))
+			task_type = "use"
+		else if(istype(task, /datum/manipulator_task/cargo/interact))
+			task_type = "interact"
+		else if(istype(task, /datum/manipulator_task/simple/wait))
+			task_type = "wait"
+
+		var/list/task_data = list(
+			"name" = task.name,
+			"id" = "[REF(task)]",
+			"task_type" = task_type,
+		)
+		if(istype(task, /datum/manipulator_task/cargo))
+			var/datum/manipulator_task/cargo/task_cargo = task
+			if(task_cargo.interaction_turf)
+				task_data["turf"] = "[task_cargo.interaction_turf.x - x],[task_cargo.interaction_turf.y - y]"
+			task_data["filters_status"] = task_cargo.should_use_filters
+			task_data["filtering_mode"] = task_cargo.filtering_mode
+			task_data["settings_list"] = list()
+			for(var/datum/manipulator_priority/priority as anything in task_cargo.interaction_priorities)
+				task_data["settings_list"] += list(list(
+					"name" = priority.name,
+					"active" = priority.active,
+				))
+			task_data["item_filters"] = list()
+			for(var/atom/movable/filter_atom as anything in task_cargo.atom_filters)
+				task_data["item_filters"] += "[filter_atom]"
+
+		if(istype(task, /datum/manipulator_task/cargo/pickup))
+			var/datum/manipulator_task/cargo/pickup/task_pickup = task
+			task_data["pickup_eagerness"] = task_pickup.pickup_eagerness
+
+		if(istype(task, /datum/manipulator_task/cargo/dropoff_base/drop))
+			var/datum/manipulator_task/cargo/dropoff_base/drop/task_drop = task
+			task_data["overflow_status"] = task_drop.overflow_status
+
+		if(istype(task, /datum/manipulator_task/cargo/dropoff_base/throw))
+			var/datum/manipulator_task/cargo/dropoff_base/throw/task_throw = task
+			task_data["throw_range"] = task_throw.throw_range
+
+		if(istype(task, /datum/manipulator_task/cargo/dropoff_base/use))
+			var/datum/manipulator_task/cargo/dropoff_base/use/task_use = task
+			task_data["worker_interaction"] = task_use.worker_interaction
+			task_data["use_post_interaction"] = task_use.use_post_interaction
+			task_data["worker_use_rmb"] = task_use.worker_use_rmb
+			task_data["worker_combat_mode"] = task_use.worker_combat_mode
+
+		if(istype(task, /datum/manipulator_task/cargo/interact))
+			var/datum/manipulator_task/cargo/interact/task_interact = task
+			task_data["worker_interaction"] = task_interact.worker_interaction
+			task_data["use_post_interaction"] = task_interact.use_post_interaction
+			task_data["worker_use_rmb"] = task_interact.worker_use_rmb
+			task_data["worker_combat_mode"] = task_interact.worker_combat_mode
+
+		if(istype(task, /datum/manipulator_task/simple/wait))
+			var/datum/manipulator_task/simple/wait/task_wait = task
+			task_data["time"] = task_wait.time_seconds
+
+		.["tasks_data"] += list(task_data)

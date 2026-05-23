@@ -63,8 +63,10 @@
 	if(!target_task)
 		return FALSE
 
-	var/target_dir = get_dir(get_turf(src), target_task.interaction_turf)
-	var/target_angle = dir2angle(target_dir)
+	var/task_dir = get_dir(get_turf(src), target_task.interaction_turf)
+	manipulator_arm.target_dir = task_dir
+
+	var/target_angle = dir2angle(task_dir)
 	var/current_angle = manipulator_arm.transform.get_angle()
 	var/angle_diff = closer_angle_difference(current_angle, target_angle)
 
@@ -89,6 +91,9 @@
 		var/matrix/final_matrix = matrix()
 		final_matrix.Turn(target_angle)
 		animate(manipulator_arm, transform = final_matrix, time = BASE_INTERACTION_TIME / speed_multiplier)
+		var/mob/living/carbon/human/species/monkey/monkey_resolve = monkey_worker?.resolve()
+		if(monkey_resolve && monkey_resolve.loc == src)
+			animate(monkey_resolve, transform = final_matrix, time = BASE_INTERACTION_TIME / speed_multiplier)
 		addtimer(CALLBACK(callback_object, callback, src), BASE_INTERACTION_TIME / speed_multiplier)
 		return
 
@@ -96,6 +101,9 @@
 	var/matrix/next_matrix = matrix()
 	next_matrix.Turn(next_angle)
 	animate(manipulator_arm, transform = next_matrix, time = BASE_INTERACTION_TIME / speed_multiplier)
+	var/mob/living/carbon/human/species/monkey/monkey_resolve = monkey_worker?.resolve()
+	if(monkey_resolve && monkey_resolve.loc == src)
+		animate(monkey_resolve, transform = next_matrix, time = BASE_INTERACTION_TIME / speed_multiplier)
 
 	addtimer(CALLBACK(src, PROC_REF(do_step_rotation), target_task, callback_object, callback, next_angle, target_angle, rotation_step), BASE_INTERACTION_TIME / speed_multiplier)
 
@@ -103,11 +111,16 @@
 	var/drop_endpoint = destination_task.find_type_priority()
 	var/obj/actual_held_object = held_object?.resolve()
 
+	if(!actual_held_object)
+		drop_held_atom()
+		return FALSE
+
 	if(isnull(drop_endpoint))
+		drop_held_atom()
 		return FALSE
 
 	var/atom/drop_target = drop_endpoint
-	if(drop_target.atom_storage && actual_held_object && (!drop_target.atom_storage.attempt_insert(actual_held_object, override = TRUE, messages = FALSE)))
+	if(drop_target.atom_storage && actual_held_object && (!drop_target.atom_storage.attempt_insert(actual_held_object, override = TRUE)))
 		actual_held_object.forceMove(drop_target.drop_location())
 		finish_manipulation()
 		return TRUE
@@ -125,26 +138,26 @@
 	var/destination_turf = destination_task.interaction_turf
 
 	if(!obj_resolve || QDELETED(obj_resolve) || obj_resolve.loc != src)
-		finish_manipulation()
+		drop_held_atom()
 		return FALSE
 
 	if(!monkey_resolve || !destination_turf)
-		finish_manipulation()
+		drop_held_atom()
 		return FALSE
 
 	if(monkey_resolve.loc != src)
-		finish_manipulation()
+		drop_held_atom()
 		return FALSE
 
 	var/obj/item/held_item = obj_resolve
 	var/atom/type_to_use = destination_task.find_type_priority()
 
 	if(isnull(type_to_use))
-		check_for_cycle_end_drop(destination_task, FALSE, work_done_at_point)
+		drop_held_atom()
 		return FALSE
 
 	if(isitem(type_to_use) && !destination_task.check_filters_for_atom(type_to_use))
-		check_for_cycle_end_drop(destination_task, FALSE, work_done_at_point)
+		drop_held_atom()
 		return FALSE
 
 	var/original_loc = held_item.loc
@@ -153,9 +166,12 @@
 	if(held_item.GetComponent(/datum/component/two_handed))
 		held_item.attack_self(monkey_resolve)
 
-	monkey_resolve.combat_mode = destination_task.worker_combat_mode
+	if(destination_task.worker_combat_mode)
+		monkey_resolve.istate |= ISTATE_HARM
+	else
+		monkey_resolve.istate &= ~ISTATE_HARM
 	held_item.melee_attack_chain(monkey_resolve, type_to_use, list(RIGHT_CLICK = destination_task.worker_use_rmb ? TRUE : FALSE))
-	monkey_resolve.combat_mode = FALSE
+	monkey_resolve.istate &= ~ISTATE_HARM
 	do_attack_animation(destination_turf)
 	manipulator_arm.do_attack_animation(destination_turf)
 
@@ -174,9 +190,12 @@
 	var/obj/obj_resolve = held_object?.resolve()
 	var/turf/drop_turf = destination_task.interaction_turf
 
-	if(!obj_resolve || obj_resolve.loc != src || QDELETED(obj_resolve))
+	if(!obj_resolve || QDELETED(obj_resolve))
 		finish_manipulation()
 		return
+
+	if(obj_resolve.loc != src)
+		obj_resolve.forceMove(src)
 
 	if(destination_task.worker_interaction == WORKER_SINGLE_USE && item_used_this_iteration)
 		obj_resolve.forceMove(drop_turf)
@@ -241,6 +260,10 @@
 		finish_manipulation()
 		return
 
+	if(monkey_resolve.loc != src)
+		finish_manipulation()
+		return
+
 	var/atom/type_to_use = destination_task.find_type_priority()
 	if(isnull(type_to_use))
 		check_end_of_use_for_use_with_empty_hand(destination_task, FALSE)
@@ -253,9 +276,12 @@
 		interact_with_item.attack_self(monkey_resolve)
 		interact_with_item.forceMove(resolve_loc)
 	else
-		monkey_resolve.combat_mode = destination_task.worker_combat_mode
+		if(destination_task.worker_combat_mode)
+			monkey_resolve.istate |= ISTATE_HARM
+		else
+			monkey_resolve.istate &= ~ISTATE_HARM
 		monkey_resolve.UnarmedAttack(type_to_use)
-		monkey_resolve.combat_mode = FALSE
+		monkey_resolve.istate &= ~ISTATE_HARM
 
 	var/turf/dest_turf = destination_task.interaction_turf
 	if(dest_turf)
@@ -321,10 +347,16 @@
 		return
 	something_happened()
 
-/// Drop the held atom.
+/// Drop the held atom and anything the monkey is holding.
 /obj/machinery/big_manipulator/proc/drop_held_atom()
-	if(isnull(held_object))
-		return
+	// Drop the manipulator's held object
 	var/obj/obj_resolve = held_object?.resolve()
-	obj_resolve?.forceMove(get_turf(obj_resolve))
+	if(obj_resolve)
+		obj_resolve.forceMove(drop_location())
+	
+	// Also drop whatever the monkey is holding
+	var/mob/living/carbon/human/species/monkey/monkey_resolve = monkey_worker?.resolve()
+	if(monkey_resolve)
+		monkey_resolve.drop_all_held_items()
+
 	finish_manipulation()

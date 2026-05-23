@@ -104,6 +104,8 @@
 	var/atom/movable/best_candidate = null
 	var/best_priority_index = INFINITY
 
+	if(!interaction_turf)
+		return null
 	for(var/atom/movable/thing as anything in interaction_turf.contents)
 		for(var/i in 1 to length(interaction_priorities))
 			if(i >= best_priority_index)
@@ -165,7 +167,7 @@
 
 	switch(filtering_mode)
 		if(TAKE_CLOSETS)
-			return iscloset(target)
+			return istype(target, /obj/structure/closet)
 		if(TAKE_HUMANS)
 			return ishuman(target)
 		if(TAKE_ITEMS)

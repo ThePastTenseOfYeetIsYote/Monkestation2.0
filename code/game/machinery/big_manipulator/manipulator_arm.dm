@@ -10,10 +10,13 @@
 	greyscale_config = /datum/greyscale_config/manipulator_arm
 	pixel_x = -32
 	pixel_y = -32
+	/// The actual target direction (may be diagonal) used for offset calculations.
+	var/target_dir = SOUTH
 	/// We get item from big manipulator and takes its icon to create overlay.
 	var/datum/weakref/item_in_my_claw
 	/// Var to icon that used as overlay on manipulator claw to show what item it grabs.
 	var/mutable_appearance/icon_overlay
+
 
 /obj/effect/big_manipulator_arm/update_overlays()
 	. = ..()
