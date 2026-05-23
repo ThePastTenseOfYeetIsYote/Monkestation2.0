@@ -7847,7 +7847,6 @@
 #include "monkestation\code\modules\factory_type_beat\ai_behaviours\latch_onto.dm"
 #include "monkestation\code\modules\factory_type_beat\machinery\assembler.dm"
 #include "monkestation\code\modules\factory_type_beat\machinery\brine_chamber.dm"
-#include "monkestation\code\modules\factory_type_beat\machinery\grabber.dm"
 #include "monkestation\code\modules\factory_type_beat\machinery\splitter.dm"
 #include "monkestation\code\modules\factory_type_beat\machinery\test_boulder_spawner.dm"
 #include "monkestation\code\modules\factory_type_beat\machinery\atmos_chem\chemical_infuser.dm"
