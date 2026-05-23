@@ -194,7 +194,6 @@
 
 /obj/machinery/big_manipulator/proc/check_for_cycle_end_drop(datum/manipulator_task/cargo/interact/destination_task, item_used_this_iteration, work_done_at_point = FALSE)
 	var/obj/obj_resolve = held_object?.resolve()
-	var/turf/drop_turf = destination_task.interaction_turf
 
 	if(!obj_resolve || QDELETED(obj_resolve))
 		finish_manipulation()
@@ -358,7 +357,7 @@
 	var/obj/obj_resolve = held_object?.resolve()
 	if(obj_resolve)
 		obj_resolve.forceMove(drop_location())
-	
+
 	// Also drop whatever the monkey is holding
 	var/mob/living/carbon/human/species/monkey/monkey_resolve = monkey_worker?.resolve()
 	if(monkey_resolve)

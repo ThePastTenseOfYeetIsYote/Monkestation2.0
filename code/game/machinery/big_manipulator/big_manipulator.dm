@@ -358,10 +358,6 @@
 	manipulator_arm.target_dir = NORTH
 	vis_contents += manipulator_arm
 
-/obj/machinery/big_manipulator/Initialize(mapload)
-	. = ..()
-	update_strategies()
-
 /obj/machinery/big_manipulator/proc/toggle_power_state(mob/user)
 	var/newly_on = !on
 
@@ -419,35 +415,6 @@
 		balloon_alert(user, "activated")
 	else
 		balloon_alert(user, "deactivated")
-
-/obj/machinery/big_manipulator/ui_interact(mob/user, datum/tgui/ui)
-	if(id_lock)
-		to_chat(user, span_warning("[src] is locked behind ID authentication!"))
-		ui?.close()
-		return
-	if(!anchored)
-		to_chat(user, span_warning("[src] isn't attached to the ground!"))
-		ui?.close()
-		return
-	ui = SStgui.try_update_ui(user, src, ui)
-	if(!ui)
-		ui = new(user, src, "BigManipulator")
-		ui.open()
-
-/obj/machinery/big_manipulator/ui_data(mob/user)
-	var/list/data = list()
-	data["active"] = on
-	data["stopping"] = stopping
-	data["current_task"] = current_task ? REF(current_task) : null
-	data["speed_multiplier"] = speed_multiplier
-	data["min_speed_multiplier"] = min_speed_multiplier
-	data["max_speed_multiplier"] = max_speed_multiplier
-	data["manipulator_position"] = "[x],[y]"
-	data["tasking_strategy"] = tasking_strategy
-	data["has_monkey"] = !isnull(monkey_worker?.resolve())
-	data["disk_inserted"] = !isnull(task_disk)
-	data["disk_read_only"] = task_disk?.read_only
-	data["disk_task_count"] = length(task_disk?.tasks_data)
 
 	var/list/tasks_data = list()
 	for(var/datum/manipulator_task/task in tasks)
@@ -517,9 +484,6 @@
 			td["time"] = t.time_seconds
 
 		tasks_data += list(td)
-
-	data["tasks_data"] = tasks_data
-	return data
 
 /obj/machinery/big_manipulator/proc/_collect_filter_names(list/filters)
 	var/list/names = list()
