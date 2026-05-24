@@ -195,8 +195,10 @@
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/big_manipulator/Destroy(force)
+	if(task_disk)
+		task_disk.forceMove(drop_location())
+		task_disk = null
 	unregister_task_turf_signals()
-	QDEL_NULL(task_disk)
 	QDEL_NULL(manipulator_arm)
 	QDEL_LIST(tasks)
 	id_lock = null
@@ -416,75 +418,6 @@
 	else
 		balloon_alert(user, "deactivated")
 
-	var/list/tasks_data = list()
-	for(var/datum/manipulator_task/task in tasks)
-		var/list/td = list()
-		td["name"] = task.name
-		td["id"] = REF(task)
-
-		if(istype(task, /datum/manipulator_task/cargo/pickup))
-			td["task_type"] = TASK_TYPE_PICKUP
-			var/datum/manipulator_task/cargo/pickup/t = task
-			td["turf"] = "[t.offset_dx],[t.offset_dy]"
-			td["filters_status"] = t.should_use_filters
-			td["filtering_mode"] = t.filtering_mode
-			td["item_filters"] = _collect_filter_names(t.atom_filters)
-			td["settings_list"] = _collect_priorities(t.interaction_priorities)
-			td["pickup_eagerness"] = t.pickup_eagerness
-
-		else if(istype(task, /datum/manipulator_task/cargo/dropoff_base/drop))
-			td["task_type"] = TASK_TYPE_DROP
-			var/datum/manipulator_task/cargo/dropoff_base/drop/t = task
-			td["turf"] = "[t.offset_dx],[t.offset_dy]"
-			td["filters_status"] = t.should_use_filters
-			td["filtering_mode"] = t.filtering_mode
-			td["item_filters"] = _collect_filter_names(t.atom_filters)
-			td["settings_list"] = _collect_priorities(t.interaction_priorities)
-			td["overflow_status"] = t.overflow_status
-
-		else if(istype(task, /datum/manipulator_task/cargo/dropoff_base/throw))
-			td["task_type"] = TASK_TYPE_THROW
-			var/datum/manipulator_task/cargo/dropoff_base/throw/t = task
-			td["turf"] = "[t.offset_dx],[t.offset_dy]"
-			td["filters_status"] = t.should_use_filters
-			td["filtering_mode"] = t.filtering_mode
-			td["item_filters"] = _collect_filter_names(t.atom_filters)
-			td["settings_list"] = _collect_priorities(t.interaction_priorities)
-			td["throw_range"] = t.throw_range
-
-		else if(istype(task, /datum/manipulator_task/cargo/dropoff_base/use))
-			td["task_type"] = TASK_TYPE_USE
-			var/datum/manipulator_task/cargo/dropoff_base/use/t = task
-			td["turf"] = "[t.offset_dx],[t.offset_dy]"
-			td["filters_status"] = t.should_use_filters
-			td["filtering_mode"] = t.filtering_mode
-			td["item_filters"] = _collect_filter_names(t.atom_filters)
-			td["settings_list"] = _collect_priorities(t.interaction_priorities)
-			td["worker_interaction"] = t.worker_interaction
-			td["use_post_interaction"] = t.use_post_interaction
-			td["worker_use_rmb"] = t.worker_use_rmb
-			td["worker_combat_mode"] = t.worker_combat_mode
-
-		else if(istype(task, /datum/manipulator_task/cargo/interact))
-			td["task_type"] = TASK_TYPE_INTERACT
-			var/datum/manipulator_task/cargo/interact/t = task
-			td["turf"] = "[t.offset_dx],[t.offset_dy]"
-			td["filters_status"] = t.should_use_filters
-			td["filtering_mode"] = t.filtering_mode
-			td["item_filters"] = _collect_filter_names(t.atom_filters)
-			td["settings_list"] = _collect_priorities(t.interaction_priorities)
-			td["worker_interaction"] = t.worker_interaction
-			td["use_post_interaction"] = t.use_post_interaction
-			td["worker_use_rmb"] = t.worker_use_rmb
-			td["worker_combat_mode"] = t.worker_combat_mode
-
-		else if(istype(task, /datum/manipulator_task/simple/wait))
-			td["task_type"] = TASK_TYPE_WAIT
-			var/datum/manipulator_task/simple/wait/t = task
-			td["time"] = t.time_seconds
-
-		tasks_data += list(td)
-
 /obj/machinery/big_manipulator/proc/_collect_filter_names(list/filters)
 	var/list/names = list()
 	for(var/atom/f as anything in filters)
@@ -545,8 +478,6 @@
 				var/mob/living/carbon/human/species/monkey/poor_monkey = monkey_worker.resolve()
 				if(poor_monkey && poor_monkey.loc == src)
 					poor_monkey.forceMove(drop_location())
-					manipulator_arm.vis_contents -= poor_monkey
-					monkey_worker = null
 			return TRUE
 
 		if("adjust_task_param")
@@ -879,6 +810,14 @@
 	return new /datum/tasking_strategy/sequential()
 
 /obj/machinery/big_manipulator/ui_interact(mob/user, datum/tgui/ui)
+	if(id_lock)
+		to_chat(user, span_warning("[src] is locked behind ID authentication!"))
+		ui?.close()
+		return
+	if(!anchored)
+		to_chat(user, span_warning("[src] isn't attached to the ground!"))
+		ui?.close()
+		return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "BigManipulator")
@@ -888,7 +827,7 @@
 	. = list(
 		"active" = on,
 		"stopping" = stopping,
-		"current_task" = current_task?.type || null,
+		"current_task" = current_task ? REF(current_task) : null,
 		"speed_multiplier" = speed_multiplier,
 		"min_speed_multiplier" = min_speed_multiplier,
 		"max_speed_multiplier" = max_speed_multiplier,
