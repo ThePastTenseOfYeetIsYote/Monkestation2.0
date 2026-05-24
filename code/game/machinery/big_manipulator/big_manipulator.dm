@@ -182,7 +182,6 @@
 
 	if(held_item.tool_behaviour == TOOL_WRENCH)
 		context[SCREENTIP_CONTEXT_LMB] = "[anchored ? "Una" : "A"]nchor"
-		context[SCREENTIP_CONTEXT_RMB] = "Rotate clockwise"
 		return CONTEXTUAL_SCREENTIP_SET
 	if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
 		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] panel"
