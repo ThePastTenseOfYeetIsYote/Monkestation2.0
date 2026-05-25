@@ -106,7 +106,6 @@ docs/_build/
 
 # IPython Notebook
 .ipynb_checkpoints
-.pi
 # pyenv
 .python-version
 
@@ -182,7 +181,6 @@ Temporary Items
 /tools/MapAtmosFixer/MapAtmosFixer/bin/*
 /tools/CreditsTool/bin/*
 /tools/CreditsTool/obj/*
-/.planning/*
 #GitHub Atom
 .atom-build.json
 
