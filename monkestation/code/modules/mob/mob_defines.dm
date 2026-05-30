@@ -7,3 +7,5 @@
 	var/istate = NONE
 	/// What icon the mob uses for speechbubbles
 	var/bubble_icon = "default"
+	/// Whether this mob is being tracked by an admin through the tag system
+	var/tracked = FALSE

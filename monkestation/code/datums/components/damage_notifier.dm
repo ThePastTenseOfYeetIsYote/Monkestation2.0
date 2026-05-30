@@ -1,11 +1,11 @@
 /**
  * Damage Notifier Component
  *
- * A debug component that displays chat messages when a carbon mob takes damage or receives healing.
- * Shows the damage type, amount, direction, and current health.
+ * Displays chat messages when a tracked carbon mob takes damage or receives healing.
+ * Only active for mobs tagged by an admin via the Tag Datum system.
+ * Shows damage type, amount, direction (▼/▲), and projected health.
  */
 /datum/component/damage_notifier
-	dupe_mode = COMPONENT_DUPE_UNIQUE
 
 /datum/component/damage_notifier/Initialize()
 	. = ..()
@@ -13,76 +13,70 @@
 		return COMPONENT_INCOMPATIBLE
 
 /datum/component/damage_notifier/RegisterWithParent()
-	// For carbons, brute/burn damage goes through bodyparts, so we need CARBON_LIMB_DAMAGED
+	// Brute and burn from bodypart damage (punching, weapons, etc.)
 	RegisterSignal(parent, COMSIG_CARBON_LIMB_DAMAGED, PROC_REF(on_limb_damage))
-	// These still use the living signals
+	// Brute healing — COMSIG_CARBON_TAKE_BRUTE_DAMAGE only fires when amount < 0
+	RegisterSignal(parent, COMSIG_CARBON_TAKE_BRUTE_DAMAGE, PROC_REF(on_brute_heal))
+	// Damage type adjustments — toxin, oxy, clone, stamina
 	RegisterSignal(parent, COMSIG_LIVING_ADJUST_TOX_DAMAGE, PROC_REF(on_damage_adjusted))
 	RegisterSignal(parent, COMSIG_LIVING_ADJUST_OXY_DAMAGE, PROC_REF(on_damage_adjusted))
 	RegisterSignal(parent, COMSIG_LIVING_ADJUST_CLONE_DAMAGE, PROC_REF(on_damage_adjusted))
 	RegisterSignal(parent, COMSIG_LIVING_ADJUST_STAMINA_DAMAGE, PROC_REF(on_damage_adjusted))
-	// Also catch burn damage from non-bodypart sources (reagents, etc)
-	RegisterSignal(parent, COMSIG_LIVING_ADJUST_BURN_DAMAGE, PROC_REF(on_damage_adjusted))
-	// And catch the carbon-specific brute damage signal
-	RegisterSignal(parent, COMSIG_CARBON_TAKE_BRUTE_DAMAGE, PROC_REF(on_carbon_brute_take))
 
 /datum/component/damage_notifier/UnregisterFromParent()
 	UnregisterSignal(parent, COMSIG_CARBON_LIMB_DAMAGED)
+	UnregisterSignal(parent, COMSIG_CARBON_TAKE_BRUTE_DAMAGE)
 	UnregisterSignal(parent, COMSIG_LIVING_ADJUST_TOX_DAMAGE)
 	UnregisterSignal(parent, COMSIG_LIVING_ADJUST_OXY_DAMAGE)
 	UnregisterSignal(parent, COMSIG_LIVING_ADJUST_CLONE_DAMAGE)
 	UnregisterSignal(parent, COMSIG_LIVING_ADJUST_STAMINA_DAMAGE)
-	UnregisterSignal(parent, COMSIG_LIVING_ADJUST_BURN_DAMAGE)
-	UnregisterSignal(parent, COMSIG_CARBON_TAKE_BRUTE_DAMAGE)
 
-/// Called when a carbon's bodypart takes damage (brute or burn from punching, etc)
+/// Called when a carbon's bodypart takes damage — captures brute and burn from hits
 /datum/component/damage_notifier/proc/on_limb_damage(datum/source, obj/item/bodypart/limb, brute, burn)
 	SIGNAL_HANDLER
 
 	var/mob/living/carbon/carbon_parent = parent
-	var/max_health = carbon_parent.maxHealth
-
-	// Handle brute damage
-	if (brute != 0)
-		send_notification(carbon_parent, BRUTE, brute, max_health)
-	// Handle burn damage
-	if (burn != 0)
-		send_notification(carbon_parent, BURN, burn, max_health)
-
-/// Called when carbon takes brute damage (negative amount = healing)
-/datum/component/damage_notifier/proc/on_carbon_brute_take(datum/source, amount)
-	SIGNAL_HANDLER
-	var/mob/living/carbon/carbon_parent = parent
-	var/max_health = carbon_parent.maxHealth
-	send_notification(carbon_parent, BRUTE, amount, max_health)
-
-/// Called for toxin/oxy/clone/stamina/burn damage
-/datum/component/damage_notifier/proc/on_damage_adjusted(source, damage_type, amount, forced)
-	SIGNAL_HANDLER
-
-	if (forced || amount == 0)
+	if (!carbon_parent.tracked)
 		return
 
-	var/mob/living/carbon/carbon_parent = parent
-	var/max_health = carbon_parent.maxHealth
-	send_notification(carbon_parent, damage_type, amount, max_health)
+	if (brute > 0)
+		send_notification(carbon_parent, BRUTE, brute)
+	if (burn > 0)
+		send_notification(carbon_parent, BURN, burn)
 
-/// Sends the damage notification
-/datum/component/damage_notifier/proc/send_notification(mob/living/carbon/carbon_parent, damage_type, amount, max_health)
+/// Called when a carbon is healed of brute damage (COMSIG_CARBON_TAKE_BRUTE_DAMAGE fires only on healing)
+/datum/component/damage_notifier/proc/on_brute_heal(datum/source, amount)
+	SIGNAL_HANDLER
+
+	var/mob/living/carbon/carbon_parent = parent
+	if (!carbon_parent.tracked || amount >= 0)
+		return
+
+	send_notification(carbon_parent, BRUTE, amount)
+
+/// Called for toxin/oxy/clone/stamina damage adjustments
+/datum/component/damage_notifier/proc/on_damage_adjusted(datum/source, damage_type, amount, forced)
+	SIGNAL_HANDLER
+
+	var/mob/living/carbon/carbon_parent = parent
+	if (!carbon_parent.tracked || amount == 0)
+		return
+
+	send_notification(carbon_parent, damage_type, amount)
+
+/// Sends damage notification to all admins tracking this mob
+/datum/component/damage_notifier/proc/send_notification(mob/living/carbon/carbon_parent, damage_type, amount)
 	var/current_health = carbon_parent.health
 	var/new_health = current_health - amount
-
-	// Determine direction and format
 	var/arrow = amount > 0 ? "▼" : "▲"
 	var/amount_display = abs(amount)
-	var/action = amount > 0 ? " took" : " healed"
-
-	// Get damage type display with color
+	var/action = amount > 0 ? "took" : "healed"
 	var/damage_name = get_damage_type_name(damage_type)
+	var/msg = "[carbon_parent.name] [action] [arrow][amount_display] [damage_name] ([new_health]/[carbon_parent.maxHealth])"
 
-	var/msg = "[carbon_parent.name][action] [arrow][amount_display] [damage_name] ([new_health]/[max_health])"
-	// Try both to_chat and visible_message for maximum visibility
-	to_chat(carbon_parent, msg)
-	carbon_parent.visible_message(msg)
+	for(var/client/admin as anything in GLOB.admins)
+		if(LAZYFIND(admin.holder.tagged_datums, carbon_parent))
+			to_chat(admin, msg)
 
 /// Returns the colored damage type name
 /datum/component/damage_notifier/proc/get_damage_type_name(damage_type)
