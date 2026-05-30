@@ -1,9 +1,9 @@
 /**
  * Damage Notifier Component
  *
- * Displays chat messages when a tracked carbon mob takes damage or receives healing.
- * Only active for mobs tagged by an admin via the Tag Datum system.
- * Shows damage type, amount, direction (▼/▲), and projected health.
+ * Displays clean damage/healing reports in admin chat for tagged mobs.
+ * Only active for carbons tagged via the Tag Datum system.
+ * Shows damage type, amount, bodypart (for limbs), and resulting health.
  */
 /datum/component/damage_notifier
 
@@ -13,11 +13,11 @@
 		return COMPONENT_INCOMPATIBLE
 
 /datum/component/damage_notifier/RegisterWithParent()
-	// Brute and burn from bodypart damage (punching, weapons, etc.)
+	// Brute and burn via bodypart damage (punching, weapons, etc.)
 	RegisterSignal(parent, COMSIG_CARBON_LIMB_DAMAGED, PROC_REF(on_limb_damage))
 	// Brute healing — COMSIG_CARBON_TAKE_BRUTE_DAMAGE only fires when amount < 0
 	RegisterSignal(parent, COMSIG_CARBON_TAKE_BRUTE_DAMAGE, PROC_REF(on_brute_heal))
-	// Damage type adjustments — toxin, oxy, clone, stamina
+	// Non-bodypart damage types
 	RegisterSignal(parent, COMSIG_LIVING_ADJUST_TOX_DAMAGE, PROC_REF(on_damage_adjusted))
 	RegisterSignal(parent, COMSIG_LIVING_ADJUST_OXY_DAMAGE, PROC_REF(on_damage_adjusted))
 	RegisterSignal(parent, COMSIG_LIVING_ADJUST_CLONE_DAMAGE, PROC_REF(on_damage_adjusted))
@@ -40,9 +40,9 @@
 		return
 
 	if (brute > 0)
-		send_notification(carbon_parent, BRUTE, brute)
+		send_notification(carbon_parent, BRUTE, brute, limb)
 	if (burn > 0)
-		send_notification(carbon_parent, BURN, burn)
+		send_notification(carbon_parent, BURN, burn, limb)
 
 /// Called when a carbon is healed of brute damage (COMSIG_CARBON_TAKE_BRUTE_DAMAGE fires only on healing)
 /datum/component/damage_notifier/proc/on_brute_heal(datum/source, amount)
@@ -54,7 +54,7 @@
 
 	send_notification(carbon_parent, BRUTE, amount)
 
-/// Called for toxin/oxy/clone/stamina damage adjustments
+/// Called for toxin/oxy/clone damage adjustments
 /datum/component/damage_notifier/proc/on_damage_adjusted(datum/source, damage_type, amount, forced)
 	SIGNAL_HANDLER
 
@@ -64,15 +64,27 @@
 
 	send_notification(carbon_parent, damage_type, amount)
 
-/// Sends damage notification to all admins tracking this mob
-/datum/component/damage_notifier/proc/send_notification(mob/living/carbon/carbon_parent, damage_type, amount)
-	var/current_health = carbon_parent.health
-	var/new_health = current_health - amount
-	var/arrow = amount > 0 ? "▼" : "▲"
-	var/amount_display = abs(amount)
-	var/action = amount > 0 ? "took" : "healed"
+/// Builds and sends a damage/heal report to all admins tracking this mob
+/datum/component/damage_notifier/proc/send_notification(mob/living/carbon/carbon_parent, damage_type, amount, obj/item/bodypart/limb)
+	var/new_health = carbon_parent.health - amount
+	var/max_health = carbon_parent.maxHealth
+
+	// Direction and amount
+	var/direction = amount > 0 ? "▼" : "▲"
+	var/display_amount = abs(amount)
 	var/damage_name = get_damage_type_name(damage_type)
-	var/msg = "[carbon_parent.name] [action] [arrow][amount_display] [damage_name] ([new_health]/[carbon_parent.maxHealth])"
+
+	// Bodypart label (only for limb damage)
+	var/limb_label = ""
+	if (limb)
+		limb_label = " [limb.name]"
+
+	// Health summary — skip for stamina since it tracks separately from mob health
+	var/health_summary = ""
+	if (damage_type != STAMINA)
+		health_summary = " →  [new_health]/[max_health]"
+
+	var/msg = "[carbon_parent.name] [damage_name][limb_label] [direction][display_amount][health_summary]"
 
 	for(var/client/admin as anything in GLOB.admins)
 		if(LAZYFIND(admin.holder.tagged_datums, carbon_parent))
