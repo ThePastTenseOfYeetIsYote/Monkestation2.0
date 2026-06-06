@@ -473,10 +473,11 @@
 			return TRUE
 
 		if("unbuckle")
-			if(monkey_worker)
-				var/mob/living/carbon/human/species/monkey/poor_monkey = monkey_worker.resolve()
-				if(poor_monkey && poor_monkey.loc == src)
-					poor_monkey.forceMove(drop_location())
+			var/mob/living/carbon/human/species/monkey/poor_monkey = monkey_worker?.resolve()
+			if(poor_monkey)
+				poor_monkey.drop_all_held_items()
+				poor_monkey.forceMove(get_turf(src))
+			monkey_worker = null
 			return TRUE
 
 		if("adjust_task_param")
