@@ -700,6 +700,8 @@
 			return TRUE
 
 		if("cycle_filtering_mode")
+			if(istype(target_task, /datum/manipulator_task/cargo/dropoff_base/use) || istype(target_task, /datum/manipulator_task/cargo/interact))
+				return FALSE
 			if(!istype(target_task, /datum/manipulator_task/cargo))
 				return FALSE
 			var/datum/manipulator_task/cargo/ct = target_task
@@ -782,6 +784,17 @@
 			if(istype(target_task, /datum/manipulator_task/cargo/interact))
 				var/datum/manipulator_task/cargo/interact/cycle_target_task = target_task
 				cycle_target_task.worker_combat_mode = !cycle_target_task.worker_combat_mode
+				return TRUE
+			return FALSE
+
+		if("toggle_skip_anchored")
+			if(istype(target_task, /datum/manipulator_task/cargo/dropoff_base/use))
+				var/datum/manipulator_task/cargo/dropoff_base/use/unanchor_target = target_task
+				unanchor_target.skip_anchored = !unanchor_target.skip_anchored
+				return TRUE
+			if(istype(target_task, /datum/manipulator_task/cargo/interact))
+				var/datum/manipulator_task/cargo/interact/unanchor_target = target_task
+				unanchor_target.skip_anchored = !unanchor_target.skip_anchored
 				return TRUE
 			return FALSE
 
@@ -893,6 +906,7 @@
 			task_data["use_post_interaction"] = task_use.use_post_interaction
 			task_data["worker_use_rmb"] = task_use.worker_use_rmb
 			task_data["worker_combat_mode"] = task_use.worker_combat_mode
+			task_data["skip_anchored"] = task_use.skip_anchored
 
 		if(istype(task, /datum/manipulator_task/cargo/interact))
 			var/datum/manipulator_task/cargo/interact/task_interact = task
@@ -900,6 +914,7 @@
 			task_data["use_post_interaction"] = task_interact.use_post_interaction
 			task_data["worker_use_rmb"] = task_interact.worker_use_rmb
 			task_data["worker_combat_mode"] = task_interact.worker_combat_mode
+			task_data["skip_anchored"] = task_interact.skip_anchored
 
 		if(istype(task, /datum/manipulator_task/simple/wait))
 			var/datum/manipulator_task/simple/wait/task_wait = task

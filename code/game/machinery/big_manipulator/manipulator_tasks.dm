@@ -100,7 +100,7 @@
 /datum/manipulator_task/cargo/proc/fill_priority_list(manipulator_tier)
 	return list()
 
-/datum/manipulator_task/cargo/proc/find_type_priority()
+/datum/manipulator_task/cargo/proc/find_type_priority(skip_anchored = FALSE)
 	var/atom/movable/best_candidate = null
 	var/best_priority_index = INFINITY
 
@@ -117,6 +117,9 @@
 				continue
 
 			if(!istype(thing, prio.atom_typepath))
+				continue
+
+			if(skip_anchored && thing.anchored)
 				continue
 
 			if(isliving(thing))
@@ -411,6 +414,7 @@
 	var/use_post_interaction = POST_INTERACTION_DROP_AT_POINT
 	var/worker_combat_mode = FALSE
 	var/worker_use_rmb = FALSE
+	var/skip_anchored = FALSE
 
 /datum/manipulator_task/cargo/dropoff_base/use/fill_priority_list(manipulator_tier)
 	var/list/priorities =  list(
@@ -430,12 +434,25 @@
 		return FALSE
 	return TRUE
 
+/datum/manipulator_task/cargo/dropoff_base/use/can_run(obj/machinery/big_manipulator/manipulator)
+	if(!..())
+		return FALSE
+	var/atom/movable/target = manipulator.held_object?.resolve()
+	if(!target)
+		return FALSE
+	if(!manipulator.monkey_worker?.resolve())
+		return FALSE
+	if(!find_type_priority(skip_anchored))
+		return FALSE
+	return can_accept(target)
+
 /datum/manipulator_task/cargo/dropoff_base/use/serialize()
 	var/list/data = ..()
 	data["worker_interaction"] = worker_interaction
 	data["use_post_interaction"] = use_post_interaction
 	data["worker_combat_mode"] = worker_combat_mode
 	data["worker_use_rmb"] = worker_use_rmb
+	data["skip_anchored"] = skip_anchored
 	return data
 
 /datum/manipulator_task/cargo/dropoff_base/use/New(turf/new_turf, manipulator_tier, serialized_data)
@@ -445,6 +462,7 @@
 		use_post_interaction = serialized_data["use_post_interaction"]
 		worker_combat_mode = !!serialized_data["worker_combat_mode"]
 		worker_use_rmb = !!serialized_data["worker_use_rmb"]
+		skip_anchored = !!serialized_data["skip_anchored"]
 	return
 
 /datum/manipulator_task/cargo/dropoff_base/use/do_dropoff(obj/machinery/big_manipulator/manipulator)
@@ -458,6 +476,7 @@
 	var/use_post_interaction = POST_INTERACTION_DROP_AT_POINT
 	var/worker_combat_mode = FALSE
 	var/worker_use_rmb = FALSE
+	var/skip_anchored = FALSE
 
 /datum/manipulator_task/cargo/interact/fill_priority_list(manipulator_tier)
 	var/list/priorities =  list(
@@ -484,6 +503,7 @@
 	data["use_post_interaction"] = use_post_interaction
 	data["worker_combat_mode"] = worker_combat_mode
 	data["worker_use_rmb"] = worker_use_rmb
+	data["skip_anchored"] = skip_anchored
 	return data
 
 /datum/manipulator_task/cargo/interact/New(turf/new_turf, manipulator_tier, serialized_data)
@@ -493,11 +513,15 @@
 		use_post_interaction = serialized_data["use_post_interaction"]
 		worker_combat_mode = !!serialized_data["worker_combat_mode"]
 		worker_use_rmb = !!serialized_data["worker_use_rmb"]
+		skip_anchored = !!serialized_data["skip_anchored"]
 	return
 
 /datum/manipulator_task/cargo/interact/proc/try_interact(obj/machinery/big_manipulator/manipulator)
 	var/atom/movable/held = manipulator.held_object?.resolve()
 	if(held)
+		if(!manipulator.monkey_worker?.resolve())
+			manipulator.nothing_ever_happens()
+			return
 		manipulator.try_use_thing(src)
 	else
 		manipulator.use_thing_with_empty_hand(src)

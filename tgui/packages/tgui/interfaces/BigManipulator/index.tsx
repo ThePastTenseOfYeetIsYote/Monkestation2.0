@@ -10,8 +10,8 @@ import {
   Slider,
   Stack,
   Table,
-} from 'tgui-core/components';
-import type { BooleanLike } from 'tgui-core/react';
+} from '../../components';
+import type { BooleanLike } from 'common/react';
 
 import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
@@ -173,7 +173,7 @@ function TaskEditModal(props: TaskEditModalProps) {
 
   const isCargo = !!task.turf;
   const isPickup = task.task_type.includes('pickup');
-  const isDropoff = task.task_type.includes('dropoff');
+  const isDropoff = task.task_type === 'drop' || task.task_type === 'throw' || task.task_type === 'use';
   const isInteract = task.task_type.includes('interact');
 
   const currentButton = task.turf
@@ -236,12 +236,14 @@ function TaskEditModal(props: TaskEditModalProps) {
             </Stack.Item>
             <Stack.Item grow>
               <Table>
-                <ConfigRow
-                  label="Object Type"
-                  content={getFilteringModeText(task.filtering_mode ?? 1)}
-                  onClick={() => adjust('cycle_filtering_mode')}
-                  tooltip="Cycle object category"
-                />
+                {(isPickup || task.task_type === 'drop' || task.task_type === 'throw') && (
+                  <ConfigRow
+                    label="Object Type"
+                    content={getFilteringModeText(task.filtering_mode ?? 1)}
+                    onClick={() => adjust('cycle_filtering_mode')}
+                    tooltip="Cycle object category"
+                  />
+                )}
                 <ConfigRow
                   label="Use Filters"
                   content={task.filters_status ? 'TRUE' : 'FALSE'}
@@ -256,31 +258,23 @@ function TaskEditModal(props: TaskEditModalProps) {
                     tooltip="Wait for dropoff slot or pick up immediately"
                   />
                 )}
-                {isDropoff && (
-                  <>
-                    <ConfigRow
-                      label="Mode"
-                      content={(task.interaction_mode ?? '').toUpperCase()}
-                      onClick={() => adjust('cycle_interaction_mode')}
-                      tooltip="Drop / Throw / Use"
-                    />
-                    <ConfigRow
-                      label="Overflow"
-                      content={task.overflow_status ?? '—'}
-                      onClick={() => adjust('cycle_overflow_status')}
-                      tooltip="Cycle overflow behaviour"
-                    />
-                    {task.interaction_mode?.toUpperCase() === 'THROW' && (
-                      <ConfigRow
-                        label="Throw Range"
-                        content={`${task.throw_range} TILES`}
-                        onClick={() => adjust('cycle_throw_range')}
-                        tooltip="Cycle throwing range"
-                      />
-                    )}
-                  </>
+                {task.task_type === 'drop' && (
+                  <ConfigRow
+                    label="Overflow"
+                    content={task.overflow_status ?? '—'}
+                    onClick={() => adjust('cycle_overflow_status')}
+                    tooltip="Cycle overflow behaviour"
+                  />
                 )}
-                {(isDropoff || isInteract) && task.interaction_mode?.toUpperCase() !== 'THROW' && (
+                {task.task_type === 'throw' && (
+                  <ConfigRow
+                    label="Throw Range"
+                    content={`${task.throw_range} TILES`}
+                    onClick={() => adjust('cycle_throw_range')}
+                    tooltip="Cycle throwing range"
+                  />
+                )}
+                {(task.task_type === 'use' || isInteract) && (
                   <>
                     <ConfigRow
                       label="Worker Action"
@@ -299,6 +293,12 @@ function TaskEditModal(props: TaskEditModalProps) {
                       content={task.worker_combat_mode ? 'TRUE' : 'FALSE'}
                       onClick={() => adjust('toggle_worker_combat')}
                       tooltip="Use combat mode during interaction"
+                    />
+                    <ConfigRow
+                      label="Skip Anchored"
+                      content={task.skip_anchored ? 'TRUE' : 'FALSE'}
+                      onClick={() => adjust('toggle_skip_anchored')}
+                      tooltip="Skip anchored objects when looking for interaction targets"
                     />
                     <ConfigRow
                       label="No Uses Left"

@@ -150,14 +150,18 @@
 		return FALSE
 
 	var/obj/item/held_item = obj_resolve
-	var/atom/type_to_use = destination_task.find_type_priority()
+	var/atom/type_to_use = destination_task.find_type_priority(destination_task.skip_anchored)
 
 	if(isnull(type_to_use))
-		drop_held_atom()
+		drop_held_after_use(destination_task)
 		return FALSE
 
 	if(isitem(type_to_use) && !destination_task.check_filters_for_atom(type_to_use))
-		drop_held_atom()
+		drop_held_after_use(destination_task)
+		return FALSE
+
+	if(istype(destination_task, /datum/manipulator_task/cargo/interact) && destination_task.should_use_filters && isitem(type_to_use) && !destination_task.check_filters_for_atom(type_to_use))
+		drop_held_after_use(destination_task)
 		return FALSE
 
 	var/original_loc = held_item.loc
@@ -268,8 +272,12 @@
 		finish_manipulation()
 		return
 
-	var/atom/type_to_use = destination_task.find_type_priority()
+	var/atom/type_to_use = destination_task.find_type_priority(destination_task.skip_anchored)
 	if(isnull(type_to_use))
+		check_end_of_use_for_use_with_empty_hand(destination_task, FALSE)
+		return
+
+	if(destination_task.should_use_filters && isitem(type_to_use) && !destination_task.check_filters_for_atom(type_to_use))
 		check_end_of_use_for_use_with_empty_hand(destination_task, FALSE)
 		return
 
@@ -307,6 +315,10 @@
 
 /// Completes the current manipulation action and schedules the next step.
 /obj/machinery/big_manipulator/proc/finish_manipulation()
+	if(held_object)
+		var/obj/resolved = held_object.resolve()
+		if(resolved && resolved.loc == src)
+			resolved.forceMove(drop_location())
 	held_object = null
 	manipulator_arm.update_claw(null)
 	current_task = null
