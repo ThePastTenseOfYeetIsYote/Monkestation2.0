@@ -88,6 +88,7 @@
 		"magboots",
 		"rcd_loaded",
 		"rcd_ammo",
+		"rcd_ammo_large",
 		"rpd_loaded",
 		"rtd_loaded",
 		"sheetifier",

@@ -38,12 +38,12 @@
 	model = new /obj/item/robot_model(src)
 	model.rebuild_modules()
 
-	if(lawupdate)
+	if(!laws)
 		make_laws()
-		for (var/law in laws.inherent)
+		for(var/law in laws.inherent)
 			lawcheck += law
-		if(!TryConnectToAI())
-			lawupdate = FALSE
+	if(lawupdate && !TryConnectToAI())
+		lawupdate = FALSE
 
 	if(!scrambledcodes && !builtInCamera)
 		builtInCamera = new (src)
@@ -317,9 +317,10 @@
 /mob/living/silicon/robot/on_changed_z_level(turf/old_turf, turf/new_turf, same_z_layer, notify_contents)
 	if(same_z_layer)
 		return ..()
-	cut_overlay(eye_lights)
-	SET_PLANE_EXPLICIT(eye_lights, PLANE_TO_TRUE(eye_lights.plane), src)
-	add_overlay(eye_lights)
+	if(eye_lights)
+		cut_overlay(eye_lights)
+		SET_PLANE_EXPLICIT(eye_lights, PLANE_TO_TRUE(eye_lights.plane), src)
+		add_overlay(eye_lights)
 	return ..()
 
 /mob/living/silicon/robot/proc/self_destruct(mob/user)
@@ -647,11 +648,11 @@
 		if(health <= -maxHealth) //die only once
 			death()
 			toggle_headlamp(1)
-			return
-		if(HAS_TRAIT(src, TRAIT_KNOCKEDOUT) || IsStun() || IsKnockdown() || IsParalyzed())
-			set_stat(UNCONSCIOUS)
 		else
-			set_stat(CONSCIOUS)
+			if(HAS_TRAIT(src, TRAIT_KNOCKEDOUT) || IsStun() || IsKnockdown() || IsParalyzed())
+				set_stat(UNCONSCIOUS)
+			else
+				set_stat(CONSCIOUS)
 	diag_hud_set_status()
 	diag_hud_set_health()
 	diag_hud_set_aishell()
