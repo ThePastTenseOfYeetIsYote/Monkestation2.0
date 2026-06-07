@@ -43,7 +43,11 @@
 	cast_on.adjustBruteLoss(20)
 	living_owner.adjustBruteLoss(-20)
 
-	cast_on.transfer_blood_to(living_owner, 20, forced = TRUE /* ignore_low_blood = TRUE, ignore_incompatibility = TRUE, transfer_viruses = FALSE */)
+	var/datum/blood_type/heretic_blood = living_owner.get_blood_type()
+	if(!isnull(heretic_blood) && living_owner.reagents)
+		var/transfer_amount = min(cast_on.blood_volume, 20)
+		cast_on.blood_volume -= transfer_amount
+		living_owner.reagents.add_reagent(heretic_blood.reagent_type, transfer_amount, heretic_blood.get_blood_data(living_owner))
 
 	if(!iscarbon(cast_on) || !iscarbon(owner))
 		return TRUE
