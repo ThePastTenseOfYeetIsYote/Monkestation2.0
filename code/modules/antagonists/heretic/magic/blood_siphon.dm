@@ -47,7 +47,7 @@
 	if(!isnull(heretic_blood))
 		var/transfer_amount = min(cast_on.blood_volume, 20)
 		cast_on.blood_volume -= transfer_amount
-		living_owner.reagents.add_reagent(heretic_blood.reagent_type, transfer_amount, heretic_blood.get_blood_data(living_owner))
+		living_owner.blood_volume = min(living_owner.blood_volume + transfer_amount, BLOOD_VOLUME_MAXIMUM)
 
 	if(!iscarbon(cast_on) || !iscarbon(owner))
 		return TRUE
