@@ -36,7 +36,7 @@
 
 	cast_on.visible_message(
 		span_danger("[cast_on] turns pale as a red glow envelops [cast_on.p_them()]!"),
-		span_danger("You pale as a red glow enevelops you!"),
+		span_danger("You pale as a red glow envelops you you!"),
 	)
 
 	var/mob/living/living_owner = owner
