@@ -252,6 +252,7 @@
 	. = ..()
 	if(. == SUCCESSFUL_UNFASTEN)
 		if(anchored)
+			reset_task_turfs()
 			validate_all_tasks()
 
 /obj/machinery/big_manipulator/screwdriver_act(mob/living/user, obj/item/tool)
@@ -393,6 +394,10 @@
 			unregister_task_turf_signals()
 			waiting_for_signal = FALSE
 		SStgui.update_uis(src)
+
+/obj/machinery/big_manipulator/proc/reset_task_turfs()
+	for(var/datum/manipulator_task/cargo/cargo_task in tasks)
+		cargo_task.interaction_turf = locate(x + cargo_task.offset_dx, y + cargo_task.offset_dy, z)
 
 /// Validates all cargo tasks, removing those on closed turfs.
 /obj/machinery/big_manipulator/proc/validate_all_tasks()
