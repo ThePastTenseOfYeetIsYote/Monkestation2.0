@@ -1,7 +1,5 @@
-// What should be picked up from the point
-#define TAKE_ITEMS 1
-#define TAKE_CLOSETS 2
-#define TAKE_HUMANS 3
+// TAKE_ITEMS / TAKE_CLOSETS / TAKE_HUMANS and TASKING_SEQUENTIAL / TASKING_STRICT
+// are defined in code/__DEFINES/big_manipulator.dm (needed before wire datum compile).
 
 #define MIN_SPEED_MULTIPLIER_TIER_1 0.5
 #define MIN_SPEED_MULTIPLIER_TIER_2 0.4
@@ -50,5 +48,3 @@
 #define TASK_TYPE_INTERACT "interact"
 #define TASK_TYPE_WAIT "wait"
 
-#define TASKING_SEQUENTIAL "Sequential"
-#define TASKING_STRICT "Strict order"
