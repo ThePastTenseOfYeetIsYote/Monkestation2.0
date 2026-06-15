@@ -34,7 +34,7 @@
 			holder_manipulator.drop_held_atom()
 		if(WIRE_ITEM_TYPE)
 			for(var/datum/manipulator_task/cargo/task in holder_manipulator.tasks)
-				task.filtering_mode = holder_manipulator.cycle_value(task.filtering_mode, list(TAKE_ITEMS, TAKE_CLOSETS, TAKE_HUMANS))
+				task.filtering_mode = holder_manipulator.cycle_value(task.filtering_mode, list(TAKE_ITEMS, TAKE_CLOSETS))
 		if(WIRE_CHANGE_MODE)
 			holder_manipulator.tasking_strategy = holder_manipulator.tasking_strategy == TASKING_SEQUENTIAL ? TASKING_STRICT : TASKING_SEQUENTIAL
 			holder_manipulator.update_strategies()
