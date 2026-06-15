@@ -30,6 +30,8 @@
 	var/obj/effect/big_manipulator_arm/manipulator_arm = null
 	/// Is the power access wire cut? Disables the power button if `TRUE`.
 	var/power_access_wire_cut = FALSE
+	/// Is the item type wire cut? Used to restore filtering modes on mend.
+	var/item_type_wire_cut = FALSE
 
 	/// How many tasks total we can have.
 	var/interaction_point_limit = MAX_TASKS_TIER_1
@@ -100,10 +102,6 @@
 		var/datum/manipulator_task/cargo/cargo_task = new_task
 		cargo_task.offset_dx = new_turf.x - x
 		cargo_task.offset_dy = new_turf.y - y
-
-	if((obj_flags & EMAGGED) && istype(new_task, /datum/manipulator_task/cargo))
-		var/datum/manipulator_task/cargo/cargo_task = new_task
-		cargo_task.type_filters += /mob/living
 
 	return new_task
 
@@ -217,13 +215,6 @@
 	monkey_worker = null
 
 
-/// Removes an invalid task from the list.
-/obj/machinery/big_manipulator/proc/remove_invalid_task(datum/manipulator_task/task)
-	if(!task)
-		return
-	tasks -= task
-	qdel(task)
-
 /obj/machinery/big_manipulator/emag_act(mob/user, obj/item/card/emag/emag_card)
 	. = ..()
 	if(obj_flags & EMAGGED)
@@ -231,9 +222,6 @@
 
 	balloon_alert(user, "overloaded")
 	obj_flags |= EMAGGED
-
-	for(var/datum/manipulator_task/cargo/cargo_task in tasks)
-		cargo_task.type_filters += /mob/living
 
 	return TRUE
 
@@ -407,7 +395,7 @@
 			qdel(cargo_task)
 
 /// Attempts to press the power button.
-/obj/machinery/big_manipulator/proc/try_press_on(mob/living/carbon/human/user)
+/obj/machinery/big_manipulator/proc/try_press_on(mob/living/user)
 	if(power_access_wire_cut)
 		balloon_alert(user, "unresponsive!")
 		return
@@ -421,21 +409,6 @@
 		balloon_alert(user, "activated")
 	else
 		balloon_alert(user, "deactivated")
-
-/obj/machinery/big_manipulator/proc/_collect_filter_names(list/filters)
-	var/list/names = list()
-	for(var/atom/f as anything in filters)
-		names += initial(f.name)
-	return names
-
-/obj/machinery/big_manipulator/proc/_collect_priorities(list/priorities)
-	var/list/out = list()
-	for(var/datum/manipulator_priority/pr in priorities)
-		var/list/entry = list()
-		entry["name"] = pr.name
-		entry["active"] = pr.active
-		out += list(entry)
-	return out
 
 /obj/machinery/big_manipulator/ui_act(action, params, datum/tgui/ui)
 	. = ..()
@@ -702,7 +675,7 @@
 			if(!istype(target_task, /datum/manipulator_task/cargo))
 				return FALSE
 			var/datum/manipulator_task/cargo/ct = target_task
-			ct.atom_filters.Cut(value, value + 1)
+			ct.atom_filters.Cut(value + 1, value + 2)
 			return TRUE
 
 		if("cycle_filtering_mode")

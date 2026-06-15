@@ -597,27 +597,24 @@ export const BigManipulator = () => {
         >
           <MasterControls />
         </Section>
-        <Section
-
-        >
+        <Section title="Disk Drive">
           <Stack>
             <Stack.Item grow>
-            <Button style={{
-              width: '100%',
-              lineHeight: '24px'
-            }}
-              icon={ data.disk_inserted ? "eject" : 'info' }
-              disabled={!data.disk_inserted || !!active || !!stopping}
-              color={!data.disk_inserted && "none"}
-              onClick={() => act('disk_eject')}
-            >
-              { data.disk_inserted ? "floppy drive (tasks: " + data.disk_task_count + ")" : "No drives inserted" }
-            </Button>
+              <Button
+                style={{ width: '100%', lineHeight: '24px' }}
+                icon={data.disk_inserted ? 'eject' : 'info'}
+                disabled={!data.disk_inserted || !!active || !!stopping}
+                color={!data.disk_inserted ? 'none' : undefined}
+                onClick={() => act('disk_eject')}
+              >
+                {data.disk_inserted
+                  ? 'floppy drive (tasks: ' + data.disk_task_count + ')'
+                  : 'No drives inserted'}
+              </Button>
             </Stack.Item>
             <Stack.Item>
-              <Button style={{
-              lineHeight: '24px'
-            }}
+              <Button
+                style={{ lineHeight: '24px' }}
                 icon="download"
                 disabled={!data.disk_inserted || !!active || !!stopping}
                 onClick={() => act('disk_read')}
@@ -626,9 +623,8 @@ export const BigManipulator = () => {
               </Button>
             </Stack.Item>
             <Stack.Item>
-              <Button style={{
-              lineHeight: '24px'
-            }}
+              <Button
+                style={{ lineHeight: '24px' }}
                 icon="upload"
                 disabled={!data.disk_inserted || !!data.disk_read_only || !!active || !!stopping}
                 onClick={() => act('disk_write')}
@@ -637,14 +633,14 @@ export const BigManipulator = () => {
               </Button>
             </Stack.Item>
             <Stack.Item>
-              <Button.Confirm style={{
-              lineHeight: '24px'
-            }}
+              <Button.Confirm
+                style={{ lineHeight: '24px' }}
                 icon="trash"
                 disabled={!data.disk_inserted || !!data.disk_read_only || !!active || !!stopping}
                 confirmContent="Clear?"
                 onClick={() => act('disk_clear')}
-              >Clear
+              >
+                Clear
               </Button.Confirm>
             </Stack.Item>
           </Stack>

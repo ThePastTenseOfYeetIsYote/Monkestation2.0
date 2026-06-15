@@ -49,10 +49,8 @@
 	var/should_use_filters = FALSE
 	var/list/atom_filters = list()
 	var/filtering_mode = TAKE_ITEMS
-	var/list/type_filters = list(
-		/obj/item,
-		/obj/structure/closet,
-	)
+	/// Saved filtering mode for restoring after WIRE_ITEM_TYPE is mended.
+	var/saved_filtering_mode = null
 	var/list/interaction_priorities = list()
 
 /datum/manipulator_task/cargo/New(turf/new_turf, manipulator_tier, serialized_data)
@@ -67,7 +65,6 @@
 		should_use_filters = !!serialized_data["should_use_filters"]
 		atom_filters = serialized_data["atom_filters"] || list()
 		filtering_mode = serialized_data["filtering_mode"]
-		type_filters = serialized_data["type_filters"] || list()
 
 		var/list/prios_data = serialized_data["interaction_priorities"]
 		if(islist(prios_data))
@@ -146,7 +143,7 @@
 	return best_candidate
 
 /datum/manipulator_task/cargo/proc/move_priority_up_by_index(index)
-	if(!index)
+	if(!index || index >= length(interaction_priorities))
 		return FALSE
 	interaction_priorities.Swap(index, index + 1)
 	return TRUE
@@ -195,7 +192,6 @@
 	data["should_use_filters"] = should_use_filters
 	data["atom_filters"] = atom_filters
 	data["filtering_mode"] = filtering_mode
-	data["type_filters"] = type_filters
 	data["interaction_priorities"] = list()
 	for(var/datum/manipulator_priority/prio as anything in interaction_priorities)
 		data["interaction_priorities"] += list(list(

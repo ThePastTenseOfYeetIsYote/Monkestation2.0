@@ -1,8 +1,3 @@
-// How should the manipulator interact with the point
-#define INTERACT_DROP "DROP"
-#define INTERACT_USE "USE"
-#define INTERACT_THROW "THROW"
-
 // What should be picked up from the point
 #define TAKE_ITEMS 1
 #define TAKE_CLOSETS 2
@@ -31,9 +26,6 @@
 
 #define BASE_POWER_USAGE 0.2
 #define BASE_INTERACTION_TIME 0.3 SECONDS
-
-/// How long will the manipulator wait if there's nothing to do
-#define CYCLE_SKIP_TIMEOUT 1 SECONDS
 
 // How should overflow should be handled
 #define POINT_OVERFLOW_ALLOWED "ALLOW"

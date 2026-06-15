@@ -5,14 +5,6 @@ export interface PrioritySettings {
   active: BooleanLike;
 }
 
-export type TaskType =
-  | 'Pick up...'
-  | 'Drop...'
-  | 'Throw...'
-  | 'Use...'
-  | 'Interact with...'
-  | 'Wait for...';
-
 export interface ManipulatorTask {
   name: string;
   id: string;
