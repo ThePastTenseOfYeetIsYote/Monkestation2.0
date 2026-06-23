@@ -9,11 +9,12 @@
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 
 	planning_subtrees = list(
+		/datum/ai_planning_subtree/pet_planning,
 		/datum/ai_planning_subtree/find_valid_home,
 		/datum/ai_planning_subtree/enter_exit_home,
-		/datum/ai_planning_subtree/simple_find_target,
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
 		/datum/ai_planning_subtree/find_and_hunt_target/pollinate,
+		/datum/ai_planning_subtree/simple_find_target/bee,
+		/datum/ai_planning_subtree/basic_melee_attack_subtree,
 	)
 
 /datum/ai_controller/basic_controller/queen_bee
@@ -32,10 +33,18 @@
 		/datum/ai_planning_subtree/basic_melee_attack_subtree,
 	)
 
+/// Once we're locked onto a tray to pollinate, commit to it instead of falling through to attack/wander planning.
+/datum/ai_planning_subtree/simple_find_target/bee/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+	if(controller.blackboard[BB_TARGET_HYDRO])
+		return SUBTREE_RETURN_FINISH_PLANNING
+	return ..()
 
 /datum/ai_planning_subtree/find_valid_home
 
 /datum/ai_planning_subtree/find_valid_home/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+	if(controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET)) //busy defending the hive, sort the housing out later
+		return
+
 	var/mob/living/work_bee = controller.pawn
 
 	var/obj/structure/beebox/current_home = controller.blackboard[BB_CURRENT_HOME]
@@ -57,6 +66,8 @@
 	var/exit_chance = 35
 
 /datum/ai_planning_subtree/enter_exit_home/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+	if(controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET)) //angry bees don't take coffee breaks at home
+		return
 
 	var/obj/structure/beebox/current_home = controller.blackboard[BB_CURRENT_HOME]
 
@@ -84,3 +95,11 @@
 	hunt_targets = list(/obj/machinery/growing)
 	hunt_range = 10
 	hunt_chance = 85
+
+/datum/ai_planning_subtree/find_and_hunt_target/pollinate/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+	var/atom/atom_pawn = controller.pawn
+	if(!isturf(atom_pawn.loc)) //tucked away inside the hive, can't pollinate from in here
+		return
+	if(controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET)) //fighting comes before flowers
+		return
+	return ..()

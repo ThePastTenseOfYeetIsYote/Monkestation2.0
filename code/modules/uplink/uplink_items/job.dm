@@ -453,6 +453,13 @@
 	cost = 17
 	restricted_roles = list(JOB_BOTANIST)
 
+/datum/uplink_item/role_restricted/bee_smoker
+	name = "Bee Smoker"
+	desc = "A device that runs on cannabis, turning it into a gas that can hypnotize bees to follow our commands."
+	item = /obj/item/bee_smoker
+	cost = 4
+	restricted_roles = list(JOB_BOTANIST)
+
 /datum/uplink_item/role_restricted/power_gloves
 	name = "Power Gloves"
 	desc = "Are the Engineers on your station creating too much power? Use this to set them in their place. T-ray scanner not included"

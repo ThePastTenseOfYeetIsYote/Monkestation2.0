@@ -168,6 +168,7 @@
 
 		bees += new_queen.queen
 		queen_bee = new_queen.queen
+		queen_bee.beehome = src //monkestation edit: otherwise handle_habitation refuses to re-home her (she's already listed as queen_bee) and she's stuck homeless
 
 		new_queen.queen.forceMove(src)
 
@@ -247,6 +248,7 @@
 				if(!user.put_in_active_hand(QB))
 					QB.forceMove(drop_location())
 				visible_message(span_notice("[user] removes the queen from the apiary."))
+				queen_bee.beehome = null //monkestation edit: she no longer lives here
 				queen_bee = null
 
 /obj/structure/beebox/deconstruct(disassembled = TRUE)
