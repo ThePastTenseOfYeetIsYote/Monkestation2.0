@@ -1,0 +1,819 @@
+Freon
+Halon
+Healium
+Hyper-Noblium
+Nitrosyl plasmide
+Nitrium
+Pluoxium
+Zauker
+Helbital
+Libital
+Probital
+Lenturi
+Aiuri
+Hercuri
+Convermol
+Tirimol
+Seiver
+Multiver
+Syriniver
+Musiver
+Synthflesh
+Penthrite
+Strong Heartbeat
+Biocellulose
+Catalyst agent
+Speed Catalyst Agent
+pH Catalyst Agent
+Temperature Catalyst Agent
+Palladium Synthate Catalyst
+Ethanol
+Beer
+Light Beer
+Malt Liquor
+Green Beer
+Kahlua
+Whiskey
+Kong
+Candy Corn Liquor
+Thirteen Loko
+Vodka
+Bilk
+Three Mile Island Iced Tea
+Gin
+Rum
+Tequila
+Vermouth
+Wine
+Lizard Wine
+Grappa
+Amaretto
+Cognac
+Absinthe
+Hooch
+Ale
+Goldschlager
+Patron
+Gin and Tonic
+Rum and Coke
+Cuba Libre
+Whiskey Cola
+Classic Martini
+Vodka Martini
+White Russian
+Screwdriver
+Booger
+Bloody Mary
+Brave Bull
+Tequila Sunrise
+Toxins Special
+Beepsky Smash
+Irish Cream
+The Manly Dorf
+Honeybee Mead
+Long Island Iced Tea
+Moonshine
+B-52
+Irish Coffee
+Margarita
+Black Russian
+Manhattan
+Manhattan Project
+Whiskey Soda
+Anti-freeze
+Barefoot
+Snow White
+Demon's Blood
+Devil's Kiss
+Vodka and Tonic
+Gin Fizz
+Bahama Mama
+Singulo
+Sbiten
+Red Mead
+Mead
+Iced Beer
+Grog
+Aloe
+Andalusia
+Allies Cocktail
+Acid Spit
+Amasec
+Changeling Sting
+Irish Car Bomb
+Syndicate Bomb
+Hivemind Eraser
+Erika Surprise
+Driest Martini
+Banana Honk
+Silencer
+Drunken Blumpkin
+Whiskey Sour
+Hard Cider
+Fetching Fizz
+Hearty Punch
+Bacchus' Blessing
+Atomic Bomb
+Pan-Galactic Gargle Blaster
+Neurotoxin
+Hippie's Delight
+Eggnog
+Nar'Sour
+Triple Sec
+Creme de Menthe
+Creme de Cacao
+Creme de Coconut
+Quadruple Sec
+Quintuple Sec
+Grasshopper
+Stinger
+Bastion Bourbon
+Squirt Cider
+Fringe Weaver
+Sugar Rush
+Crevice Spike
+Sake
+Peppermint Patty
+Alexander
+Amaretto Alexander
+Sidecar
+Between the Sheets
+Kamikaze
+Mojito
+Moscow Mule
+Fernet
+Fernet Cola
+Fanciulli
+Branca Menta
+Blank Paper
+Fruit Wine
+Mixed [names_in_order[1]] Wine
+Champagne
+Wizz Fizz
+Bug Spray
+Applejack
+Jack Rose
+Turbo
+Old Timer
+Rubberneck
+Duplex
+Trappist Beer
+Blazaam
+Planet Cracker
+Mauna Loa
+Painkiller
+Pina Colada
+Piña Olivada
+Pruno
+Ginger Amaretto
+Godfather
+Godmother
+Kortara
+Sea Breeze
+White Tiziran
+Drunken Espatier
+Protein Blend
+Mushi Kombucha
+Triumphal Arch
+The Juice
+Ritual Wine
+Curaçao
+Navy Rum
+Andromeda Bitters
+Admiralty
+Long Haul
+Long John Silver
+Tropical Storm
+Dark and Stormy
+Salt and Swell
+Tiltällen
+Tich Toch
+Helianthus
+Plum wine
+The Hat
+Gin Garden
+Voltaic Yellow Wine
+Telepole
+Pod Tesla
+Rice Beer
+Shochu
+Yūyake
+Coconut Rum
+Yūyakita
+Saibāsan
+Banzai-Tī
+Sanraizusōda
+Kumichō
+Red Planet
+Amaterasu
+Nekomimosa
+Sentai Quencha
+Bōsōzoku
+Ersatzche
+Red City AM
+King's Ransom
+Four Bit
+White Hawaiian
+Maui Sunrise
+Imperial Mai Tai
+Konococo Rumtini
+Blue Hawaiian
+Orange Juice
+Tomato Juice
+Lime Juice
+Carrot Juice
+Berry Juice
+Apple Juice
+Poison Berry Juice
+Watermelon Juice
+Lemon Juice
+Banana Juice
+Nothing
+Laughter
+Super Laughter
+Potato Juice
+Grape Juice
+Plum Juice
+Milk
+Soy Milk
+Cream
+Coffee
+Tea
+Lemonade
+Arnold Palmer
+Iced Coffee
+Hot Ice Coffee
+Iced Tea
+Cola
+Roy Rogers
+Nuka Cola
+root beer
+Grey Bull
+SM Wind
+Dr. Gibb
+Space-Up
+Lemon Lime
+Pwr Game
+Shambler's Juice
+Soda Water
+Tonic Water
+Wellcheers
+Monkey Energy
+Ice
+Soy Latte
+Cafe Latte
+The Doctor's Delight
+Cinderella
+Cherry Shake
+Blue Cherry Shake
+Vanilla Shake
+Caramel Shake
+Chocolate Shake
+Strawberry Shake
+Banana Shake
+Malt Milkshake
+Pumpkin Latte
+Gibb Floats
+Pumpkin Juice
+Blumpkin Juice
+Triple Citrus
+Grape Soda
+Chocolate Milk
+Bogril
+Hot Coco
+Italian Hot Chocolate
+Menthol
+Grenadine
+Parsnip Juice
+Pineapple Juice
+Peach Juice
+Cream Soda
+Sol Dry
+Shirley Temple
+Red Queen
+Bungo Juice
+Pruno Mixture
+Aloe Juice
+Agua Fresca
+Mushroom Tea
+Töchtaüse Juice
+Töchtaüse Syrup
+strawberry banana smoothie
+berry blast smoothie
+funky monkey smoothie
+ook monkey smoothie?
+green giant smoothie
+melon baller smoothie
+vanilla dream smoothie
+Cucumber Juice
+Cucumber Lemonade
+Mississippi Queen
+T
+Hakka-Mate
+Coconut Milk
+Melon Soda
+24-Volt Energy
+Drug
+Space Drugs
+Cannabis
+Nicotine
+Krokodil
+Methamphetamine
+Positronic Excitement Salts
+Bath Salts
+Aranesp
+Happiness
+Pump-Up
+Maintenance Drugs
+Maintenance Powder
+Maintenance Sludge
+Maintenance Tar
+Mushroom Hallucinogen
+bLaStOoF
+Saturn-X
+Stabilized Saturn-X
+Kronkaine
+Gore
+Consumable
+Nutriment
+Vitamin
+Protein
+Organ Tissue
+Cloth Fibers
+Cooking Oil
+Deep-fried [initial(exposed_turf.name)]
+Sugar
+Virus Food
+Soysauce
+Ketchup
+Capsaicin Oil
+Frost Oil
+Condensed Capsaicin
+Table Salt
+Black Pepper
+Coco Powder
+Garlic Juice
+Tear Juice
+Sprinkles
+Corn Oil
+Universal Enzyme
+Dry Ramen
+Hot Ramen
+Nutraslop
+Hell Ramen
+Flour
+Cherry Jelly
+Blue Cherry Jelly
+Rice
+Vanilla Powder
+Egg Yolk
+Egg White
+Corn Starch
+Corn Syrup
+Honey
+Mayonnaise
+Mold
+Rotten Eggyolk
+Stabilized Nutriment
+Entropic Polypnium
+Tinea Luxor
+Vitrium Froth
+Liquid Electricity
+Astrotame
+Secret Sauce
+Peptides
+Caramel
+Char
+BBQ Sauce
+Chocolate Pudding
+Vanilla Pudding
+Flan
+Cherry Pudding
+Laughin' Syrup
+Gravy
+Pancake Batter
+Korta Flour
+Korta Milk
+Korta Nectar
+Whipped Cream
+Peanut Butter
+Vinegar
+Quality Oil
+Cornmeal
+Yoghurt
+Cornmeal Batter
+Olive Paste
+Coffee Creamer
+Mint Extract
+Worcestershire Sauce
+Red Bay Seasoning
+Curry Powder
+Dashi Concentrate
+Martian Batter
+Grounding Solution
+Chemical Isomers
+Toxic Monomers
+Viscous Sludge
+Eigenswap
+Cryogelidia
+Healing Impure Reagent
+Healing Inverse Reagent
+Insolvent Medicinal Precipitate
+Helgrasp
+Grasp of the Mansus
+Libitoil
+Metabolic Inhibition Factor
+Prion Peptides
+Lentslurri
+Ichiyuri
+Aivime
+Herignis
+Super Melatonin
+Coveroli
+Technetium 99
+Syrinifergus
+Monover
+Nooartrium
+Mannitoil
+Neruwhine
+Corazargh
+Prohol
+Oculater
+Tinacusiate
+Ipecacide
+Methanol
+Chloralax
+Rosenol
+Leporazine
+Adminordrazine
+Quantum Medicine
+Synaptizine
+Diphen-Synaptizine
+Cryoxadone
+Clonexadone
+Pyroxadone
+Rezadone
+Spaceacillin
+Oxandrolone
+Saline-Glucose Solution
+Miner's Salve
+Omnizine
+Protozine
+Calomel
+Ammoniated Mercury
+Potassium Iodide
+Pentetic Acid
+Salicylic Acid
+Salbutamol
+Ephedrine
+Diphenhydramine
+Morphine
+Oculine
+Inacusiate
+Atropine
+Epinephrine
+Strange Reagent
+Stranger Reagent
+Mannitol
+Neurine
+Mutadone
+Antihol
+Stimulants
+Insulin
+Inaprovaline
+Regenerative Jelly
+Weakened Regenerative Jelly
+Restorative Nanites
+Earthsblood
+Haloperidol
+Changeling Adrenaline
+Changeling Haste
+Higadrite
+Cordiolis Hepatico
+Muscle Stimulant
+Modafinil
+Psicodine
+Mitogen Metabolism Factor
+Silibinin
+Polypyrylium Oligomers
+Granibitaluri
+Sanguirite
+Pulped Banana Peel
+Seraka Extract
+Positronic Neural Dampener
+Blood
+Liquid gibs
+Bone Dust
+Vaccine
+Vaccine (Fungal Tuberculosis)
+Water
+Saltwater
+Holy Water
+Hollow Water
+Hydrogen Peroxide
+Unholy Water
+Hell Water
+Godblood
+Space Lube
+Super Duper Lube
+Spray Tan
+Stable Mutation Toxin
+Mutation Toxin
+Lizard Mutation Toxin
+Fly Mutation Toxin
+Moth Mutation Toxin
+Podperson Mutation Toxin
+Imperfect Mutation Toxin
+Golem Mutation Toxin
+Abductor Mutation Toxin
+Android Mutation Toxin
+Skeleton Mutation Toxin
+Zombie Mutation Toxin
+Ash Mutation Toxin
+Shadow Mutation Toxin
+Plasma Mutation Toxin
+Oni Mutation Toxin
+Mulligan Toxin
+Advanced Mutation Toxin
+Gluttony's Blessing
+Serotrotium
+Oxygen
+Copper
+Nitrogen
+Hydrogen
+Potassium
+Mercury
+Sulfur
+Carbon
+Chlorine
+Fluorine
+Sodium
+Phosphorus
+Lithium
+Glycerol
+Sterilizine
+Iron
+Gold
+Silver
+Uranium
+Radium
+Bluespace Dust
+Aluminium
+Silicon
+Welding Fuel
+Space Cleaner
+EZ Clean
+Cryptobiolin
+Impedrezene
+Nanomachines
+Xenomicrobes
+Tubercle Bacillus Cosmosis Microbes
+Agent-S
+Fluorosurfactant
+Foaming Agent
+Smart Foaming Agent
+Ammonia
+Diethylamine
+Carbon Dioxide
+Nitrous Oxide
+Mundane Powder
+none
+Red Powder
+red
+Orange Powder
+orange
+Yellow Powder
+yellow
+Green Powder
+green
+Blue Powder
+blue
+Purple Powder
+purple
+Invisible Powder
+invisible
+Black Powder
+black
+White Powder
+white
+Red Crayon Powder
+Orange Crayon Powder
+Yellow Crayon Powder
+Green Crayon Powder
+Blue Crayon Powder
+Purple Crayon Powder
+Black Crayon Powder
+White Crayon Powder
+Generic Nutriment
+E-Z Nutrient
+Left 4 Zed
+Robust Harvest
+Enduro Grow
+Liquid Earthquake
+Oil
+Stable Plasma
+Iodine
+Carpet
+Black Carpet
+Blue Carpet
+Cyan Carpet
+Green Carpet
+Orange Carpet
+Purple Carpet
+Red Carpet
+Royal Carpet?
+Royal Black Carpet
+Royal Blue Carpet
+Neon Carpet
+Simple White Neon Carpet
+Simple Red Neon Carpet
+Simple Orange Neon Carpet
+Simple Yellow Neon Carpet
+Simple Lime Neon Carpet
+Simple Green Neon Carpet
+Simple Teal Neon Carpet
+Simple Cyan Neon Carpet
+Simple Blue Neon Carpet
+Simple Purple Neon Carpet
+Simple Violet Neon Carpet
+Simple Pink Neon Carpet
+Simple Black Neon Carpet
+Bromine
+Pentaerythritol
+Acetaldehyde
+Acetone Oxide
+Phenol
+Ash
+Acetone
+Colorful Reagent
+Quantum Hair Dye
+Barber's Aid
+Concentrated Barber's Aid
+Baldium
+Saltpetre
+Lye
+Drying Agent
+Mutagenic Agar
+Sucrose Agar
+Virus Rations
+Virus Plasma
+Weakened Virus Plasma
+Decaying Uranium Gel
+Unstable Uranium Gel
+Stable Uranium Gel
+Royal Bee Jelly
+Romerol
+Magillitis
+Growth Serum
+Plastic Polymers
+Generic Glitter
+Pink Glitter
+White Glitter
+Blue Glitter
+Confetti
+Pax
+BZ Metabolites
+Synthpax
+Dizzying Solution
+Tiring Solution
+Tranquility
+Spider Extract
+Organic Slurry
+Monkey Powder
+Hyper-Plasmium Oxide
+Exotic Stabilizer
+Wittel
+Metalgen
+Gravitum
+Cellulose Fibers
+Determination
+Eldritch Essence
+Universal Indicator
+Ants
+Lead
+Kronkus Extract
+Brimdust
+Love
+Hauntium
+High-Purity Scrunchium
+Thermite
+Nitroglycerin
+Stabilizing Agent
+Chlorine Trifluoride
+Sorium
+Liquid Dark Matter
+Gunpowder
+RDX
+TaTP
+Flash Powder
+Smoke Powder
+Sonic Powder
+Phlogiston
+Napalm
+Cryostylane
+Pyrosium
+Teslium
+Energized Jelly
+Firefighting Foam
+Reaction Agent
+Strong Acidic Buffer
+Strong Basic Buffer
+Interim Product Alpha
+Interim Product Beta
+Purity Tester
+Tempomyocin
+Toxin
+Amatoxin
+Unstable Mutagen
+Plasma
+Hot Ice Slush
+Lexorin
+Slime Jelly
+Carpotoxin
+Zombie Powder
+Ghoul Powder
+Mindbreaker Toxin
+Plant-B-Gone
+Weed Killer
+Pest Killer
+Natural Pest Killer
+Spore Toxin
+Burning Spore Toxin
+Chloral Hydrate
+B33r
+Coffee Grounds
+Ground Tea Leaves
+Mushroom Powder
+Mute Toxin
+Tirizene
+Polonium
+Histamine
+Formaldehyde
+Venom
+Fentanyl
+Cyanide
+Bad Food
+Itching Powder
+Initropidril
+Pancuronium
+Sodium Thiopental
+Sulfonal
+Amanitin
+Lipolicide
+Coniine
+Spewium
+Curare
+Heparin
+Rotatium
+Anacea
+Sulfuric Acid
+Fluorosulfuric Acid
+Nitric Acid
+Toxin Microcapsules
+Mime's Bane
+Bone Hurting Juice
+Morbital
+Bungotoxin
+Lead Acetate
+Spider Toxin
+Viper Spider Toxin
+Tetrodotoxin
+Radiomagnetic Disruptor
+Eigenstasium
+[living_mob.name]'s Eigenstate
+condiment
+ketchup pack
+ketchup
+hotsauce pack
+hotsauce
+astrotame pack
+astrotame
+bbq sauce pack
+bbq sauce
+creamer pack
+creamer
+sugar pack
+sugar
+DemonEye steroid injector
+aranepaine combat stimulant injector
+pentibinin normalizant injector
+synalvipitol muscle stimulant injector
+occuisate sensory restoration injector
+adrenaline injector
+morpital regenerative stimulant injector
+lipital regenerative stimulant injector
+meridine antidote injector
+synephrine emergency stimulant injector
+calopine emergency stabilizant injector
+coagulant-S injector
+krotozine manipulative stimulant injector
+lepoturi burn treatment injector
+psifinil personal recovery injector
+halobinin soberant injector
+synthetic cleaner autoinjector
+synthetic smart-solder autoinjector
+Rat'vander Cocktail
+Australium
+Liquid justice
+Shakeium
+Sunset Sarsaparilla
