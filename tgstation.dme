@@ -8825,6 +8825,7 @@
 #include "monkestation\code\modules\storytellers\converted_events\solo\spies.dm"
 #include "monkestation\code\modules\storytellers\converted_events\solo\traitor.dm"
 #include "monkestation\code\modules\storytellers\converted_events\solo\wizard.dm"
+#include "monkestation\code\modules\storytellers\converted_events\solo\ghosts\abandoned_ipc.dm"
 #include "monkestation\code\modules\storytellers\converted_events\solo\ghosts\nuclear_operative_ghost.dm"
 #include "monkestation\code\modules\storytellers\converted_events\solo\ghosts\paradox_clone.dm"
 #include "monkestation\code\modules\storytellers\converted_events\solo\ghosts\teratoma.dm"
@@ -9185,5 +9186,4 @@
 #include "monkestation\code\modules\wiremod_chem\housing\_chem_housing.dm"
 #include "monkestation\code\modules\wiremod_chem\housing\chemical_circuit.dm"
 #include "monkestation\code\modules\wiremod_chem\housing\precursor_tank.dm"
-#include "monkestation\interface\interface.dm"
 // END_INCLUDE
