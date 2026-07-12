@@ -2832,7 +2832,7 @@
 /turf/open/floor/engine/co2,
 /area/station/engineering/atmos)
 "Cd" = (
-/obj/machinery/rnd/destructive_analyzer,
+/obj/machinery/flatpacker,
 /turf/open/floor/iron,
 /area/station/science)
 "Ce" = (
