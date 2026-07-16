@@ -1,8 +1,8 @@
 /obj/item/clothing/mask/cigarette/pipe/crackpipe
 	name = "crack pipe"
 	desc = "A slick glass pipe made for smoking one thing: crack."
-	icon = 'monkestation/icons/obj/items/drugs.dmi'
-	worn_icon = 'monkestation/icons/mob/clothing/mask.dmi'
+	icon = 'icons/obj/items/drugs.dmi'
+	worn_icon = 'icons/mob/clothing/mask.dmi'
 	icon_state = "glass_pipeoff"
 	icon_on = "glass_pipeon"
 	icon_off = "glass_pipeoff"
@@ -41,7 +41,7 @@
 		smoketime = 120
 		name = "[used_item.name]-packed [initial(name)]"
 		if(used_item.reagents)
-			used_item.reagents.trans_to(src, used_item.reagents.total_volume, transfered_by = user)
+			used_item.reagents.trans_to(src, used_item.reagents.total_volume, transferred_by = user)
 		qdel(used_item)
 	else
 		var/lighting_text = used_item.ignition_effect(src,user)
