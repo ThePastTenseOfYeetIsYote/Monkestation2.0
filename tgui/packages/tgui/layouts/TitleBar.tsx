@@ -11,6 +11,10 @@ type TitleBarProps = Partial<{
   title: string;
   status: number;
   canClose: BooleanLike;
+  canMinimize: BooleanLike;
+  minimized: BooleanLike;
+  onMinimize: (e) => void;
+  onRestore: (e) => void;
   onClose: (e) => void;
   onDragStart: (e) => void;
 }> &
@@ -28,8 +32,19 @@ function statusToColor(status: number): string {
 }
 
 export function TitleBar(props: TitleBarProps) {
-  const { className, title, status, canClose, onDragStart, onClose, children } =
-    props;
+  const {
+    className,
+    title,
+    status,
+    canClose,
+    canMinimize,
+    minimized,
+    onMinimize,
+    onRestore,
+    onDragStart,
+    onClose,
+    children,
+  } = props;
 
   const setKitchenSink = useSetAtom(kitchenSinkAtom);
 
@@ -62,6 +77,17 @@ export function TitleBar(props: TitleBarProps) {
           icon="bug"
           onClick={() => setKitchenSink((prev) => !prev)}
         />
+      )}
+      {!!canMinimize && (
+        <div
+          className="TitleBar__minimize"
+          onClick={minimized ? onRestore : onMinimize}
+        >
+          <Icon
+            className="TitleBar__minimize--icon"
+            name={minimized ? 'window-maximize' : 'window-minimize'}
+          />
+        </div>
       )}
       {!!canClose && (
         <div className="TitleBar__close" onClick={onClose}>

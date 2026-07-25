@@ -8,8 +8,10 @@ import {
   type ComponentProps,
   type PropsWithChildren,
   type ReactNode,
+  useCallback,
   useEffect,
   useLayoutEffect,
+  useRef,
   useState,
 } from 'react';
 import { type Box, KeyListener } from 'tgui-core/components';
@@ -20,6 +22,7 @@ import { decodeHtmlEntities } from 'tgui-core/string';
 import { useBackend } from '../backend';
 import {
   dragStartHandler,
+  getWindowSize,
   recallWindowGeometry,
   resizeStartHandler,
   setWindowKey,
@@ -37,6 +40,7 @@ const DEFAULT_SIZE: [number, number] = [400, 600];
 type Props = Partial<{
   buttons: ReactNode;
   canClose: BooleanLike;
+  canMinimize: BooleanLike;
   height: number;
   theme: string;
   title: string;
@@ -47,6 +51,7 @@ type Props = Partial<{
 export function Window(props: Props) {
   const {
     canClose = true,
+    canMinimize = true,
     theme,
     title,
     children,
@@ -54,10 +59,47 @@ export function Window(props: Props) {
     width,
     height,
   } = props;
-
   const { config, suspended, debug } = useBackend();
 
   const [isReadyToRender, setIsReadyToRender] = useState(false);
+
+  const [minimized, setMinimized] = useState(false);
+  // Captured window size (px) from before minimize, to restore on expand.
+  const preMinimizeSize = useRef<[number, number] | null>(null);
+
+  const handleMinimize = useCallback(() => {
+    if (minimized) return;
+    const current = getWindowSize();
+    if (current && current[0] > 0 && current[1] > 0) {
+      preMinimizeSize.current = current;
+    }
+    setMinimized(true);
+  }, [minimized]);
+
+  const handleRestore = useCallback(() => {
+    if (!minimized) return;
+    setMinimized(false);
+  }, [minimized]);
+
+  // Collapse the BYOND window down to the title bar while minimized,
+  // and restore the previously captured size on expand.
+  useEffect(() => {
+    if (!isReadyToRender || suspended) return;
+    if (minimized) {
+      const [w] = preMinimizeSize.current
+        ? preMinimizeSize.current
+        : getWindowSize();
+      Byond.winset(Byond.windowId, {
+        size: `${w}x32`,
+      });
+    } else if (preMinimizeSize.current) {
+      const [w, h] = preMinimizeSize.current;
+      Byond.winset(Byond.windowId, {
+        size: `${w}x${h}`,
+      });
+      preMinimizeSize.current = null;
+    }
+  }, [minimized, isReadyToRender, suspended]);
 
   // We need to set the window to be invisible before we can set its geometry
   // Otherwise, we get a flicker effect when the window is first rendered
@@ -117,30 +159,38 @@ export function Window(props: Props) {
         onDragStart={dragStartHandler}
         onClose={suspendStart}
         canClose={canClose}
+        canMinimize={canMinimize}
+        minimized={minimized}
+        onMinimize={handleMinimize}
+        onRestore={handleRestore}
       >
         {buttons}
       </TitleBar>
-      <div
-        className={classes([
-          'Window__rest',
-          debug.debugLayout && 'debug-layout',
-        ])}
-      >
-        {!suspended && children}
-        {showDimmer && <div className="Window__dimmer" />}
-      </div>
-      <div
-        className="Window__resizeHandle__e"
-        onMouseDown={resizeStartHandler(1, 0) as any}
-      />
-      <div
-        className="Window__resizeHandle__s"
-        onMouseDown={resizeStartHandler(0, 1) as any}
-      />
-      <div
-        className="Window__resizeHandle__se"
-        onMouseDown={resizeStartHandler(1, 1) as any}
-      />
+      {!minimized && (
+        <>
+          <div
+            className={classes([
+              'Window__rest',
+              debug.debugLayout && 'debug-layout',
+            ])}
+          >
+            {!suspended && children}
+            {showDimmer && <div className="Window__dimmer" />}
+          </div>
+          <div
+            className="Window__resizeHandle__e"
+            onMouseDown={resizeStartHandler(1, 0) as any}
+          />
+          <div
+            className="Window__resizeHandle__s"
+            onMouseDown={resizeStartHandler(0, 1) as any}
+          />
+          <div
+            className="Window__resizeHandle__se"
+            onMouseDown={resizeStartHandler(1, 1) as any}
+          />
+        </>
+      )}
     </Layout>
   );
 }

@@ -2,6 +2,7 @@ import { useBackend, useLocalState } from '../backend';
 import {
   Box,
   Button,
+  Collapsible,
   Dropdown,
   Flex,
   Input,
@@ -23,12 +24,16 @@ type BeakerPanelData = {
     name: string;
     dangerous: string;
   }[];
-  chemstring: string;
+  grenadeCasings: {
+    type: string;
+    name: string;
+    description: string;
+  }[];
 };
 
 export const BeakerPanel = (props) => {
   const { act, data } = useBackend<BeakerPanelData>();
-  const { reagents, containers, chemstring } = data;
+  const { reagents, containers, grenadeCasings } = data;
 
   const [selectedContainersType, setContainersType] = useLocalState(
     'beakerPanel_beakersType',
@@ -167,7 +172,13 @@ export const BeakerPanel = (props) => {
       : [];
 
     return (
-      <Section title={`Container ${containerNum}`}>
+      <Section
+        title={`Container ${containerNum}${
+          selectedContainersType[containerNum]?.name
+            ? `: ${selectedContainersType[containerNum].name}`
+            : ''
+        }`}
+      >
         <Stack.Item>
           <LabeledList>
             <LabeledList.Item label="Container Type">
@@ -212,7 +223,7 @@ export const BeakerPanel = (props) => {
         </Stack.Item>
 
         <Stack.Item>
-          <Box bold>Reagents:</Box>
+          <Box bold>Reagents ({safeContainerReagents.length}):</Box>
           {safeContainerReagents.map((reagent, index: number) => {
             const currentreagentData = reagents.find(
               (r) => r.id === reagent.id,
@@ -220,7 +231,8 @@ export const BeakerPanel = (props) => {
             return (
               <Flex key={index} align="center" mb={1}>
                 <Flex.Item grow>
-                  {currentreagentData?.name || `Unknown Reagent ${reagent.id}`}
+                  {currentreagentData?.name ||
+                    `Unknown Reagent ${reagent.id}`}
                 </Flex.Item>
                 <Flex.Item>
                   <NumberInput
@@ -256,7 +268,8 @@ export const BeakerPanel = (props) => {
         </Stack.Item>
 
         <Stack.Item>
-          <Flex align="center">
+          <Box bold>Add Reagent:</Box>
+          <Flex align="center" mb={1}>
             <Flex.Item grow>
               <Box
                 p={1}
@@ -266,7 +279,8 @@ export const BeakerPanel = (props) => {
                   backgroundColor: '#2a2a2a',
                 }}
               >
-                {selectedReagents[containerNum]?.name || 'No reagent selected'}
+                {selectedReagents[containerNum]?.name ||
+                  'No reagent selected'}
               </Box>
             </Flex.Item>
             <Flex.Item>
@@ -279,9 +293,6 @@ export const BeakerPanel = (props) => {
               </Button>
             </Flex.Item>
           </Flex>
-        </Stack.Item>
-
-        <Stack.Item>
           <Box bold>Search Reagent:</Box>
           <Input
             placeholder="Search reagents..."
@@ -314,53 +325,61 @@ export const BeakerPanel = (props) => {
       <Window.Content>
         <Stack vertical scrollable>
           <Stack.Item>
-            <Section title="Grenade Controls">
-              <Stack>
-                <Stack.Item>
-                  <Button icon="bomb" onClick={spawnGrenade}>
-                    Spawn Grenade
-                  </Button>
-                </Stack.Item>
-                <Stack.Item>
-                  <LabeledList>
-                    <LabeledList.Item label="Grenade Type">
-                      <Dropdown
-                        width="150px"
-                        options={['Normal']}
-                        selected={grenadeData.grenadeType}
-                        onSelected={(value) =>
-                          setGrenadeData({
-                            ...grenadeData,
-                            grenadeType: value, // Update grenade type in state
-                          })
-                        }
-                      />
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Timer (seconds)">
-                      <NumberInput
-                        width="75px"
-                        step={0.1}
-                        minValue={10}
-                        maxValue={10.0}
-                        unit="seconds"
-                        value={grenadeData.grenadeTimer}
-                        onChange={(value) =>
-                          setGrenadeData({
-                            ...grenadeData,
-                            grenadeTimer: value,
-                          })
-                        }
-                      />
-                    </LabeledList.Item>
-                  </LabeledList>
-                </Stack.Item>
-              </Stack>
-              <Box mt={1} color="gray">
-                <em>
-                  Note: beakers recommended, other containers may have issues
-                </em>
-              </Box>
-            </Section>
+            <Collapsible title="Grenade Controls" open>
+              <Section>
+                <Stack>
+                  <Stack.Item>
+                    <Button icon="bomb" onClick={spawnGrenade}>
+                      Spawn Grenade
+                    </Button>
+                  </Stack.Item>
+                  <Stack.Item>
+                    <LabeledList>
+                      <LabeledList.Item label="Grenade Type">
+                        <Dropdown
+                          width="180px"
+                          options={
+                            grenadeCasings?.map((c) => c.type) ?? ['Normal']
+                          }
+                          selected={grenadeData.grenadeType}
+                          onSelected={(value) =>
+                            setGrenadeData({
+                              ...grenadeData,
+                              grenadeType: value,
+                            })
+                          }
+                        />
+                        <Box mt={1} color="gray" fontSize="11px">
+                          {grenadeCasings?.find(
+                            (c) => c.type === grenadeData.grenadeType,
+                          )?.description || ''}
+                        </Box>
+                      </LabeledList.Item>
+                      <LabeledList.Item label="Timer (seconds)">
+                        <NumberInput
+                          width="75px"
+                          step={0.1}
+                          minValue={1}
+                          maxValue={60}
+                          value={grenadeData.grenadeTimer}
+                          onChange={(value) =>
+                            setGrenadeData({
+                              ...grenadeData,
+                              grenadeTimer: value,
+                            })
+                          }
+                        />
+                      </LabeledList.Item>
+                    </LabeledList>
+                  </Stack.Item>
+                </Stack>
+                <Box mt={1} color="gray">
+                  <em>
+                    Note: beakers recommended, other containers may have issues
+                  </em>
+                </Box>
+              </Section>
+            </Collapsible>
           </Stack.Item>
           <Stack.Item>
             <Flex>

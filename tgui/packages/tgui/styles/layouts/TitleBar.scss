@@ -84,8 +84,29 @@
     }
   }
 
+  &__minimize {
+    cursor: var(--cursor-pointer);
+    opacity: 0.5;
+    pointer-events: all;
+    align-content: center;
+    text-align: center;
+    font-size: base.rem(16px);
+    height: 100%;
+    color: var(--color-text);
+    transition-property: background-color, opacity;
+    transition-duration: var(--transition-time-medium);
+    z-index: 102;
+
+    &:hover {
+      opacity: 1;
+      background-color: var(--button-background-default);
+      transition-duration: 0s;
+    }
+  }
+
   &__statusIcon,
-  &__close {
+  &__close,
+  &__minimize {
     width: base.rem(45px);
     min-width: base.rem(45px);
     max-width: base.rem(45px);

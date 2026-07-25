@@ -63,7 +63,6 @@ ADMIN_VERB(beaker_panel, R_SPAWN, FALSE, "Spawn Reagent Container", "Spawn a rea
 	tgui.ui_interact(user.mob)
 
 /datum/beaker_panel
-	var/chemstring
 	var/mob/user
 
 /datum/beaker_panel/New(mob/target_user)
@@ -86,20 +85,18 @@ ADMIN_VERB(beaker_panel, R_SPAWN, FALSE, "Spawn Reagent Container", "Spawn a rea
 	return container
 
 /datum/beaker_panel/proc/beaker_panel_create_grenade(list/grenadedata, list/obj/item/reagent_containers/containers, location)
-	switch(grenadedata["grenadeType"] )
-		if("Normal")
-			var/timer = text2num(grenadedata["grenadeTimer"]) SECONDS
-			var/obj/item/grenade/chem_grenade/grenade = new(location)
-			for(var/obj/item/reagent_containers/container in containers)
-				grenade.beakers += container
-				container.forceMove(grenade)
-			grenade.stage_change(GRENADE_READY)
-			if(timer)
-				grenade.det_time = timer
-
-			return grenade
-		else
-			return null
+	var/casing_type = beaker_grenade_casing_types()[grenadedata["grenadeType"]]
+	if(!casing_type)
+		return null
+	var/timer = text2num(grenadedata["grenadeTimer"]) SECONDS
+	var/obj/item/grenade/chem_grenade/grenade = new casing_type(location)
+	for(var/obj/item/reagent_containers/container in containers)
+		grenade.beakers += container
+		container.forceMove(grenade)
+	grenade.stage_change(GRENADE_READY)
+	if(timer)
+		grenade.det_time = timer
+	return grenade
 
 /datum/beaker_panel/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -114,11 +111,33 @@ ADMIN_VERB(beaker_panel, R_SPAWN, FALSE, "Spawn Reagent Container", "Spawn a rea
 	var/list/data = list()
 	data["reagents"] = reagentsforbeakers()
 	data["containers"] = beakersforbeakers()
+	data["grenadeCasings"] = grenade_casings_for_beakers()
 	return data
+
+/proc/beaker_grenade_casing_types()
+	var/static/list/casing_types = list(
+		"Normal" = /obj/item/grenade/chem_grenade,
+		"Large" = /obj/item/grenade/chem_grenade/large,
+		"Cryo" = /obj/item/grenade/chem_grenade/cryo,
+		"Pyro" = /obj/item/grenade/chem_grenade/pyro,
+		"Advanced Release" = /obj/item/grenade/chem_grenade/adv_release,
+	)
+	return casing_types
+
+/proc/grenade_casings_for_beakers()
+	var/list/casing_types = beaker_grenade_casing_types()
+	var/list/casing_list = list()
+	for(var/casing_name in casing_types)
+		var/obj/item/grenade/chem_grenade/casing = casing_types[casing_name]
+		casing_list += list(list(
+			"type" = casing_name,
+			"name" = initial(casing.name),
+			"description" = initial(casing.casedesc),
+		))
+	return casing_list
 
 /datum/beaker_panel/ui_data(mob/user)
 	var/list/data = list()
-	data["chemstring"] = chemstring
 	return data
 
 /datum/beaker_panel/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
