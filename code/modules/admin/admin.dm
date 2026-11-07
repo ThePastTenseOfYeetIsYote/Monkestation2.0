@@ -152,12 +152,11 @@ ADMIN_VERB(spawn_cargo, R_SPAWN, FALSE, "Spawn Cargo", "Spawn a cargo crate.", A
 	var/chosen = pick_closest_path(object, make_types_fancy(subtypesof(/datum/supply_pack)))
 	if(!chosen)
 		return
-
-	var/datum/supply_pack/S = new chosen_path
+	var/datum/supply_pack/S = new chosen
 	S.admin_spawned = TRUE
 	S.generate(get_turf(user.mob))
 
-	log_admin("[key_name(user.mob)] spawned cargo pack [chosen_path] at [AREACOORD(user.mob)]")
+	log_admin("[key_name(user.mob)] spawned cargo pack [chosen] at [AREACOORD(user.mob)]")
 	BLACKBOX_LOG_ADMIN_VERB("Spawn Cargo")
 
 /datum/admins/proc/dynamic_mode_options(mob/user)

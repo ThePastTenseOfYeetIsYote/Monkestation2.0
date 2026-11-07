@@ -6,7 +6,6 @@
 
 	GLOB.carbon_list += src
 	AddComponent(/datum/component/carbon_sprint)
-	AddComponent(/datum/component/damage_notifier)
 	immune_system = new(src)
 	var/static/list/loc_connections = list(
 		COMSIG_CARBON_DISARM_PRESHOVE = PROC_REF(disarm_precollide),
