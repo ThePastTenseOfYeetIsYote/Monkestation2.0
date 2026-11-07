@@ -20,7 +20,7 @@
  */
 /datum/action/cooldown/spell/touch
 	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_HANDS_BLOCKED
-	sound = 'sound/items/welder.ogg'
+	sound = 'sound/items/tools/welder.ogg'
 	invocation = "High Five!"
 	invocation_type = INVOCATION_SHOUT
 
@@ -166,7 +166,7 @@
 		StartCooldown()
 		return
 
-	if(!QDELETED(attached_hand) && (attached_hand in cast_on.held_items))
+	if(!QDELETED(attached_hand) && cast_on.is_holding(attached_hand))
 		remove_hand(cast_on, reset_cooldown_after = TRUE)
 		return
 
@@ -400,7 +400,6 @@
 	hand_spell.do_hand_hit(src, interacting_with, user)
 	if(QDELETED(src))
 		return ITEM_INTERACT_SUCCESS
-	return NONE
 
 /obj/item/melee/touch_attack/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
 	var/datum/action/cooldown/spell/touch/hand_spell = spell_which_made_us?.resolve()
@@ -410,7 +409,6 @@
 	hand_spell.do_secondary_hand_hit(src, interacting_with, user)
 	if(QDELETED(src))
 		return ITEM_INTERACT_SUCCESS
-	return NONE
 
 /obj/item/melee/touch_attack/ranged_interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	return NONE

@@ -1,4 +1,5 @@
 /obj/item/storage/belt
+	abstract_type = /obj/item/storage/belt
 	name = "not actually a toolbelt"
 	desc = "Can hold various things. This is the base type of /belt, are you sure you should have this?"
 	icon = 'icons/obj/clothing/belts.dmi'
@@ -509,7 +510,7 @@
 		/obj/item/storage/box/kinetic/shotgun,
 		/obj/item/storage/box/kinetic/shotgun/rockbreaker,
 		/obj/item/storage/box/kinetic/shotgun/sniperslug,
-		/obj/item/ammo_box/magazine/autoshotgun,
+		/obj/item/ammo_box/magazine/autoshotgun/kinetic,
 		/obj/item/ammo_casing/shotgun/hydrakinetic,
 		/obj/item/storage/box/kinetic/autoshotgun,
 		/obj/item/storage/box/kinetic/autoshotgun/smallcase,
@@ -673,7 +674,7 @@
 /obj/item/storage/belt/military/abductor
 	name = "agent belt"
 	desc = "A belt used by abductor agents."
-	icon = 'icons/obj/abductor.dmi'
+	icon = 'icons/obj/antags/abductor.dmi'
 	icon_state = "belt"
 	inhand_icon_state = "security"
 	worn_icon_state = "security"
@@ -828,7 +829,7 @@
 
 /obj/item/storage/belt/bandolier
 	name = "bandolier"
-	desc = "A bandolier for holding rifle and shotgun ammunition."
+	desc = "A bandolier for holding rifle, shotgun and .357 revolver ammunition."
 	icon_state = "bandolier"
 	inhand_icon_state = "bandolier"
 	worn_icon_state = "bandolier"

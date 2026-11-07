@@ -1,4 +1,5 @@
 /obj/item/clothing/head
+	abstract_type = /obj/item/clothing/head
 	name = BODY_ZONE_HEAD
 	icon = 'icons/obj/clothing/head/default.dmi'
 	worn_icon = 'icons/mob/clothing/head/default.dmi'
@@ -52,7 +53,7 @@
 		return
 	if(iscyborg(hit_atom))
 		var/mob/living/silicon/robot/R = hit_atom
-		var/obj/item/worn_hat = R.hat
+		var/obj/item/worn_hat = R.worn_hat
 		if(worn_hat && HAS_TRAIT(worn_hat, TRAIT_NODROP))
 			R.visible_message(span_warning("[src] bounces off [worn_hat], without an effect!"), span_warning("[src] bounces off your mighty [worn_hat.name], falling to the floor in defeat."))
 			return
@@ -146,11 +147,7 @@
 		to_chat(user, span_warning("You take apart the pile of hats."))
 		update_hats(NONE, user)
 
-
-/obj/item/clothing/head/verb/detach_stacked_hat()
-	set name = "Remove Stacked Hat"
-	set category = "Object"
-	set src in usr
+GAME_VERB_SRC(/obj/item/clothing/head, detach_stacked_hat, usr, "Remove Stacked Hat", "Object")
 
 	if(!isliving(usr) || !can_use(usr) || !length(contents))
 		return

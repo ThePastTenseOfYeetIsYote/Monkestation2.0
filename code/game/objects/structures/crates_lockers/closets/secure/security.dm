@@ -133,12 +133,28 @@
 	..()
 	new /obj/item/storage/belt/security/full(src)
 
+/obj/structure/closet/secure_closet/security/sec/blueshirt
+
+/obj/structure/closet/secure_closet/security/sec/blueshirt/PopulateContents()
+	..()
+	new /obj/item/clothing/head/helmet/blueshirt(src)
+	new /obj/item/clothing/suit/armor/vest/blueshirt(src)
+	new /obj/item/clothing/under/rank/security/officer/blueshirt(src)
+
 /obj/structure/closet/secure_closet/security/cargo
 
 /obj/structure/closet/secure_closet/security/cargo/PopulateContents()
 	..()
 	new /obj/item/clothing/accessory/armband/cargo(src)
 	new /obj/item/encryptionkey/headset_cargo(src)
+
+/obj/structure/closet/secure_closet/security/cargo/blueshirt
+
+/obj/structure/closet/secure_closet/security/cargo/blueshirt/PopulateContents()
+	..()
+	new /obj/item/clothing/head/helmet/blueshirt(src)
+	new /obj/item/clothing/suit/armor/vest/blueshirt(src)
+	new /obj/item/clothing/under/rank/security/officer/blueshirt(src)
 
 /obj/structure/closet/secure_closet/security/engine
 
@@ -147,12 +163,28 @@
 	new /obj/item/clothing/accessory/armband/engine(src)
 	new /obj/item/encryptionkey/headset_eng(src)
 
+/obj/structure/closet/secure_closet/security/engine/blueshirt
+
+/obj/structure/closet/secure_closet/security/engine/blueshirt/PopulateContents()
+	..()
+	new /obj/item/clothing/head/helmet/blueshirt(src)
+	new /obj/item/clothing/suit/armor/vest/blueshirt(src)
+	new /obj/item/clothing/under/rank/security/officer/blueshirt(src)
+
 /obj/structure/closet/secure_closet/security/science
 
 /obj/structure/closet/secure_closet/security/science/PopulateContents()
 	..()
 	new /obj/item/clothing/accessory/armband/science(src)
 	new /obj/item/encryptionkey/headset_sci(src)
+
+/obj/structure/closet/secure_closet/security/science/blueshirt
+
+/obj/structure/closet/secure_closet/security/science/blueshirt/PopulateContents()
+	..()
+	new /obj/item/clothing/head/helmet/blueshirt(src)
+	new /obj/item/clothing/suit/armor/vest/blueshirt(src)
+	new /obj/item/clothing/under/rank/security/officer/blueshirt(src)
 
 /obj/structure/closet/secure_closet/security/med
 
@@ -161,14 +193,22 @@
 	new /obj/item/clothing/accessory/armband/medblue(src)
 	new /obj/item/encryptionkey/headset_med(src)
 
+/obj/structure/closet/secure_closet/security/med/blueshirt
+
+/obj/structure/closet/secure_closet/security/med/blueshirt/PopulateContents()
+	..()
+	new /obj/item/clothing/head/helmet/blueshirt(src)
+	new /obj/item/clothing/suit/armor/vest/blueshirt(src)
+	new /obj/item/clothing/under/rank/security/officer/blueshirt(src)
+
 /obj/structure/closet/secure_closet/detective
 	name = "\improper detective's cabinet"
 	icon_state = "cabinet"
 	resistance_flags = FLAMMABLE
 	max_integrity = 70
 	door_anim_time = 0 // no animation
-	open_sound = 'sound/machines/wooden_closet_open.ogg'
-	close_sound = 'sound/machines/wooden_closet_close.ogg'
+	open_sound = 'sound/machines/closet/wooden_closet_open.ogg'
+	close_sound = 'sound/machines/closet/wooden_closet_close.ogg'
 	req_access = list(ACCESS_DETECTIVE)
 
 /obj/structure/closet/secure_closet/detective/PopulateContents()

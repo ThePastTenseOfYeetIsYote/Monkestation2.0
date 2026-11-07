@@ -26,6 +26,7 @@ GLOBAL_LIST_INIT(abstract_mob_types, list(
 	/mob/living/carbon/human/consistent,
 	/mob/living/carbon/human/dummy,
 	/mob/living/carbon/human/dummy/consistent,
+	/mob/living/carbon/human/tutorial,
 	/mob/living/carbon/human/species,
 	/mob/living/silicon,
 	/mob/living/simple_animal,
@@ -142,9 +143,7 @@ GLOBAL_LIST_INIT(blood_types, init_blood_types())
 /// Initializes the list of blood type singletons
 /proc/init_blood_types()
 	. = list()
-	for(var/datum/blood_type/blood_type_path as anything in subtypesof(/datum/blood_type))
-		if(blood_type_path::root_abstract_type == blood_type_path) // Don't instantiate abstract blood types
-			continue
+	for(var/datum/blood_type/blood_type_path as anything in valid_subtypesof(/datum/blood_type))
 		var/datum/blood_type/new_type = new blood_type_path()
 		.[new_type.id] = new_type
 
@@ -208,3 +207,7 @@ GLOBAL_LIST_INIT(blood_types, init_blood_types())
 		if(require_body && QDELETED(mind.current))
 			continue
 		. += mind
+
+///List of ckeys that have seen a blurb of a given key.
+GLOBAL_LIST_EMPTY(blurb_witnesses)
+GLOBAL_LIST_EMPTY(assault_operative_start)

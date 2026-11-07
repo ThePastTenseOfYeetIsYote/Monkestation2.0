@@ -128,7 +128,7 @@ GLOBAL_LIST_INIT(chem_master_containers, list(
 	if(panel_open || (machine_stat & (NOPOWER|BROKEN)))
 		set_light(0)
 	else
-		set_light(1, 1, "#fffb00")
+		set_light(l_outer_range = 1, l_power = 1, l_color = "#fffb00")
 
 /obj/machinery/chem_master/update_overlays()
 	. = ..()
@@ -321,7 +321,7 @@ GLOBAL_LIST_INIT(chem_master_containers, list(
 
 	return data
 
-/obj/machinery/chem_master/ui_act(action, params)
+/obj/machinery/chem_master/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
 		return

@@ -572,7 +572,7 @@
 		return
 
 	if(!mapload)
-		var/datum/move_loop/loop = SSmove_manager.move_to(src, get_step(src, direction), delay = delay, timeout = range * delay, priority = MOVEMENT_ABOVE_SPACE_PRIORITY)
+		var/datum/move_loop/loop = GLOB.move_manager.move_to(src, get_step(src, direction), delay = delay, timeout = range * delay, priority = MOVEMENT_ABOVE_SPACE_PRIORITY)
 		if (leave_blood)
 			RegisterSignal(loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(spread_movement_effects))
 		return
@@ -800,7 +800,7 @@
 /// Set the splatter up to fly through the air until it rounds out of steam or hits something
 /obj/effect/decal/cleanable/blood/hitsplatter/proc/fly_towards(turf/target_turf, range)
 	flight_dir = get_dir(src, target_turf)
-	var/datum/move_loop/loop = SSmove_manager.move_towards(src, target_turf, splatter_speed, timeout = splatter_speed * range, priority = MOVEMENT_ABOVE_SPACE_PRIORITY, flags = MOVEMENT_LOOP_START_FAST)
+	var/datum/move_loop/loop = GLOB.move_manager.move_towards(src, target_turf, splatter_speed, timeout = splatter_speed * range, priority = MOVEMENT_ABOVE_SPACE_PRIORITY, flags = MOVEMENT_LOOP_START_FAST)
 	RegisterSignal(loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(pre_move))
 	RegisterSignal(loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(post_move))
 	RegisterSignal(loop, COMSIG_QDELETING, PROC_REF(loop_done))
@@ -890,8 +890,9 @@
 		return FALSE
 
 	var/obj/effect/decal/cleanable/final_splatter = new /obj/effect/decal/cleanable/blood/splatter/over_window(prev_loc, null, GET_ATOM_BLOOD_DNA(src))
-	final_splatter.forceMove(the_window)
-	the_window.vis_contents += final_splatter
+	if(!QDELETED(final_splatter))
+		final_splatter.forceMove(the_window)
+		the_window.vis_contents += final_splatter
 	expire()
 	return TRUE
 
@@ -916,3 +917,99 @@
 	//squirts of the same dir are redundant, but not if they're different
 	if(merger.dir != src.dir)
 		return FALSE
+
+/// A drop of blood thrown through the air by movable_physics, lands as a splatter
+/obj/effect/blood_droplet
+	name = "blood droplet"
+	icon = 'icons/effects/blood.dmi'
+	icon_state = "drip5"
+	plane = GAME_PLANE
+	layer = BELOW_MOB_LAYER
+	anchored = TRUE
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	blocks_emissive = EMISSIVE_BLOCK_NONE
+	/// Blood DNA list the splatter and anything we land on gets
+	var/list/blood_dna
+	/// Static diseases the splatter gets
+	var/list/datum/disease/carried_diseases
+	/// Where we were launched from, landing or hitting something here does nothing
+	var/turf/start_turf
+
+/obj/effect/blood_droplet/Initialize(mapload, list/datum/disease/diseases, list/blood_dna)
+	. = ..()
+	if(!isturf(loc))
+		return INITIALIZE_HINT_QDEL
+	start_turf = loc
+	carried_diseases = diseases
+	src.blood_dna = blood_dna
+	icon_state = "drip[rand(1, 5)]"
+	color = get_color_from_blood_list(blood_dna)
+
+/obj/effect/blood_droplet/proc/fling(fling_angle)
+	AddComponent(/datum/component/movable_physics, \
+		angle = fling_angle, \
+		horizontal_velocity = rand(3 * 100, 5.5 * 100) * 0.01, \
+		vertical_velocity = rand(4 * 100, 4.5 * 100) * 0.01, \
+		horizontal_friction = rand(0.05 * 100, 0.1 * 100) * 0.01, \
+		vertical_friction = 10 * 0.05, \
+		vertical_conservation_of_momentum = 0.1, \
+		z_floor = 0, \
+		bounce_callback = CALLBACK(src, PROC_REF(on_bounce)), \
+		bump_callback = CALLBACK(src, PROC_REF(on_bump)), \
+		stop_callback = CALLBACK(src, PROC_REF(on_stop)), \
+	)
+
+/obj/effect/blood_droplet/proc/on_stop()
+	if(!QDELETED(src))
+		qdel(src)
+
+/obj/effect/blood_droplet/proc/on_bounce()
+	if(QDELETED(src))
+		return
+
+	if(loc == start_turf || !isturf(loc))
+		qdel(src)
+		return
+
+	for(var/atom/movable/iter_atom in loc)
+		if(iter_atom == src || iter_atom.invisibility || iter_atom.alpha <= 0 || (isobj(iter_atom) && !iter_atom.density))
+			continue
+		iter_atom.add_blood_DNA(blood_dna)
+
+	var/obj/effect/decal/cleanable/blood/splatter/splatter = new(loc, carried_diseases, blood_dna)
+	if(!QDELETED(splatter))
+		splatter.pixel_x = pixel_x
+		splatter.pixel_y = pixel_y
+		splatter.adjust_bloodiness(splatter.bloodiness * -0.66)
+		splatter.update_appearance()
+	qdel(src)
+
+/obj/effect/blood_droplet/proc/on_bump(atom/bumped_atom)
+	if(QDELETED(src) || QDELETED(bumped_atom))
+		return
+
+	if(loc == start_turf)
+		return
+
+	if(iswallturf(bumped_atom))
+		var/obj/effect/decal/cleanable/blood/splatter/over_window/wall_splatter = new(loc, carried_diseases, blood_dna)
+		var/dir_to_wall = get_dir(src, bumped_atom)
+		wall_splatter.pixel_x = (dir_to_wall & EAST ? ICON_SIZE_X : (dir_to_wall & WEST ? -ICON_SIZE_X : 0))
+		wall_splatter.pixel_y = (dir_to_wall & NORTH ? ICON_SIZE_Y : (dir_to_wall & SOUTH ? -ICON_SIZE_Y : 0))
+		qdel(src)
+		return
+
+	if(istype(bumped_atom, /obj/structure/window))
+		var/obj/structure/window/the_window = bumped_atom
+		if(!the_window.fulltile)
+			return
+
+		var/obj/effect/decal/cleanable/blood/splatter/over_window/window_splatter = new(loc, carried_diseases, blood_dna)
+		if(!QDELETED(window_splatter))
+			window_splatter.forceMove(the_window)
+			the_window.vis_contents += window_splatter
+		qdel(src)
+		return
+
+	qdel(src)
+

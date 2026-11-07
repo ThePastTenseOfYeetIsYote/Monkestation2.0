@@ -7,6 +7,7 @@
 	icon_keyboard = "security_key"
 	circuit = /obj/item/circuitboard/computer/security
 	light_color = COLOR_SOFT_RED
+	interaction_flags_machine = INTERACT_MACHINE_ALLOW_SILICON|INTERACT_MACHINE_REQUIRES_SIGHT
 
 	var/list/network = list(CAMERANET_NETWORK_SS13)
 	var/obj/machinery/camera/active_camera
@@ -28,7 +29,7 @@
 	// Convert networks to lowercase
 	for(var/i in network)
 		network -= i
-		network += lowertext(i)
+		network += LOWER_TEXT(i)
 	// Initialize map objects
 	cam_screen = new
 	cam_screen.generate_view(map_name)
@@ -44,6 +45,8 @@
 
 /obj/machinery/computer/security/ui_interact(mob/user, datum/tgui/ui)
 	. = ..()
+	if(!user.client) //prevents errors by trying to pass clients that don't exist.
+		return
 	// Update UI
 	ui = SStgui.try_update_ui(user, src, ui)
 
@@ -59,7 +62,7 @@
 			concurrent_users += user_ref
 		// Turn on the console
 		if(length(concurrent_users) == 1 && is_living)
-			playsound(src, 'sound/machines/terminal_on.ogg', 25, FALSE)
+			playsound(src, 'sound/machines/terminal/terminal_on.ogg', 25, FALSE)
 			use_energy(active_power_usage)
 		// Open UI
 		ui = new(user, src, "CameraConsole", name)
@@ -97,6 +100,7 @@
 		return
 
 	if(action == "switch_camera")
+		active_camera?.on_stop_watching(src)
 		var/obj/machinery/camera/selected_camera = locate(params["camera"]) in SScameras.cameras
 		active_camera = selected_camera
 		playsound(src, SFX_TERMINAL_TYPE, 25, FALSE)
@@ -104,6 +108,7 @@
 		if(isnull(active_camera))
 			return TRUE
 
+		active_camera.on_start_watching(src)
 		update_active_camera_screen()
 
 		return TRUE
@@ -163,6 +168,13 @@
 
 	cam_screen.show_camera(visible_turfs, size_x, size_y)
 
+/obj/machinery/camera/proc/count_spesstv_viewers()
+	. = 0
+	var/list/spesstv_viewers = GLOB.spesstv_viewers // just in case this ends up being a hot proc
+	for(var/key in spesstv_viewers)
+		if(spesstv_viewers[key] == c_tag)
+			.++
+
 /obj/machinery/computer/security/ui_close(mob/user)
 	. = ..()
 	var/user_ref = REF(user)
@@ -170,12 +182,13 @@
 	// Living creature or not, we remove you anyway.
 	concurrent_users -= user_ref
 	// Unregister map objects
-	cam_screen.hide_from(user)
+	cam_screen?.hide_from(user)
 	// Turn off the console
 	if(length(concurrent_users) == 0 && is_living)
+		active_camera?.on_stop_watching(src)
 		active_camera = null
 		last_camera_turf = null
-		playsound(src, 'sound/machines/terminal_off.ogg', 25, FALSE)
+		playsound(src, 'sound/machines/terminal/terminal_off.ogg', 25, FALSE)
 
 /atom/movable/screen/map_view/camera
 	/// All the plane masters that need to be applied.
@@ -213,6 +226,12 @@
 	icon_keyboard = null
 	icon_screen = "detective_tv"
 	pass_flags = PASSTABLE
+
+/obj/machinery/computer/security/wooden_tv/wall_mounted
+	name = "wall mounted security camera monitor"
+	desc = "An old, wall mounted, TV hooked into the station's camera network."
+	icon_state = "wall_television"
+	icon_screen = "detective_tv_wall"
 
 /obj/machinery/computer/security/mining
 	name = "outpost camera console"

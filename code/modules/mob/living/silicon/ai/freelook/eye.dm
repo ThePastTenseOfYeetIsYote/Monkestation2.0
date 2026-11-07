@@ -139,10 +139,8 @@
 ///Called when the AI shiftclicks on something to examinate it.
 /mob/eye/camera/ai/proc/examinate_check(mob/user, atom/source)
 	SIGNAL_HANDLER
-	if(user.client.eye == src)
-		if(ishuman(source) && !ai.canExamineHumans)
-			return
-		return COMPONENT_ALLOW_EXAMINATE
+	if(user.client.eye == src && ishuman(source) && !ai.canExamineHumans)
+		return COMSIG_MOB_CANCEL_CLICKON
 
 /atom/proc/move_camera_by_click()
 	if(!isAI(usr))
@@ -220,15 +218,6 @@
 		eyeobj.SetInvisibility(INVISIBILITY_OBSERVER, id=type)
 	else
 		eyeobj.RemoveInvisibility(type)
-
-/mob/living/silicon/ai/verb/toggle_acceleration()
-	set category = "AI Commands"
-	set name = "Toggle Camera Acceleration"
-
-	if(incapacitated())
-		return
-	acceleration = !acceleration
-	to_chat(usr, "Camera acceleration has been toggled [acceleration ? "on" : "off"].")
 
 /mob/eye/camera/ai/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), message_range)
 	. = ..()

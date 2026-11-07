@@ -293,15 +293,22 @@
 	var/heating = 0
 	switch(current_cycle)
 		if(1 to 15)
-			heating = 0.1 KELVIN
+			heating = 5
+			if(isslime(affected_mob))
+				heating = rand(5, 20)
 		if(15 to 25)
-			heating = 0.33 KELVIN
+			heating = 10
+			if(isslime(affected_mob))
+				heating = rand(10, 20)
 		if(25 to 35)
-			heating = 0.66 KELVIN
+			heating = 15
+			if(isslime(affected_mob))
+				heating = rand(15, 20)
 		if(35 to INFINITY)
-			heating = 1.2 KELVIN
-
-	affected_mob.adjust_bodytemperature(heating * REM * seconds_per_tick, max_temp = CELCIUS_TO_KELVIN(39 CELCIUS))
+			heating = 20
+			if(isslime(affected_mob))
+				heating = rand(20, 25)
+	affected_mob.adjust_bodytemperature(heating * TEMPERATURE_DAMAGE_COEFFICIENT * REM * seconds_per_tick)
 	return ..()
 
 /datum/reagent/consumable/frostoil
@@ -342,7 +349,7 @@
 			if(prob(5))
 				affected_mob.emote("shiver")
 
-	affected_mob.adjust_bodytemperature(cooling * REM * seconds_per_tick, min_temp = affected_mob.bodytemp_cold_damage_limit - 15 KELVIN)
+	affected_mob.adjust_bodytemperature(cooling * REM * seconds_per_tick, 50)
 	return ..()
 
 /datum/reagent/consumable/frostoil/expose_turf(turf/exposed_turf, reac_volume)
@@ -443,13 +450,13 @@
 	adjust_blood_flow(-0.06 * reac_volume, initial_flow * 0.6) // 20u of a salt shacker * 0.1 = -1.6~ blood flow, but is always clamped to, at best, third blood loss from that wound.
 	// Crystal irritation worsening recovery.
 	gauzed_clot_rate *= 0.65
-	to_chat(carbies, span_notice("The salt bits seep in and stick to [lowertext(src)], painfully irritating the skin but soaking up most of the blood."))
+	to_chat(carbies, span_notice("The salt bits seep in and stick to [LOWER_TEXT(src)], painfully irritating the skin but soaking up most of the blood."))
 
 /datum/wound/slash/flesh/on_salt(reac_volume, mob/living/carbon/carbies)
 	adjust_blood_flow(-0.1 * reac_volume, initial_flow * 0.5) // 20u of a salt shacker * 0.1 = -2~ blood flow, but is always clamped to, at best, halve blood loss from that wound.
 	// Crystal irritation worsening recovery.
 	clot_rate *= 0.75
-	to_chat(carbies, span_notice("The salt bits seep in and stick to [lowertext(src)], painfully irritating the skin but soaking up most of the blood."))
+	to_chat(carbies, span_notice("The salt bits seep in and stick to [LOWER_TEXT(src)], painfully irritating the skin but soaking up most of the blood."))
 
 /datum/wound/burn/flesh/on_salt(reac_volume)
 	// Slightly sanitizes and disinfects, but also increases infestation rate (some bacteria are aided by salt), and decreases flesh healing (can damage the skin from moisture absorption)
@@ -457,7 +464,7 @@
 	infestation -= max(VALUE_PER(0.3, 30) * reac_volume, 0)
 	infestation_rate += VALUE_PER(0.12, 30) * reac_volume
 	flesh_healing -= max(VALUE_PER(5, 30) * reac_volume, 0)
-	to_chat(victim, span_notice("The salt bits seep in and stick to [lowertext(src)], painfully irritating the skin! After a few moments, it feels marginally better."))
+	to_chat(victim, span_notice("The salt bits seep in and stick to [LOWER_TEXT(src)], painfully irritating the skin! After a few moments, it feels marginally better."))
 
 
 /datum/reagent/consumable/blackpepper
@@ -593,7 +600,7 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/consumable/hot_ramen/on_mob_life(mob/living/carbon/M, seconds_per_tick, times_fired)
-	M.adjust_bodytemperature(0.2 KELVIN * REM * seconds_per_tick, 0, M.standard_body_temperature)
+	M.adjust_bodytemperature(10 * TEMPERATURE_DAMAGE_COEFFICIENT * REM * seconds_per_tick, 0, M.get_body_temp_normal())
 	..()
 
 /datum/reagent/consumable/hell_ramen
@@ -605,7 +612,7 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/consumable/hell_ramen/on_mob_life(mob/living/carbon/target_mob, seconds_per_tick, times_fired)
-	target_mob.adjust_bodytemperature(WARM_DRINK KELVIN * REM * seconds_per_tick, max_temp = CELCIUS_TO_KELVIN(45 CELCIUS))
+	target_mob.adjust_bodytemperature(10 * TEMPERATURE_DAMAGE_COEFFICIENT * REM * seconds_per_tick)
 	..()
 
 /datum/reagent/consumable/flour
@@ -630,18 +637,18 @@
 
 /datum/wound/pierce/bleed/on_flour(reac_volume, mob/living/carbon/carbies)
 	adjust_blood_flow(-0.015 * reac_volume) // 30u of a flour sack * 0.015 = -0.45~ blood flow, prettay good
-	to_chat(carbies, span_notice("The flour seeps into [lowertext(src)], painfully drying it up and absorbing some of the blood."))
+	to_chat(carbies, span_notice("The flour seeps into [LOWER_TEXT(src)], painfully drying it up and absorbing some of the blood."))
 	// When some nerd adds infection for wounds, make this increase the infection
 
 /datum/wound/slash/flesh/on_flour(reac_volume, mob/living/carbon/carbies)
 	adjust_blood_flow(-0.04 * reac_volume) // 30u of a flour sack * 0.04 = -1.25~ blood flow, pretty good!
-	to_chat(carbies, span_notice("The flour seeps into [lowertext(src)], painfully drying some of it up and absorbing a little blood."))
+	to_chat(carbies, span_notice("The flour seeps into [LOWER_TEXT(src)], painfully drying some of it up and absorbing a little blood."))
 	// When some nerd adds infection for wounds, make this increase the infection
 
 // Don't pour flour onto burn wounds, it increases infection risk! Very unwise. Backed up by REAL info from REAL professionals.
 // https://www.reuters.com/article/uk-factcheck-flour-burn-idUSKCN26F2N3
 /datum/wound/burn/flesh/on_flour(reac_volume)
-	to_chat(victim, span_notice("The flour seeps into [lowertext(src)], spiking you with intense pain! That probably wasn't a good idea..."))
+	to_chat(victim, span_notice("The flour seeps into [LOWER_TEXT(src)], spiking you with intense pain! That probably wasn't a good idea..."))
 	sanitization -= min(0, 1)
 	infestation += 0.2
 	return
@@ -727,18 +734,18 @@
 
 /datum/wound/pierce/bleed/on_starch(reac_volume, mob/living/carbon/carbies)
 	adjust_blood_flow(-0.03 * reac_volume)
-	to_chat(carbies, span_notice("The slimey starch seeps into [lowertext(src)], painfully drying some of it up and absorbing a little blood."))
+	to_chat(carbies, span_notice("The slimey starch seeps into [LOWER_TEXT(src)], painfully drying some of it up and absorbing a little blood."))
 	// When some nerd adds infection for wounds, make this increase the infection
 	return
 
 /datum/wound/slash/flesh/on_starch(reac_volume, mob/living/carbon/carbies)
 	adjust_blood_flow(-0.06 * reac_volume)
-	to_chat(carbies, span_notice("The slimey starch seeps into [lowertext(src)], painfully drying it up and absorbing some of the blood."))
+	to_chat(carbies, span_notice("The slimey starch seeps into [LOWER_TEXT(src)], painfully drying it up and absorbing some of the blood."))
 	// When some nerd adds infection for wounds, make this increase the infection
 	return
 
 /datum/wound/burn/flesh/on_starch(reac_volume, mob/living/carbon/carbies)
-	to_chat(carbies, span_notice("The slimey starch seeps into [lowertext(src)], spiking you with intense pain! That probably wasn't a good idea..."))
+	to_chat(carbies, span_notice("The slimey starch seeps into [LOWER_TEXT(src)], spiking you with intense pain! That probably wasn't a good idea..."))
 	sanitization -= min(0, 0.5)
 	infestation += 0.1
 	return
@@ -917,7 +924,7 @@
 		M.blood_volume += 1 * seconds_per_tick
 	else if(SPT_PROB(10, seconds_per_tick)) //lmao at the newbs who eat energy bars
 		M.electrocute_act(rand(5,10), "Liquid Electricity in their body", 1, SHOCK_NOGLOVES | SHOCK_NOSTUN) //the shock is coming from inside the house //MONKESTATION ADDITION NO STUN
-		M.Immobilize(1 SECOND) //MONKESTATION ADDITION
+		M.Immobilize(1 SECONDS)
 		playsound(M, SFX_SPARKS, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	return ..()
 

@@ -74,6 +74,9 @@ GLOBAL_LIST_INIT(ai_core_display_screens, sort_list(list(
 	"Banned",
 	"Bliss",
 	"Blue",
+	"Boxfort",
+	"Boy",
+	"Boy-malf",
 	"Clown",
 	"Database",
 	"Dorf",
@@ -81,6 +84,8 @@ GLOBAL_LIST_INIT(ai_core_display_screens, sort_list(list(
 	"Fracktail",
 	"Fuzzy",
 	"Gentoo",
+	"Girl",
+	"Girl-malf",
 	"Glitchman",
 	"Gondola",
 	"Goon",
@@ -89,6 +94,7 @@ GLOBAL_LIST_INIT(ai_core_display_screens, sort_list(list(
 	"Heartline",
 	"Helios",
 	"House",
+	"Hotdog",
 	"Inverted",
 	"Matrix",
 	"Monochrome",
@@ -106,11 +112,13 @@ GLOBAL_LIST_INIT(ai_core_display_screens, sort_list(list(
 	"Syndicat Meow",
 	"TEC",
 	"Tenna",
+	"Terminal",
 	"Text",
 	"Too Deep",
 	"Triumvirate-M",
 	"Triumvirate",
 	"Weird", // monkestation additions start below this line
+	"Yes-Man",
 	"Monkestation",
 	"Facepunch",
 	"Kitty",
@@ -130,7 +138,7 @@ GLOBAL_LIST_INIT(ai_core_display_screens, sort_list(list(
 	else
 		if(input == "Random")
 			input = pick(GLOB.ai_core_display_screens - "Random")
-		return "ai-[lowertext(input)]"
+		return "ai-[LOWER_TEXT(input)]"
 
 /proc/resolve_ai_icon(input)
 	if(istype(input, /mutable_appearance))

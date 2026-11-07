@@ -1,4 +1,5 @@
-ADMIN_VERB(borg_panel, R_ADMIN, FALSE, "Show Borg Panel", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_HIDDEN, mob/living/silicon/robot/borgo)
+ADMIN_VERB(borg_panel, R_ADMIN, FALSE, "Show Borg Panel", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_HIDDEN)
+	VERB_ARG_TYPED(borgo, VERB_ARG_TYPE_MOB, VERB_ARG_SOURCE_WORLD, /mob/living/silicon/robot)
 	var/datum/borgpanel/borgpanel = new(user.mob, borgo)
 	borgpanel.ui_interact(user.mob)
 
@@ -200,7 +201,8 @@ ADMIN_VERB(borg_panel, R_ADMIN, FALSE, "Show Borg Panel", ADMIN_VERB_NO_DESCRIPT
 		if ("setmodule")
 			var/new_model_path = text2path(params["module"])
 			if (ispath(new_model_path))
-				borg.model.transform_to(new_model_path)
+				borg.apply_model(new_model_path)
+				borg.apply_skin(borg.model.default_skin)
 				message_admins("[key_name_admin(user)] changed the model of [ADMIN_LOOKUPFLW(borg)] to [new_model_path].")
 				log_silicon("[key_name(user)] changed the model of [key_name(borg)] to [new_model_path].")
 		if ("slavetoai")

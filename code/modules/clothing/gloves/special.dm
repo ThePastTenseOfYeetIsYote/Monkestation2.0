@@ -81,9 +81,9 @@
 	inhand_icon_state = null
 	greyscale_colors = null
 	siemens_coefficient = 0
-
+	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_TEMP_PROTECT
-
+	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_TEMP_PROTECT
 	strip_delay = 60
 	armor_type = /datum/armor/captain_gloves
@@ -108,6 +108,14 @@
 
 /datum/armor/latex_gloves
 	bio = 100
+
+/obj/item/clothing/gloves/latex/surgical
+	name = "black latex gloves"
+	desc = "Pricy sterile gloves that are thinner than latex. The lining allows for the person to operate \
+			quicker and with higher success along with the faster use time of various chemical related items."
+	icon_state = "surgeonlatex"
+	clothing_traits = list(TRAIT_FASTMED, TRAIT_STERILE)
+	custom_premium_price = PAYCHECK_CREW * 6
 
 /obj/item/clothing/gloves/latex/nitrile
 	name = "nitrile gloves"
@@ -149,11 +157,42 @@
 	name = "atmospheric extrication gloves"
 	desc = "Heavy duty gloves for firefighters. These are thick, non-flammable and let you carry people faster."
 	icon_state = "atmos"
-
+	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_TEMP_PROTECT
-
+	heat_protection = HANDS
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	resistance_flags = FIRE_PROOF
 	siemens_coefficient = 0.3
 	clothing_traits = list(TRAIT_QUICKER_CARRY)
 	clothing_flags = THICKMATERIAL
+
+/obj/item/clothing/gloves/crueltysquad_gloves
+	name = "CSIJ level I gloves"
+	desc = "Armor used by assassins working for Cruelty Squad, stripped of all of its functions for kids to play with."
+	icon_state = "crueltysquad_gloves"
+
+/obj/item/clothing/gloves/civilprotection_gloves
+	name = "civil protection gloves"
+	desc = "Armored gloves for beating anticitizens."
+	icon_state = "civilprotection_gloves"
+
+/obj/item/clothing/gloves/infinity_gloves
+	name = "infinity wristbands"
+	desc = "The bands are oddly moist... let's hope it's not blood."
+	icon_state = "infinity_wrist"
+
+/obj/item/clothing/gloves/infinity_gloves/equipped(mob/living/carbon/user, slot)
+	. = ..()
+	if(!ishuman(user))
+		return
+	if(slot == ITEM_SLOT_GLOVES)
+		var/obj/item/bodypart/user_active_arm = user.get_active_hand()
+		user_active_arm.unarmed_damage_low += 0.2
+		user_active_arm.unarmed_damage_high += 0.1
+
+/obj/item/clothing/gloves/admiral // Loadout version of the Abraxis Centcom Admiral gloves
+	name = "black gloves"
+	icon = /obj/item/clothing/gloves/tackler/combat/insulated/admiral::icon
+	worn_icon = /obj/item/clothing/gloves/tackler/combat/insulated/admiral::worn_icon
+	icon_state = /obj/item/clothing/gloves/tackler/combat/insulated/admiral::icon_state
+	alternate_worn_layer = /obj/item/clothing/gloves/tackler/combat/insulated/admiral::alternate_worn_layer

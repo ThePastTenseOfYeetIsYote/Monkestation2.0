@@ -18,6 +18,10 @@
 /atom/proc/balloon_alert(mob/viewer, text)
 	SHOULD_NOT_SLEEP(TRUE)
 
+	if(istext(viewer) && isnull(text))
+		stack_trace("Attempted to call balloon_alert with only one argument! This is invalid.")
+		return
+
 	INVOKE_ASYNC(src, PROC_REF(balloon_alert_perform), viewer, text)
 
 /// Create balloon alerts (text that floats up) to everything within range.
@@ -39,6 +43,7 @@
 // I would've made the maptext_height update on its own, but I don't know
 // if this would look bad on laggy clients.
 /atom/proc/balloon_alert_perform(mob/viewer, text)
+	usr = null // do not hold a ref to usr here please,,,,
 
 	var/client/viewer_client = viewer?.client
 	if (isnull(viewer_client))

@@ -10,6 +10,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*5)
 	override_notes = TRUE
+	custom_materials = AMMO_MATS_BASIC
 	///What sound should play when this ammo is fired
 	var/fire_sound = null
 	///Which kind of guns it can be loaded into
@@ -180,7 +181,7 @@
 			z_floor = 0, \
 		)
 	if(still_warm && our_turf.bullet_sizzle)
-		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound), src, 'sound/items/welder.ogg', 20, 1), sound_delay) //If the turf is made of water and the shell casing is still hot, make a sizzling sound when it's ejected.
+		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound), src, 'sound/items/tools/welder.ogg', 20, 1), sound_delay) //If the turf is made of water and the shell casing is still hot, make a sizzling sound when it's ejected.
 		return
 	if(bullet_bounce_sound)
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound), src, bullet_bounce_sound, bullet_bounce_sound_volume, 1), sound_delay)

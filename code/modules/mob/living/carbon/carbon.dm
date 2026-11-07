@@ -19,6 +19,7 @@
 	//This must be done first, so the mob ghosts correctly before DNA etc is nulled
 	. = ..()
 
+	real_bodypart_cache.Cut()
 	QDEL_LIST(hand_bodyparts)
 	QDEL_LIST(organs)
 	QDEL_LIST(bodyparts)
@@ -101,7 +102,7 @@
 		victim.impact_fart()
 
 	if(oof_noise)
-		playsound(src,'sound/weapons/punch1.ogg',50,TRUE)
+		playsound(src,'sound/items/weapons/punch1.ogg',50,TRUE)
 
 /mob/living/carbon/proc/canBeHandcuffed()
 	return FALSE
@@ -617,12 +618,8 @@
  */
 /mob/living/carbon/proc/update_tint()
 	var/tint = 0
-	if(isclothing(head))
-		tint += head.tint
-	if(isclothing(wear_mask))
-		tint += wear_mask.tint
-	if(isclothing(glasses))
-		tint += glasses.tint
+	for(var/obj/item/clothing/worn_item in get_equipped_items())
+		tint += worn_item.tint
 
 	var/obj/item/organ/internal/eyes/eyes = get_organ_slot(ORGAN_SLOT_EYES)
 	if(eyes)
@@ -998,12 +995,17 @@
 				bodypart_instance.held_index = r_arm_index_next //2, 4, 6, 8...
 				hand_bodyparts += bodypart_instance
 
+	for(var/obj/item/bodypart/bodypart_instance as anything in bodyparts.Copy())
+		bodypart_instance.on_body_created(src)
+
 
 ///Proc to hook behavior on bodypart additions. Do not directly call. You're looking for [/obj/item/bodypart/proc/try_attach_limb()].
 /mob/living/carbon/proc/add_bodypart(obj/item/bodypart/new_bodypart)
 	SHOULD_NOT_OVERRIDE(TRUE)
 
 	bodyparts += new_bodypart
+	if(!isnull(new_bodypart.body_zone))
+		real_bodypart_cache[new_bodypart.body_zone] = new_bodypart
 	new_bodypart.set_owner(src)
 
 	switch(new_bodypart.body_part)
@@ -1017,6 +1019,7 @@
 				set_usable_hands(usable_hands + 1)
 
 	synchronize_bodytypes()
+	synchronize_bodyshapes()
 
 
 ///Proc to hook behavior on bodypart removals.  Do not directly call. You're looking for [/obj/item/bodypart/proc/drop_limb()].
@@ -1024,6 +1027,8 @@
 	SHOULD_NOT_OVERRIDE(TRUE)
 	old_bodypart.on_removal()
 	bodyparts -= old_bodypart
+	if(!isnull(old_bodypart.body_zone))
+		real_bodypart_cache -= old_bodypart.body_zone
 	switch(old_bodypart.body_part)
 		if(LEG_LEFT, LEG_RIGHT)
 			set_num_legs(num_legs - 1)
@@ -1035,6 +1040,7 @@
 				set_usable_hands(usable_hands - 1)
 
 	synchronize_bodytypes()
+	synchronize_bodyshapes()
 
 
 ///Updates the bodypart speed modifier based on our bodyparts.
@@ -1183,47 +1189,21 @@
 
 /mob/living/carbon/wash(clean_types)
 	. = ..()
-
 	// Wash equipped stuff that cannot be covered
 	for(var/obj/item/held_thing in held_items)
 		if(held_thing.wash(clean_types))
 			. = TRUE
 
-	if(back?.wash(clean_types))
-		update_worn_back(0)
-		. = TRUE
-
-	if(head?.wash(clean_types))
-		update_worn_head()
-		. = TRUE
-
-	// Check and wash stuff that can be covered
-	var/obscured = check_obscured_slots()
-
-	// If the eyes are covered by anything but glasses, that thing will be covering any potential glasses as well.
-	if(glasses && is_eyes_covered(ITEM_SLOT_MASK|ITEM_SLOT_HEAD) && glasses.wash(clean_types))
-		update_worn_glasses()
-		. = TRUE
-
-	if(wear_mask && !(obscured & ITEM_SLOT_MASK) && wear_mask.wash(clean_types))
-		update_worn_mask()
-		. = TRUE
-
-	if(ears && !(obscured & ITEM_SLOT_EARS) && ears.wash(clean_types))
-		update_inv_ears()
-		. = TRUE
-
-	if(wear_neck && !(obscured & ITEM_SLOT_NECK) && wear_neck.wash(clean_types))
-		update_worn_neck()
-		. = TRUE
-
-	if(shoes && !(obscured & ITEM_SLOT_FEET) && shoes.wash(clean_types))
-		update_worn_shoes()
-		. = TRUE
-
-	if(gloves && !(obscured & ITEM_SLOT_GLOVES) && gloves.wash(clean_types))
-		update_worn_gloves()
-		. = TRUE
+	// Check and wash stuff that isn't covered
+	var/covered = check_covered_slots()
+	for(var/obj/item/worn as anything in get_equipped_items())
+		var/slot = get_slot_by_item(worn)
+		// Don't wash glasses if something other than them is covering our eyes
+		if(slot == ITEM_SLOT_EYES && is_eyes_covered(ITEM_SLOT_MASK|ITEM_SLOT_HEAD))
+			continue
+		if(!(covered & slot))
+			// /obj/item/wash() already updates our clothing slot
+			. = worn.wash(clean_types) || .
 
 /// if any of our bodyparts are bleeding
 /mob/living/carbon/proc/is_bleeding()
@@ -1469,7 +1449,7 @@
 		playsound(src, pick(butt.sound_effect), 50, mixer_channel = CHANNEL_PRUDE)
 
 /mob/living/carbon/proc/gib_fart(freq=0)
-	if (stat == DEAD && world.time - timeofdeath > 1 SECOND)
+	if (stat == DEAD && world.time - timeofdeath > 1 SECONDS)
 		return
 
 	if(HAS_TRAIT(src, TRAIT_LOUD_ASS))

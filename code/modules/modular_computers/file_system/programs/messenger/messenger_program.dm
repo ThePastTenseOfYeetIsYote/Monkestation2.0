@@ -333,7 +333,7 @@
 			var/mob/living/usr_mob = usr
 			if(in_range(computer, usr_mob) && COOLDOWN_FINISHED(src, ringtone_set_cooldown))
 				playsound(computer, GLOB.pda_ringtone_sounds[new_sound], 30, TRUE, mixer_channel = CHANNEL_RINGTONES, extrarange = - 4)
-				COOLDOWN_START(src, ringtone_set_cooldown, 1 SECOND)
+				COOLDOWN_START(src, ringtone_set_cooldown, 1 SECONDS)
 
 			return TRUE
 
@@ -593,7 +593,7 @@
 		// different message so people know it's a radio jammer
 		to_chat(sender, span_notice("ERROR: Network unavailable, please try again later."))
 		if(alert_able && !alert_silenced)
-			playsound(computer, 'sound/machines/terminal_error.ogg', 15, TRUE)
+			playsound(computer, 'sound/machines/terminal/terminal_error.ogg', 15, TRUE)
 		return FALSE
 
 	// used for logging
@@ -623,7 +623,7 @@
 	if (!signal.data["done"])
 		to_chat(sender, span_notice("ERROR: Server is not responding."))
 		if(alert_able && !alert_silenced)
-			playsound(computer, 'sound/machines/terminal_error.ogg', 15, TRUE)
+			playsound(computer, 'sound/machines/terminal/terminal_error.ogg', 15, TRUE)
 		return FALSE
 
 	// Log in the talk log
