@@ -10,10 +10,15 @@
 		return
 	LAZYADD(tagged_datums, target_datum)
 	RegisterSignal(target_datum, COMSIG_QDELETING, PROC_REF(handle_tagged_del), override = TRUE)
-	if(ismob(target_datum))
-		var/mob/target_mob = target_datum
-		target_mob.tracked = TRUE
+	if(iscarbon(target_datum))
+		target_datum.AddComponentFrom(src, /datum/component/damage_notifier)
 	to_chat(owner, span_notice("[target_datum] has been tagged."))
+
+/// Delivers a damage tracking report from a tagged carbon's [/datum/component/damage_notifier]
+/datum/admins/proc/receive_damage_report(message)
+	if(owner)
+		to_chat(owner, message)
+
 /// Get ahead of the curve with deleting
 /datum/admins/proc/handle_tagged_del(datum/source)
 	SIGNAL_HANDLER
@@ -32,15 +37,7 @@
 		return
 	if(LAZYFIND(tagged_datums, target_datum))
 		LAZYREMOVE(tagged_datums, target_datum)
-		if(ismob(target_datum))
-			var/mob/target_mob = target_datum
-			var/still_tracked = FALSE
-			for(var/client/other_admin as anything in GLOB.admins)
-				if(other_admin.holder != src && LAZYFIND(other_admin.holder.tagged_datums, target_mob))
-					still_tracked = TRUE
-					break
-			if(!still_tracked)
-				target_mob.tracked = FALSE
+		target_datum.RemoveComponentSource(src, /datum/component/damage_notifier)
 		if(!silent)
 			to_chat(owner, span_notice("[target_datum] has been untagged."))
 	else if(!silent)

@@ -1,94 +1,118 @@
+/// Max call stack frames walked when looking for what caused a damage change
+#define DAMAGE_NOTIFIER_MAX_FRAMES 30
+
 /**
  * Damage Notifier Component
  *
- * Displays clean damage/healing reports in admin chat for tagged mobs.
- * Only active for carbons tagged via the Tag Datum system.
- * Shows damage type, amount, bodypart (for limbs), and resulting health.
+ * Reports every damage and healing change on a tagged carbon to the admins that tagged it:
+ * damage type, amount, bodypart or organ, resulting health and the proc/object/user that caused it.
+ *
+ * Sources are the [/datum/admins] holders watching the parent. Added by [/datum/admins/proc/add_tagged_datum],
+ * removed by [/datum/admins/proc/remove_tagged_datum]; the component deletes itself when the last watcher leaves.
  */
 /datum/component/damage_notifier
+	dupe_mode = COMPONENT_DUPE_SOURCES
+
+	/// Damage pipeline procs skipped when walking the call stack for the cause of a damage change
+	var/static/list/pipeline_procs = list(
+		"_SendSignal" = TRUE,
+		"on_damage_changed" = TRUE,
+		"find_cause" = TRUE,
+		"set_current" = TRUE,
+		"adjust" = TRUE,
+		"adjust_to" = TRUE,
+		"revitalize" = TRUE,
+		"set_brute_dam" = TRUE,
+		"set_burn_dam" = TRUE,
+		"set_initial_damage" = TRUE,
+		"receive_damage" = TRUE,
+		"heal_damage" = TRUE,
+		"apply_organ_damage" = TRUE,
+		"set_organ_damage" = TRUE,
+		"adjustBruteLoss" = TRUE,
+		"adjustFireLoss" = TRUE,
+		"adjustToxLoss" = TRUE,
+		"adjustOxyLoss" = TRUE,
+		"adjustCloneLoss" = TRUE,
+		"adjustOrganLoss" = TRUE,
+		"setBruteLoss" = TRUE,
+		"setFireLoss" = TRUE,
+		"setToxLoss" = TRUE,
+		"setOxyLoss" = TRUE,
+		"setCloneLoss" = TRUE,
+		"setOrganLoss" = TRUE,
+		"apply_damage" = TRUE,
+		"apply_damages" = TRUE,
+		"take_overall_damage" = TRUE,
+		"heal_overall_damage" = TRUE,
+		"take_bodypart_damage" = TRUE,
+		"heal_bodypart_damage" = TRUE,
+		"heal_damage_type" = TRUE,
+		"heal_ordered_damage" = TRUE,
+	)
 
 /datum/component/damage_notifier/Initialize()
-	. = ..()
-	if (!iscarbon(parent))
+	if(!iscarbon(parent))
 		return COMPONENT_INCOMPATIBLE
 
 /datum/component/damage_notifier/RegisterWithParent()
-	// Brute and burn via bodypart damage (punching, weapons, etc.)
-	RegisterSignal(parent, COMSIG_CARBON_LIMB_DAMAGED, PROC_REF(on_limb_damage))
-	// Brute healing — COMSIG_CARBON_TAKE_BRUTE_DAMAGE only fires when amount < 0
-	RegisterSignal(parent, COMSIG_CARBON_TAKE_BRUTE_DAMAGE, PROC_REF(on_brute_heal))
-	// Non-bodypart damage types
-	RegisterSignal(parent, COMSIG_LIVING_ADJUST_TOX_DAMAGE, PROC_REF(on_damage_adjusted))
-	RegisterSignal(parent, COMSIG_LIVING_ADJUST_OXY_DAMAGE, PROC_REF(on_damage_adjusted))
-	RegisterSignal(parent, COMSIG_LIVING_ADJUST_CLONE_DAMAGE, PROC_REF(on_damage_adjusted))
-	RegisterSignal(parent, COMSIG_LIVING_ADJUST_STAMINA_DAMAGE, PROC_REF(on_damage_adjusted))
+	RegisterSignal(parent, COMSIG_LIVING_DAMAGE_CHANGED, PROC_REF(on_damage_changed))
 
 /datum/component/damage_notifier/UnregisterFromParent()
-	UnregisterSignal(parent, COMSIG_CARBON_LIMB_DAMAGED)
-	UnregisterSignal(parent, COMSIG_CARBON_TAKE_BRUTE_DAMAGE)
-	UnregisterSignal(parent, COMSIG_LIVING_ADJUST_TOX_DAMAGE)
-	UnregisterSignal(parent, COMSIG_LIVING_ADJUST_OXY_DAMAGE)
-	UnregisterSignal(parent, COMSIG_LIVING_ADJUST_CLONE_DAMAGE)
-	UnregisterSignal(parent, COMSIG_LIVING_ADJUST_STAMINA_DAMAGE)
+	UnregisterSignal(parent, COMSIG_LIVING_DAMAGE_CHANGED)
 
-/// Called when a carbon's bodypart takes damage — captures brute and burn from hits
-/datum/component/damage_notifier/proc/on_limb_damage(datum/source, obj/item/bodypart/limb, brute, burn)
+/// Reports a damage or healing change on our parent to every watching admin
+/datum/component/damage_notifier/proc/on_damage_changed(mob/living/carbon/source, damage_type, delta, atom/damaged_part)
 	SIGNAL_HANDLER
 
-	var/mob/living/carbon/carbon_parent = parent
-	if (!carbon_parent.tracked)
+	var/amount = round(abs(delta), DAMAGE_PRECISION)
+	if(!amount)
 		return
 
-	if (brute > 0)
-		send_notification(carbon_parent, BRUTE, brute, limb)
-	if (burn > 0)
-		send_notification(carbon_parent, BURN, burn, limb)
-
-/// Called when a carbon is healed of brute damage (COMSIG_CARBON_TAKE_BRUTE_DAMAGE fires only on healing)
-/datum/component/damage_notifier/proc/on_brute_heal(datum/source, amount)
-	SIGNAL_HANDLER
-
-	var/mob/living/carbon/carbon_parent = parent
-	if (!carbon_parent.tracked || amount >= 0)
+	// list(proc name, proc src) of the first proc outside the damage pipeline
+	var/list/cause = find_cause()
+	var/datum/cause_src = cause?[2]
+	// Organs decaying inside a corpse every tick is noise, not damage anyone dealt
+	if(cause?[1] == "on_death" && isorgan(cause_src))
 		return
 
-	send_notification(carbon_parent, BRUTE, amount)
+	var/change = delta > 0 ? span_red("took [amount]") : span_green("healed [amount]")
+	var/part_label = damaged_part ? " ([damaged_part.name])" : ""
 
-/// Called for toxin/oxy/clone damage adjustments
-/datum/component/damage_notifier/proc/on_damage_adjusted(datum/source, damage_type, amount, forced)
-	SIGNAL_HANDLER
+	var/status
+	switch(damage_type)
+		if(STAMINA)
+			status = "Stamina [round(source.stamina.current, DAMAGE_PRECISION)]/[source.stamina.maximum]"
+		if(BRAIN, ORGAN_DAMAGE)
+			var/obj/item/organ/organ = damaged_part
+			status = "[organ.name] [round(organ.damage, DAMAGE_PRECISION)]/[organ.maxHealth] | Health [source.calculate_health()]/[source.maxHealth]"
+		else
+			status = "Health [source.calculate_health()]/[source.maxHealth]"
 
-	var/mob/living/carbon/carbon_parent = parent
-	if (!carbon_parent.tracked || amount == 0)
-		return
+	var/cause_text = ""
+	if(cause)
+		cause_text = " | via [cause[1]]()"
+		if(cause_src && cause_src != parent)
+			cause_text += " of [cause_src] ([cause_src.type])"
+	if(ismob(usr) && usr != parent)
+		cause_text += " by [key_name_admin(usr)]"
+	var/message = span_adminnotice("<b>DAMAGE:</b> [source] [change] [get_damage_type_name(damage_type)][part_label] | [status][cause_text]")
+	for(var/datum/admins/watcher as anything in sources)
+		watcher.receive_damage_report(message)
 
-	send_notification(carbon_parent, damage_type, amount)
-
-/// Builds and sends a damage/heal report to all admins tracking this mob
-/datum/component/damage_notifier/proc/send_notification(mob/living/carbon/carbon_parent, damage_type, amount, obj/item/bodypart/limb)
-	var/new_health = carbon_parent.health - amount
-	var/max_health = carbon_parent.maxHealth
-
-	// Direction and amount
-	var/direction = amount > 0 ? "▼" : "▲"
-	var/display_amount = abs(amount)
-	var/damage_name = get_damage_type_name(damage_type)
-
-	// Bodypart label (only for limb damage)
-	var/limb_label = ""
-	if (limb)
-		limb_label = " [limb.name]"
-
-	// Health summary — skip for stamina since it tracks separately from mob health
-	var/health_summary = ""
-	if (damage_type != STAMINA)
-		health_summary = " →  [new_health]/[max_health]"
-
-	var/msg = "[carbon_parent.name] [damage_name][limb_label] [direction][display_amount][health_summary]"
-
-	for(var/client/admin as anything in GLOB.admins)
-		if(LAZYFIND(admin.holder.tagged_datums, carbon_parent))
-			to_chat(admin, msg)
+/// Walks the call stack past the damage pipeline. Returns list(proc name, proc src) for the first proc outside it, or null
+/datum/component/damage_notifier/proc/find_cause()
+	var/frames = 0
+	for(var/callee/frame = caller; frame && frames < DAMAGE_NOTIFIER_MAX_FRAMES; frame = frame.caller)
+		frames++
+		if(!frame.proc)
+			continue
+		var/proc_path = "[frame.proc.type]"
+		var/proc_name = copytext(proc_path, findlasttext(proc_path, "/") + 1)
+		if(pipeline_procs[proc_name])
+			continue
+		return list(proc_name, frame.src)
+	return null
 
 /// Returns the colored damage type name
 /datum/component/damage_notifier/proc/get_damage_type_name(damage_type)
@@ -105,5 +129,10 @@
 			return span_purple("Clone")
 		if(STAMINA)
 			return span_yellow("Stamina")
-		else
-			return "Unknown"
+		if(BRAIN)
+			return span_purple("Brain")
+		if(ORGAN_DAMAGE)
+			return span_orange("Organ")
+	return "[damage_type]"
+
+#undef DAMAGE_NOTIFIER_MAX_FRAMES

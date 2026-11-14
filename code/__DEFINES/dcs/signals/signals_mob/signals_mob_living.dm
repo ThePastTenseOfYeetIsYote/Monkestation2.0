@@ -90,7 +90,9 @@
 )
 /// List of signals sent when you receive any kind of damage at all
 #define COMSIG_LIVING_ADJUST_ALL_DAMAGE_TYPES (COMSIG_LIVING_ADJUST_STANDARD_DAMAGE_TYPES + COMSIG_LIVING_ADJUST_STAMINA_DAMAGE)
-
+/// Sent from every damage storage chokepoint after a damage value actually changed: (damage_type, delta, atom/damaged_part)
+/// delta > 0 is damage taken, delta < 0 is healing. damaged_part is the bodypart or organ that changed, or null.
+#define COMSIG_LIVING_DAMAGE_CHANGED "living_damage_changed"
 
 /// from base of mob/living/updatehealth()
 #define COMSIG_LIVING_HEALTH_UPDATE "living_health_update"

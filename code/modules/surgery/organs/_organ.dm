@@ -280,8 +280,11 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 		return
 	if(required_organ_flag && !(organ_flags & required_organ_flag))
 		return
+	var/old_damage = damage
 	damage = clamp(damage + damage_amount, 0, maximum)
 	SEND_SIGNAL(src, COMSIG_ORGAN_ADJUST_DAMAGE, damage_amount, maximum, required_organ_flag)
+	if(owner && damage != old_damage)
+		SEND_SIGNAL(owner, COMSIG_LIVING_DAMAGE_CHANGED, slot == ORGAN_SLOT_BRAIN ? BRAIN : ORGAN_DAMAGE, damage - old_damage, src)
 	var/mess = check_damage_thresholds(owner)
 	prev_damage = damage
 

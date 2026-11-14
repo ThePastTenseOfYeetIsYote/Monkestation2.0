@@ -465,6 +465,15 @@
 			remove_movespeed_modifier(/datum/movespeed_modifier/carbon_crawling)
 
 
+/// Returns what this carbon's health would be from its current bodypart and mob damage, without updating it
+/mob/living/carbon/proc/calculate_health()
+	var/total_burn = 0
+	var/total_brute = 0
+	for(var/obj/item/bodypart/BP as anything in bodyparts) //hardcoded to streamline things a bit
+		total_brute += (BP.brute_dam * BP.body_damage_coeff)
+		total_burn += (BP.burn_dam * BP.body_damage_coeff)
+	return round(maxHealth - getOxyLoss() - getToxLoss() - getCloneLoss() - total_burn - total_brute, DAMAGE_PRECISION)
+
 //Updates the mob's health from bodyparts and mob damage variables
 /mob/living/carbon/updatehealth()
 	if(HAS_TRAIT(src, TRAIT_GODMODE))

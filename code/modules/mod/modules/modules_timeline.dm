@@ -447,16 +447,12 @@
 	overlay_state_active = "module_fast_actions_on"
 
 /obj/item/mod/module/fast_actions/on_activation()
-	. = ..()
-	if(!.)
-		return
+	..()
 	if(mod.wearer)
 		mod.wearer.add_actionspeed_modifier(/datum/actionspeed_modifier/admin_fast_actions)
 
 /obj/item/mod/module/fast_actions/on_deactivation(display_message = TRUE, deleting = FALSE)
-	. = ..()
-	if(!.)
-		return
+	..()
 	if(mod.wearer)
 		mod.wearer.remove_actionspeed_modifier(/datum/actionspeed_modifier/admin_fast_actions)
 

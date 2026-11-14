@@ -115,6 +115,8 @@ GLOBAL_PROTECT(href_token)
 	color_test = null
 	plane_debug = null
 	library_manager = null
+	for(var/datum/tagged as anything in tagged_datums)
+		remove_tagged_datum(tagged, silent = TRUE)
 	tagged_datums = null
 	return ..()
 

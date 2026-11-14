@@ -55,8 +55,6 @@
 	return ..()
 
 /datum/stamina_container/proc/update(seconds_per_tick = 0)
-	var/last_current = current
-
 	if (current != maximum)
 		process_stamina = TRUE
 
@@ -66,11 +64,8 @@
 				is_regenerating = TRUE
 				regen_on_cooldown = FALSE
 
-		if(seconds_per_tick)
-			if(is_regenerating)
-				current = min(current + (regen_rate*seconds_per_tick), maximum)
-		if(current != last_current)
-			should_notify_parent = TRUE
+		if(seconds_per_tick && is_regenerating)
+			set_current(min(current + (regen_rate*seconds_per_tick), maximum))
 		loss = maximum - current
 		loss_as_percent = loss ? (loss == maximum ? 0 : loss / maximum * 100) : 0
 
@@ -81,6 +76,18 @@
 	if(should_notify_parent)
 		parent.on_stamina_update()
 		should_notify_parent = FALSE
+
+/// Sets current stamina, flags the parent for an update and reports the change. Returns TRUE if stamina changed.
+/datum/stamina_container/proc/set_current(new_current)
+	PRIVATE_PROC(TRUE)
+	if(new_current == current)
+		return FALSE
+	var/old_current = current
+	current = new_current
+	should_notify_parent = TRUE
+	// Stamina damage is missing stamina, so losing stamina is positive damage
+	SEND_SIGNAL(parent, COMSIG_LIVING_DAMAGE_CHANGED, STAMINA, old_current - new_current, null)
+	return TRUE
 
 ///Pause stamina regeneration for some period of time. Will override previous cooldown if one was set. Will NOT override stop(), if stop() was used to halt stamina regen.
 /datum/stamina_container/proc/pause(time)
@@ -108,11 +115,7 @@
 	///Our parent might want to fuck with these numbers
 	var/modify = parent.pre_stamina_change(amt, forced)
 
-	var/old_current = current
-	current = round(clamp(current + modify, 0, maximum), DAMAGE_PRECISION)
-	if(current != old_current)
-		should_notify_parent = TRUE
-		// Send signal when stamina changes (for damage notification system)
+	if(set_current(round(clamp(current + modify, 0, maximum), DAMAGE_PRECISION)))
 		SEND_SIGNAL(parent, COMSIG_LIVING_ADJUST_STAMINA_DAMAGE, STAMINA, modify, forced)
 	if(modify < 0)
 		pause(STAMINA_REGEN_TIME)
@@ -127,16 +130,10 @@
 /datum/stamina_container/proc/adjust_to(amt as num, lowest_stamina_value, forced = FALSE)
 	var/modify = parent.pre_stamina_change(amt, forced)
 
-	var/old_current = current
-
 	var/stamina_after_loss = current + modify
 	if(stamina_after_loss < lowest_stamina_value)
-		current = round(clamp(lowest_stamina_value, 0, maximum), DAMAGE_PRECISION)
-	else
-		current = round(clamp(current + modify, 0, maximum), DAMAGE_PRECISION)
-	if(current != old_current)
-		should_notify_parent = TRUE
-		// Send signal when stamina changes (for damage notification system)
+		stamina_after_loss = lowest_stamina_value
+	if(set_current(round(clamp(stamina_after_loss, 0, maximum), DAMAGE_PRECISION)))
 		SEND_SIGNAL(parent, COMSIG_LIVING_ADJUST_STAMINA_DAMAGE, STAMINA, modify, forced)
 	if(modify < 0)
 		pause(STAMINA_REGEN_TIME)

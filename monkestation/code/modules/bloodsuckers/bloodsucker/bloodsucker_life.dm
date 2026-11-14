@@ -165,7 +165,7 @@
 			ensure_brain_nonvital()
 		AddBloodVolume(-limb_regen_cost)
 		var/obj/item/bodypart/missing_bodypart = user.get_bodypart(missing_limb) // 2) Limb returns Damaged
-		missing_bodypart.brute_dam = 60
+		missing_bodypart.set_initial_damage(60, missing_bodypart.burn_dam)
 		to_chat(user, span_notice("Your flesh knits as it regrows your [missing_bodypart]!"))
 		playsound(user, 'sound/effects/magic/demon_consume.ogg', vol = 50, vary = TRUE)
 		return TRUE

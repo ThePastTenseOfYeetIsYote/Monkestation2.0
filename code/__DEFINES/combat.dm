@@ -17,6 +17,8 @@
 #define STAMINA "stamina"
 /// Brain damage. Should probably be decomissioned and replaced with proper organ damage.
 #define BRAIN "brain"
+/// Damage to an organ other than the brain. Organs store their own damage; this only labels it.
+#define ORGAN_DAMAGE "organ"
 
 //Damage flag defines //
 

@@ -299,6 +299,7 @@
 	. -= bruteloss
 	if(!.) // no change, no need to update
 		return 0
+	SEND_SIGNAL(src, COMSIG_LIVING_DAMAGE_CHANGED, BRUTE, -., null)
 	if(updating_health)
 		updatehealth()
 	return amount
@@ -308,6 +309,8 @@
 		return
 	. = bruteloss
 	bruteloss = amount
+	if(. != bruteloss)
+		SEND_SIGNAL(src, COMSIG_LIVING_DAMAGE_CHANGED, BRUTE, bruteloss - ., null)
 	if(updating_health)
 		updatehealth()
 
@@ -339,6 +342,8 @@
 		return 0
 	. = oxyloss
 	oxyloss = clamp((oxyloss + (amount * CONFIG_GET(number/damage_multiplier))), 0, maxHealth * 2)
+	if(. != oxyloss)
+		SEND_SIGNAL(src, COMSIG_LIVING_DAMAGE_CHANGED, OXY, oxyloss - ., null)
 	if(updating_health)
 		updatehealth()
 
@@ -357,6 +362,8 @@
 				return
 	. = oxyloss
 	oxyloss = amount
+	if(. != oxyloss)
+		SEND_SIGNAL(src, COMSIG_LIVING_DAMAGE_CHANGED, OXY, oxyloss - ., null)
 	if(updating_health)
 		updatehealth()
 
@@ -389,6 +396,7 @@
 	. -= toxloss
 	if(!.) // no change, no need to update
 		return FALSE
+	SEND_SIGNAL(src, COMSIG_LIVING_DAMAGE_CHANGED, TOX, -., null)
 	if(updating_health)
 		updatehealth()
 
@@ -397,7 +405,10 @@
 		return FALSE
 	if(!forced && !(mob_biotypes & required_biotype))
 		return
+	var/old_toxloss = toxloss
 	toxloss = amount
+	if(old_toxloss != toxloss)
+		SEND_SIGNAL(src, COMSIG_LIVING_DAMAGE_CHANGED, TOX, toxloss - old_toxloss, null)
 	if(updating_health)
 		updatehealth()
 	return amount
@@ -424,6 +435,7 @@
 	. -= fireloss
 	if(. == 0) // no change, no need to update
 		return
+	SEND_SIGNAL(src, COMSIG_LIVING_DAMAGE_CHANGED, BURN, -., null)
 	if(updating_health)
 		updatehealth()
 	return amount
@@ -436,6 +448,7 @@
 	. -= fireloss
 	if(. == 0) // no change, no need to update
 		return 0
+	SEND_SIGNAL(src, COMSIG_LIVING_DAMAGE_CHANGED, BURN, -., null)
 	if(updating_health)
 		updatehealth()
 
@@ -461,6 +474,7 @@
 	. -= cloneloss
 	if(. == 0) // no change, no need to update
 		return 0
+	SEND_SIGNAL(src, COMSIG_LIVING_DAMAGE_CHANGED, CLONE, -., null)
 	if(updating_health)
 		updatehealth()
 	return amount
@@ -468,7 +482,10 @@
 /mob/living/proc/setCloneLoss(amount, updating_health = TRUE, forced = FALSE, required_biotype)
 	if(!forced && ( HAS_TRAIT(src, TRAIT_GODMODE) || HAS_TRAIT(src, TRAIT_NOCLONELOSS)) )
 		return FALSE
+	var/old_cloneloss = cloneloss
 	cloneloss = amount
+	if(old_cloneloss != cloneloss)
+		SEND_SIGNAL(src, COMSIG_LIVING_DAMAGE_CHANGED, CLONE, cloneloss - old_cloneloss, null)
 	if(updating_health)
 		updatehealth()
 	return amount

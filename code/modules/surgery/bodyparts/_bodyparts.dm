@@ -770,6 +770,8 @@
 		return
 	. = brute_dam
 	brute_dam = new_value
+	if(owner)
+		SEND_SIGNAL(owner, COMSIG_LIVING_DAMAGE_CHANGED, BRUTE, new_value - ., src)
 
 
 ///Proc to hook behavior associated to the change of the burn_dam variable's value.
@@ -780,6 +782,8 @@
 		return
 	. = burn_dam
 	burn_dam = new_value
+	if(owner)
+		SEND_SIGNAL(owner, COMSIG_LIVING_DAMAGE_CHANGED, BURN, new_value - ., src)
 
 //Returns total damage.
 /obj/item/bodypart/proc/get_damage()

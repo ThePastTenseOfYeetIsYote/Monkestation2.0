@@ -102,13 +102,13 @@ If you have > 135 toxin damage and dont have spleenless/liverless metabolism you
 			if(!isnull(organ_owner.dna.species.mutantliver) && !organ_owner.get_organ_slot(ORGAN_SLOT_LIVER))
 				var/obj/item/organ/organ = organ_owner.get_organ_slot(ORGAN_SLOT_LIVER)
 				if(organ.damage < 70)
-					damage += 2
+					apply_organ_damage(2)
 					organ_owner.adjustToxLoss(toxResistance)
 				else
-					damage += 1
+					apply_organ_damage(1)
 					organ_owner.adjustToxLoss(toxResistance)
 			else
-				damage += 3
+				apply_organ_damage(3)
 				organ_owner.adjustToxLoss(toxResistance)
 
 /obj/item/organ/internal/spleen/get_availability(datum/species/owner_species, mob/living/owner_mob)

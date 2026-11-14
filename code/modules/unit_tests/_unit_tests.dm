@@ -261,6 +261,7 @@
 #include "subsystem_init.dm"
 #include "suit_storage_icons.dm"
 #include "surgeries.dm"
+#include "tag_datum_damage_tracking.dm"
 #include "teleporters.dm"
 #include "text.dm"
 #include "tgui_create_message.dm"
