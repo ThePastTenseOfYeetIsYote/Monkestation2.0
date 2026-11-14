@@ -71,6 +71,16 @@
 	use_energy_cost = DEFAULT_CHARGE_DRAIN * 5
 	cooldown_time = 3 SECONDS
 
+/obj/item/mod/module/stealth/myststranger
+	name = "MOD V.A.N.I.S.H. module"
+	desc = "Out of sight, out of mind."
+	icon_state = "cloak_ninja"
+	bumpoff = FALSE
+	stealth_alpha = 1
+	active_power_cost = 0
+	use_energy_cost = 0
+	cooldown_time = 1 SECONDS
+
 ///Camera Vision - Prevents flashes, blocks tracking.
 /obj/item/mod/module/welding/camera_vision
 	name = "MOD camera vision module"
@@ -418,9 +428,11 @@
 	addtimer(CALLBACK(src, PROC_REF(boost_aftereffects), mod.wearer), 7 SECONDS)
 
 /obj/item/mod/module/adrenaline_boost/on_install()
+	. = ..()
 	RegisterSignal(mod, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
 
 /obj/item/mod/module/adrenaline_boost/on_uninstall(deleting = FALSE)
+	. = ..()
 	UnregisterSignal(mod, COMSIG_ATOM_ATTACKBY)
 
 /obj/item/mod/module/adrenaline_boost/attackby(obj/item/attacking_item, mob/user, list/modifiers, list/attack_modifiers)

@@ -8,7 +8,7 @@
 		"mod_chestplate",
 		"mod_gauntlets",
 		"mod_helmet",
-		"mod_paint_kit",
+		"paint_kit",
 		"mod_shell",
 		"mod_plating_standard",
 		"mod_storage",
@@ -139,6 +139,11 @@
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_1_POINTS)
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_ENGINEERING)
+
+/datum/techweb_node/mod_advanced_engineering/New()
+	if(HAS_TRAIT(SSstation, STATION_TRAIT_RADIOACTIVE_NEBULA)) //we'll really need the rad protection modsuit module
+		starting_node = TRUE
+	return ..()
 
 /datum/techweb_node/mod_advanced_medical
 	id = "mod_advanced_medical"
