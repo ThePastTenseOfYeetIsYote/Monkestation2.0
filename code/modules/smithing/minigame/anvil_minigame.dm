@@ -34,8 +34,6 @@
 	var/debug = FALSE
 	///our clients average ping
 	var/average_ping = 0
-	/// Sequential counter for assigning IDs to notes as they are created
-	var/note_counter = 0
 
 /datum/anvil_challenge/New(obj/structure/anvil/anvil, datum/anvil_recipe/end_product_recipe, mob/user, difficulty_modifier)
 	host_anvil = anvil
@@ -51,7 +49,6 @@
 	if(HAS_TRAIT(user, TRAIT_DWARF) && difficulty > 1) //Dwarves are better at smithing.
 		difficulty--
 
-	start_time = REALTIMEOFDAY
 	generate_anvil_beats(TRUE)
 
 	if(QDELETED(user.client) || user.incapacitated())
@@ -59,7 +56,6 @@
 	. = TRUE
 	anvil_hud = new
 	anvil_hud.prepare_minigame(src, anvil_presses)
-	to_chat(user.client, "##SMITH_LOG## GAME_START|START_MS=[start_time * 100]|TOTAL=[total_notes]|DIFF=[difficulty]|RECIPE=[selected_recipe.name]|SMITH_LEVEL=[user.mind.get_skill_level(/datum/skill/smithing)]|PING_MS=[user.client.avgping]")
 	RegisterSignal(user.client, COMSIG_CLIENT_CLICK_DIRTY, PROC_REF(check_click))
 
 	START_PROCESSING(SSfishing, src)
@@ -84,7 +80,6 @@
 		if(difficulty >= 6)
 			time /= round((difficulty - 4) * 0.5)
 		hud_note.generate_click_type(difficulty)
-		hud_note.note_id = ++note_counter
 		hud_note.pixel_x += 138 // we start 40 units back and move towards the end
 		anvil_presses += hud_note
 		anvil_presses[hud_note] = last_note_time + time
@@ -100,10 +95,6 @@
 		note_pixels_moved[hud_note] = 0
 		new_notes |= hud_note
 
-		if(user?.client)
-			var/window_ms = round((0.2 SECONDS + average_ping) * 100)
-			to_chat(user.client, "##SMITH_LOG## NOTE_CREATE|ID=[hud_note.note_id]|TYPE=[hud_note.icon_state]|TARGET_MS=[last_note_time * 100]|TARGET_REL_MS=[(last_note_time - start_time) * 100]|TRAVEL_MS=[round((last_note_time - REALTIMEOFDAY) * 100)]|WINDOW_MS=[window_ms]|NOTES_LEFT=[notes_left]")
-
 	if(!init)
 		anvil_hud.add_notes(new_notes)
 		if(host_anvil.always_perfect) //The results gonna be perfect anyway....
@@ -116,11 +107,9 @@
 	if(user.client)
 		average_ping = user.client.avgping * 0.01
 
-	var/target_time = anvil_presses[choice]
-	var/upper_range = target_time + 0.2 SECONDS + average_ping
-	var/lower_range = target_time - 0.2 SECONDS - average_ping
-	var/actual_time = REALTIMEOFDAY
-	var/window_ms = round((0.2 SECONDS + average_ping) * 100)
+
+	var/upper_range = anvil_presses[choice] + 0.2 SECONDS + average_ping
+	var/lower_range = anvil_presses[choice] - 0.2 SECONDS - average_ping
 
 	var/list/modifiers = params2list(params)
 
@@ -135,39 +124,26 @@
 	if(LAZYACCESS(modifiers, CTRL_CLICK))
 		click_list |= CTRL_CLICK
 
-	var/good_hit = TRUE
-	var/log_outcome
-	var/log_extra = ""
 
+	var/good_hit = TRUE
 	if(!choice.check_click(click_list))
 		failed_notes++
 		good_hit = FALSE
-		log_outcome = "WRONG_TYPE"
-		log_extra = "|EXPECTED=[choice.icon_state]|GOT=[jointext(click_list, "+")]|DEVIATION_MS=[round((actual_time - target_time) * 100)]"
 	else
-		if((actual_time > lower_range) && (actual_time < upper_range))
+		if((REALTIMEOFDAY > lower_range) && (REALTIMEOFDAY < upper_range))
 			anvil_presses -= anvil_presses[choice]
 			user.balloon_alert(user, "great Hit!")
 			playsound(host_anvil, 'code/modules/smithing/sounds/forge.ogg', 25, TRUE, mixer_channel = CHANNEL_SOUND_EFFECTS)
 
 		else
-			if(actual_time > upper_range)
-				var/over = actual_time - upper_range
-				off_time += over
+			if(REALTIMEOFDAY > anvil_presses[choice] + 0.2 SECONDS + average_ping)
+				off_time += REALTIMEOFDAY - (anvil_presses[choice] + 0.2 SECONDS + average_ping)
 				failed_notes++
 				good_hit = FALSE
-				log_outcome = "TOO_LATE"
-				log_extra = "|DEVIATION_MS=[round((actual_time - target_time) * 100)]|OFF_ADDED_MS=[round(over * 100)]"
-			else if(actual_time < lower_range)
-				var/under = upper_range - actual_time
-				off_time += under
+			else if(REALTIMEOFDAY < anvil_presses[choice] - 0.2 SECONDS - average_ping)
+				off_time += (anvil_presses[choice] + 0.2 SECONDS + average_ping) - REALTIMEOFDAY
 				failed_notes++
 				good_hit = FALSE
-				log_outcome = "TOO_EARLY"
-				log_extra = "|DEVIATION_MS=[round((actual_time - target_time) * 100)]|OFF_ADDED_MS=[round(under * 100)]"
-
-	if(user?.client && log_outcome)
-		to_chat(user.client, "##SMITH_LOG## [log_outcome]|ID=[choice.note_id]|TYPE=[choice.icon_state]|ACTUAL_MS=[actual_time * 100]|ACTUAL_REL_MS=[round((actual_time - start_time) * 100)]|TARGET_MS=[target_time * 100]|TARGET_REL_MS=[round((target_time - start_time) * 100)]|WINDOW_MS=[window_ms]|PING_MS=[user.client.avgping][log_extra]")
 
 	anvil_presses -= choice
 	note_pixels_moved -= choice
@@ -183,10 +159,6 @@
 	for(var/note in anvil_presses)
 		if(anvil_presses[note] + 0.6 SECONDS > REALTIMEOFDAY)
 			continue
-		var/atom/movable/screen/hud_note/expired_note = note
-		var/expired_time = REALTIMEOFDAY
-		if(user?.client)
-			to_chat(user.client, "##SMITH_LOG## EXPIRED|ID=[expired_note.note_id]|TYPE=[expired_note.icon_state]|TARGET_MS=[anvil_presses[note] * 100]|TARGET_REL_MS=[round((anvil_presses[note] - start_time) * 100)]|EXPIRED_MS=[expired_time * 100]|EXPIRED_REL_MS=[round((expired_time - start_time) * 100)]|OVERDUE_MS=[round((expired_time - (anvil_presses[note] + 0.6 SECONDS)) * 100)]")
 		anvil_presses -= note
 		anvil_hud.delete_note(note)
 		failed_notes++
@@ -210,6 +182,7 @@
 	STOP_PROCESSING(SSfishing, src)
 	anvil_presses = null
 	note_pixels_moved = null
+	var/obj/item/mat = host_anvil.working_material
 	if(mat.material_stats)
 		//gives bonus XP for harder mats, so no cheese with gold or wood.
 		user.mind.adjust_experience(/datum/skill/smithing,round((total_notes - failed_notes) * 1.5) + round(2 + (mat.material_stats.hardness + mat.material_stats.density)/2.5))
@@ -263,8 +236,6 @@
 	vis_flags = VIS_INHERIT_ID
 	var/list/click_requirements = list()
 	var/timer
-	/// Sequential ID assigned by anvil_challenge at creation time
-	var/note_id = 0
 
 /atom/movable/screen/hud_note/proc/generate_click_type(difficulty)
 	difficulty = min(6, difficulty)
